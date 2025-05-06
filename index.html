@@ -14,6 +14,7 @@
             --dark-bg: #000000;
             --button-bg: #0e0e0e;
             --divider: rgba(255, 255, 255, 0.1);
+            --border-gray: rgba(255, 255, 255, 0.2);
         }
 
         * {
@@ -30,19 +31,20 @@
             display: flex;
             flex-direction: column;
         }
-		        .pagetitle {
-    font-size: 34px;
-    font-weight: 700;
-    margin-bottom: 30px;
-    background: var(--gradient);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-    font-family: 'Playfair Display', serif;
-    display: inline-block; /* Add this to ensure proper gradient application */
-}
+
+        .pagetitle {
+            font-size: 34px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-background-clip: text;
+            -moz-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            display: inline-block;
+        }
 
         .container {
             width: 100%;
@@ -68,15 +70,15 @@
         }
 
         .logo {
-    font-size: 28px;
-    font-weight: bold;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 1px;
-}
+            font-size: 28px;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
 
         nav ul {
             list-style: none;
@@ -85,127 +87,51 @@
         }
 
         nav a {
-    color: var(--white);
-    text-decoration: none;
-    position: relative;
-    padding-bottom: 8px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease; /* Optional: smooth color change */
-}
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
 
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--gradient);
-    transform: scaleX(0); /* Start with the underline invisible */
-    transform-origin: bottom right;
-    transition: transform 0.3s ease; /* Add transition to the underline */
-}
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
 
-nav a:hover::after,
-nav a.active::after {
-    transform: scaleX(1); /* On hover or active, the underline will grow */
-    transform-origin: bottom left; /* Set the origin for the growing underline */
-}
-
+        nav a:hover::after,
+        nav a.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
 
         .header-divider {
-    height: 1px;
-    background-color: var(--divider);
-    width: 100%;
-    margin-top: 25px;
-}
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-top: 25px;
+        }
 
         /* Main */
         main {
             flex: 1;
             margin-top: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding-bottom: 60px;
         }
 
-        .coming-soon {
-            max-width: 90%;
-            max-height: 600px;
-            object-fit: contain;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #000;
-            margin-top: 40px;
-        }
-
-        .footer-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .footer-logo {
-    font-size: 24px;
-    font-weight: bold;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 8px;
-    font-family: 'Playfair Display', serif;
-}
-
-        .footer-text {
-    color: var(--white);
-    font-size: 16px;
-    font-weight: 500;
-}
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icon {
-            width: 36px;
-            height: 36px;
-            transition: all 0.3s ease;
-            filter: brightness(0.8);
-        }
-
-        .social-icon:hover {
-            filter: brightness(1.5);
-            transform: translateY(-5px);
-        }
-
-        .footer-divider {
-    height: 1px;
-    background-color: var(--divider);
-    width: 100%;
-    margin-bottom: 40px;
-}
-        .footer-bottom-divider {
-            height: 1px;
-            background-color: var(--divider);
-            width: 100%;
-			max-width: 1200px;
-            margin: 30px auto;
-        }
-		.copyright {
-            text-align: center;
-            color: var(--light-white);
-            font-size: 14px;
-            font-weight: 500;
-        }
-		.contact-container {
+        .contact-container {
             display: flex;
             gap: 40px;
             width: 100%;
@@ -226,40 +152,202 @@ nav a.active::after {
             border: 1px solid var(--divider);
             color: var(--white);
             font-family: 'Montserrat', sans-serif;
+            border-radius: 4px;
         }
         
-        button[type="submit"] {
-            background: var(--gradient);
-            color: black;
-            padding: 12px 30px;
-            border: none;
-            font-weight: 600;
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 20px;
+        }
+
+        /* Button Styles (matches projects page) */
+        .visit-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--button-bg);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
             cursor: pointer;
-            transition: transform 0.3s;
         }
-        
-        button[type="submit"]:hover {
-            transform: translateY(-3px);
+
+        .visit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        
+
+        .visit-btn:hover {
+            border-color: transparent;
+            color: black;
+            font-weight: 600;
+        }
+
+        .visit-btn:hover::before {
+            opacity: 1;
+        }
+
+        /* Contact Methods */
+        .contact-info h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
         .contact-method {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 20px;
         }
-        
-        .hidden { display: none; }
+
+        .contact-method img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .contact-method a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method a:hover {
+            color: #ff9900;
+        }
+
+        .response-time {
+            margin-top: 30px;
+            opacity: 0.8;
+            font-size: 15px;
+        }
+
+        .hidden { 
+            display: none; 
+        }
         
         @media (max-width: 768px) {
             .contact-container {
                 flex-direction: column;
             }
+            
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-text {
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            transition: all 0.3s ease;
+            filter: brightness(0.8);
+        }
+
+        .social-icon:hover {
+            filter: brightness(1.5);
+            transform: translateY(-5px);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .footer-bottom-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--light-white);
+            font-size: 14px;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">CMA</div>
+            <nav>
+                <ul>
+                    <li><a href="https://thecma.xyz/index.html">Home</a></li>
+                    <li><a href="https://thecma.xyz/about.html">About</a></li>
+                    <li><a href="https://thecma.xyz/projects.html">Projects</a></li>
+                    <li><a href="https://thecma.xyz/creative.html">Creative</a></li>
+                    <li><a href="https://contact.thecma.xyz" class="active">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-divider"></div>
+    </header>
+
+    <!-- Main Content -->
     <main>
         <div class="container">
             <h1 class="pagetitle">Get in touch</h1>
@@ -290,81 +378,68 @@ nav a.active::after {
                         </div>
                         
                         <div class="form-group">
-                            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+                            <textarea name="message" placeholder="Your Message" required></textarea>
                         </div>
                         
-                        <button type="submit">Send Message</button>
+                        <button type="submit" class="visit-btn">Send Message</button>
                     </form>
                 </div>
                 
                 <!-- Right Column: Contact Info -->
                 <div class="contact-info">
-                    <h3 style="margin-bottom: 20px;">Other ways to reach me</h3>
+                    <h3>Other ways to reach me</h3>
                     
                     <div class="contact-method">
-                        <img src="media/mail.png" width="24" alt="Email">
+                        <img src="media/mail.png" alt="Email">
                         <a href="mailto:chrismaje63@gmail.com">chrismaje63@gmail.com</a>
                     </div>
                     
                     <div class="contact-method">
-                        <img src="media/whatsapp.png" width="24" alt="WhatsApp">
-                        <a href="https://wa.me/+918848914245">+91 88489 14245</a>
+                        <img src="media/phone.png" alt="Phone">
+                        <a href="tel:+918848914245">+91 88489 14245</a>
                     </div>
                     
                     <div class="contact-method">
-                        <img src="media/linkedin.png" width="24" alt="LinkedIn">
-                        <a href="https://linkedin.com/in/chrismaje">linkedin.com/in/chrismaje</a>
+                        <img src="media/linkedin.png" alt="LinkedIn">
+                        <a href="https://linkedin.com/in/chrismaje" target="_blank">linkedin.com/in/chrismaje</a>
                     </div>
                     
                     <div class="contact-method">
-                        <img src="media/github.png" width="24" alt="GitHub">
-                        <a href="https://github.com/chrismat-05">github.com/chrismat-05</a>
+                        <img src="media/github.png" alt="GitHub">
+                        <a href="https://github.com/chrismat-05" target="_blank">github.com/chrismat-05</a>
                     </div>
                     
-                    <p style="margin-top: 30px; opacity: 0.8;">
-                        Typically responds within 6 - 8 hours.
+                    <div class="contact-method">
+                        <img src="media/whatsapp.png" alt="WhatsApp">
+                        <a href="https://wa.me/+918848914245" target="_blank">+91 88489 14245</a>
+                    </div>
+                    
+                    <p class="response-time">
+                        Typically responds within 6-8 hours
                     </p>
                 </div>
             </div>
         </div>
     </main>
 
-<!-- Header -->
-<header>
-    <div class="container header-container">
-        <div class="logo">CMA</div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="creative.html">Creative</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="header-divider"></div>
-</header>
-
-<!-- Footer -->
-<footer>
-    <div class="footer-divider"></div>
-    <div class="container footer-container">
-        <div>
-            <div class="footer-logo">CMA</div>
-            <div class="footer-text">Bridging tech & creativity - one step at a time</div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-divider"></div>
+        <div class="container footer-container">
+            <div>
+                <div class="footer-logo">CMA</div>
+                <div class="footer-text">Bridging tech & creativity - one step at a time</div>
+            </div>
+            <div class="social-icons">
+                <a href="https://github.com/chrismat-05" target="_blank"><img class="social-icon" src="media/github.png" alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/chrismaje/" target="_blank"><img class="social-icon" src="media/linkedin.png" alt="LinkedIn"></a>
+                <a href="https://wa.me/+918848914245" target="_blank"><img class="social-icon" src="media/whatsapp.png" alt="WhatsApp"></a>
+                <a href="mailto:chrismaje63@gmail.com"><img class="social-icon" src="media/mail.png" alt="Email"></a>
+            </div>
         </div>
-        <div class="social-icons">
-            <a href="https://github.com/chrismat-05" target="_blank"><img class="social-icon" src="media/github.png" alt="GitHub"></a>
-            <a href="https://www.linkedin.com/in/chrismaje/" target="_blank"><img class="social-icon" src="media/linkedin.png" alt="LinkedIn"></a>
-            <a href="https://wa.me/+918848914245" target="_blank"><img class="social-icon" src="media/whatsapp.png" alt="WhatsApp"></a>
-            <a href="mailto:chrismaje63@gmail.com"><img class="social-icon" src="media/mail.png" alt="Email"></a>
-        </div>
-    </div>
-    <div class="footer-bottom-divider"></div>
-    <div class="copyright">© 2025 Chris Matthew Aje, All rights reserved.</div><br><br>
-</footer>
-
+        <div class="footer-bottom-divider"></div>
+        <div class="copyright">© 2025 Chris Matthew Aje, All rights reserved.</div><br><br>
+    </footer>
 
 </body>
 </html>
