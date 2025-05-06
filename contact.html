@@ -30,6 +30,19 @@
             display: flex;
             flex-direction: column;
         }
+		        .pagetitle {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    background: var(--gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    font-family: 'Playfair Display', serif;
+    display: inline-block; /* Add this to ensure proper gradient application */
+}
 
         .container {
             width: 100%;
@@ -192,13 +205,128 @@ nav a.active::after {
             font-size: 14px;
             font-weight: 500;
         }
+		.contact-container {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+        }
+        
+        .contact-form, .contact-info {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            background: var(--button-bg);
+            border: 1px solid var(--divider);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        button[type="submit"] {
+            background: var(--gradient);
+            color: black;
+            padding: 12px 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        button[type="submit"]:hover {
+            transform: translateY(-3px);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .hidden { display: none; }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Main Content -->
     <main>
-        <img src="media/comingsoon.png" alt="Coming Soon" class="coming-soon">
+        <div class="container">
+            <h1 class="pagetitle">Get in touch</h1>
+            <div class="contact-container">
+                <!-- Left Column: Form -->
+                <div class="contact-form">
+                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <p class="hidden">
+                            <label>Don't fill this out: <input name="bot-field"/></label>
+                        </p>
+                        
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select name="subject" required>
+                                <option value="" disabled selected>Select a subject</option>
+                                <option value="work">Work Inquiry</option>
+                                <option value="project">Project Collaboration</option>
+                                <option value="question">Question</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+                        </div>
+                        
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+                
+                <!-- Right Column: Contact Info -->
+                <div class="contact-info">
+                    <h3 style="margin-bottom: 20px;">Other ways to reach me</h3>
+                    
+                    <div class="contact-method">
+                        <img src="media/mail.png" width="24" alt="Email">
+                        <a href="mailto:chrismaje63@gmail.com">chrismaje63@gmail.com</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <img src="media/whatsapp.png" width="24" alt="WhatsApp">
+                        <a href="https://wa.me/+918848914245">+91 88489 14245</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <img src="media/linkedin.png" width="24" alt="LinkedIn">
+                        <a href="https://linkedin.com/in/chrismaje">linkedin.com/in/chrismaje</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <img src="media/github.png" width="24" alt="GitHub">
+                        <a href="https://github.com/chrismat-05">github.com/chrismat-05</a>
+                    </div>
+                    
+                    <p style="margin-top: 30px; opacity: 0.8;">
+                        Typically responds within 6 - 8 hours.
+                    </p>
+                </div>
+            </div>
+        </div>
     </main>
 
 <!-- Header -->
