@@ -366,10 +366,11 @@
             box-shadow: var(--red-glow);
         }
 
-        .hobby-icon {
-            width: 24px;
-            height: 24px;
-        }
+	.hobby-item img {
+    		width: 24px;  /* Fixed width */
+    		height: 24px; /* Fixed height */
+    		object-fit: contain; /* Ensures image maintains aspect ratio */
+	}
 
         /* Tech Skills */
         .tech-skills {
