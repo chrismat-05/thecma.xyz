@@ -14,6 +14,8 @@
             --dark-bg: #000000;
             --button-bg: #0e0e0e;
             --divider: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(30, 30, 30, 0.7);
+            --red-glow: 0 0 15px rgba(255, 50, 50, 0.7);
         }
 
         * {
@@ -55,15 +57,15 @@
         }
 
         .logo {
-    font-size: 28px;
-    font-weight: bold;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 1px;
-}
+            font-size: 28px;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
 
         nav ul {
             list-style: none;
@@ -72,63 +74,335 @@
         }
 
         nav a {
-    color: var(--white);
-    text-decoration: none;
-    position: relative;
-    padding-bottom: 8px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease; /* Optional: smooth color change */
-}
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
 
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--gradient);
-    transform: scaleX(0); /* Start with the underline invisible */
-    transform-origin: bottom right;
-    transition: transform 0.3s ease; /* Add transition to the underline */
-}
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
 
-nav a:hover::after,
-nav a.active::after {
-    transform: scaleX(1); /* On hover or active, the underline will grow */
-    transform-origin: bottom left; /* Set the origin for the growing underline */
-}
-
+        nav a:hover::after,
+        nav a.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
 
         .header-divider {
-    height: 1px;
-    background-color: var(--divider);
-    width: 100%;
-    margin-top: 25px;
-}
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-top: 25px;
+        }
 
         /* Main */
         main {
             flex: 1;
             margin-top: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding-bottom: 60px;
         }
 
-        .coming-soon {
-            max-width: 90%;
-            max-height: 600px;
+        .pagetitle {
+            font-size: 34px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+			-moz-background-clip: text;
+			-moz-text-fill-color: transparent;
+			display: inline-block;
+        }
+
+        /* About Page Specific Styles */
+        .section-title {
+            font-size: 24px;
+            margin: 30px 0 20px;
+            font-weight: 600;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Summary Section */
+        .summary-section {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .summary-text {
+            flex: 0 0 70%;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .photo-gallery {
+            flex: 1;
+            position: relative;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--gradient);
+            padding: 3px;
+            height: 300px;
+        }
+
+        .photo-gallery::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--dark-bg);
+            padding: 2px;
+            border-radius: 6px;
+            z-index: 1;
+        }
+
+        .gallery-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .gallery-image.active {
+            opacity: 1;
+        }
+
+        /* Education Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--gradient);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--gradient);
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            color: var(--light-white);
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-subtitle {
+            font-size: 16px;
+            color: var(--light-white);
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: flex;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        /* Certifications Cards */
+        .certification-card {
+            background: var(--card-bg);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    display: block; /* Important for anchor tag styling */
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Keeps text color consistent */
+        }
+
+        .certification-card:hover {
+            border-left: 3px solid #ff9900;
+            transform: translateY(-3px);
+			text-decoration: none;
+        }
+
+        .certification-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+		.certification-card, 
+		.certification-card * {
+    		text-decoration: none;
+    		color: inherit;
+		}
+		.certification-card {
+    		cursor: pointer;
+		}
+        .certification-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
             object-fit: contain;
+        }
+
+        .certification-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .certification-issuer {
+            font-size: 14px;
+            color: var(--light-white);
+            margin-top: 3px;
+        }
+
+        .certification-date {
+            font-size: 12px;
+            color: var(--light-white);
+            margin-top: 10px;
+        }
+
+        /* Soft Skills */
+        .soft-skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .soft-skill-item {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .soft-skill-item:hover {
+			
+            transform: translateY(-3px);
+            box-shadow: var(--red-glow);
+        }
+
+        .soft-skill-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Hobbies */
+        .hobbies-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .hobby-item {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .hobby-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--red-glow);
+        }
+
+        .hobby-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Tech Skills */
+        .tech-skills {
+            margin-top: 40px;
+        }
+
+        .tech-skill {
+            margin-bottom: 20px;
+        }
+
+        .tech-skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background: var(--gradient);
         }
 
         /* Footer */
         footer {
             background-color: #000;
-            margin-top: 40px;
         }
 
         .footer-container {
@@ -140,21 +414,21 @@ nav a.active::after {
         }
 
         .footer-logo {
-    font-size: 24px;
-    font-weight: bold;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 8px;
-    font-family: 'Playfair Display', serif;
-}
+            font-size: 24px;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
 
         .footer-text {
-    color: var(--white);
-    font-size: 16px;
-    font-weight: 500;
-}
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 500;
+        }
 
         .social-icons {
             display: flex;
@@ -174,32 +448,54 @@ nav a.active::after {
         }
 
         .footer-divider {
-    height: 1px;
-    background-color: var(--divider);
-    width: 100%;
-    margin-bottom: 40px;
-}
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
         .footer-bottom-divider {
             height: 1px;
             background-color: var(--divider);
             width: 100%;
-			max-width: 1200px;
+            max-width: 1200px;
             margin: 30px auto;
         }
-		.copyright {
+        
+        .copyright {
             text-align: center;
             color: var(--light-white);
             font-size: 14px;
             font-weight: 500;
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .summary-section {
+                flex-direction: column;
+            }
+            
+            .summary-text {
+                flex: 1;
+            }
+            
+            .photo-gallery {
+                width: 100%;
+                height: 250px;
+            }
+            
+            .two-column {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <!-- Main Content -->
-    <main>
-        <img src="media/comingsoon.png" alt="Coming Soon" class="coming-soon">
-    </main>
 
 <!-- Header -->
 <header>
@@ -217,6 +513,213 @@ nav a.active::after {
     </div>
     <div class="header-divider"></div>
 </header>
+
+<!-- Main Content -->
+<main>
+    <div class="container">
+        <h1 class="pagetitle">About Me</h1>
+        
+        <!-- Summary Section with Photo Gallery -->
+        <div class="summary-section">
+            <div class="summary-text">
+                <p>I'm a passionate developer and creative thinker with a strong foundation in computer science principles and practical experience in building web applications. My journey in tech began when I wrote my first line of code at 15, and since then I've been fascinated by how technology can solve real-world problems.</p>
+                <br>
+                <p>I believe in clean, efficient code and user-centric design. My approach combines technical expertise with creative problem-solving, always looking for innovative ways to bridge the gap between functionality and aesthetics. When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or mentoring aspiring developers.</p>
+            </div>
+            <div class="photo-gallery">
+                <img src="media/cma/photo1.jpg" alt="Photo 1" class="gallery-image active">
+                <img src="media/cma/photo2.jpg" alt="Photo 2" class="gallery-image">
+                <img src="media/cma/photo3.jpg" alt="Photo 3" class="gallery-image">
+            </div>
+        </div>
+        
+        <!-- Two Column: Education and Certifications -->
+        <div class="two-column">
+            <!-- Left Column: Education -->
+            <div class="column">
+                <h2 class="section-title">Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023 - Present</div>
+                        <h3 class="timeline-title">Kristu Jayanti College</h3>
+                        <p class="timeline-subtitle">Bachelor of Computer Applications</p>
+                        <p class="timeline-description">Coursework includes Data Structures, Database Systems, Programming languages and Software Engineering.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023</div>
+                        <h3 class="timeline-title">The Indian School, Kingdom of Bahrain</h3>
+                        <p class="timeline-subtitle">Higher Secondary Education</p>
+                        <p class="timeline-description">Focus on Commerce stream with Computer Science as elective. Achieved 79% in final examinations.</p>
+                    </div>
+					<div class="timeline-item">
+                        <div class="timeline-date">2021</div>
+                        <h3 class="timeline-title">The Indian School, Kingdom of Bahrain</h3>
+                        <p class="timeline-subtitle">Secondary Education</p>
+                        <p class="timeline-description">Achieved 81% in final examinations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: Certifications -->
+<div class="column">
+    <h2 class="section-title">Certifications</h2>
+    <a href="https://trainings.internshala.com/certificate/view/nsdc/esj6jiys4ch/3uson3kgfx2/" class="certification-card" target="_blank">
+        <div class="certification-header">
+            <div>
+                <h3 class="certification-title">Ethical Hacking</h3>
+                <p class="certification-issuer">NSDC Academy & Internshala</p>
+            </div>
+        </div>
+        <p class="certification-date">Issued March 2025 · No Expiration</p>
+    </a>
+    <a href="https://fsp-assessment-certificates.s3-ap-southeast-1.amazonaws.com/ChrisMathewAje-124647283.pdf" class="certification-card" target="_blank">
+        <div class="certification-header">
+            <div>
+                <h3 class="certification-title">Digital Engineering</h3>
+                <p class="certification-issuer">Nasscom</p>
+            </div>
+        </div>
+        <p class="certification-date">Issued Oct 2023 · No Expiration</p>
+    </a>
+	<a href="https://www.coursera.org/account/accomplishments/verify/45YW8F3CQXG2" class="certification-card" target="_blank">
+        <div class="certification-header">
+            <div>
+                <h3 class="certification-title">HTML</h3>
+                <p class="certification-issuer">University of Michigan</p>
+            </div>
+        </div>
+        <p class="certification-date">Issued Apr 2023 · No Expiration</p>
+    </a>
+</div>
+        </div>
+        <!-- Tech Skills -->
+        <div class="tech-skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="tech-skill">
+                <div class="tech-skill-name">
+                    <span>Python</span>
+                    <span>25%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 25%"></div>
+                </div>
+            </div>
+            <div class="tech-skill">
+                <div class="tech-skill-name">
+                    <span>C</span>
+                    <span>20%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 20%"></div>
+                </div>
+            </div>
+            <div class="tech-skill">
+                <div class="tech-skill-name">
+                    <span>HTML/CSS</span>
+                    <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 75%"></div>
+                </div>
+            </div>
+            <div class="tech-skill">
+                <div class="tech-skill-name">
+                    <span>VB.Net</span>
+                    <span>80%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 80%"></div>
+                </div>
+            </div>
+            <div class="tech-skill">
+                <div class="tech-skill-name">
+                    <span>Java</span>
+                    <span>30%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 70%"></div>
+                </div>
+            </div>
+			<div class="tech-skill">
+                <div class="tech-skill-name">
+                    <span>MySQL</span>
+                    <span>80%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 80%"></div>
+                </div>
+            </div>
+			<div class="tech-skill">
+                <div class="tech-skill-name">
+                    <span>SQL+</span>
+                    <span>65%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 65%"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Two Column: Skills and Hobbies -->
+        <div class="two-column">
+            <!-- Left Column: Soft Skills -->
+            <div class="column">
+                <h2 class="section-title">Skills</h2>
+                <div class="soft-skills-container">
+                    <div class="soft-skill-item">
+                        <span>Ethical Hacking</span>
+                    </div>
+                    <div class="soft-skill-item">
+                        <span>Information Security</span>
+                    </div>
+					<div class="soft-skill-item">
+                        <span>Computer Networking</span>
+                    </div>
+					<div class="soft-skill-item">
+                        <span>CyberSecurity</span>
+                    </div>
+					<div class="soft-skill-item">
+                        <span>Figma</span>
+                    </div>
+					<div class="soft-skill-item">
+                        <span>Canva</span>
+                    </div>
+					<div class="soft-skill-item">
+                        <span>Git</span>
+                    </div>
+					<div class="soft-skill-item">
+                        <span>Kali Linux</span>
+                    </div>
+					<div class="soft-skill-item">
+                        <span>Vulnerability Assessment and Penetration Testing (VAPT)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: Hobbies -->
+            <div class="column">
+                <h2 class="section-title">Hobbies & Interests</h2>
+                <div class="hobbies-container">
+                    <div class="hobby-item">
+						<img src="media/hobbies/bike.png">
+                        <span>Bike Riding</span>
+                    </div>
+                    <div class="hobby-item">
+						<img src="media/hobbies/film.png">
+                        <span>Filmmaking</span>
+                    </div>
+                    <div class="hobby-item">
+						<img src="media/hobbies/audiomix.png">
+                        <span>Audio Mixing</span>
+                    </div>
+                    <div class="hobby-item">
+						<img src="media/hobbies/videography.png">
+                        <span>Videography</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
 <!-- Footer -->
 <footer>
@@ -237,6 +740,20 @@ nav a.active::after {
     <div class="copyright">© 2025 Chris Matthew Aje, All rights reserved.</div><br><br>
 </footer>
 
+<script>
+    // Photo gallery slideshow
+    const images = document.querySelectorAll('.gallery-image');
+    let currentImage = 0;
+    
+    function changeImage() {
+        images[currentImage].classList.remove('active');
+        currentImage = (currentImage + 1) % images.length;
+        images[currentImage].classList.add('active');
+    }
+    
+    // Change image every 3 seconds
+    setInterval(changeImage, 3000);
+</script>
 
 </body>
 </html>
