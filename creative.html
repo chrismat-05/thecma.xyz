@@ -152,14 +152,20 @@
             border-radius: 2px;
             background: #111;
             cursor: pointer;
-			padding: 2px;
-			background: var(--gradient);
+	    padding: 2px;
+	    background: var(--gradient);
+	    height: 400px; /* Fixed height */
+  	    display: flex;
+    	    align-items: center;
+    	    justify-content: center;
+
         }
 
         /* Image Thumbnail */
         .project-thumbnail {
             width: 100%;
-            height: auto;
+            height: 100%;
+	    object-fit: cover:
             display: block;
             transition: transform 0.3s ease;
 			boarder-radius: 5px;
@@ -233,6 +239,8 @@
     transition: all 0.3s ease;
     font-family: 'Montserrat', sans-serif;
     margin-top: 15px;
+    margin-right: 8px;
+    font-size: 14px;
 }
 .project-link::before {
     content: '';
@@ -254,7 +262,12 @@
 .project-link:hover::before {
     opacity: 1;
 }
-
+.links-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
         /* Footer */
         footer {
             background-color: #000;
@@ -395,10 +408,12 @@
                     <p><span class="info-label">When:</span> 2024</p>
                     <p><span class="info-label">Category:</span> Reel</p>
                     <p>Short recap reels for each days of the camp made for Instagram.</p>
+		    <div class="links-container">
                     <a href="https://www.instagram.com/icpfbangalore/reel/DBDGa5BPyUb/" class="project-link" target="_blank">View Reel 01</a>
-					<a href="https://www.instagram.com/chrismat_05/reel/DBEfGT3SURR/" class="project-link" target="_blank">View Reel 02</a>
-					<a href="https://www.instagram.com/chrismat_05/reel/DBHW-fpNwOZ/" class="project-link" target="_blank">View Reel 03</a>
-                </div>
+		    <a href="https://www.instagram.com/chrismat_05/reel/DBEfGT3SURR/" class="project-link" target="_blank">View Reel 02</a>
+		    <a href="https://www.instagram.com/chrismat_05/reel/DBHW-fpNwOZ/" class="project-link" target="_blank">View Reel 03</a>
+		    </div>
+		</div>
             </div>
         </div>
     </div>
