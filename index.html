@@ -392,14 +392,9 @@
     }
 }
 @media (max-width: 768px) {
-    nav ul li a.active::after {
-        transform: scaleX(1) !important;
-        transform-origin: bottom left !important;
-    }
-    
-    nav ul li a:hover::after {
-        transform: scaleX(1) !important;
-        transform-origin: bottom left !important;
+    nav ul.active a.active::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
     }
 }
     </style>
@@ -541,23 +536,6 @@
             overlay.classList.remove('active');
         });
     });
-    // Initialize active link based on current page
-    function setActiveLink() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        navLinks.forEach(link => {
-            const linkPage = link.getAttribute('href').split('/').pop();
-            if (linkPage === currentPage) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
-    }
-
-    // Call this function when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        setActiveLink();
-}
 </script>
 </body>
 </html>
