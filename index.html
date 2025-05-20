@@ -392,9 +392,14 @@
     }
 }
 @media (max-width: 768px) {
-    nav ul.active a.active::after {
-        transform: scaleX(1);
-        transform-origin: bottom left;
+    nav ul li a.active::after {
+        transform: scaleX(1) !important;
+        transform-origin: bottom left !important;
+    }
+    
+    nav ul li a:hover::after {
+        transform: scaleX(1) !important;
+        transform-origin: bottom left !important;
     }
 }
     </style>
@@ -518,24 +523,58 @@
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('nav ul');
     const overlay = document.querySelector('.overlay');
+    const navLinks = document.querySelectorAll('nav a');
 
     menuToggle.addEventListener('click', () => {
         navMenu.classList.toggle('active');
         overlay.classList.toggle('active');
+        
+        // Toggle menu icon between ☰ and ✕
+        if (navMenu.classList.contains('active')) {
+            menuToggle.innerHTML = '✕';
+        } else {
+            menuToggle.innerHTML = '☰';
+        }
     });
 
     overlay.addEventListener('click', () => {
         navMenu.classList.remove('active');
         overlay.classList.remove('active');
+        menuToggle.innerHTML = '☰';
     });
 
-    // Close menu when clicking on a link (for single page navigation)
-    document.querySelectorAll('nav a').forEach(link => {
+    // Close menu when clicking on a link
+    navLinks.forEach(link => {
         link.addEventListener('click', () => {
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+            // Add active class to clicked link
+            link.classList.add('active');
+            
+            // Close mobile menu
             navMenu.classList.remove('active');
             overlay.classList.remove('active');
+            menuToggle.innerHTML = '☰';
         });
     });
+
+    // Initialize active link based on current page
+    function setActiveLink() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop();
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    // Call this function when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        setActiveLink();
 </script>
 </body>
 </html>
