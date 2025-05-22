@@ -396,6 +396,26 @@
         transform: scaleX(1);
         transform-origin: bottom left;
     }
+    nav ul.active a.active::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    .header-container {
+        justify-content: space-between;
+        padding: 0 15px; /* Add some padding on sides */
+    }
+    
+    .menu-toggle {
+        margin-left: auto; /* Pushes it to far right */
+    }
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .social-icons {
+        margin-left: auto; /* Pushes icons to right */
+    }
 }
     </style>
 </head>
