@@ -442,6 +442,28 @@ nav a.active::after {
         transform-origin: bottom left;
     }
 }
+@media (max-width: 768px) {
+    nav ul.active a.active::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    .header-container {
+        justify-content: space-between;
+        padding: 0 15px; /* Add some padding on sides */
+    }
+    
+    .menu-toggle {
+        margin-left: auto; /* Pushes it to far right */
+    }
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .social-icons {
+        margin-left: auto; /* Pushes icons to right */
+    }
+}
     </style>
 </head>
 <body>
@@ -454,7 +476,7 @@ nav a.active::after {
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="projects.html" class="active">Home</a></li>
                 <li><a href="creative.html">Creative</a></li>
                 <li><a href="https://contact.thecma.xyz/">Contact</a></li>
             </ul>

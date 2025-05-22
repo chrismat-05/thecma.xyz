@@ -563,8 +563,34 @@
     nav ul.active a.active::after {
         transform: scaleX(1);
         transform-origin: bottom left;
+    .header-container {
+        justify-content: space-between;
+        padding: 0 15px; /* Add some padding on sides */
+    }
+    
+    .menu-toggle {
+        margin-left: auto; /* Pushes it to far right */
+    }
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .social-icons {
+        margin-left: auto; /* Pushes icons to right */
+    }
+    .photo-gallery {
+        margin-top: 30px; /* Adds space above gallery */
+        height: 250px; /* Ensure this is set */
+        width: 100%; /* Full width */
+    }
+    
+    .summary-section {
+        margin-bottom: 40px; /* Adds space below gallery */
     }
 }
+
     </style>
 </head>
 <body>
@@ -578,7 +604,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="projects.html" class="active">About</a></li>
                 <li><a href="creative.html">Creative</a></li>
                 <li><a href="https://contact.thecma.xyz/">Contact</a></li>
             </ul>
