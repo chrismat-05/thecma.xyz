@@ -263,14 +263,14 @@
         /* Certifications Cards */
         .certification-card {
             background: var(--card-bg);
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-left: 3px solid transparent;
-    transition: all 0.3s ease;
-    display: block; /* Important for anchor tag styling */
-    text-decoration: none; /* Removes underline */
-    color: inherit; /* Keeps text color consistent */
+    	border-radius: 8px;
+    	padding: 20px;
+    	margin-bottom: 20px;
+    	border-left: 3px solid transparent;
+    	transition: all 0.3s ease;
+    	display: block; /* Important for anchor tag styling */
+    	text-decoration: none; /* Removes underline */
+    	color: inherit; /* Keeps text color consistent */
         }
 
         .certification-card:hover {
@@ -284,13 +284,13 @@
             align-items: center;
             margin-bottom: 15px;
         }
-		.certification-card, 
-		.certification-card * {
-    		text-decoration: none;
-    		color: inherit;
+	.certification-card, 
+	.certification-card * {
+    	text-decoration: none;
+    	color: inherit;
 		}
-		.certification-card {
-    		cursor: pointer;
+	.certification-card {
+    	cursor: pointer;
 		}
         .certification-icon {
             width: 40px;
@@ -367,9 +367,9 @@
         }
 
 	.hobby-item img {
-    		width: 24px;  /* Fixed width */
-    		height: 24px; /* Fixed height */
-    		object-fit: contain; /* Ensures image maintains aspect ratio */
+    	width: 24px;  /* Fixed width */
+    	height: 24px; /* Fixed height */
+    	object-fit: contain; /* Ensures image maintains aspect ratio */
 	}
 
         /* Tech Skills */
@@ -472,28 +472,47 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .summary-section {
+    	.header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px; /* Add padding to prevent touching screen edges */
+    	}
+    
+    	.menu-toggle {
+        order: 2; /* Moves it to the far right */
+        margin-left: auto; /* Pushes it all the way right */
+    	}
+    
+    	.logo {
+        order: 1; /* Ensures logo stays left */
+    	}
+    
+    	nav {
+        order: 3; /* Puts nav last (though it's hidden) */
+    	}
+        .summary-section {
                 flex-direction: column;
-            }
+        }
             
-            .summary-text {
+        .summary-text {
                 flex: 1;
-            }
+        }
             
-            .photo-gallery {
+        .photo-gallery {
                 width: 100%;
                 height: 250px;
-            }
+        }
             
-            .two-column {
+        .two-column {
                 flex-direction: column;
                 gap: 30px;
-            }
-            
-            .container {
-                padding: 0 20px;
-            }
         }
+            
+        .container {
+                padding: 0 20px;
+        }
+    }
 /* Mobile Menu Button */
 .menu-toggle {
     display: none;

@@ -336,6 +336,25 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px; /* Add padding to prevent touching screen edges */
+    }
+    
+    .menu-toggle {
+        order: 2; /* Moves it to the far right */
+        margin-left: auto; /* Pushes it all the way right */
+    }
+    
+    .logo {
+        order: 1; /* Ensures logo stays left */
+    }
+    
+    nav {
+        order: 3; /* Puts nav last (though it's hidden) */
+    }
             .projects-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
