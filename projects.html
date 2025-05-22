@@ -145,17 +145,17 @@
         }
 
         .pagetitle {
-    font-size: 34px;
-    font-weight: 700;
-    margin-bottom: 30px;
-    background: var(--gradient);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-    font-family: 'Playfair Display', serif;
-    display: inline-block;
+    		font-size: 34px;
+    		font-weight: 700;
+    		margin-bottom: 30px;
+    		background: var(--gradient);
+    		background-clip: text;
+    		-webkit-background-clip: text;
+    		-webkit-text-fill-color: transparent;
+    		-moz-background-clip: text;
+    		-moz-text-fill-color: transparent;
+    		font-family: 'Playfair Display', serif;
+    		display: inline-block;
 }
 		.project-description {
             color: var(--light-white);
@@ -344,8 +344,27 @@
             .container {
                 padding: 0 20px;
             }
-			/* Mobile Menu Styles - Only activates below 768px */
+/* Mobile Menu Styles - Only activates below 768px */
 @media (max-width: 768px) {
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px; /* Add padding to prevent touching screen edges */
+    }
+    
+    .menu-toggle {
+        order: 2; /* Moves it to the far right */
+        margin-left: auto; /* Pushes it all the way right */
+    }
+    
+    .logo {
+        order: 1; /* Ensures logo stays left */
+    }
+    
+    nav {
+        order: 3; /* Puts nav last (though it's hidden) */
+    }
     .menu-toggle {
         display: block;
         background: none;
