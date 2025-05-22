@@ -193,37 +193,6 @@
             opacity: 1;
         }
 
-@media (max-width: 768px) {
-    .photo-gallery {
-        width: 100%;
-        height: 250px; /* Fixed height */
-        margin-top: 30px; /* Space above gallery */
-        position: relative; /* Ensure positioning works */
-        z-index: 1; /* Make sure it's above other elements */
-    }
-    
-    .photo-gallery::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: var(--dark-bg);
-        padding: 2px;
-        border-radius: 6px;
-        z-index: -1; /* Send gradient border behind */
-    }
-    
-    .gallery-image {
-        position: absolute;
-        width: calc(100% - 6px); /* Account for border */
-        height: calc(100% - 6px); /* Account for border */
-        left: 3px; /* Center within border */
-        top: 3px; /* Center within border */
-        object-fit: cover;
-        border-radius: 4px;
-        z-index: 2;
-    }
-}
-
         /* Education Timeline */
         .timeline {
             position: relative;
@@ -630,16 +599,12 @@
     .social-icons {
         margin-left: auto; /* Pushes icons to right */
     }
-    .photo-gallery {
-        margin-top: 30px; /* Adds space above gallery */
-        height: 250px; /* Ensure this is set */
-        width: 100%; /* Full width */
-    }
     
     .summary-section {
         margin-bottom: 40px; /* Adds space below gallery */
     }
 }
+
 
     </style>
 </head>
