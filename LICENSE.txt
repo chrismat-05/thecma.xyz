@@ -1,0 +1,18 @@
+Copyright (c) 2025 Chris Mathew Aje
+
+This project is the intellectual property of Chris Mathew Aje. All rights are reserved.
+
+Unauthorized copying, distribution, reuse, modification, or sublicensing of any files, assets, or features of this software is strictly prohibited.
+
+You may NOT:
+- Use this project code for personal or commercial purposes without permission
+- Host or re-deploy this system under any domain or platform
+- Rebrand, fork, or resell any part of this project
+
+This is a private, proprietary project and is not open-source currently.
+
+To request licensing or discuss collaboration, contact:
+contact.thecma.xyz
+chrismaje63@gmail.com
+
+Licensed exclusively by Chris Mathew Aje.
