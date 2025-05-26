@@ -40,7 +40,7 @@
         }
 
         /* Header */
-        header {
+		header {
             position: fixed;
             width: 100%;
             top: 0;
@@ -52,6 +52,7 @@
         .header-container {
             display: flex;
             justify-content: space-between;
+			width: 100%
             align-items: center;
         }
 
@@ -70,7 +71,14 @@
             list-style: none;
             display: flex;
             gap: 20px;
+			padding-right: 0;
+    		margin-right: 0; 
         }
+		nav {
+    		display: flex;
+    		justify-content: flex-end;
+    		flex-grow: 1;
+		}
 
         nav a {
             color: var(--white);
@@ -266,18 +274,23 @@
 }
         /* Footer */
         footer {
-            background-color: #000;
-            margin-top: 40px;
+            padding: 50px 0 30px;
+            background-color: var(--dark-bg);
         }
-
+        
+        .footer-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
         .footer-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            flex-wrap: wrap;
         }
-
+        
         .footer-logo {
             font-size: 24px;
             font-weight: bold;
@@ -288,37 +301,30 @@
             margin-bottom: 8px;
             font-family: 'Playfair Display', serif;
         }
-
+        
         .footer-text {
             color: var(--white);
             font-size: 16px;
             font-weight: 500;
         }
-
+        
         .social-icons {
             display: flex;
-            gap: 15px;
+            gap: 25px;
         }
-
+        
         .social-icon {
             width: 36px;
             height: 36px;
             transition: all 0.3s ease;
             filter: brightness(0.8);
         }
-
+        
         .social-icon:hover {
             filter: brightness(1.5);
             transform: translateY(-5px);
         }
-
-        .footer-divider {
-            height: 1px;
-            background-color: var(--divider);
-            width: 100%;
-            margin-bottom: 40px;
-        }
-
+        
         .footer-bottom-divider {
             height: 1px;
             background-color: var(--divider);
@@ -326,7 +332,7 @@
             max-width: 1200px;
             margin: 30px auto;
         }
-
+        
         .copyright {
             text-align: center;
             color: var(--light-white);
@@ -477,7 +483,7 @@
     .social-icons {
         margin-left: auto; /* Pushes icons to right */
     }
-}
+}}
     </style>
 </head>
 <body>
