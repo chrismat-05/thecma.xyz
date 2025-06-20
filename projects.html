@@ -52,7 +52,7 @@
         .header-container {
             display: flex;
             justify-content: space-between;
-			width: 100%
+			width: 100%;
             align-items: center;
         }
 
@@ -271,7 +271,6 @@
             margin: 2px 0 40px 0;
         }
 
-        /* Footer */
 footer {
             padding: 50px 0 30px;
             background-color: var(--dark-bg);
@@ -351,26 +350,25 @@ footer {
             .container {
                 padding: 0 20px;
             }}
-/* Mobile Menu Styles - Only activates below 768px */
 @media (max-width: 768px) {
     .header-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 20px; /* Add padding to prevent touching screen edges */
+        padding: 0 20px;
     }
     
     .menu-toggle {
-        order: 2; /* Moves it to the far right */
-        margin-left: auto; /* Pushes it all the way right */
+        order: 2;
+        margin-left: auto;
     }
     
     .logo {
-        order: 1; /* Ensures logo stays left */
+        order: 1;
     }
     
     nav {
-        order: 3; /* Puts nav last (though it's hidden) */
+        order: 3;
     }
     .menu-toggle {
         display: block;
@@ -420,23 +418,19 @@ footer {
         visibility: visible;
     }
 
-    /* Hide regular menu items on mobile */
     nav ul {
         display: none;
     }
     
-    /* Show when active */
     nav ul.active {
         display: flex;
     }
     
-    /* Ensure header doesn't get too tall */
     header {
         padding: 15px 0;
     }
 	}
 
-/* Ensure menu toggle is hidden on desktop */
 	@media (min-width: 769px) {
     .menu-toggle {
         display: none !important;
@@ -455,19 +449,69 @@ footer {
 @media (max-width: 768px) {
     .menu-toggle {
         position: absolute;
-        right: 20px; /* Matches your container padding */
+        right: 20px;
     }
     
     .logo {
         position: relative;
-        z-index: 1; /* Ensures logo stays above other elements */
+        z-index: 1;
     }
+}
+.project-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tag-major {
+    background-color: rgba(255, 102, 0, 0.2);
+    color: #ff6600;
+    border: 1px solid rgba(255, 102, 0, 0.3);
+}
+
+.tag-minor {
+    background-color: rgba(0, 153, 255, 0.2);
+    color: #0099ff;
+    border: 1px solid rgba(0, 153, 255, 0.3);
+}
+
+.tag-development {
+    background-color: rgba(255, 204, 0, 0.2);
+    color: #ffcc00;
+    border: 1px solid rgba(255, 204, 0, 0.3);
+}
+
+.tag-upcoming {
+    background-color: rgba(153, 51, 255, 0.2);
+    color: #9933ff;
+    border: 1px solid rgba(153, 51, 255, 0.3);
+}
+
+.tag-live {
+    background-color: rgba(0, 204, 102, 0.2);
+    color: #00cc66;
+    border: 1px solid rgba(0, 204, 102, 0.3);
+}
+
+.tag-opensource {
+    background-color: rgba(102, 204, 255, 0.2);
+    color: #66ccff;
+    border: 1px solid rgba(102, 204, 255, 0.3);
 }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
 <header>
     <div class="container header-container">
         <div class="logo">CMA</div>
@@ -486,16 +530,19 @@ footer {
     <div class="header-divider"></div>
 </header>
 
-    <!-- Main Content -->
     <main>
         <div class="container">
 		<div class="pagetitle">Projects</div>
             <div class="projects-container">
 				
 				<!-- Project forms.thecma.xyz -->
-		<div class="project">
+		        <div class="project">
                     <div class="project-info">
-                        <h2 class="project-title">forms.thecma.xyz (In Development)</h2>
+                        <h2 class="project-title">forms.thecma.xyz</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-major">🗂️Major Project</span>
+                            <span class="tag tag-development">🛠️In Development</span>
+                        </div>
                         <p class="project-description">
                            Built with HTML, CSS, JavaScript, and formBuilder.js, the platform enables users to create, preview, and share customizable forms with themes, analytics, and export options. Data is securely handled using Firebase Auth and Firestore, while responses are managed through a custom-built interface supporting sheet view, graph view (powered by Chart.js), and individual response view. Export options include CSV, Excel, and PDF formats using SheetJS and jsPDF. Hosted on Netlify with code managed on GitHub, the tool empowers users with complete control over form creation and response management — without relying on third-party integrations.</p>
                         <a href="https://forms.thecma.xyz/" target="_blank" class="visit-btn">Visit</a>
@@ -524,13 +571,50 @@ footer {
                     </div>
                 </div>
 
-		    		 <!-- Project Divider -->
+		    	<!-- Project Divider -->
                 <div class="project-divider"></div>
 		    
-		<!-- Project theCMA.xyz -->
+		        <!-- Project API Peek -->
+                <div class="project">
+                    <div class="project-info">
+                        <h2 class="project-title">API Peek</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-minor">📄Minor Project</span>
+                            <span class="tag tag-live">🟢Live</span>
+                            <span class="tag tag-opensource">🌐Open Source</span>
+                        </div>
+                        <p class="project-description">
+                            A lightweight, developer-friendly API request debugger built using React, Tailwind CSS, Axios, and Framer Motion. It allows users to test HTTP methods like GET, POST, PUT, and DELETE by entering a URL, headers, and body, and instantly viewing a formatted response with status, headers, and even the time taken. Designed with an animated UI and no login or tracking, it's fully open source and perfect for developers who need a fast, focused tool to inspect APIs on the go.
+                        </p>
+                        <a href="https://apipeek.thecma.xyz" target="_blank" class="visit-btn">Visit</a>
+                    </div>
+                    <div class="project-preview">
+                        <div class="slideshow-container">
+                            <div class="slide active">
+                                <img src="media/apipeek/apipeek1.png" alt="API Peek">
+                            </div>
+                            <div class="slide">
+                                <img src="media/apipeek/apipeek2.png" alt="API Peek">
+                            </div>
+                            <div class="slide-nav">
+                                <div class="slide-dot active" data-index="0"></div>
+                                <div class="slide-dot" data-index="1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Divider -->
+                <div class="project-divider"></div>
+
+		        <!-- Project theCMA.xyz -->
                 <div class="project">
                     <div class="project-info">
                         <h2 class="project-title">theCMA.xyz</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-minor">📄Minor Project</span>
+                            <span class="tag tag-live">🟢Live</span>
+                        </div>
                         <p class="project-description">
                             theCMA.xyz – My personal portfolio website, built primarily with HTML5, CSS3, and a touch of JavaScript for interactivity. 
                             It's a fully static site hosted on GitHub Pages with a custom domain. 
@@ -567,11 +651,19 @@ footer {
                 </div>
 
                 <!-- Project Divider -->
+<!--
                 <div class="project-divider"></div>
-		    			<!-- Project AMC ERP -->
-		<div class="project">
+-->
+
+		    	<!-- Project AMC ERP -->
+<!--
+		        <div class="project">
                     <div class="project-info">
                         <h2 class="project-title">AMC</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-major">🗂️Major Project</span>
+                            <span class="tag tag-upcoming">⏳Upcoming</span>
+                        </div>
                         <p class="project-description">
                             Educational Project: A user-friendly Annual Maintenance Contract (AMC) Management System built using VB.NET and SQL Server 2022. It streamlines contract, client, asset, and service request management with secure login roles, intuitive dashboards, and admin reporting—enhancing efficiency for individuals or teams managing multiple maintenance contracts.
                         </p>
@@ -616,14 +708,20 @@ footer {
                         </div>
                     </div>
                 </div>
+-->
+
+				<!-- Project Divider -->
+                <!--<div class="project-divider"></div>-->
 				
-						    		 <!-- Project Divider -->
-                <div class="project-divider"></div>
-				
-		    			<!-- Project photos.thecma.xyz -->
-		<div class="project">
+				<!-- Project photos.thecma.xyz -->
+<!--
+		        <div class="project">
                     <div class="project-info">
-                        <h2 class="project-title">photos.thecma.xyz (Pre development phase)</h2>
+                        <h2 class="project-title">photos.thecma.xyz</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-major">🗂️Major Project</span>
+                            <span class="tag tag-upcoming">⏳Upcoming</span>
+                        </div>
                         <p class="project-description">
                            A facial recognition-based event photo organizer built with React, Tailwind CSS, and face-api.js. Guests upload a selfie to find their photos from event albums stored in the photographer’s own Cloudinary, Google Photos, or OneDrive. Each event gets a custom subdomain with full gallery view, logo watermarking, and studio branding. Hosted on Netlify with code on GitHub and optional backend via Firebase or Supabase.
                         </p>
@@ -632,16 +730,16 @@ footer {
                     <div class="project-preview">
                         <div class="slideshow-container">
                             <div class="slide active">
-                                <img src="media/photos.thecma.xyz/photos.thecma (7).png" alt="Form Welcome Screen">
+                                <img src="media/photos.thecma.xyz/photos.thecma (7).png" alt="Photos">
                             </div>
                             <div class="slide">
-                                <img src="media/photos.thecma.xyz/photos.thecma (6).png" alt="Form Textbox Question">
+                                <img src="media/photos.thecma.xyz/photos.thecma (6).png" alt="Photos">
                             </div>
                             <div class="slide">
-                                <img src="media/photos.thecma.xyz/photos.thecma (5).png" alt="Form Textbox question">
+                                <img src="media/photos.thecma.xyz/photos.thecma (5).png" alt="Photos">
                             </div>
                             <div class="slide">
-                                <img src="media/photos.thecma.xyz/photos.thecma (4).png" alt="Form Radio button question">
+                                <img src="media/photos.thecma.xyz/photos.thecma (4).png" alt="Photos">
                             </div>
                             <div class="slide-nav">
                                 <div class="slide-dot active" data-index="0"></div>
@@ -652,11 +750,10 @@ footer {
                         </div>
                     </div>
                 </div>
-				<!--Project ends-->
+-->
 	</div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-divider"></div>
         <div class="container footer-container">
@@ -676,12 +773,9 @@ footer {
     </footer>
 
 <script>
-    // Slideshow functionality
     document.addEventListener('DOMContentLoaded', function() {
-        // Get all slideshow containers
         const slideshowContainers = document.querySelectorAll('.slideshow-container');
         
-        // Initialize each slideshow separately
         slideshowContainers.forEach(container => {
             const slides = container.querySelectorAll('.slide');
             const dots = container.querySelectorAll('.slide-dot');
@@ -706,7 +800,6 @@ footer {
                 dots[currentSlide].classList.add('active');
             }
             
-            // Add click event to dots
             dots.forEach(dot => {
                 dot.addEventListener('click', function() {
                     clearInterval(slideInterval);
@@ -715,11 +808,9 @@ footer {
                 });
             });
             
-            // Start the slideshow
             startSlideshow();
         });
     });
-	    // Mobile menu toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('nav ul');
     const overlay = document.querySelector('.overlay');
