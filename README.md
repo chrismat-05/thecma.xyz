@@ -1,12 +1,42 @@
-# React + Vite
+# 🌐 CMA Portfolio – [thecma.xyz](https://thecma.xyz)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Personal Portfolio Website of Chris Mathew Aje**
 
-Currently, two official plugins are available:
+This is a dynamic, responsive, animation-rich portfolio site built with **React**, **Tailwind CSS**, **Framer Motion**, **Anime.js**, and more. It showcases my work, projects, public speaking, and technical interests — all wrapped in a creative, dark-themed design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Hosted at 👉 [**https://thecma.xyz**](https://thecma.xyz)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+| Tool            | Use                                                                 |
+|----------------|----------------------------------------------------------------------|
+| React           | Component-based frontend                                             |
+| Vite            | Fast bundler with dev server                                         |
+| Tailwind CSS    | Utility-first responsive styling                                     |
+| Framer Motion   | Animations on scroll, transitions, mounts                           |
+| Anime.js        | Dynamic effects like loops, scroll animations                        |
+| Lucide Icons    | Beautifully styled vector icons                                      |
+| Lottie React    | JSON-based animation integration                                     |
+| TypeScript      | (Optional) Scripts for logic and safety                              |
+| Python Scripts  | Small CLI/utility integrations inside `public/python-scripts`       |
+
+---
+
+## 📫 Contact
+You can reach out to me directly via the Contact Section or:
+
+📧 Email: chrismaje63@gmail.com
+
+🔗 LinkedIn: linkedin.com/in/chrismaje
+
+---
+
+![Vite](https://img.shields.io/badge/bundler-vite-646CFF?logo=vite&logoColor=white)
+![React](https://img.shields.io/badge/framework-react-61DAFB?logo=react&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/styling-tailwindcss-38B2AC?logo=tailwind-css&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/animations-framer--motion-black?logo=framer&logoColor=white)
+![Anime.js](https://img.shields.io/badge/scroll-anime.js-FB3550?logo=javascript)
+![License](https://img.shields.io/badge/license-Proprietary-red)
+/*![Netlify Status](https://api.netlify.com/api/v1/badges/ add badge id here once deployed. from site settings -> status badge /deploy-status)*/
