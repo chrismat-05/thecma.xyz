@@ -1,0 +1,83 @@
+[
+  {
+    "id": "forms-thecma",
+    "title": "forms.thecma.xyz",
+    "tags": ["major", "testing"],
+    "description": "Built with HTML, CSS, JavaScript, and formBuilder.js, the platform enables users to create, preview, and share customizable forms with themes, analytics, and export options. Data is securely handled using Firebase Auth and Firestore, while responses are managed through a custom-built interface supporting sheet view, graph view, and individual response view. Export options include CSV, Excel, and PDF formats using SheetJS and jsPDF. Hosted on Netlify with code managed on GitHub, the tool empowers users with complete control over form creation and response management; without relying on third-party integrations.",
+    "visitLink": "https://forms.thecma.xyz/",
+    "images": [
+      "assets/forms.thecma.xyz/forms.thecma (4).png",
+      "assets/forms.thecma.xyz/forms.thecma (3).png",
+      "assets/forms.thecma.xyz/forms.thecma (2).png",
+      "assets/forms.thecma.xyz/forms.thecma (1).png"
+    ],
+    "highlight": true
+  },
+  {
+    "id": "quotzy",
+    "title": "Quotzy",
+    "tags": ["minor", "package", "opensource"],
+    "description": "Quotzy is a fully open-source quote generator built as both a CLI tool and a JS module. It features handpicked quotes across six diverse categories: Movies, Bible Verses, Fun, Christian, Deep, and Inspirational. Quotzy supports both terminal-based use and programmatic integration. Published to npm and GitHub Packages, with automated CI/CD using GitHub Actions. Check out the Repo for install and setup instructions.",
+    "visitLink": "https://github.com/chrismat-05/quotzy",
+    "images": [
+      "assets/Quotzy/quotzy(1).png",
+      "assets/Quotzy/quotzy(2).png"
+    ],
+    "highlight": true
+  },
+  {
+    "id": "reqapi",
+    "title": "ReqAPI",
+    "tags": ["minor", "opensource", "live"],
+    "description": "A minimal HTTP testing interface that allows users to send GET, POST, PUT, DELETE requests with customizable headers and request bodies. Displays real-time status code and JSON response. Fully open-source and deployable. Built using HTML, CSS, JS and powered by Fetch API.",
+    "visitLink": "https://reqapi.thecma.xyz",
+    "images": [
+      "assets/reqapi/reqapi1.png"
+    ],
+    "highlight": false
+  },
+  {
+    "id": "scrihdr",
+    "title": "SecuriHeaders",
+    "tags": ["minor", "opensource", "live"],
+    "description": "A header and policy inspector for websites. Provides a report on security-related HTTP headers like Content-Security-Policy, X-Frame-Options, Strict-Transport-Security, etc. Highlights what's missing. Ideal for frontend devs and cybersecurity learners. Built with JS and Fetch API.",
+    "visitLink": "https://scrihdr.thecma.xyz",
+    "images": [
+      "assets/scrihdr/scrihdr1.png"
+    ],
+    "highlight": false
+  },
+  {
+    "id": "thecma-xyz",
+    "title": "theCMA.xyz",
+    "tags": ["minor", "live"],
+    "description": "theCMA.xyz – My personal portfolio website, built primarily with HTML5, CSS3, and a touch of JavaScript for interactivity. It's a fully static site hosted on GitHub Pages with a custom domain. theCMA.xyz showcases my tech projects, creative work, and personal milestones, all in one evolving space.",
+    "visitLink": "https://thecma.xyz",
+    "images": [
+      "assets/theCMA.xyz/thecma.xyz-home.png",
+      "assets/theCMA.xyz/thecma.xyz-projects.png",
+      "assets/theCMA.xyz/thecma.xyz-contact.png",
+      "assets/theCMA.xyz/thecma.xyz-about.png",
+      "assets/theCMA.xyz/thecma.xyz-creative.png"
+    ],
+    "highlight": true
+  },
+  {
+    "id": "amc-college",
+    "title": "AMC",
+    "tags": ["college", "live", "opensource"],
+    "description": "A user-friendly Annual Maintenance Contract (AMC) Management System built using VB.NET and SQL Server 2022. It streamlines contract, client, asset, and service request management with secure login roles, intuitive dashboards, and admin reporting; enhancing efficiency for individuals or teams managing multiple maintenance contracts.",
+    "visitLink": "https://github.com/chrismat-05/AMC",
+    "images": [
+      "assets/AMC/AMC1.png",
+      "assets/AMC/AMC2.png",
+      "assets/AMC/AMC3.png",
+      "assets/AMC/AMC4.png",
+      "assets/AMC/AMC5.png",
+      "assets/AMC/AMC6.png",
+      "assets/AMC/AMC7.png",
+      "assets/AMC/AMC8.png"
+    ],
+    "highlight": false
+  }
+]
