@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Contact Chris Mathew Aje">
+	<meta name="keywords" content="Chris Mathew Aje, Chris, Software Developer, Portfolio, CMA, Full Stack Developer, CyberSecurity, IT, Get in touch, Contact Chris">
+    <title>Contact | CMA</title>
+    <link rel="icon" href="../media/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&family=Montserrat:wght@400;500;600&family=Tangerine:wght@700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gradient: linear-gradient(90deg, #ffcc00, #ff9900, #ff6600);
+            --white: #ffffff;
+            --light-white: rgba(255, 255, 255, 0.8);
+            --dark-bg: #000000;
+            --button-bg: #0e0e0e;
+            --divider: rgba(255, 255, 255, 0.1);
+            --border-gray: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pagetitle {
+            font-size: 34px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-background-clip: text;
+            -moz-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            display: inline-block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: #000;
+            padding: 20px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+			width: 100%;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+			padding-right: 0;
+    		margin-right: 0; 
+        }
+		nav {
+    		display: flex;
+    		justify-content: flex-end;
+    		flex-grow: 1;
+		}
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .header-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-top: 25px;
+        }
+
+
+        /* Main */
+        main {
+            flex: 1;
+            margin-top: 120px;
+            padding-bottom: 60px;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+        }
+        
+        .contact-form, .contact-info {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            background: var(--button-bg);
+            border: 1px solid var(--divider);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 4px;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 20px;
+        }
+
+        /* Button Styles (matches projects page) */
+        .visit-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--button-bg);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+        }
+
+        .visit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .visit-btn:hover {
+            border-color: transparent;
+            color: black;
+            font-weight: 600;
+        }
+
+        .visit-btn:hover::before {
+            opacity: 1;
+        }
+
+        /* Contact Methods */
+        .contact-info h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-method img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .contact-method a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method a:hover {
+            color: #ff9900;
+        }
+
+        .response-time {
+            margin-top: 30px;
+            opacity: 0.8;
+            font-size: 15px;
+        }
+
+        .hidden { 
+            display: none; 
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        /* Footer */
+footer {
+            padding: 50px 0 30px;
+            background-color: var(--dark-bg);
+        }
+        
+        .footer-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .footer-text {
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            transition: all 0.3s ease;
+            filter: brightness(0.8);
+        }
+        
+        .social-icon:hover {
+            filter: brightness(1.5);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+        
+        .copyright {
+            text-align: center;
+            color: var(--light-white);
+            font-size: 14px;
+            font-weight: 500;
+        }
+/* Mobile Menu Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 24px;
+    cursor: pointer;
+    /*z-index: 1001;*/
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: var(--dark-bg);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        padding-top: 80px;
+    }
+
+    nav ul.active {
+        right: 0;
+    }
+@media (max-width: 768px) {
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px; /* Add padding to prevent touching screen edges */
+    }
+    
+    .menu-toggle {
+        order: 2; /* Moves it to the far right */
+        margin-left: auto; /* Pushes it all the way right */
+    }
+    
+    .logo {
+        order: 1; /* Ensures logo stays left */
+    }
+    
+    nav {
+        order: 3; /* Puts nav last (though it's hidden) */
+    }
+}
+    nav a {
+        font-size: 18px;
+    }
+
+    /* Overlay when menu is open */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Adjust header padding on mobile */
+    header {
+        padding: 15px 0;
+    }
+}
+@media (max-width: 768px) {
+    nav ul.active a.active::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+    nav ul.active a.active::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    .header-container {
+        justify-content: space-between;
+        padding: 0 15px; /* Add some padding on sides */
+    }
+    
+    .menu-toggle {
+        margin-left: auto; /* Pushes it to far right */
+    }
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .social-icons {
+        margin-left: auto; /* Pushes icons to right */
+    }
+}
+@media (max-width: 768px) {
+    .menu-toggle {
+        position: absolute;
+        right: 20px; /* Matches your container padding */
+    }
+}    
+    .logo {
+        position: relative;
+        z-index: 1; /* Ensures logo stays above other elements */
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+<header>
+    <div class="container header-container">
+        <div class="logo">CMA</div>
+        <button class="menu-toggle">☰</button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="creative.html">Creative</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="overlay"></div>
+    </div>
+    <div class="header-divider"></div>
+</header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h1 class="pagetitle">Get in touch</h1>
+            <div class="contact-container">
+                <!-- Left Column: Form -->
+                <div class="contact-form">
+                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <p class="hidden">
+                            <label>Don't fill this out: <input name="bot-field"/></label>
+                        </p>
+                        
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select name="subject" required>
+                                <option value="" disabled selected>Select a subject</option>
+                                <option value="work">Work Inquiry</option>
+                                <option value="project">Project Collaboration</option>
+                                <option value="question">Question</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="visit-btn">Send Message</button>
+                    </form>
+                </div>
+                
+                <!-- Right Column: Contact Info -->
+                <div class="contact-info">
+                    <h3>Other ways to reach me</h3>
+                    
+                    <div class="contact-method">
+                        <img src="../media/mail.png" alt="Email">
+                        <a href="mailto:chrismaje63@gmail.com">chrismaje63@gmail.com</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <img src="../media/phone.png" alt="Phone">
+                        <a href="tel:+918848914245">+91 88489 14245</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <img src="../media/linkedin.png" alt="LinkedIn">
+                        <a href="https://linkedin.com/in/chrismaje" target="_blank">linkedin.com/in/chrismaje</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <img src="../media/github.png" alt="GitHub">
+                        <a href="https://github.com/chrismat-05" target="_blank">github.com/chrismat-05</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <img src="../media/whatsapp.png" alt="WhatsApp">
+                        <a href="https://wa.me/+918848914245" target="_blank">+91 88489 14245</a>
+                    </div>
+                    
+                    <p class="response-time">
+                        Typically responds within 6-8 hours
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-divider"></div>
+        <div class="container footer-container">
+            <div>
+                <div class="footer-logo">CMA</div>
+                <div class="footer-text">Bridging tech & creativity - one step at a time</div>
+            </div>
+            <div class="social-icons">
+                <a href="https://github.com/chrismat-05" target="_blank"><img class="social-icon" src="../media/github.png" alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/chrismaje/" target="_blank"><img class="social-icon" src="../media/linkedin.png" alt="LinkedIn"></a>
+                <a href="https://wa.me/+918848914245" target="_blank"><img class="social-icon" src="../media/whatsapp.png" alt="WhatsApp"></a>
+                <a href="mailto:chrismaje63@gmail.com"><img class="social-icon" src="../media/mail.png" alt="Email"></a>
+            </div>
+        </div>
+        <div class="footer-bottom-divider"></div>
+        <div class="copyright">© 2025 Chris Mathew Aje, All rights reserved.</div><br><br>
+    </footer>
+<script>
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('nav ul');
+    const overlay = document.querySelector('.overlay');
+
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    // Close menu when clicking on a link (for single page navigation)
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    });
+</script>
+</body>
+</html>

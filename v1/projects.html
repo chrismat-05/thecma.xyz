@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | CMA</title>
+    <link rel="icon" href="../media/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&family=Montserrat:wght@400;500;600&family=Tangerine:wght@700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gradient: linear-gradient(90deg, #ffcc00, #ff9900, #ff6600);
+            --white: #ffffff;
+            --light-white: rgba(255, 255, 255, 0.8);
+            --dark-bg: #000000;
+            --button-bg: #0e0e0e;
+            --divider: rgba(255, 255, 255, 0.1);
+            --border-gray: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: #000;
+            padding: 20px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+			width: 100%;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+			padding-right: 0;
+    		margin-right: 0; 
+        }
+		nav {
+    		display: flex;
+    		justify-content: flex-end;
+    		flex-grow: 1;
+		}
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .header-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        /* Main */
+        main {
+            flex: 1;
+            margin-top: 120px;
+            padding-bottom: 60px;
+        }
+
+        .projects-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .project {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .pagetitle {
+    		font-size: 34px;
+    		font-weight: 700;
+    		margin-bottom: 30px;
+    		background: var(--gradient);
+    		background-clip: text;
+    		-webkit-background-clip: text;
+    		-webkit-text-fill-color: transparent;
+    		-moz-background-clip: text;
+    		-moz-text-fill-color: transparent;
+    		font-family: 'Playfair Display', serif;
+    		display: inline-block;
+}
+		.project-description {
+            color: var(--light-white);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-preview {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 153, 0, 0.1);
+            height: 300px;
+            position: relative;
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 2;
+        }
+
+        .slide-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .slide-dot.active {
+            background-color: var(--white);
+        }
+
+        .visit-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--button-bg);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
+        }
+
+        .visit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .visit-btn:hover {
+            border-color: transparent;
+        }
+
+        .visit-btn:hover::before {
+            opacity: 1;
+        }
+
+        .project-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin: 2px 0 40px 0;
+        }
+
+footer {
+            padding: 50px 0 30px;
+            background-color: var(--dark-bg);
+        }
+        
+        .footer-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .footer-text {
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            transition: all 0.3s ease;
+            filter: brightness(0.8);
+        }
+        
+        .social-icon:hover {
+            filter: brightness(1.5);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+        
+        .copyright {
+            text-align: center;
+            color: var(--light-white);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .project {
+                flex-direction: column;
+            }
+
+            .project-info, .project-preview {
+                width: 100%;
+            }
+
+            .container {
+                padding: 0 20px;
+            }}
+@media (max-width: 768px) {
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+    
+    .menu-toggle {
+        order: 2;
+        margin-left: auto;
+    }
+    
+    .logo {
+        order: 1;
+    }
+    
+    nav {
+        order: 3;
+    }
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: var(--dark-bg);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        padding-top: 80px;
+    }
+
+    nav ul.active {
+        right: 0;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    nav ul {
+        display: none;
+    }
+    
+    nav ul.active {
+        display: flex;
+    }
+    
+    header {
+        padding: 15px 0;
+    }
+	}
+
+	@media (min-width: 769px) {
+    .menu-toggle {
+        display: none !important;
+    }
+    
+    .overlay {
+        display: none !important;
+    }
+	}
+@media (max-width: 768px) {
+    nav ul.active a.active::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+}
+@media (max-width: 768px) {
+    .menu-toggle {
+        position: absolute;
+        right: 20px;
+    }
+    
+    .logo {
+        position: relative;
+        z-index: 1;
+    }
+}
+.project-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tag-major {
+    background-color: rgba(255, 102, 0, 0.2);
+    color: #ff6600;
+    border: 1px solid rgba(255, 102, 0, 0.3);
+}
+
+.tag-minor {
+    background-color: rgba(0, 153, 255, 0.2);
+    color: #0099ff;
+    border: 1px solid rgba(0, 153, 255, 0.3);
+}
+
+.tag-development {
+    background-color: rgba(255, 204, 0, 0.2);
+    color: #ffcc00;
+    border: 1px solid rgba(255, 204, 0, 0.3);
+}
+
+.tag-upcoming {
+    background-color: rgba(153, 51, 255, 0.2);
+    color: #9933ff;
+    border: 1px solid rgba(153, 51, 255, 0.3);
+}
+
+.tag-live {
+    background-color: rgba(0, 204, 102, 0.2);
+    color: #00cc66;
+    border: 1px solid rgba(0, 204, 102, 0.3);
+}
+
+.tag-opensource {
+    background-color: rgba(102, 204, 255, 0.2);
+    color: #66ccff;
+    border: 1px solid rgba(102, 204, 255, 0.3);
+}
+.tag-testing {
+    background-color: rgba(102, 204, 255, 0.2);
+    color: #008080;
+    border: 1px solid rgba(102, 204, 255, 0.3);
+}
+.tag-college {
+    background-color: rgba(219, 102, 255, 0.2);
+    color: #f700ff;
+    border: 1px solid rgba(219, 102, 255, 0.3);
+}
+.tag-package {
+    background-color: rgba(160, 120, 70, 0.2);
+    color: #A07846;
+    border: 1px solid rgba(160, 120, 70, 0.3);
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-container">
+        <div class="logo">CMA</div>
+        <button class="menu-toggle">☰</button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="creative.html">Creative</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="overlay"></div>
+    </div>
+    <div class="header-divider"></div>
+</header>
+
+    <main>
+        <div class="container">
+		<div class="pagetitle">Projects</div>
+            <div class="projects-container">
+				
+				<!-- Project forms.thecma.xyz -->
+		        <div class="project">
+                    <div class="project-info">
+                        <h2 class="project-title">forms.thecma.xyz</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-major">🗂️Major Project</span>
+                            <span class="tag tag-testing">🧪Testing</span>
+                        </div>
+                        <p class="project-description">
+                           Built with HTML, CSS, JavaScript, and formBuilder.js, the platform enables users to create, preview, and share customizable forms with themes, analytics, and export options. Data is securely handled using Firebase Auth and Firestore, while responses are managed through a custom-built interface supporting sheet view, graph view, and individual response view. Export options include CSV, Excel, and PDF formats using SheetJS and jsPDF. Hosted on Netlify with code managed on GitHub, the tool empowers users with complete control over form creation and response management; without relying on third-party integrations.</p>
+                        <a href="https://forms.thecma.xyz/" target="_blank" class="visit-btn">Visit</a>
+                    </div>
+                    <div class="project-preview">
+                        <div class="slideshow-container">
+                            <div class="slide active">
+                                <img src="../media/forms.thecma.xyz/forms.thecma (4).png" alt="Form Welcome Screen">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/forms.thecma.xyz/forms.thecma (3).png" alt="Form Textbox Question">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/forms.thecma.xyz/forms.thecma (2).png" alt="Form Textbox question">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/forms.thecma.xyz/forms.thecma (1).png" alt="Form Radio button question">
+                            </div>
+                            <div class="slide-nav">
+                                <div class="slide-dot active" data-index="0"></div>
+                                <div class="slide-dot" data-index="1"></div>
+                                <div class="slide-dot" data-index="2"></div>
+                                <div class="slide-dot" data-index="3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+		    	<!-- Project Divider -->
+                <div class="project-divider"></div>
+		    
+		        <!-- Project quotzy -->
+                <div class="project">
+                    <div class="project-info">
+                        <h2 class="project-title">Quotzy</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-minor">📄Minor Project</span>
+                            <span class="tag tag-package">📦Package</span>
+                            <span class="tag tag-opensource">🌐Open Source</span>
+                        </div>
+                        <p class="project-description">
+                            Quotzy is a fully open-source quote generator built as both a CLI tool and a JS module. It features handpicked quotes across six diverse categories: Movies, Bible Verses, Fun, Christian, Deep, and Inspirational. Quotzy supports both terminal-based use and programmatic integration. Published to npm and GitHub Packages, with automated CI/CD using GitHub Actions.<br>Check out the Repo for install and setup instructions.
+                        </p>
+                        <a href="https://github.com/chrismat-05/quotzy" target="_blank" class="visit-btn">Visit Repo</a>
+                    </div>
+                    <div class="project-preview">
+                        <div class="slideshow-container">
+                            <div class="slide active">
+                                <img src="../media/Quotzy/quotzy(1).png" alt="SecuriHeader">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/Quotzy/quotzy(2).png" alt="SecuriHeader">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/Quotzy/quotzy(3).png" alt="SecuriHeader">
+                            </div>
+                            <div class="slide-nav">
+                                <div class="slide-dot active" data-index="0"></div>
+                                <div class="slide-dot" data-index="1"></div>
+                                <div class="slide-dot" data-index="2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Divider -->
+                <div class="project-divider"></div>
+		    
+		        <!-- Project SecuriHeader -->
+                <div class="project">
+                    <div class="project-info">
+                        <h2 class="project-title">SecuriHeader</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-minor">📄Minor Project</span>
+                            <span class="tag tag-live">🟢Live</span>
+                            <span class="tag tag-opensource">🌐Open Source</span>
+                        </div>
+                        <p class="project-description">
+                            A tool that analyzes the HTTP response headers of any website and checks for missing or misconfigured security-related headers like X-Frame-Options, Content-Security-Policy, and more. Ideal for developers and security-conscious users looking to audit basic web hygiene.
+                            <br>Clean interface, instant results.
+                        </p>
+                        <a href="https://scrihdr.thecma.xyz" target="_blank" class="visit-btn">Visit</a>
+                    </div>
+                    <div class="project-preview">
+                        <div class="slideshow-container">
+                            <div class="slide active">
+                                <img src="../media/scrihdr/scrihdr1.png" alt="SecuriHeader">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/scrihdr/scrihdr2.png" alt="SecuriHeader">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/scrihdr/scrihdr3.png" alt="SecuriHeader">
+                            </div>
+                            <div class="slide-nav">
+                                <div class="slide-dot active" data-index="0"></div>
+                                <div class="slide-dot" data-index="1"></div>
+                                <div class="slide-dot" data-index="2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+		    	<!-- Project Divider -->
+                <div class="project-divider"></div>
+		    
+		        <!-- Project Req API -->
+                <div class="project">
+                    <div class="project-info">
+                        <h2 class="project-title">Req API</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-minor">📄Minor Project</span>
+                            <span class="tag tag-live">🟢Live</span>
+                            <span class="tag tag-opensource">🌐Open Source</span>
+                        </div>
+                        <p class="project-description">
+                            A lightweight, developer-friendly API request debugger built using React, Tailwind CSS, Axios, and Framer Motion. It allows users to test HTTP methods like GET, POST, PUT, and DELETE by entering a URL, headers, and body, and instantly viewing a formatted response with status, headers, and even the time taken. Designed with an animated UI and no login or tracking, it's fully open source and perfect for developers who need a fast, focused tool to inspect APIs on the go.
+                        </p>
+                        <a href="https://reqapi.thecma.xyz" target="_blank" class="visit-btn">Visit</a>
+                    </div>
+                    <div class="project-preview">
+                        <div class="slideshow-container">
+                            <div class="slide active">
+                                <img src="../media/reqapi/reqapi1.png" alt="API Peek">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/reqapi/reqapi2.png" alt="API Peek">
+                            </div>
+                            <div class="slide-nav">
+                                <div class="slide-dot active" data-index="0"></div>
+                                <div class="slide-dot" data-index="1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Divider -->
+                <div class="project-divider"></div>
+
+		        <!-- Project theCMA.xyz -->
+                <div class="project">
+                    <div class="project-info">
+                        <h2 class="project-title">theCMA.xyz</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-minor">📄Minor Project</span>
+                            <span class="tag tag-live">🟢Live</span>
+                        </div>
+                        <p class="project-description">
+                            theCMA.xyz – My personal portfolio website, built primarily with HTML5, CSS3, and a touch of JavaScript for interactivity. 
+                            It's a fully static site hosted on GitHub Pages with a custom domain. 
+                            theCMA.xyz showcases my tech projects, creative work, and personal milestones, all in one evolving space.
+                        </p>
+                        <a href="https://thecma.xyz/v1" target="_blank" class="visit-btn">Visit</a>
+                    </div>
+                    <div class="project-preview">
+                        <div class="slideshow-container">
+                            <div class="slide active">
+                                <img src="../media/theCMA.xyz/thecma.xyz-home.png" alt="theCMA.xyz Homepage">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/theCMA.xyz/thecma.xyz-projects.png" alt="theCMA.xyz Projects Page">
+                            </div>
+			    <div class="slide">
+                                <img src="../media/theCMA.xyz/thecma.xyz-contact.png" alt="theCMA.xyz Contact Page">
+                            </div>
+			    <div class="slide">
+                                <img src="../media/theCMA.xyz/thecma.xyz-about.png" alt="theCMA.xyz About Page">
+                            </div>
+			    <div class="slide">
+                                <img src="../media/theCMA.xyz/thecma.xyz-creative.png" alt="theCMA.xyz Creative Page">
+                            </div>
+                            <div class="slide-nav">
+                                <div class="slide-dot active" data-index="0"></div>
+                                <div class="slide-dot" data-index="1"></div>
+                                <div class="slide-dot" data-index="2"></div>
+                                <div class="slide-dot" data-index="3"></div>
+                                <div class="slide-dot" data-index="4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Divider -->
+<!--
+                <div class="project-divider"></div>
+-->
+
+		    	<!-- Project AMC ERP -->
+		        <div class="project">
+                    <div class="project-info">
+                        <h2 class="project-title">AMC</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-live">🟢Live</span>
+                            <span class="tag tag-opensource">🌐Open Source</span>
+                            <span class="tag tag-college">🎓 College project</span>
+                        </div>
+                        <p class="project-description">
+                            A user-friendly Annual Maintenance Contract (AMC) Management System built using VB.NET and SQL Server 2022. It streamlines contract, client, asset, and service request management with secure login roles, intuitive dashboards, and admin reporting; enhancing efficiency for individuals or teams managing multiple maintenance contracts.
+                        </p>
+                        <a href="https://github.com/chrismat-05/AMC" target="_blank" class="visit-btn">Visit</a>
+                    </div>
+                    <div class="project-preview">
+                        <div class="slideshow-container">
+                            <div class="slide active">
+                                <img src="../media/AMC/AMC1.png" alt="AMC">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/AMC/AMC2.png" alt="AMC">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/AMC/AMC3.png" alt="AMC">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/AMC/AMC4.png" alt="AMC">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/AMC/AMC5.png" alt="AMC">
+                            </div>
+			    <div class="slide">
+                                <img src="../media/AMC/AMC6.png" alt="AMC">
+                            </div>
+			    <div class="slide">
+                                <img src="../media/AMC/AMC7.png" alt="AMC">
+			    </div>
+			    <div class="slide">
+                                <img src="../media/AMC/AMC8.png" alt="AMC">
+                            </div>
+                            <div class="slide-nav">
+                                <div class="slide-dot active" data-index="0"></div>
+                                <div class="slide-dot" data-index="1"></div>
+                                <div class="slide-dot" data-index="2"></div>
+                                <div class="slide-dot" data-index="3"></div>
+                                <div class="slide-dot" data-index="4"></div>
+                                <div class="slide-dot" data-index="5"></div>
+                                <div class="slide-dot" data-index="6"></div>
+                                <div class="slide-dot" data-index="7"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				<!-- Project Divider -->
+<!--
+                <div class="project-divider"></div>
+-->
+				
+				<!-- Project photos.thecma.xyz -->
+<!--
+		        <div class="project">
+                    <div class="project-info">
+                        <h2 class="project-title">photos.thecma.xyz</h2>
+                        <div class="project-tags">
+                            <span class="tag tag-major">🗂️Major Project</span>
+                            <span class="tag tag-upcoming">⏳Upcoming</span>
+                            <span class="tag tag-development">🚧In development</span>
+                        </div>
+                        <p class="project-description">
+                           A facial recognition-based event photo organizer built with React, Tailwind CSS, and face-api.js. Guests upload a selfie to find their photos from event albums stored in the photographer’s own Cloudinary, Google Photos, or OneDrive. Each event gets a custom subdomain with full gallery view, logo watermarking, and studio branding. Hosted on Netlify with code on GitHub and optional backend via Firebase or Supabase.
+                        </p>
+                        <a href="https://photos.thecma.xyz/" target="_blank" class="visit-btn">Visit</a>
+                    </div>
+                    <div class="project-preview">
+                        <div class="slideshow-container">
+                            <div class="slide active">
+                                <img src="../media/photos.thecma.xyz/photos.thecma (7).png" alt="Photos">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/photos.thecma.xyz/photos.thecma (6).png" alt="Photos">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/photos.thecma.xyz/photos.thecma (5).png" alt="Photos">
+                            </div>
+                            <div class="slide">
+                                <img src="../media/photos.thecma.xyz/photos.thecma (4).png" alt="Photos">
+                            </div>
+                            <div class="slide-nav">
+                                <div class="slide-dot active" data-index="0"></div>
+                                <div class="slide-dot" data-index="1"></div>
+                                <div class="slide-dot" data-index="2"></div>
+                                <div class="slide-dot" data-index="3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+-->
+	</div>
+    </main>
+
+    <footer>
+        <div class="footer-divider"></div>
+        <div class="container footer-container">
+            <div>
+                <div class="footer-logo">CMA</div>
+                <div class="footer-text">Bridging tech & creativity - one step at a time</div>
+            </div>
+            <div class="social-icons">
+                <a href="https://github.com/chrismat-05" target="_blank"><img class="social-icon" src="../media/github.png" alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/chrismaje/" target="_blank"><img class="social-icon" src="../media/linkedin.png" alt="LinkedIn"></a>
+                <a href="https://wa.me/+918848914245" target="_blank"><img class="social-icon" src="../media/whatsapp.png" alt="WhatsApp"></a>
+                <a href="mailto:chrismaje63@gmail.com"><img class="social-icon" src="../media/mail.png" alt="Email"></a>
+            </div>
+        </div>
+        <div class="footer-bottom-divider"></div>
+        <div class="copyright">© 2025 Chris Mathew Aje, All rights reserved.</div><br><br>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slideshowContainers = document.querySelectorAll('.slideshow-container');
+        
+        slideshowContainers.forEach(container => {
+            const slides = container.querySelectorAll('.slide');
+            const dots = container.querySelectorAll('.slide-dot');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            function startSlideshow() {
+                slideInterval = setInterval(() => {
+                    nextSlide();
+                }, 3000);
+            }
+            
+            function nextSlide() {
+                goToSlide((currentSlide + 1) % slides.length);
+            }
+            
+            function goToSlide(n) {
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+                currentSlide = n;
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    clearInterval(slideInterval);
+                    goToSlide(parseInt(this.getAttribute('data-index')));
+                    startSlideshow();
+                });
+            });
+            
+            startSlideshow();
+        });
+    });
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('nav ul');
+    const overlay = document.querySelector('.overlay');
+
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    });
+</script>
+
+</body>
+</html>
