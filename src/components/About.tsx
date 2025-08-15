@@ -280,13 +280,10 @@ const About = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ delay: 2 + index * 0.2, duration: 0.6 }}
-                     className="relative"
-                   >
-                     {/* Timeline dot */}
-                     <div className="hidden md:block absolute -top-8 left-1/2 w-4 h-4 bg-primary rounded-full transform -translate-x-1/2 z-10"></div>
-                     
-                     {/* Content */}
-                     <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:bg-card/80 hover:border-primary/50 hover:scale-105 transition-all duration-300 mt-8 md:mt-12">
+                       className="relative"
+                     >
+                       {/* Content */}
+                       <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:bg-card/80 hover:border-primary/50 hover:scale-105 transition-all duration-300 mt-8 md:mt-12">
                       <div className="flex items-center justify-center gap-2 mb-3">
                         <Calendar size={16} className="text-primary" />
                         <span className="text-primary font-semibold text-center">{edu.year}</span>
