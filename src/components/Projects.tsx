@@ -18,7 +18,7 @@ const Projects = () => {
         { label: '🧪 Testing', color: 'secondary' },
       ],
       technologies: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Firestore'],
-      images: ['/placeholder.svg', '/placeholder.svg', '/placeholder.svg'],
+      images: ['../../media/forms.thecma.xyz/forms.thecma (1).png', '../../media/forms.thecma.xyz/forms.thecma (2).png', '../../media/forms.thecma.xyz/forms.thecma (3).png', '../../media/forms.thecma.xyz/forms.thecma (4).png', '../../media/forms.thecma.xyz/forms.thecma (5).png', '../../media/forms.thecma.xyz/forms.thecma (6).png', '../../media/forms.thecma.xyz/forms.thecma (7).png'],
       link: 'https://forms.thecma.xyz/',
       github: null,
       status: 'live',
@@ -33,7 +33,7 @@ const Projects = () => {
         { label: '🌐 Open Source', color: 'primary' },
       ],
       technologies: ['Node.js', 'CLI', 'npm', 'GitHub Actions'],
-      images: ['/placeholder.svg', '/placeholder.svg'],
+      images: ['../../media/Quotzy/quotzy(1).png', '../../media/Quotzy/quotzy(2).png', '../../media/Quotzy/quotzy(3).png'],
       link: null,
       github: 'https://github.com/chrismat-05/quotzy',
       status: 'open-source',
@@ -48,7 +48,7 @@ const Projects = () => {
         { label: '🌐 Open Source', color: 'primary' },
       ],
       technologies: ['React', 'Security Analysis', 'HTTP Headers'],
-      images: ['/placeholder.svg', '/placeholder.svg'],
+      images: ['../../media/scrihdr/scrihdr1.png', '../../media/scrihdr/scrihdr2.png', '../../media/scrihdr/scrihdr3.png'],
       link: 'https://scrihdr.thecma.xyz/',
       github: null,
       status: 'live',
@@ -63,7 +63,7 @@ const Projects = () => {
         { label: '🌐 Open Source', color: 'primary' },
       ],
       technologies: ['React', 'Tailwind CSS', 'Axios', 'Framer Motion'],
-      images: ['/placeholder.svg', '/placeholder.svg'],
+      images: ['../../media/reqapi/reqapi1.png', '../../media/reqapi/reqapi2.png'],
       link: 'https://reqapi.thecma.xyz/',
       github: null,
       status: 'live',
@@ -77,7 +77,7 @@ const Projects = () => {
         { label: '🟢 Live', color: 'success' },
       ],
       technologies: ['HTML5', 'CSS3', 'JavaScript', 'GitHub Pages'],
-      images: ['/placeholder.svg'],
+      images: ['../../media/theCMA.xyz/thecma.xyz-home.png', '../../media/theCMA.xyz/thecma.xyz-about.png', '../../media/theCMA.xyz/thecma.xyz-creative.png', '../../media/theCMA.xyz/thecma.xyz-projects.png', '../../media/theCMA.xyz/thecma.xyz-contact.png'],
       link: 'https://thecma.xyz/',
       github: null,
       status: 'live',
@@ -92,7 +92,7 @@ const Projects = () => {
         { label: '🎓 College Project', color: 'accent' },
       ],
       technologies: ['VB.NET', 'SQL Server 2022', 'Windows Forms'],
-      images: ['/placeholder.svg', '/placeholder.svg'],
+      images: ['../../media/AMC/AMC1.png', '../../media/AMC/AMC2.png', '../../media/AMC/AMC3.png', '../../media/AMC/AMC4.png', '../../media/AMC/AMC5.png', '../../media/AMC/AMC6.png', '../../media/AMC/AMC7.png', '../../media/AMC/AMC8.png'],
       link: null,
       github: 'https://github.com/chrismat-05/AMC',
       status: 'open-source',
@@ -118,7 +118,6 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           className="max-w-7xl mx-auto"
         >
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -132,7 +131,6 @@ const Projects = () => {
             </p>
           </motion.div>
 
-          {/* Projects Grid */}
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {projects.map((project, index) => {
               const CategoryIcon = getIconForCategory(project.category);
@@ -144,7 +142,6 @@ const Projects = () => {
                   transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
                   className="project-card"
                 >
-                  {/* Image Slideshow */}
                   <div className="relative">
                     <Carousel
                       opts={{ loop: true }}
@@ -176,7 +173,6 @@ const Projects = () => {
                     </Carousel>
                   </div>
 
-                  {/* Project Header */}
                   <div className="p-6 border-b border-border/50">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
@@ -209,7 +205,6 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tags.map((tag, tagIndex) => (
                         <span
@@ -222,13 +217,11 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  {/* Project Content */}
                   <div className="p-6">
                     <p className="text-muted-foreground mb-6 leading-relaxed">
                       {project.description}
                     </p>
 
-                    {/* Technologies */}
                     <div className="mb-6">
                       <h4 className="text-sm font-semibold text-foreground mb-3">Built with:</h4>
                       <div className="flex flex-wrap gap-2">
@@ -243,7 +236,6 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    {/* Action Links */}
                     <div className="flex gap-3">
                       {project.link && (
                         <a
@@ -274,7 +266,6 @@ const Projects = () => {
             })}
           </div>
 
-          {/* Call to Action */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
