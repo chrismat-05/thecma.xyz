@@ -2,6 +2,46 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
 import { Link } from 'react-scroll';
+import { Github, Linkedin, Mail, Phone, MessageSquareMore, Award, MapPin } from 'lucide-react';
+
+const socialLinks = [
+  {
+    icon: Github,
+    label: 'GitHub',
+    href: 'https://github.com/chrismat-05',
+    color: 'hover:text-foreground',
+  },
+  {
+    icon: Linkedin,
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/chrismaje/',
+    color: 'hover:text-blue-400',
+  },
+  {
+    icon: MessageSquareMore,
+    label: 'WhatsApp',
+    href: 'https://wa.me/+918848914245',
+    color: 'hover:text-green-400',
+  },
+  {
+    icon: Phone,
+    label: 'Call',
+    href: 'tel:+918848914245',
+    color: 'hover:text-amber-400',
+  },
+  {
+    icon: Mail,
+    label: 'Email',
+    href: 'mailto:chrismaje63@gmail.com',
+    color: 'hover:text-red-400',
+  },
+  {
+    icon: Award,
+    label: 'Credly',
+    href: 'https://www.credly.com/users/chrismaje',
+    color: 'hover:text-orange-400',
+  },
+];
 
 const Footer = () => {
   return (
@@ -20,7 +60,9 @@ const Footer = () => {
                 Bridging tech & creativity - one step at a time
               </p>
               <p className="text-muted-foreground">
-                Aspiring Software Developer passionate about bridging technology and creativity.
+                <span className="inline-flex items-center gap-2">
+                  <MapPin /> Bengaluru, Karnataka, India
+                </span>
               </p>
             </motion.div>
 
@@ -51,12 +93,30 @@ const Footer = () => {
               viewport={{ once: true }}
               className="flex flex-col md:flex-row justify-between items-center gap-4"
             >
-              <p className="text-muted-foreground text-sm">
-                © {new Date().getFullYear()} Chris Mathew Aje. All rights reserved.
-              </p>
-              <p className="text-muted-foreground text-sm flex items-center gap-2">
-                Made with <Heart className="text-red-500" size={16} /> and lots of coffee
-              </p>
+              <div className="order-2 md:order-1 w-full md:w-auto flex justify-center md:justify-start">
+                <p className="text-muted-foreground text-sm">
+                  © {new Date().getFullYear()} Chris Mathew Aje. All rights reserved.
+                </p>
+              </div>
+              <div className="order-1 md:order-2 w-full md:w-auto flex justify-center md:justify-end">
+                <div className="flex gap-4">
+                  {socialLinks.map((social) => {
+                    const Icon = social.icon;
+                    return (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`text-muted-foreground ${social.color} transition-colors duration-300`}
+                        title={social.label}
+                      >
+                        <Icon size={22} />
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
