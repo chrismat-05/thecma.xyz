@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { GraduationCap, Award, Calendar, Code, Database, Palette, Globe } from 'lucide-react';
+import { link } from 'fs';
 
 const About = () => {
   const ref = useRef(null);
@@ -30,21 +31,72 @@ const About = () => {
 
   const certifications = [
     {
+      title: 'Salesforce Administrator Explorer',
+      issuer: 'Nasscom',
+      date: 'July 2025',
+      status: 'No Expiration',
+      link: 'https://fsp-assessment-certificates.s3.ap-southeast-1.amazonaws.com/%27/s3/buckets/fsp-assessment-certificates%27/CHRIS%2BMATHEW%2BAJE_148550316.pdf.pdf'
+    },
+    {
+      title: 'Problem Solving',
+      issuer: 'HackerRank',
+      date: 'May 2025',
+      status: 'No Expiration',
+      link: 'https://www.hackerrank.com/certificates/fbca630d6812'
+    },
+    {
+      title: 'REST API',
+      issuer: 'HackerRank',
+      date: 'May 2025',
+      status: 'No Expiration',
+      link: 'https://www.hackerrank.com/certificates/7067cb8f76d2'
+    },
+    {
+      title: 'Securing MongoDB Atlas: Authentication & Authorization',
+      issuer: 'MongoDB',
+      date: 'May 2025',
+      status: 'No Expiration',
+      link: 'https://www.credly.com/badges/d42ba4a5-27fa-4bbb-ae5f-5b87323f3b2e/linked_in_profile'
+    },
+    {
+      title: 'Securing MongoDB Self-Managed: Authentication & Authorization ',
+      issuer: 'MongoDB',
+      date: 'May 2025',
+      status: 'No Expiration',
+      link: 'https://www.credly.com/badges/f0b99dd0-aabf-48a3-8eed-02a0b1ec833a/linked_in_profile'
+    },
+    {
       title: 'Ethical Hacking',
       issuer: 'NSDC Academy & Internshala',
       date: 'March 2025',
       status: 'No Expiration',
+      link: 'https://trainings.internshala.com/s/v/3610844/1c4beaba'
     },
     {
       title: 'Digital Engineering',
       issuer: 'Nasscom',
-      date: 'Oct 2023',
+      date: 'October 2023',
       status: 'No Expiration',
+      link: 'https://fsp-assessment-certificates.s3-ap-southeast-1.amazonaws.com/ChrisMathewAje-124647283.pdf'
+    },
+    {
+      title: 'Get started with Figma',
+      issuer: 'Coursera',
+      date: 'October 2023',
+      status: 'No Expiration',
+      link: 'https://www.coursera.org/account/accomplishments/verify/KG4BZ57MXM64'
+    },
+    {
+      title: 'Work with Components in Figma',
+      issuer: 'Coursera',
+      date: 'October 2023',
+      status: 'No Expiration',
+      link: 'https://www.coursera.org/account/accomplishments/verify/JPM7L2GU3CGM'
     },
     {
       title: 'HTML',
       issuer: 'University of Michigan',
-      date: 'Apr 2023',
+      date: 'April 2023',
       status: 'No Expiration',
     },
   ];
