@@ -12,14 +12,13 @@ const About = () => {
     {
       year: '2023 - Present',
       institution: 'Kristu Jayanti College',
-      degree: 'Bachelor of Computer Applications',
-      description: 'Coursework includes Data Structures, Database Systems, Programming languages and Software Engineering.',
+      degree: 'Bachelor of Computer Applications'
     },
     {
       year: '2023',
       institution: 'The Indian School, Kingdom of Bahrain',
       degree: 'Higher Secondary Education',
-      description: 'Focus on Commerce stream with Computer Science as elective. Achieved 79% in final examinations.',
+      description: 'Commerce stream with Computer Science. Achieved 79% in final examinations.',
     },
     {
       year: '2021',
