@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Mail, Phone, Github, Linkedin, Award, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin, Award, Send, CheckCircle, MessageSquareMore } from 'lucide-react';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -22,10 +22,16 @@ const Contact = () => {
       color: 'hover:text-blue-400',
     },
     {
-      icon: Phone,
+      icon: MessageSquareMore,
       label: 'WhatsApp',
       href: 'https://wa.me/+918848914245',
       color: 'hover:text-green-400',
+    },
+    {
+      icon: Phone,
+      label: 'Call',
+      href: 'tel:+918848914245',
+      color: 'hover:text-amber-400',
     },
     {
       icon: Mail,
@@ -45,7 +51,6 @@ const Contact = () => {
     e.preventDefault();
     setFormStatus('sending');
     
-    // Simulate form submission
     setTimeout(() => {
       setFormStatus('sent');
       setTimeout(() => {
@@ -64,7 +69,6 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -79,7 +83,6 @@ const Contact = () => {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
@@ -95,7 +98,6 @@ const Contact = () => {
                 </p>
               </div>
 
-              {/* Social Links */}
               <div className="space-y-4">
                 <h4 className="text-lg font-semibold text-foreground mb-4">Find me on</h4>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -121,7 +123,6 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
