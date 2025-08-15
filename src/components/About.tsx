@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { GraduationCap, Award, Calendar, Code, Database, Palette, Globe } from 'lucide-react';
-import { link } from 'fs';
+import { ExternalLink } from 'lucide-react';
 
 const About = () => {
   const ref = useRef(null);
@@ -237,8 +237,19 @@ const About = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ delay: 1.6 + index * 0.1, duration: 0.6 }}
-                  className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:bg-card/80 hover:border-primary/50 hover:scale-105 transition-all duration-300"
+                  className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:bg-card/80 hover:border-primary/50 hover:scale-105 transition-all duration-300 relative"
                 >
+                  {cert.link && (
+                    <a
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute top-3 right-3 text-muted-foreground hover:text-primary transition-colors"
+                      title="Open certificate in new tab"
+                    >
+                      <ExternalLink size={18} />
+                    </a>
+                  )}
                   <h4 className="text-xl font-semibold text-foreground mb-2">{cert.title}</h4>
                   <p className="text-primary font-medium mb-2">{cert.issuer}</p>
                   <p className="text-sm text-muted-foreground mb-1">Issued {cert.date}</p>
