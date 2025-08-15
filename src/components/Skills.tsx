@@ -84,10 +84,10 @@ const Skills = () => {
                     <h3 className="text-xl font-semibold text-foreground">{category.title}</h3>
                   </div>
 
-                  {/* Skills List */}
-                  <div className="space-y-3">
+                  {/* Skills List as pills/cards, wrapping and rearranging as tags/chips */}
+                  <div className="flex flex-wrap gap-3">
                     {category.skills.map((skill, skillIndex) => (
-                      <motion.div
+                      <motion.span
                         key={skill}
                         initial={{ opacity: 0, x: -20 }}
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
@@ -95,13 +95,10 @@ const Skills = () => {
                           delay: 0.6 + categoryIndex * 0.1 + skillIndex * 0.05, 
                           duration: 0.4 
                         }}
-                        className="flex items-center gap-3"
+                        className="inline-flex items-center px-4 py-2 bg-card/70 border border-border rounded-full text-muted-foreground group-hover:text-foreground group-hover:bg-card/90 transition-colors duration-300 font-medium"
                       >
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <span className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                          {skill}
-                        </span>
-                      </motion.div>
+                        {skill}
+                      </motion.span>
                     ))}
                   </div>
 
