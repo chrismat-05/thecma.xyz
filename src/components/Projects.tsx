@@ -32,7 +32,7 @@ const Projects = () => {
         { label: '🟢 Live', color: 'success' },
       ],
       technologies: ['Vite', 'React', 'Typescript', 'Tailwind CSS', 'Framer Motion'],
-      images: ['../../media/forms.thecma.xyz/forms.thecma (1).png', '../../media/forms.thecma.xyz/forms.thecma (2).png', '../../media/forms.thecma.xyz/forms.thecma (3).png', '../../media/forms.thecma.xyz/forms.thecma (4).png', '../../media/forms.thecma.xyz/forms.thecma (5).png', '../../media/forms.thecma.xyz/forms.thecma (6).png', '../../media/forms.thecma.xyz/forms.thecma (7).png'],
+      images: ['../../media/Portfolio/1.png', '../../media/Portfolio/2.png', '../../media/Portfolio/3.png', '../../media/Portfolio/4.png', '../../media/Portfolio/5.png', '../../media/Portfolio/6.png', '../../media/Portfolio/7.png'],
       link: 'https://forms.thecma.xyz/',
       github: null,
       status: 'live',
