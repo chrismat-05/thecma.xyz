@@ -34,7 +34,12 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <span className="block text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-2">I'm</span>
+              <span
+                className="block text-3xl md:text-3xl lg:text-4xl font-semibold text-foreground mb-2"
+                style={{ fontFamily: 'Pacifico, "Dancing Script", "Great Vibes", cursive' }}
+              >
+                I'm
+              </span>
               <span className="block text-4xl md:text-7xl lg:text-7xl font-bold gradient-text whitespace-nowrap font-display overflow-visible w-full">Chris Mathew Aje</span>
             </motion.div>
 
