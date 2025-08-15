@@ -94,8 +94,7 @@ const About = () => {
             <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
-            {/* Profile Image */}
+          <div className="grid lg:grid-cols-2 items-center mb-20">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
@@ -105,38 +104,29 @@ const About = () => {
               <div className="relative w-80 h-80 mx-auto lg:mx-0">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full animate-glow-pulse"></div>
                 <div className="absolute inset-2 bg-background rounded-full overflow-hidden">
-                  {/* Placeholder for profile image - you can replace with actual image */}
-                  <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                    <span className="text-6xl font-bold gradient-text">CMA</span>
-                  </div>
+                  <img src='../../media/cover.png'></img>
                 </div>
               </div>
             </motion.div>
 
-            {/* About Text */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="space-y-6"
+              className="space-y-6 lg:ml-[-200px] lg:w-[calc(100%+200px)]"
             >
               <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
-                Passionate about technology, problem-solving and innovation
+                Hi, I'm Chris.
               </h3>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                BCA student passionate about technology, problem-solving and innovation. 
-                Eager to learn and apply skills in a professional setting while continuously 
-                expanding knowledge in the field.
+                I'm a BCA student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                From ethical hacking to videography, I bridge the gap between technical 
-                expertise and creative expression, always seeking new challenges and 
-                opportunities to grow.
+                From Cybersecurity to videography, I love exploring new things and trying them out while trying to bridge the gap between technical expertise and creative expression, always seeking new technologies and opportunities to grow.
               </p>
             </motion.div>
           </div>
 
-          {/* Skills & Expertise */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
