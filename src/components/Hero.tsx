@@ -29,14 +29,14 @@ const Hero = () => {
               &lt;hello world&gt;
             </motion.p>
 
-            <motion.h1
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-4xl md:text-7xl lg:text-7xl font-bold gradient-text whitespace-nowrap font-display overflow-visible w-full"
             >
-              I'm Chris Mathew Aje
-            </motion.h1>
+              <span className="block text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-2">I'm</span>
+              <span className="block text-4xl md:text-7xl lg:text-7xl font-bold gradient-text whitespace-nowrap font-display overflow-visible w-full">Chris Mathew Aje</span>
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
