@@ -24,7 +24,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-xl md:text-2xl text-muted-foreground mb-4"
+              className="text-xl md:text-2xl text-muted-foreground mb-4 font-mono"
             >
               &lt;hello world&gt;
             </motion.p>
