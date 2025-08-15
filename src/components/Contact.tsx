@@ -60,7 +60,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden">
+  <section id="contact" className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -129,7 +129,9 @@ const Contact = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8"
             >
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6" name="v2 form" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="v2 form" />
+                <input type="hidden" name="bot-field" />
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
