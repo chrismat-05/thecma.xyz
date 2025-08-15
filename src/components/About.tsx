@@ -106,22 +106,22 @@ const About = () => {
     {
       title: 'Languages',
       icon: Code,
-      skills: ['JavaScript', 'TypeScript', 'Python', 'VB.Net', 'HTML', 'CSS'],
+      skills: ['JavaScript', 'TypeScript', 'Python', 'VB.Net', 'CSS', 'HTML'],
     },
     {
       title: 'Frameworks',
       icon: Globe,
-      skills: ['React', 'Node.js', 'Tailwind CSS'],
+      skills: ['React', 'Tailwind CSS', 'Node.js', 'Express.js', '.NET'],
     },
     {
       title: 'Databases',
       icon: Database,
-      skills: ['Supabase', 'Firebase', 'SQL Plus', 'SQL Lite', 'MySQL'],
+      skills: ['Supabase', 'Firebase', 'SQL Plus', 'SQL Lite', 'MySQL', 'PostgreSQL'],
     },
     {
       title: 'Creative',
       icon: Palette,
-      skills: ['Videography', 'Filmmaking', 'Photography', 'Canva', 'Sound Design'],
+      skills: ['Videography', 'Direction', 'Graphic Design', 'Sound Design'],
     },
   ];
 
@@ -188,7 +188,7 @@ const About = () => {
               <Code className="text-primary" size={32} />
               Skills & Expertise
             </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
               {skillCategories.map((category, categoryIndex) => {
                 const CategoryIcon = category.icon;
                 return (
@@ -203,14 +203,14 @@ const About = () => {
                       <CategoryIcon className="text-primary" size={24} />
                       <h4 className="text-lg font-semibold text-foreground">{category.title}</h4>
                     </div>
-                    <div className="space-y-2">
+                    <div className="flex flex-wrap gap-2">
                       {category.skills.map((skill, skillIndex) => (
-                        <div
+                        <span
                           key={skill}
-                          className="px-3 py-1 bg-muted/30 text-muted-foreground text-sm rounded-md"
+                          className="inline-block px-4 py-2 bg-muted/30 text-muted-foreground text-sm rounded-full font-medium"
                         >
                           {skill}
-                        </div>
+                        </span>
                       ))}
                     </div>
                   </motion.div>

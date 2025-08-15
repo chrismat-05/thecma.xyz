@@ -50,7 +50,6 @@ const Skills = () => {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -64,10 +63,12 @@ const Skills = () => {
             </p>
           </motion.div>
 
-          {/* Skills Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skillCategories.map((category, categoryIndex) => {
               const Icon = category.icon;
+              // Only apply pill flex-wrap to selected categories
+              const pillCategories = ['Languages', 'Frameworks', 'Databases', 'Creative'];
+              const isPillCategory = pillCategories.includes(category.title);
               return (
                 <motion.div
                   key={category.title}
@@ -76,7 +77,6 @@ const Skills = () => {
                   transition={{ delay: 0.4 + categoryIndex * 0.1, duration: 0.6 }}
                   className="skill-card group"
                 >
-                  {/* Category Header */}
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors duration-300">
                       <Icon className="text-primary" size={24} />
@@ -85,34 +85,53 @@ const Skills = () => {
                   </div>
 
                   {/* Skills List */}
-                  <div className="space-y-3">
-                    {category.skills.map((skill, skillIndex) => (
-                      <motion.div
-                        key={skill}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                        transition={{ 
-                          delay: 0.6 + categoryIndex * 0.1 + skillIndex * 0.05, 
-                          duration: 0.4 
-                        }}
-                        className="flex items-center gap-3"
-                      >
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <span className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                  {isPillCategory ? (
+                    <div className="flex flex-wrap gap-3">
+                      {category.skills.map((skill, skillIndex) => (
+                        <motion.span
+                          key={skill}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                          transition={{
+                            delay: 0.6 + categoryIndex * 0.1 + skillIndex * 0.05,
+                            duration: 0.4
+                          }}
+                          className="inline-flex items-center px-4 py-2 bg-card/70 border border-border rounded-full 
+                                    text-muted-foreground group-hover:text-foreground 
+                                    group-hover:bg-card/90 transition-colors duration-300 font-medium"
+                        >
                           {skill}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
+                        </motion.span>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {category.skills.map((skill, skillIndex) => (
+                        <motion.div
+                          key={skill}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                          transition={{ 
+                            delay: 0.6 + categoryIndex * 0.1 + skillIndex * 0.05, 
+                            duration: 0.4 
+                          }}
+                          className="flex items-center gap-3"
+                        >
+                          <div className="w-2 h-2 bg-primary rounded-full"></div>
+                          <span className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                            {skill}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  )}
 
-                  {/* Hover Effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 </motion.div>
               );
             })}
           </div>
 
-          {/* Tech Stack Highlight */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}

@@ -6,7 +6,6 @@ import { Mail, Phone, Github, Linkedin, Award, Send, CheckCircle, MessageSquareM
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  // Remove formStatus state, not needed for native submission
 
   const socialLinks = [
     {
@@ -46,8 +45,6 @@ const Contact = () => {
       color: 'hover:text-orange-400',
     },
   ];
-
-  // Remove handleSubmit, let browser submit natively
 
   return (
   <section id="contact" className="py-20 relative overflow-hidden">

@@ -24,19 +24,29 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-xl md:text-2xl text-muted-foreground mb-4"
+              className="text-xl md:text-2xl text-muted-foreground mb-4 font-mono"
             >
               &lt;hello world&gt;
             </motion.p>
 
-            <motion.h1
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text"
             >
-              I'm Chris Mathew Aje
-            </motion.h1>
+              <span
+                className="block text-3xl md:text-3xl lg:text-4xl font-semibold text-foreground mb-2"
+                style={{ fontFamily: 'Pacifico, "Dancing Script", "Great Vibes", cursive' }}
+              >
+                I'm
+              </span>
+              <span
+                className="block text-4xl md:text-7xl lg:text-7xl font-bold gradient-text whitespace-nowrap font-display overflow-visible w-full"
+                style={{ fontFamily: 'Tangerine, cursive', lineHeight: 1.5 }}
+              >
+                Chris Mathew Aje
+              </span>
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -51,10 +61,11 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-lg md:text-xl text-primary mb-12 h-8"
+              className="text-2xl md:text-4xl lg:text-4xl mb-12 h-12"
+              style={{ fontFamily: 'Fredoka, Baloo, Comic Neue, cursive', background: 'linear-gradient(90deg, #FFCC00, #FF9900, #FF6600)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
             >
               <TypeAnimation
-                sequence={[
+                sequence={[ 
                   'Aspiring Software Developer',
                   2000,
                   'BCA Student',
