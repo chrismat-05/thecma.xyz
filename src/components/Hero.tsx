@@ -14,14 +14,11 @@ const Hero = () => {
 
   return (
     <section id="hero" className="min-h-screen flex items-center relative overflow-hidden">
-      {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/20" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left side - Content */}
           <div className="text-left space-y-8">
-            {/* Greeting */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -31,7 +28,6 @@ const Hero = () => {
               &lt;hello world&gt;
             </motion.p>
 
-            {/* Name */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -41,7 +37,6 @@ const Hero = () => {
               I'm Chris Mathew Aje
             </motion.h1>
 
-            {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -51,7 +46,6 @@ const Hero = () => {
               Bridging tech & creativity - one step at a time
             </motion.p>
 
-            {/* Type Animation */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -79,7 +73,6 @@ const Hero = () => {
               />
             </motion.div>
 
-            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -106,7 +99,6 @@ const Hero = () => {
               </Link>
             </motion.div>
 
-            {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -135,7 +127,6 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right side - Animation */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -143,7 +134,6 @@ const Hero = () => {
             className="hidden lg:flex items-center justify-center"
           >
             <div className="relative w-96 h-96">
-              {/* Floating particles */}
               {Array.from({ length: 15 }).map((_, i) => (
                 <motion.div
                   key={i}
@@ -164,7 +154,6 @@ const Hero = () => {
                 />
               ))}
               
-              {/* Central glow */}
               <motion.div
                 className="absolute inset-1/4 bg-gradient-to-r from-primary to-secondary rounded-full opacity-20"
                 animate={{
@@ -178,7 +167,6 @@ const Hero = () => {
                 }}
               />
               
-              {/* Orbiting elements */}
               <motion.div
                 className="absolute inset-0"
                 animate={{ rotate: 360 }}
@@ -193,25 +181,6 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-primary rounded-full flex justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, 16, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-3 bg-primary rounded-full mt-2"
-            />
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );
