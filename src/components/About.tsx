@@ -54,22 +54,22 @@ const About = () => {
     {
       title: 'Languages',
       icon: Code,
-      skills: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'Python', 'VB.Net'],
+      skills: ['JavaScript', 'TypeScript', 'Python', 'VB.Net', 'HTML', 'CSS'],
     },
     {
       title: 'Frameworks',
       icon: Globe,
-      skills: ['React', 'Node.js', 'Tailwind CSS', 'Framer Motion'],
+      skills: ['React', 'Node.js', 'Tailwind CSS'],
     },
     {
       title: 'Databases',
       icon: Database,
-      skills: ['Firebase', 'Firestore', 'SQL Server'],
+      skills: ['Supabase', 'Firebase', 'SQL Plus', 'SQL Lite', 'MySQL'],
     },
     {
       title: 'Creative',
       icon: Palette,
-      skills: ['Video Editing', 'Filmmaking', 'UI/UX Design'],
+      skills: ['Videography', 'Filmmaking', 'Photography', 'Canva', 'Sound Design'],
     },
   ];
 
