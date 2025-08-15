@@ -25,6 +25,20 @@ const Projects = () => {
       category: 'major'
     },
     {
+      title: 'CMA',
+      description: 'Revamped my portfolio with a fresh, modern stack: built using the Vite framework with TypeScript, React for dynamic components, Tailwind CSS for styling, Framer Motion for animations, and Lucide for icons. The new design embraces a clean one-page layout with multiple sections, delivering a fast, visually engaging, and seamless browsing experience.',
+      tags: [
+        { label: '📄 Minor Project', color: 'muted' },
+        { label: '🟢 Live', color: 'success' },
+      ],
+      technologies: ['Vite', 'React', 'Typescript', 'Tailwind CSS', 'Framer Motion'],
+      images: ['../../media/forms.thecma.xyz/forms.thecma (1).png', '../../media/forms.thecma.xyz/forms.thecma (2).png', '../../media/forms.thecma.xyz/forms.thecma (3).png', '../../media/forms.thecma.xyz/forms.thecma (4).png', '../../media/forms.thecma.xyz/forms.thecma (5).png', '../../media/forms.thecma.xyz/forms.thecma (6).png', '../../media/forms.thecma.xyz/forms.thecma (7).png'],
+      link: 'https://forms.thecma.xyz/',
+      github: null,
+      status: 'live',
+      category: 'major'
+    },
+    {
       title: 'Quotzy',
       description: 'Quotzy is a fully open-source quote generator built as both a CLI tool and a JS module. It features handpicked quotes across six diverse categories. Published to npm and GitHub Packages.',
       tags: [
@@ -32,7 +46,7 @@ const Projects = () => {
         { label: '📦 Package', color: 'accent' },
         { label: '🌐 Open Source', color: 'primary' },
       ],
-      technologies: ['Node.js', 'CLI', 'npm', 'GitHub Actions'],
+      technologies: ['Node.js', 'CLI', 'npm'],
       images: ['../../media/Quotzy/quotzy(1).png', '../../media/Quotzy/quotzy(2).png', '../../media/Quotzy/quotzy(3).png'],
       link: null,
       github: 'https://github.com/chrismat-05/quotzy',
@@ -47,7 +61,7 @@ const Projects = () => {
         { label: '🟢 Live', color: 'success' },
         { label: '🌐 Open Source', color: 'primary' },
       ],
-      technologies: ['React', 'Security Analysis', 'HTTP Headers'],
+      technologies: ['React', 'Security Analysis', 'Docker'],
       images: ['../../media/scrihdr/scrihdr1.png', '../../media/scrihdr/scrihdr2.png', '../../media/scrihdr/scrihdr3.png'],
       link: 'https://scrihdr.thecma.xyz/',
       github: null,
@@ -76,9 +90,9 @@ const Projects = () => {
         { label: '📄 Minor Project', color: 'muted' },
         { label: '🟢 Live', color: 'success' },
       ],
-      technologies: ['HTML5', 'CSS3', 'JavaScript', 'GitHub Pages'],
+      technologies: ['HTML5', 'CSS3', 'JavaScript'],
       images: ['../../media/theCMA.xyz/thecma.xyz-home.png', '../../media/theCMA.xyz/thecma.xyz-about.png', '../../media/theCMA.xyz/thecma.xyz-creative.png', '../../media/theCMA.xyz/thecma.xyz-projects.png', '../../media/theCMA.xyz/thecma.xyz-contact.png'],
-      link: 'https://thecma.xyz/',
+      link: 'https://thecma.xyz/v1',
       github: null,
       status: 'live',
       category: 'minor'
