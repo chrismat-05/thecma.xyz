@@ -40,7 +40,12 @@ const Hero = () => {
               >
                 I'm
               </span>
-              <span className="block text-4xl md:text-7xl lg:text-7xl font-bold gradient-text whitespace-nowrap font-display overflow-visible w-full">Chris Mathew Aje</span>
+              <span
+                className="block text-4xl md:text-7xl lg:text-7xl font-bold gradient-text whitespace-nowrap font-display overflow-visible w-full"
+                style={{ fontFamily: 'Fredoka, Baloo, Bebas Neue, "Comic Neue", sans-serif', lineHeight: 1.2 }}
+              >
+                Chris Mathew Aje
+              </span>
             </motion.div>
 
             <motion.p
