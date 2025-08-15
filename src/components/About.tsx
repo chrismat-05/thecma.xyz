@@ -135,7 +135,6 @@ const About = () => {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -259,7 +258,6 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Education Timeline - Horizontal */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -270,7 +268,6 @@ const About = () => {
               Education
             </h3>
             <div className="relative">
-              {/* Horizontal timeline line */}
               <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-primary/30 transform -translate-y-1/2"></div>
               
               <div className="grid md:grid-cols-3 gap-8">
@@ -282,7 +279,6 @@ const About = () => {
                     transition={{ delay: 2 + index * 0.2, duration: 0.6 }}
                        className="relative"
                      >
-                       {/* Content */}
                        <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:bg-card/80 hover:border-primary/50 hover:scale-105 transition-all duration-300 mt-8 md:mt-12">
                       <div className="flex items-center justify-center gap-2 mb-3">
                         <Calendar size={16} className="text-primary" />
