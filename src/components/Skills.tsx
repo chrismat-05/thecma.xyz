@@ -50,7 +50,6 @@ const Skills = () => {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -64,7 +63,6 @@ const Skills = () => {
             </p>
           </motion.div>
 
-          {/* Skills Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skillCategories.map((category, categoryIndex) => {
               const Icon = category.icon;
@@ -79,7 +77,6 @@ const Skills = () => {
                   transition={{ delay: 0.4 + categoryIndex * 0.1, duration: 0.6 }}
                   className="skill-card group"
                 >
-                  {/* Category Header */}
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors duration-300">
                       <Icon className="text-primary" size={24} />
@@ -129,14 +126,12 @@ const Skills = () => {
                     </div>
                   )}
 
-                  {/* Hover Effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 </motion.div>
               );
             })}
           </div>
 
-          {/* Tech Stack Highlight */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
