@@ -60,6 +60,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'Poppins', Arial, sans-serif;
     scroll-behavior: smooth;
   }
 
