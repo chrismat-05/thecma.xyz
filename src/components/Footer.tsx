@@ -9,7 +9,6 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 mb-8">
-            {/* Brand */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -25,7 +24,6 @@ const Footer = () => {
               </p>
             </motion.div>
 
-            {/* Connect */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -45,7 +43,6 @@ const Footer = () => {
             </motion.div>
           </div>
 
-          {/* Divider */}
           <div className="border-t border-border pt-8">
             <motion.div
               initial={{ opacity: 0 }}
