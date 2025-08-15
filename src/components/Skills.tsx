@@ -95,11 +95,13 @@ const Skills = () => {
                           key={skill}
                           initial={{ opacity: 0, x: -20 }}
                           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                          transition={{ 
-                            delay: 0.6 + categoryIndex * 0.1 + skillIndex * 0.05, 
-                            duration: 0.4 
+                          transition={{
+                            delay: 0.6 + categoryIndex * 0.1 + skillIndex * 0.05,
+                            duration: 0.4
                           }}
-                          className="inline-block px-4 py-2 bg-card/70 border border-border rounded-full text-muted-foreground group-hover:text-foreground group-hover:bg-card/90 transition-colors duration-300 font-medium"
+                          className="inline-flex items-center px-4 py-2 bg-card/70 border border-border rounded-full 
+                                    text-muted-foreground group-hover:text-foreground 
+                                    group-hover:bg-card/90 transition-colors duration-300 font-medium"
                         >
                           {skill}
                         </motion.span>
