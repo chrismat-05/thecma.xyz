@@ -113,7 +113,7 @@ const Hero = () => {
                 if (social.label === "LinkedIn") hoverColor = "hover:text-blue-600";
                 if (social.label === "Email") hoverColor = "hover:text-red-500";
                 if (social.label === "WhatsApp") hoverColor = "hover:text-green-500";
-                if (social.label === "Call") hoverColor = "hover:text-amber-500";
+                if (social.label === "Call") hoverColor = "hover:text-purple-500";
                 return (
                   <motion.a
                     key={social.label}

@@ -27,7 +27,7 @@ const socialLinks = [
     icon: Phone,
     label: 'Call',
     href: 'tel:+918848914245',
-    color: 'hover:text-amber-400',
+    color: 'hover:text-purple-400',
   },
   {
     icon: Mail,
