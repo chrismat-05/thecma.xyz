@@ -17,7 +17,7 @@ const Projects = () => {
         { label: '🗂️ Major Project', color: 'primary' },
         { label: '🧪 Testing', color: 'secondary' },
       ],
-      technologies: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Firestore'],
+      technologies: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Firestore', 'TypeScript', 'Handlebars', 'Resend'],
       images: ['../../media/forms.thecma.xyz/forms.thecma (1).png', '../../media/forms.thecma.xyz/forms.thecma (2).png', '../../media/forms.thecma.xyz/forms.thecma (3).png', '../../media/forms.thecma.xyz/forms.thecma (4).png', '../../media/forms.thecma.xyz/forms.thecma (5).png', '../../media/forms.thecma.xyz/forms.thecma (6).png', '../../media/forms.thecma.xyz/forms.thecma (7).png'],
       link: 'https://forms.thecma.xyz/',
       github: null,
@@ -26,7 +26,7 @@ const Projects = () => {
     },
     {
       title: 'CMA',
-      description: 'Revamped my portfolio with a fresh, modern stack: built using the Vite framework with TypeScript, React for dynamic components, Tailwind CSS for styling, Framer Motion for animations, and Lucide for icons. The new design embraces a clean one-page layout with multiple sections, delivering a fast, visually engaging, and seamless browsing experience.',
+      description: 'Revamped with a fresh stack: Vite framework with TypeScript, React for components, Tailwind CSS for styling, Framer Motion for animations. The new design embraces a clean one-page layout with multiple sections, delivering a fast, visually engaging, and seamless browsing experience.',
       tags: [
         { label: '📄 Minor Project', color: 'muted' },
         { label: '🟢 Live', color: 'success' },
