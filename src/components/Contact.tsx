@@ -6,7 +6,7 @@ import { Mail, Phone, Github, Linkedin, Award, Send, CheckCircle, MessageSquareM
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
+  // Remove formStatus state, not needed for native submission
 
   const socialLinks = [
     {
@@ -47,17 +47,7 @@ const Contact = () => {
     },
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormStatus('sending');
-    
-    setTimeout(() => {
-      setFormStatus('sent');
-      setTimeout(() => {
-        setFormStatus('idle');
-      }, 3000);
-    }, 1500);
-  };
+  // Remove handleSubmit, let browser submit natively
 
   return (
   <section id="contact" className="py-20 relative overflow-hidden">
@@ -129,7 +119,7 @@ const Contact = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8"
             >
-              <form name="contactv2" method="POST" onSubmit={handleSubmit} className="space-y-6" data-netlify="true" netlify-honeypot="bot-field">
+              <form name="contactv2" method="POST" className="space-y-6" data-netlify="true" netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="contactv2" />
                 <input type="hidden" name="bot-field" />
                 <motion.div
@@ -185,7 +175,6 @@ const Contact = () => {
                     placeholder="Tell me about your project or just say hello..."
                   />
                 </motion.div>
-
                 <motion.button
                   type="submit"
                   initial={{ opacity: 0, y: 20 }}
@@ -193,27 +182,10 @@ const Contact = () => {
                   transition={{ delay: 1.4, duration: 0.4 }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  disabled={formStatus === 'sending'}
-                  className="w-full btn-hero-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full btn-hero-primary flex items-center justify-center gap-2"
                 >
-                  {formStatus === 'idle' && (
-                    <>
-                      <Send size={20} />
-                      Send Message
-                    </>
-                  )}
-                  {formStatus === 'sending' && (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending...
-                    </>
-                  )}
-                  {formStatus === 'sent' && (
-                    <>
-                      <CheckCircle size={20} />
-                      Message Sent!
-                    </>
-                  )}
+                  <Send size={20} />
+                  <span>Send Message</span>
                 </motion.button>
               </form>
             </motion.div>
