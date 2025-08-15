@@ -19,7 +19,6 @@ const Navigation = () => {
   const navItems = [
     { name: 'Home', to: 'hero' },
     { name: 'About', to: 'about' },
-    { name: 'Skills', to: 'skills' },
     { name: 'Projects', to: 'projects' },
     { name: 'Contact', to: 'contact' },
   ];
@@ -34,7 +33,7 @@ const Navigation = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -44,7 +43,6 @@ const Navigation = () => {
             Chris Mathew Aje
           </motion.div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item, index) => (
@@ -70,7 +68,6 @@ const Navigation = () => {
             </div>
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -82,7 +79,6 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -119,7 +115,6 @@ const Navigation = () => {
         )}
       </AnimatePresence>
 
-      {/* Mobile menu overlay */}
       {isMobileMenuOpen && (
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
