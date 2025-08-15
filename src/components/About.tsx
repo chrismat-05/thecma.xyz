@@ -98,6 +98,7 @@ const About = () => {
       issuer: 'University of Michigan',
       date: 'April 2023',
       status: 'No Expiration',
+      link: 'https://www.coursera.org/account/accomplishments/verify/45YW8F3CQXG2'
     },
   ];
 
@@ -219,7 +220,6 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Certifications */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
