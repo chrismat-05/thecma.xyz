@@ -61,10 +61,11 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-lg md:text-xl text-primary mb-12 h-8"
+              className="text-2xl md:text-4xl lg:text-4xl mb-12 h-12"
+              style={{ fontFamily: 'Fredoka, Baloo, Comic Neue, cursive', background: 'linear-gradient(90deg, #FFCC00, #FF9900, #FF6600)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
             >
               <TypeAnimation
-                sequence={[
+                sequence={[ 
                   'Aspiring Software Developer',
                   2000,
                   'BCA Student',
