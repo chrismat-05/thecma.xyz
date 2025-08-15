@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Github, Linkedin, Mail, Phone } from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, MessageSquareMore } from 'lucide-react';
 import { Link } from 'react-scroll';
 
 const Hero = () => {
@@ -9,7 +9,8 @@ const Hero = () => {
     { icon: Github, href: 'https://github.com/chrismat-05', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/chrismaje/', label: 'LinkedIn' },
     { icon: Mail, href: 'mailto:chrismaje63@gmail.com', label: 'Email' },
-    { icon: Phone, href: 'https://wa.me/+918848914245', label: 'WhatsApp' },
+    { icon: MessageSquareMore, href: 'https://wa.me/+918848914245', label: 'WhatsApp' },
+    { icon: Phone, href: 'tel:+918848914245', label: 'Call' },
   ];
 
   return (
@@ -107,13 +108,19 @@ const Hero = () => {
             >
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
+                let hoverColor = "hover:text-primary";
+                if (social.label === "GitHub") hoverColor = "hover:text-gray-500";
+                if (social.label === "LinkedIn") hoverColor = "hover:text-blue-600";
+                if (social.label === "Email") hoverColor = "hover:text-red-500";
+                if (social.label === "WhatsApp") hoverColor = "hover:text-green-500";
+                if (social.label === "Call") hoverColor = "hover:text-blue-500";
                 return (
                   <motion.a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors duration-300 glow-primary"
+                    className={`text-muted-foreground ${hoverColor} transition-colors duration-300 glow-primary`}
                     whileHover={{ scale: 1.2, y: -5 }}
                     whileTap={{ scale: 0.9 }}
                     initial={{ opacity: 0, y: 20 }}
