@@ -33,7 +33,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-4xl md:text-7xl lg:text-7xl font-bold gradient-text whitespace-nowrap font-display"
+              className="text-4xl md:text-7xl lg:text-7xl font-bold gradient-text whitespace-nowrap font-display overflow-visible w-full"
             >
               I'm Chris Mathew Aje
             </motion.h1>
