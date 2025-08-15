@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative | CMA</title>
+    <link rel="icon" href="media/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&family=Montserrat:wght@400;500;600&family=Tangerine:wght@700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gradient: linear-gradient(90deg, #ffcc00, #ff9900, #ff6600);
+            --white: #ffffff;
+            --light-white: rgba(255, 255, 255, 0.8);
+            --dark-bg: #000000;
+            --button-bg: #0e0e0e;
+            --divider: rgba(255, 255, 255, 0.1);
+			--border-gray: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+		header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: #000;
+            padding: 20px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+        }
+    /* End of .header-container */
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+			padding-right: 0;
+    		margin-right: 0; 
+        }
+		nav {
+    		display: flex;
+    		justify-content: flex-end;
+    		flex-grow: 1;
+		}
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .header-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding-top: 100px;
+        }
+
+        /* Creative Works Title */
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: left;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+            justify-items: center;
+        }
+
+        .project {
+            position: relative;
+            transition: all 0.4s ease;
+            width: 100%;
+            max-width: 320px;
+        }
+
+/* Thumbnail Container */
+        .thumbnail-container {
+            position: relative;
+    		width: 100%;
+    		overflow: hidden;
+    		border-radius: 2px;
+    		background: var(--gradient);
+    		cursor: pointer;
+    		padding: 2px;
+    		aspect-ratio: 16/9;
+
+        }
+
+        /* Image Thumbnail */
+        .project-thumbnail {
+            width: 100%;
+    		height: 100%;
+    		object-fit: cover;
+   			display: block;
+   		 	transition: transform 0.3s ease;
+    		border-radius: 1px; /* Slightly less than container */
+    		position: relative;
+    		z-index: 1;
+    		background: var(--dark-bg);
+        }
+
+        .project:hover .project-thumbnail {
+            transform: scale(1.05);
+        }
+
+        /* Project Info (shown on hover) */
+        .project-info {
+            position: absolute;
+            top: 50%;
+            left: calc(100% + 20px);
+            transform: translateY(-50%);
+            width: 280px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border-left: 2px solid #ff9900;
+            opacity: 0;
+            pointer-events: all;
+            transition: all 0.4s ease;
+            z-index: 10;
+        }
+
+        .project:hover {
+            transform: translateX(0);
+        }
+
+        .project:hover ~ .project {
+            transform: translateX(160px);
+        }
+
+        .project:hover .project-info {
+            opacity: 1;
+            left: calc(100% + 20px);
+        }
+
+        .project-info h3 {
+            margin-bottom: 15px;
+            color: #ff9900;
+        }
+
+        .project-info p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #ff9900;
+        }
+
+        /* Project Link Button */
+        .project-link {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--button-bg);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: 1px solid var(--border-gray);
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 8px;
+    margin-right: 6px;
+    font-size: 13px;
+}
+.project-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.project-link:hover {
+    border-color: transparent;
+    color: black;
+    font-weight: 600;
+}
+.project-link:hover::before {
+    opacity: 1;
+}
+.links-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+        /* Footer */
+        footer {
+            padding: 50px 0 30px;
+            background-color: var(--dark-bg);
+        }
+        
+        .footer-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .footer-text {
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            transition: all 0.3s ease;
+            filter: brightness(0.8);
+        }
+        
+        .social-icon:hover {
+            filter: brightness(1.5);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom-divider {
+            height: 1px;
+            background-color: var(--divider);
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+        
+        .copyright {
+            text-align: center;
+            color: var(--light-white);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px; /* Add padding to prevent touching screen edges */
+    }
+    
+    .menu-toggle {
+        order: 2; /* Moves it to the far right */
+        margin-left: auto; /* Pushes it all the way right */
+    }
+    
+    .logo {
+        order: 1; /* Ensures logo stays left */
+    }
+    
+    nav {
+        order: 3; /* Puts nav last (though it's hidden) */
+    }
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .project {
+                max-width: 100%;
+            }
+
+            .project:hover ~ .project {
+                transform: none;
+            }
+
+            .project-info {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: 100%;
+                margin-top: 15px;
+                border-left: none;
+                border-top: 2px solid #ff9900;
+                opacity: 1;
+                padding: 15px;
+            }
+
+            .project:hover .project-info {
+                left: auto;
+            }
+        }
+/* Mobile Menu Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: var(--dark-bg);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        padding-top: 80px;
+    }
+
+    nav ul.active {
+        right: 0;
+    }
+
+    nav a {
+        font-size: 18px;
+    }
+
+    /* Overlay when menu is open */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Adjust header padding on mobile */
+    header {
+        padding: 15px 0;
+    }
+}
+@media (max-width: 768px) {
+    nav ul.active a.active::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+}
+@media (max-width: 768px) {
+    nav ul.active a.active::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    .header-container {
+        justify-content: space-between;
+        padding: 0 15px; /* Add some padding on sides */
+    }
+    
+    .menu-toggle {
+        margin-left: auto; /* Pushes it to far right */
+    }
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .social-icons {
+        margin-left: auto; /* Pushes icons to right */
+    }
+}}
+@media (max-width: 768px) {
+    .menu-toggle {
+        position: absolute;
+        right: 20px; /* Matches your container padding */
+    }
+    
+    .logo {
+        position: relative;
+        z-index: 1; /* Ensures logo stays above other elements */
+    }
+}
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="container header-container">
+        <div class="logo">CMA</div>
+        <button class="menu-toggle">☰</button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="creative.html" class="active">Creative</a></li>
+                <li><a href="https://contact.thecma.xyz/">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="overlay"></div>
+    </div>
+    <div class="header-divider"></div>
+</header>
+
+<!-- Main Content -->
+<main>
+    <div class="container">
+        <h1 class="page-title">Creative Works</h1>
+        <div class="projects-grid">
+            <!-- Project Voyager -->
+            <div class="project">
+                <div class="thumbnail-container">
+                    <img src="media/creative/voyager.png" alt="Project 4" class="project-thumbnail">
+                </div>
+                <div class="project-info">
+                    <h3>Voyager Camp Recap reels</h3>
+                    <p><span class="info-label">For:</span> icpfbengaluru</p>
+                    <p><span class="info-label">Role:</span> Videographer</p>
+                    <p><span class="info-label">When:</span> 2024</p>
+                    <p><span class="info-label">Category:</span> Reel</p>
+                    <p>Short recap reels for each days of the camp made for Instagram.</p>
+		    <div class="links-container">
+                    <a href="https://www.instagram.com/icpfbangalore/reel/DBDGa5BPyUb/" class="project-link" target="_blank">View Reel 01</a>
+		    <a href="https://www.instagram.com/chrismat_05/reel/DBEfGT3SURR/" class="project-link" target="_blank">View Reel 02</a>
+		    <a href="https://www.instagram.com/chrismat_05/reel/DBHW-fpNwOZ/" class="project-link" target="_blank">View Reel 03</a>
+		    </div>
+		</div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-divider"></div>
+    <div class="container footer-container">
+        <div>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="creative.html" class="active">Creative</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <a href="https://www.linkedin.com/in/chrismaje/" target="_blank"><img class="social-icon" src="media/linkedin.png" alt="LinkedIn"></a>
+            <a href="https://wa.me/+918848914245" target="_blank"><img class="social-icon" src="media/whatsapp.png" alt="WhatsApp"></a>
+            <a href="mailto:chrismaje63@gmail.com"><img class="social-icon" src="media/mail.png" alt="Email"></a>
+        </div>
+    </div>
+    <div class="footer-bottom-divider"></div>
+    <div class="copyright">© 2025 Chris Mathew Aje, All rights reserved.</div><br><br>
+</footer>
+<script>
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('nav ul');
+    const overlay = document.querySelector('.overlay');
+
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    // Close menu when clicking on a link (for single page navigation)
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    });
+</script>
+</body>
+</html>
