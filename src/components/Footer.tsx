@@ -56,7 +56,7 @@ const Footer = () => {
               viewport={{ once: true }}
             >
               <h3 className="text-xl font-bold gradient-text mb-2">Chris Mathew Aje</h3>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-grey-100 mb-4">
                 Bridging tech & creativity - one step at a time
               </p>
               <p className="text-muted-foreground">
