@@ -166,9 +166,6 @@ const About = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="space-y-6 lg:ml-[-200px] lg:w-[calc(100%+200px)]"
             >
-              <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
-                Hi, I'm Chris.
-              </h3>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 I'm a BCA student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field.
               </p>
