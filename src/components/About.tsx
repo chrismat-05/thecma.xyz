@@ -204,7 +204,7 @@ const About = () => {
                       {category.skills.map((skill, skillIndex) => (
                         <span
                           key={skill}
-                          className="inline-block px-4 py-2 bg-muted/30 text-muted-foreground text-sm rounded-full font-medium"
+                          className="inline-block px-4 py-2 bg-muted/30 text-gray-300 text-sm rounded-full font-medium"
                         >
                           {skill}
                         </span>
@@ -248,7 +248,7 @@ const About = () => {
                   )}
                   <h4 className="text-xl font-semibold text-foreground mb-2">{cert.title}</h4>
                   <p className="text-primary font-medium mb-2">{cert.issuer}</p>
-                  <p className="text-sm text-muted-foreground mb-1">Issued {cert.date}</p>
+                  <p className="text-sm text-gray-300 mb-1">Issued {cert.date}</p>
                   <p className="text-sm text-muted-foreground">{cert.status}</p>
                 </motion.div>
               ))}
