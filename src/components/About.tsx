@@ -246,7 +246,7 @@ const About = () => {
                       <ExternalLink size={18} />
                     </a>
                   )}
-                  <h4 className="text-xl font-semibold text-foreground mb-2">{cert.title}</h4>
+                  <h4 className="text-[17px] font-semibold text-foreground mb-2">{cert.title}</h4>
                   <p className="text-primary font-medium mb-2">{cert.issuer}</p>
                   <p className="text-sm text-gray-300 mb-1">Issued {cert.date}</p>
                   <p className="text-sm text-muted-foreground">{cert.status}</p>
