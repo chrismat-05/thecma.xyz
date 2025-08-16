@@ -18,11 +18,11 @@ All colors MUST be HSL.
   --popover: 0 0% 5%;
   --popover-foreground: 0 0% 100%;
 
-  --primary: 227 24% 22%; /* Deep Navy #2B2F44 */
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 195 36% 36%; /* Muted Teal #3A6D7F */
+  --secondary: 227 24% 22%; /* Deep Navy #2B2F44 */
   --secondary-foreground: 0 0% 100%;
+
+  --primary: 195 36% 36%; /* Muted Teal #3A6D7F */
+  --primary-foreground: 0 0% 100%;
 
   --accent: 30 44% 61%; /* Gold-Tan #C99B6E */
   --accent-foreground: 0 0% 0%;
