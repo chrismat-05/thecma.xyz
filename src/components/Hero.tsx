@@ -48,15 +48,6 @@ const Hero = () => {
               </span>
             </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="text-xl md:text-2xl text-foreground mb-8"
-            >
-              Bridging tech & creativity - one step at a time
-            </motion.p>
-
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
