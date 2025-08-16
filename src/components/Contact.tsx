@@ -12,7 +12,7 @@ const Contact = () => {
       icon: Github,
       label: 'GitHub',
       href: 'https://github.com/chrismat-05',
-      color: 'hover:text-foreground',
+      color: 'hover:text-grey-100',
     },
     {
       icon: Linkedin,
@@ -99,7 +99,7 @@ const Contact = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
-                        className={`flex items-center gap-3 p-3 bg-card/50 backdrop-blur-sm border border-border rounded-lg text-muted-foreground ${social.color} transition-all duration-300 hover:scale-105 hover:border-primary/50`}
+                        className={`flex items-center gap-3 p-3 bg-card/50 backdrop-blur-sm border border-border rounded-lg text-grey-300 ${social.color} transition-all duration-300 hover:scale-105 hover:border-primary/50`}
                       >
                         <Icon size={20} />
                         <span className="font-medium">{social.label}</span>
