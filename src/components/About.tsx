@@ -233,7 +233,7 @@ const About = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ delay: 1.6 + index * 0.1, duration: 0.6 }}
-                  className="project-card relative"
+                  className="project-card relative p-4"
                 >
                   {cert.link && (
                     <a
