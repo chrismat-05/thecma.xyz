@@ -37,10 +37,10 @@ const Navigation = () => {
               smooth={true}
               offset={-70}
               duration={500}
-              className="group flex flex-col items-center justify-center cursor-pointer"
-              activeClass="text-primary"
+              className="group flex flex-col items-center justify-center cursor-pointer text-muted-foreground group-hover:text-primary transition-colors duration-300"
+              activeClass="text-primary nav-active"
             >
-              <Icon size={28} className="text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+              <Icon size={28} />
               <span className="sr-only">{item.name}</span>
             </Link>
           );
@@ -87,9 +87,9 @@ const Navigation = () => {
                       duration={500}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="flex items-center gap-3 py-3 text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 cursor-pointer"
-                      activeClass="text-primary"
+                      activeClass="nav-active text-primary"
                     >
-                      <Icon size={22} className="text-muted-foreground" />
+                      <Icon size={22} className="text-muted-foreground group-hover:text-primary" />
                       {item.name}
                     </Link>
                   </motion.div>
