@@ -1,4 +1,39 @@
-/* Dotted background utility */
+    .outer-glow-grey:hover {
+      box-shadow: 0 0 0 2px #e2e8f0, 0 0 20px #e2e8f0 !important;
+    }
+    .outer-glow-blue:hover {
+      box-shadow: 0 0 0 2px #60a5fa, 0 0 20px #60a5fa !important;
+    }
+    .outer-glow-green:hover {
+      box-shadow: 0 0 0 2px #34d399, 0 0 20px #34d399 !important;
+    }
+    .outer-glow-purple:hover {
+      box-shadow: 0 0 0 2px #a78bfa, 0 0 20px #a78bfa !important;
+    }
+    .outer-glow-red:hover {
+      box-shadow: 0 0 0 2px #f87171, 0 0 20px #f87171 !important;
+    }
+    .outer-glow-orange:hover {
+      box-shadow: 0 0 0 2px #fb923c, 0 0 20px #fb923c !important;
+    }
+  .glow-grey {
+    box-shadow: 0 0 20px #e2e8f0;
+  }
+  .glow-blue {
+    box-shadow: 0 0 20px #60a5fa;
+  }
+  .glow-green {
+    box-shadow: 0 0 20px #34d399;
+  }
+  .glow-purple {
+    box-shadow: 0 0 20px #a78bfa;
+  }
+  .glow-red {
+    box-shadow: 0 0 20px #f87171;
+  }
+  .glow-orange {
+    box-shadow: 0 0 20px #fb923c;
+  }
 .bg-dotted {
   background-image: radial-gradient(circle, rgba(120,120,120,0.3) 1px, transparent 2.5px);
   background-size: 22px 22px;
@@ -6,10 +41,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
 
 @layer base {
   :root {
@@ -44,7 +75,6 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* Portfolio-specific colors */
     --hero-gradient-start: 222 47% 10%; /* Very dark blue */
     --hero-gradient-end: 195 100% 45%; /* Bright teal */
     --hero-gradient-accent: 40 100% 50%; /* Vibrant gold */
