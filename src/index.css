@@ -1,3 +1,11 @@
+@media (pointer: coarse), (max-width: 768px) {
+  #custom-cursor {
+    display: none !important;
+  }
+  body, html {
+    cursor: auto !important;
+  }
+}
 body, html {
   cursor: none !important;
 }
