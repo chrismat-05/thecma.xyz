@@ -60,10 +60,10 @@ const Navigation = () => {
               smooth={true}
               offset={-70}
               duration={500}
-              className="group flex flex-col items-center justify-center cursor-pointer"
-              activeClass="nav-active"
+              className="group flex flex-col items-center justify-center cursor-pointer text-muted-foreground group-hover:text-primary transition-colors duration-300"
+              activeClass="text-primary nav-active"
             >
-              <Icon size={24} className="text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+              <Icon size={24} />
               <span className="sr-only">{item.name}</span>
             </Link>
           );
