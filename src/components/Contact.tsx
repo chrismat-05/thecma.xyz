@@ -12,37 +12,43 @@ const Contact = () => {
       icon: Github,
       label: 'GitHub',
       href: 'https://github.com/chrismat-05',
-      color: 'hover:text-foreground',
+      color: 'hover:text-grey-100',
+      glow: 'glow-grey',
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/chrismaje/',
       color: 'hover:text-blue-400',
+      glow: 'glow-blue',
     },
     {
       icon: MessageSquareMore,
       label: 'WhatsApp',
       href: 'https://wa.me/+918848914245',
       color: 'hover:text-green-400',
+      glow: 'glow-green',
     },
     {
       icon: Phone,
       label: 'Call',
       href: 'tel:+918848914245',
       color: 'hover:text-purple-400',
+      glow: 'glow-purple',
     },
     {
       icon: Mail,
       label: 'Email',
       href: 'mailto:chrismaje63@gmail.com',
       color: 'hover:text-red-400',
+      glow: 'glow-red',
     },
     {
       icon: Award,
       label: 'Credly',
       href: 'https://www.credly.com/users/chrismaje',
       color: 'hover:text-orange-400',
+      glow: 'glow-orange',
     },
   ];
 
@@ -90,6 +96,17 @@ const Contact = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4">
                   {socialLinks.map((social, index) => {
                     const Icon = social.icon;
+                    let glowClass = '';
+                    let outerGlowClass = '';
+                    switch (social.label) {
+                      case 'GitHub': glowClass = 'hover:glow-grey'; outerGlowClass = 'outer-glow-grey'; break;
+                      case 'LinkedIn': glowClass = 'hover:glow-blue'; outerGlowClass = 'outer-glow-blue'; break;
+                      case 'WhatsApp': glowClass = 'hover:glow-green'; outerGlowClass = 'outer-glow-green'; break;
+                      case 'Call': glowClass = 'hover:glow-purple'; outerGlowClass = 'outer-glow-purple'; break;
+                      case 'Email': glowClass = 'hover:glow-red'; outerGlowClass = 'outer-glow-red'; break;
+                      case 'Credly': glowClass = 'hover:glow-orange'; outerGlowClass = 'outer-glow-orange'; break;
+                      default: glowClass = ''; outerGlowClass = '';
+                    }
                     return (
                       <motion.a
                         key={social.label}
@@ -99,7 +116,7 @@ const Contact = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
-                        className={`flex items-center gap-3 p-3 bg-card/50 backdrop-blur-sm border border-border rounded-lg text-muted-foreground ${social.color} transition-all duration-300 hover:scale-105 hover:border-primary/50`}
+                        className={`flex items-center gap-3 p-3 project-card text-grey-300 ${social.color} transition-all duration-300 hover:scale-105 hover:border-primary/50 ${glowClass} ${outerGlowClass}`}
                       >
                         <Icon size={20} />
                         <span className="font-medium">{social.label}</span>
@@ -114,7 +131,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8"
+              className="project-card bg-card/20 backdrop-blur-sm border-t border-border p-8"
             >
               <form name="contactv2" method="POST" className="space-y-6" data-netlify="true" netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="contactv2" />

@@ -1,4 +1,5 @@
 import React from 'react';
+import DottedBackground from '@/components/ui/DottedBackground';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -8,7 +9,8 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background bg-fixed relative overflow-x-clip">
+      <DottedBackground />
       <Navigation />
       <Hero />
       <About />
