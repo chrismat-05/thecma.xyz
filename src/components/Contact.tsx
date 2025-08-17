@@ -114,7 +114,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="project-card p-8"
+              className="project-card bg-card/20 backdrop-blur-sm border-t border-border p-8"
             >
               <form name="contactv2" method="POST" className="space-y-6" data-netlify="true" netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="contactv2" />
