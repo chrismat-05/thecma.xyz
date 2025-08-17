@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Github, Linkedin, Mail, Phone, MessageSquareMore } from 'lucide-react';
 import { Link } from 'react-scroll';
+import Player from 'lottie-react';
+import devLottie from './ui/dev-lottie.json';
 
 const Hero = () => {
   const socialLinks = [
@@ -47,15 +49,6 @@ const Hero = () => {
                 Chris Mathew Aje
               </span>
             </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="text-xl md:text-2xl text-foreground mb-8"
-            >
-              Bridging tech & creativity - one step at a time
-            </motion.p>
 
             <motion.div
               initial={{ opacity: 0 }}
@@ -131,7 +124,7 @@ const Hero = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-muted-foreground ${hoverColor} transition-colors duration-300 glow-primary`}
+                    className={`text-muted-foreground ${hoverColor} transition-colors duration-300`}
                     whileHover={{ scale: 1.2, y: -5 }}
                     whileTap={{ scale: 0.9 }}
                     initial={{ opacity: 0, y: 20 }}
@@ -151,50 +144,13 @@ const Hero = () => {
             transition={{ delay: 0.8, duration: 1 }}
             className="hidden lg:flex items-center justify-center"
           >
-            <div className="relative w-96 h-96">
-              {Array.from({ length: 15 }).map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-3 h-3 bg-primary/30 rounded-full"
-                  initial={{
-                    x: Math.random() * 400,
-                    y: Math.random() * 400,
-                  }}
-                  animate={{
-                    x: Math.random() * 400,
-                    y: Math.random() * 400,
-                  }}
-                  transition={{
-                    duration: Math.random() * 8 + 5,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  }}
-                />
-              ))}
-              
-              <motion.div
-                className="absolute inset-1/4 bg-gradient-to-r from-primary to-secondary rounded-full opacity-20"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 180, 360],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
+            <div className="w-144 h-144 flex items-center justify-center">
+              <Player
+                autoplay
+                loop
+                animationData={devLottie}
+                style={{ width: '100%', height: '100%' }}
               />
-              
-              <motion.div
-                className="absolute inset-0"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              >
-                <div className="absolute top-0 left-1/2 w-2 h-2 bg-secondary rounded-full transform -translate-x-1/2" />
-                <div className="absolute bottom-0 left-1/2 w-2 h-2 bg-primary rounded-full transform -translate-x-1/2" />
-                <div className="absolute left-0 top-1/2 w-2 h-2 bg-accent rounded-full transform -translate-y-1/2" />
-                <div className="absolute right-0 top-1/2 w-2 h-2 bg-secondary rounded-full transform -translate-y-1/2" />
-              </motion.div>
             </div>
           </motion.div>
         </div>

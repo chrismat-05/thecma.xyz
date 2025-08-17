@@ -138,7 +138,7 @@ const Projects = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Featured Projects</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text leading-[1.8] pb-2">Featured Projects</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               A collection of projects showcasing my technical skills and creative problem-solving
@@ -242,7 +242,7 @@ const Projects = () => {
                         {project.technologies.map((tech, techIndex) => (
                           <span
                             key={techIndex}
-                            className="px-2 py-1 text-xs bg-muted/50 text-muted-foreground rounded border border-border"
+                            className="px-2 py-1 text-xs bg-muted/50 text-grey-300 rounded border border-border"
                           >
                             {tech}
                           </span>

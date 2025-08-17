@@ -166,9 +166,6 @@ const About = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="space-y-6 lg:ml-[-200px] lg:w-[calc(100%+200px)]"
             >
-              <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
-                Hi, I'm Chris.
-              </h3>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 I'm a BCA student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field.
               </p>
@@ -207,7 +204,7 @@ const About = () => {
                       {category.skills.map((skill, skillIndex) => (
                         <span
                           key={skill}
-                          className="inline-block px-4 py-2 bg-muted/30 text-muted-foreground text-sm rounded-full font-medium"
+                          className="inline-block px-4 py-2 bg-muted/30 text-gray-300 text-sm rounded-full font-medium"
                         >
                           {skill}
                         </span>
@@ -236,7 +233,7 @@ const About = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ delay: 1.6 + index * 0.1, duration: 0.6 }}
-                  className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:bg-card/80 hover:border-primary/50 hover:scale-105 transition-all duration-300 relative"
+                  className="project-card relative p-4"
                 >
                   {cert.link && (
                     <a
@@ -249,9 +246,9 @@ const About = () => {
                       <ExternalLink size={18} />
                     </a>
                   )}
-                  <h4 className="text-xl font-semibold text-foreground mb-2">{cert.title}</h4>
+                  <h4 className="text-[17px] font-semibold text-foreground mb-2">{cert.title}</h4>
                   <p className="text-primary font-medium mb-2">{cert.issuer}</p>
-                  <p className="text-sm text-muted-foreground mb-1">Issued {cert.date}</p>
+                  <p className="text-sm text-gray-300 mb-1">Issued {cert.date}</p>
                   <p className="text-sm text-muted-foreground">{cert.status}</p>
                 </motion.div>
               ))}
