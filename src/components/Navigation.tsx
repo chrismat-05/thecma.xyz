@@ -47,17 +47,27 @@ const Navigation = () => {
         })}
       </div>
 
-      {/* Mobile hamburger menu */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-50">
-        <div className="flex items-center justify-between h-16 px-4">
-          <div className="text-xl font-bold gradient-text">Chris Mathew Aje</div>
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-foreground hover:text-primary transition-colors duration-300"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <AppWindow size={24} />}
-          </button>
-        </div>
+
+      {/* Mobile nav bar on top center for small screens */}
+      <div className="lg:hidden fixed top-4 left-1/2 z-50 -translate-x-1/2 flex flex-row items-center gap-6 bg-background/80 backdrop-blur-lg rounded-2xl px-4 py-2 border border-border shadow-lg">
+        {navItems.map((item, idx) => {
+          const Icon = item.icon;
+          return (
+            <Link
+              key={item.name}
+              to={item.to}
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
+              className="group flex flex-col items-center justify-center cursor-pointer"
+              activeClass="nav-active"
+            >
+              <Icon size={24} className="text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+              <span className="sr-only">{item.name}</span>
+            </Link>
+          );
+        })}
       </div>
 
       <AnimatePresence>
