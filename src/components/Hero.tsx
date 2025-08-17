@@ -122,7 +122,7 @@ const Hero = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-muted-foreground ${hoverColor} transition-colors duration-300 glow-primary`}
+                    className={`text-muted-foreground ${hoverColor} transition-colors duration-300`}
                     whileHover={{ scale: 1.2, y: -5 }}
                     whileTap={{ scale: 0.9 }}
                     initial={{ opacity: 0, y: 20 }}
