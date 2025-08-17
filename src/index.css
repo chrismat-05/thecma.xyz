@@ -121,15 +121,15 @@
   /* Skill Card */
   .skill-card {
     @apply bg-card/20 backdrop-blur-sm border-t border-border rounded-xl p-6 shadow-lg;
-    @apply hover:bg-card/40 hover:border-accent hover:scale-105 hover:-translate-y-1 hover:shadow-[0_0_24px_4px_hsl(var(--glow-primary)/0.5)];
-  @apply transition-all duration-300 ease-out;
+    @apply hover:bg-card/40 hover:border-accent hover:scale-105 hover:-translate-y-1;
+    @apply transition-all duration-300 ease-out;
   }
 
   /* Project Card */
   .project-card {
     @apply bg-card/20 backdrop-blur-sm border-t border-border rounded-xl overflow-hidden shadow-lg;
-    @apply hover:bg-card/40 hover:border-accent hover:scale-[1.02] hover:shadow-[0_0_32px_6px_hsl(var(--glow-secondary)/0.5)];
-  @apply transition-all duration-300 ease-out;
+    @apply hover:bg-card/40 hover:border-accent hover:scale-[1.02];
+    @apply transition-all duration-300 ease-out;
   }
 
   /* Glow Effect */
