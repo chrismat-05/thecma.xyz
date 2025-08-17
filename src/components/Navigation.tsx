@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, AppWindow, Home, User, FolderOpen, Mail } from 'lucide-react';
 import { Link } from 'react-scroll';
 
 const Navigation = () => {
@@ -17,65 +17,46 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', to: 'hero' },
-    { name: 'About', to: 'about' },
-    { name: 'Projects', to: 'projects' },
-    { name: 'Contact', to: 'contact' },
+    { name: 'Home', to: 'hero', icon: Home },
+    { name: 'About', to: 'about', icon: User },
+    { name: 'Projects', to: 'projects', icon: FolderOpen },
+    { name: 'Contact', to: 'contact', icon: Mail },
   ];
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/95 backdrop-blur-lg border-b border-border' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl font-bold gradient-text"
-          >
-            Chris Mathew Aje
-          </motion.div>
-
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item, index) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                >
-                  <Link
-                    to={item.to}
-                    spy={true}
-                    smooth={true}
-                    offset={-70}
-                    duration={500}
-                    className="nav-link text-foreground hover:text-primary cursor-pointer font-medium transition-colors duration-300"
-                    activeClass="text-primary"
-                  >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-foreground hover:text-primary transition-colors duration-300"
+    <>
+      {/* Desktop vertical nav */}
+      <div className="hidden lg:flex fixed right-8 top-1/2 z-50 flex-col items-center gap-6 -translate-y-1/2 bg-background/80 backdrop-blur-lg rounded-2xl p-4 border border-border shadow-lg">
+        {navItems.map((item, idx) => {
+          const Icon = item.icon;
+          return (
+            <Link
+              key={item.name}
+              to={item.to}
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
+              className="group flex flex-col items-center justify-center cursor-pointer"
+              activeClass="text-primary"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+              <Icon size={28} className="text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+              <span className="sr-only">{item.name}</span>
+            </Link>
+          );
+        })}
+      </div>
+
+      {/* Mobile hamburger menu */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50">
+        <div className="flex items-center justify-between h-16 px-4">
+          <div className="text-xl font-bold gradient-text">Chris Mathew Aje</div>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-foreground hover:text-primary transition-colors duration-300"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <AppWindow size={24} />}
+          </button>
         </div>
       </div>
 
@@ -86,30 +67,34 @@ const Navigation = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -300 }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 left-0 z-50 w-64 bg-background/95 backdrop-blur-lg border-r border-border md:hidden"
+            className="fixed inset-y-0 left-0 z-50 w-64 bg-background/95 backdrop-blur-lg border-r border-border lg:hidden"
           >
             <div className="flex flex-col pt-20 pb-4 px-4">
-              {navItems.map((item, index) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                >
-                  <Link
-                    to={item.to}
-                    spy={true}
-                    smooth={true}
-                    offset={-70}
-                    duration={500}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block py-3 text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 cursor-pointer"
-                    activeClass="text-primary"
+              {navItems.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 * index }}
                   >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      to={item.to}
+                      spy={true}
+                      smooth={true}
+                      offset={-70}
+                      duration={500}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center gap-3 py-3 text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 cursor-pointer"
+                      activeClass="text-primary"
+                    >
+                      <Icon size={22} className="text-muted-foreground" />
+                      {item.name}
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         )}
@@ -117,11 +102,11 @@ const Navigation = () => {
 
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
-    </motion.nav>
+    </>
   );
 };
 
