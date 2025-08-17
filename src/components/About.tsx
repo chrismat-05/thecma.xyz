@@ -233,7 +233,7 @@ const About = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ delay: 1.6 + index * 0.1, duration: 0.6 }}
-                  className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:bg-card/80 hover:border-primary/50 hover:scale-105 transition-all duration-300 relative"
+                  className="project-card relative"
                 >
                   {cert.link && (
                     <a

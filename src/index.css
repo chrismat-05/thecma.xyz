@@ -90,15 +90,15 @@ All colors MUST be HSL.
 
   /* Skill Card */
   .skill-card {
-    @apply bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6;
-    @apply hover:bg-card/80 hover:border-primary/50 hover:scale-105 hover:-translate-y-1;
+    @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-6 shadow-lg;
+    @apply hover:bg-white/20 hover:border-primary/50 hover:scale-105 hover:-translate-y-1;
     @apply transition-all duration-300 ease-out;
   }
 
   /* Project Card */
   .project-card {
-    @apply bg-card/30 backdrop-blur-sm border border-border rounded-xl overflow-hidden;
-    @apply hover:bg-card/60 hover:border-primary/50 hover:scale-[1.02];
+    @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl overflow-hidden shadow-lg;
+    @apply hover:bg-white/20 hover:border-primary/50 hover:scale-[1.02];
     @apply transition-all duration-300 ease-out;
   }
 

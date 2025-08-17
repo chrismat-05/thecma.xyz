@@ -99,7 +99,7 @@ const Contact = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
-                        className={`flex items-center gap-3 p-3 bg-card/50 backdrop-blur-sm border border-border rounded-lg text-grey-300 ${social.color} transition-all duration-300 hover:scale-105 hover:border-primary/50`}
+                        className={`flex items-center gap-3 p-3 project-card text-grey-300 ${social.color} transition-all duration-300 hover:scale-105 hover:border-primary/50`}
                       >
                         <Icon size={20} />
                         <span className="font-medium">{social.label}</span>
@@ -114,7 +114,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8"
+              className="project-card p-8"
             >
               <form name="contactv2" method="POST" className="space-y-6" data-netlify="true" netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="contactv2" />
