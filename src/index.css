@@ -1,3 +1,50 @@
+body, html {
+  cursor: none !important;
+}
+
+#custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #60a5fa 60%, #34d399 100%);
+  box-shadow: 0 0 12px 2px #60a5fa99;
+  transform: translate(-50%, -50%);
+  transition: background 0.2s, box-shadow 0.2s, width 0.2s, height 0.2s;
+}
+
+#custom-cursor.pointer {
+  background: linear-gradient(135deg, #fb923c 60%, #f87171 100%);
+  box-shadow: 0 0 16px 4px #fb923c99;
+  width: 22px;
+  height: 22px;
+}
+
+#custom-cursor.text {
+  background: linear-gradient(135deg, #a78bfa 60%, #60a5fa 100%);
+  box-shadow: 0 0 16px 4px #a78bfa99;
+  width: 14px;
+  height: 28px;
+  border-radius: 8px;
+}
+body, html {
+  cursor: none !important;
+}
+
+#custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #60a5fa 60%, #34d399 100%);
+  box-shadow: 0 0 12px 2px #60a5fa99;
+  transform: translate(-50%, -50%);
+  transition: background 0.2s, box-shadow 0.2s;
+}
     .outer-glow-grey:hover {
       box-shadow: 0 0 0 2px #e2e8f0, 0 0 20px #e2e8f0 !important;
     }
