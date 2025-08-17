@@ -13,48 +13,48 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Cinematic Dark Portfolio Theme - Yellow Orange Gradient */
-  --background: 0 0% 0%; /* Pure Black */
-  --foreground: 210 13% 93%; /* Gray 200 - #E5E7EB */
+    /* Beautiful Dark Blue Theme */
+    --background: 222 47% 10%; /* Very dark blue */
+    --foreground: 220 16% 92%; /* Light gray-blue */
 
-  --card: 0 0% 5%; /* Slightly off-black for cards */
-  --card-foreground: 0 0% 100%; /* Pure White */
+    --card: 222 47% 14%; /* Slightly lighter dark blue */
+    --card-foreground: 220 16% 98%; /* Near white */
 
-  --popover: 0 0% 5%;
-  --popover-foreground: 0 0% 100%;
+    --popover: 222 47% 12%;
+    --popover-foreground: 220 16% 98%;
 
-  --secondary: 227 24% 22%; /* Deep Navy #2B2F44 */
-  --secondary-foreground: 0 0% 100%;
+    --secondary: 265 80% 60%; /* Vivid purple-blue */
+    --secondary-foreground: 220 16% 98%;
 
-  --primary: 195 36% 36%; /* Muted Teal #3A6D7F */
-  --primary-foreground: 0 0% 100%;
+    --primary: 195 100% 45%; /* Bright teal */
+    --primary-foreground: 220 16% 98%;
 
-  --accent: 30 44% 61%; /* Gold-Tan #C99B6E */
-  --accent-foreground: 0 0% 0%;
+    --accent: 40 100% 50%; /* Vibrant gold */
+    --accent-foreground: 222 47% 10%;
 
-  --muted: 0 0% 88%; /* Soft Gray #E0E0E0 */
-  --muted-foreground: 0 0% 40%; /* Slightly darker for contrast */
+    --muted: 220 16% 30%; /* Muted blue-gray */
+    --muted-foreground: 220 16% 70%;
 
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 16% 98%;
 
-  --border: 0 0% 88%; /* Soft Gray #E0E0E0 */
-  --input: 0 0% 88%;
-  --ring: 227 24% 22%; /* Deep Navy */
+    --border: 220 16% 30%; /* Muted blue-gray */
+    --input: 220 16% 30%;
+    --ring: 265 80% 60%; /* Vivid purple-blue */
 
-  --radius: 0.75rem;
+    --radius: 0.75rem;
 
-  /* Portfolio-specific colors */
-  --hero-gradient-start: 227 24% 22%; /* Deep Navy */
-  --hero-gradient-end: 195 36% 36%; /* Muted Teal */
-  --hero-gradient-accent: 30 44% 61%; /* Gold-Tan */
-  --text-highlight: 0 0% 88%; /* Soft Gray */
-  --glow-primary: 227 24% 22%;
-  --glow-secondary: 195 36% 36%;
+    /* Portfolio-specific colors */
+    --hero-gradient-start: 222 47% 10%; /* Very dark blue */
+    --hero-gradient-end: 195 100% 45%; /* Bright teal */
+    --hero-gradient-accent: 40 100% 50%; /* Vibrant gold */
+    --text-highlight: 220 16% 92%; /* Light gray-blue */
+    --glow-primary: 195 100% 45%; /* Bright teal */
+    --glow-secondary: 265 80% 60%; /* Vivid purple-blue */
 
-  /* Animation variables */
-  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Animation variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 }
 
@@ -77,29 +77,29 @@ All colors MUST be HSL.
 @layer components {
   /* Hero Button Variants */
   .btn-hero-primary {
-    @apply bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-lg font-semibold;
-    @apply hover:scale-105 hover:shadow-lg hover:shadow-primary/25;
-    @apply transition-all duration-300 ease-out;
+  @apply bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-lg font-semibold;
+  @apply hover:scale-105 hover:shadow-[0_0_24px_4px_hsl(var(--glow-primary)/0.7)];
+  @apply transition-all duration-300 ease-out;
   }
 
   .btn-hero-outline {
-    @apply border-2 border-primary text-primary bg-transparent px-8 py-4 rounded-lg font-semibold;
-    @apply hover:bg-primary hover:text-background hover:scale-105;
-    @apply transition-all duration-300 ease-out;
+  @apply border-2 border-primary text-primary bg-transparent px-8 py-4 rounded-lg font-semibold;
+  @apply hover:bg-primary hover:text-background hover:scale-105 hover:shadow-[0_0_24px_4px_hsl(var(--glow-primary)/0.7)];
+  @apply transition-all duration-300 ease-out;
   }
 
   /* Skill Card */
   .skill-card {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 shadow-lg;
-    @apply hover:bg-white/20 hover:border-primary/50 hover:scale-105 hover:-translate-y-1;
-    @apply transition-all duration-300 ease-out;
+  @apply bg-card/70 backdrop-blur-md border border-accent/40 rounded-xl p-6 shadow-lg;
+  @apply hover:bg-card/90 hover:border-accent hover:scale-105 hover:-translate-y-1 hover:shadow-[0_0_24px_4px_hsl(var(--glow-primary)/0.5)];
+  @apply transition-all duration-300 ease-out;
   }
 
   /* Project Card */
   .project-card {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden shadow-lg;
-    @apply hover:bg-white/20 hover:border-primary/50 hover:scale-[1.02];
-    @apply transition-all duration-300 ease-out;
+  @apply bg-card/70 backdrop-blur-md border border-accent/40 rounded-xl overflow-hidden shadow-lg;
+  @apply hover:bg-card/90 hover:border-accent hover:scale-[1.02] hover:shadow-[0_0_32px_6px_hsl(var(--glow-secondary)/0.5)];
+  @apply transition-all duration-300 ease-out;
   }
 
   /* Glow Effect */
