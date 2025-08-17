@@ -144,7 +144,7 @@ const Hero = () => {
             transition={{ delay: 0.8, duration: 1 }}
             className="hidden lg:flex items-center justify-center"
           >
-            <div className="w-96 h-96 flex items-center justify-center">
+            <div className="w-144 h-144 flex items-center justify-center">
               <Player
                 autoplay
                 loop
