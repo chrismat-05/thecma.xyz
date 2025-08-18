@@ -140,9 +140,6 @@ const Projects = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text leading-[1.8] pb-2">Featured Projects</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A collection of projects showcasing my technical skills and creative problem-solving
-            </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
