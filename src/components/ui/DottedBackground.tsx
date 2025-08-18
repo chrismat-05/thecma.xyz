@@ -5,7 +5,7 @@ const DOT_SIZE = 4;
 const DOT_SPACING = 18;
 const DOT_COLOR = 'rgba(120,120,120,0)';
 const DOT_HIGHLIGHT = 'hsl(var(--primary))';
-const DOT_RADIUS = 90;
+const DOT_RADIUS = 60;
 
 function getDotPositions(width: number, height: number) {
   const positions = [];
