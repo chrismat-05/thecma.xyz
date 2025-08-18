@@ -145,34 +145,36 @@ const About = () => {
             <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 items-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="relative"
-            >
-              <div className="relative w-80 h-80 mx-auto lg:mx-0">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full animate-glow-pulse"></div>
-                <div className="absolute inset-2 bg-background rounded-full overflow-hidden">
-                  <img src='../../media/cover.png'></img>
+          <div className="bg-card/20 backdrop-blur-sm border-t border-border rounded-xl p-8 mb-20">
+            <div className="grid lg:grid-cols-2 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="relative"
+              >
+                <div className="relative w-80 h-80 mx-auto lg:mx-0">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full animate-glow-pulse"></div>
+                  <div className="absolute inset-2 bg-background rounded-full overflow-hidden">
+                    <img src='../../media/cover.png'></img>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="space-y-6 lg:ml-[-200px] lg:w-[calc(100%+200px)]"
-            >
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                I'm a BCA student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                From Cybersecurity to videography, I love exploring new things and trying them out while trying to bridge the gap between technical expertise and creative expression, always seeking new technologies and opportunities to grow.
-              </p>
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                className="space-y-6 lg:ml-[-200px] lg:w-[calc(100%+200px)]"
+              >
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  I'm a BCA student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field.
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  From Cybersecurity to videography, I love exploring new things and trying them out while trying to bridge the gap between technical expertise and creative expression, always seeking new technologies and opportunities to grow.
+                </p>
+              </motion.div>
+            </div>
           </div>
 
           <motion.div
