@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const DOT_SIZE = 4;
-const DOT_SPACING = 28;
+const DOT_SPACING = 18;
 const DOT_COLOR = 'rgba(120,120,120,0)';
 const DOT_HIGHLIGHT = 'hsl(var(--primary))';
-const DOT_RADIUS = 60;
+const DOT_RADIUS = 90;
 
 function getDotPositions(width: number, height: number) {
   const positions = [];
@@ -51,7 +51,6 @@ const DottedBackground: React.FC = () => {
       {dots.map((dot, i) => {
         const dist = Math.hypot(dot.x - cursor.x, dot.y - cursor.y);
         const isActive = dist < DOT_RADIUS;
-        // Use palette for highlight, transparent for default
         const highlightColors = [
           'hsl(var(--primary))',
           'hsl(var(--secondary))',
