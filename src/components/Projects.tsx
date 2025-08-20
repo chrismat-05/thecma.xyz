@@ -25,20 +25,6 @@ const Projects = () => {
       category: 'major'
     },
     {
-      title: 'CMA',
-      description: 'Revamped with a fresh stack: Vite framework with TypeScript, React for components, Tailwind CSS for styling, Framer Motion for animations. The new design embraces a clean one-page layout with multiple sections, delivering a fast, visually engaging, and seamless browsing experience.',
-      tags: [
-        { label: '📄 Minor Project', color: 'muted' },
-        { label: '🟢 Live', color: 'success' },
-      ],
-      technologies: ['Vite', 'React', 'Typescript', 'Tailwind CSS', 'Framer Motion'],
-      images: ['../../media/Portfolio/1.png', '../../media/Portfolio/2.png', '../../media/Portfolio/3.png', '../../media/Portfolio/4.png', '../../media/Portfolio/5.png', '../../media/Portfolio/6.png', '../../media/Portfolio/7.png'],
-      link: 'https://forms.thecma.xyz/',
-      github: null,
-      status: 'live',
-      category: 'major'
-    },
-    {
       title: 'Quotzy',
       description: 'Quotzy is a fully open-source quote generator built as both a CLI tool and a JS module. It features handpicked quotes across six diverse categories. Published to npm and GitHub Packages.',
       tags: [
@@ -79,20 +65,6 @@ const Projects = () => {
       technologies: ['React', 'Tailwind CSS', 'Axios', 'Framer Motion'],
       images: ['../../media/reqapi/reqapi1.png', '../../media/reqapi/reqapi2.png'],
       link: 'https://reqapi.thecma.xyz/',
-      github: null,
-      status: 'live',
-      category: 'minor'
-    },
-    {
-      title: 'theCMA.xyz (v1)',
-      description: 'My personal portfolio website, built primarily with HTML5, CSS3, and a touch of JavaScript for interactivity. A fully static site hosted on GitHub Pages with a custom domain.',
-      tags: [
-        { label: '📄 Minor Project', color: 'muted' },
-        { label: '🟢 Live', color: 'success' },
-      ],
-      technologies: ['HTML5', 'CSS3', 'JavaScript'],
-      images: ['../../media/theCMA.xyz/thecma.xyz-home.png', '../../media/theCMA.xyz/thecma.xyz-about.png', '../../media/theCMA.xyz/thecma.xyz-creative.png', '../../media/theCMA.xyz/thecma.xyz-projects.png', '../../media/theCMA.xyz/thecma.xyz-contact.png'],
-      link: 'https://thecma.xyz/v1',
       github: null,
       status: 'live',
       category: 'minor'
