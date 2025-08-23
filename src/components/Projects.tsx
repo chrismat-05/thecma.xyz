@@ -25,6 +25,21 @@ const Projects = () => {
       category: 'major'
     },
     {
+      title: 'IPLocator',
+      description: 'A professional IP address lookup and analysis tool. Instantly discover detailed information about any IP address, including location, ISP details, security insights, and network information',
+      tags: [
+        { label: '📄 Minor Project', color: 'muted' },
+        { label: '🟢 Live', color: 'success' },
+        { label: '🌐 Open Source', color: 'primary' },
+      ],
+      technologies: ['React JS', 'Vite', 'Framer', 'Tailwind CSS', 'Framer'],
+      images: ['../../media/IPLocator/1.png', '../../media/IPLocator/2.png'],
+      link: 'https://iplocator.thecma.xyz/',
+      github: 'https://github.com/chrismat-05/IPLocator',
+      status: 'live',
+      category: 'minor'
+    },
+    {
       title: 'Quotzy',
       description: 'Quotzy is a fully open-source quote generator built as both a CLI tool and a JS module. It features handpicked quotes across six diverse categories. Published to npm and GitHub Packages.',
       tags: [
@@ -50,7 +65,7 @@ const Projects = () => {
       technologies: ['React', 'Security Analysis', 'Docker'],
       images: ['../../media/scrihdr/scrihdr1.png', '../../media/scrihdr/scrihdr2.png', '../../media/scrihdr/scrihdr3.png'],
       link: 'https://scrihdr.thecma.xyz/',
-      github: null,
+      github: 'https://github.com/chrismat-05/SecuriHeader',
       status: 'live',
       category: 'minor'
     },
@@ -65,7 +80,7 @@ const Projects = () => {
       technologies: ['React', 'Tailwind CSS', 'Axios', 'Framer Motion'],
       images: ['../../media/reqapi/reqapi1.png', '../../media/reqapi/reqapi2.png'],
       link: 'https://reqapi.thecma.xyz/',
-      github: null,
+      github: 'https://github.com/chrismat-05/Req-API',
       status: 'live',
       category: 'minor'
     },
