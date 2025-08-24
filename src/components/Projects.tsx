@@ -26,7 +26,7 @@ const Projects = () => {
     },
     {
       title: 'ScanThePolicy',
-      description: 'ScanThePolicy helps users quickly understand complex privacy policies and terms of service. Paste text or a URL, and get actionable highlights, category breakdowns, and a privacy risk score. The app features a modern Vite/React frontend and a FastAPI backend powered by NLP, making privacy analysis fast, clear, and accessible for everyone.',
+      description: 'ScanThePolicy helps users quickly understand complex privacy policies and terms of service. Paste text or a URL, and get highlights, breakdowns, and a privacy risk score. The app features a modern Vite/React frontend and a FastAPI backend powered by NLP.',
       tags: [
         { label: '📄 Minor Project', color: 'primary' },
         { label: '🟢 Live', color: 'success' },
@@ -36,7 +36,7 @@ const Projects = () => {
       images: ['../../media/ScanThePolicy/home.png', '../../media/ScanThePolicy/text_input.png', '../../media/ScanThePolicy/url_input.png'],
       link: null,
       github: 'https://github.com/chrismat-05/ScanThePolicy',
-      status: 'live',
+      status: 'open-source',
       category: 'minor'
     },
     {
