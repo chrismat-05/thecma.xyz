@@ -25,17 +25,17 @@ const Projects = () => {
       category: 'major'
     },
     {
-      title: 'IPLocator',
-      description: 'A professional IP address lookup and analysis tool. Instantly discover detailed information about any IP address, including location, ISP details, security insights, and network information',
+      title: 'ScanThePolicy',
+      description: 'ScanThePolicy helps users quickly understand complex privacy policies and terms of service. Paste text or a URL, and get actionable highlights, category breakdowns, and a privacy risk score. The app features a modern Vite/React frontend and a FastAPI backend powered by NLP, making privacy analysis fast, clear, and accessible for everyone.',
       tags: [
-        { label: '📄 Minor Project', color: 'muted' },
+        { label: '📄 Minor Project', color: 'primary' },
         { label: '🟢 Live', color: 'success' },
         { label: '🌐 Open Source', color: 'primary' },
       ],
-      technologies: ['React JS', 'Vite', 'Framer', 'Tailwind CSS', 'Framer'],
-      images: ['../../media/IPLocator/1.png', '../../media/IPLocator/2.png'],
-      link: 'https://iplocator.thecma.xyz/',
-      github: 'https://github.com/chrismat-05/IPLocator',
+      technologies: ['React', 'Javascript', 'Python'],
+      images: ['../../media/forms.thecma.xyz/forms.thecma (1).png', '../../media/forms.thecma.xyz/forms.thecma (2).png', '../../media/forms.thecma.xyz/forms.thecma (3).png', '../../media/forms.thecma.xyz/forms.thecma (4).png', '../../media/forms.thecma.xyz/forms.thecma (5).png', '../../media/forms.thecma.xyz/forms.thecma (6).png', '../../media/forms.thecma.xyz/forms.thecma (7).png'],
+      link: null,
+      github: 'https://github.com/chrismat-05/ScanThePolicy',
       status: 'live',
       category: 'minor'
     },
@@ -81,6 +81,21 @@ const Projects = () => {
       images: ['../../media/reqapi/reqapi1.png', '../../media/reqapi/reqapi2.png'],
       link: 'https://reqapi.thecma.xyz/',
       github: 'https://github.com/chrismat-05/Req-API',
+      status: 'live',
+      category: 'minor'
+    },
+    {
+      title: 'IPLocator',
+      description: 'A professional IP address lookup and analysis tool. Instantly discover detailed information about any IP address, including location, ISP details, security insights, and network information',
+      tags: [
+        { label: '📄 Minor Project', color: 'muted' },
+        { label: '🟢 Live', color: 'success' },
+        { label: '🌐 Open Source', color: 'primary' },
+      ],
+      technologies: ['React JS', 'Vite', 'Framer', 'Tailwind CSS', 'Framer'],
+      images: ['../../media/IPLocator/1.png', '../../media/IPLocator/2.png'],
+      link: 'https://iplocator.thecma.xyz/',
+      github: 'https://github.com/chrismat-05/IPLocator',
       status: 'live',
       category: 'minor'
     },
