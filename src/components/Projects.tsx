@@ -33,7 +33,7 @@ const Projects = () => {
         { label: '🌐 Open Source', color: 'primary' },
       ],
       technologies: ['React', 'Javascript', 'Python'],
-      images: ['../../media/forms.thecma.xyz/forms.thecma (1).png', '../../media/forms.thecma.xyz/forms.thecma (2).png', '../../media/forms.thecma.xyz/forms.thecma (3).png', '../../media/forms.thecma.xyz/forms.thecma (4).png', '../../media/forms.thecma.xyz/forms.thecma (5).png', '../../media/forms.thecma.xyz/forms.thecma (6).png', '../../media/forms.thecma.xyz/forms.thecma (7).png'],
+      images: ['../../media/ScanThePolicy/home.png', '../../media/ScanThePolicy/text_input.png', '../../media/ScanThePolicy/url_input.png'],
       link: null,
       github: 'https://github.com/chrismat-05/ScanThePolicy',
       status: 'live',
