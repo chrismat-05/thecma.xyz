@@ -281,6 +281,17 @@ const Projects = () => {
                           View Code
                         </a>
                       )}
+                      {project.package && (
+                        <a
+                          href={project.package}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                        >
+                          <Package size={16} />
+                          View Package
+                        </a>
+                      )}
                     </div>
                   </div>
                 </motion.div>
