@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { ExternalLink, Github, Folder, Package, Globe, Zap } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
@@ -156,6 +155,11 @@ const Projects = () => {
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {projects.map((project, index) => {
               const CategoryIcon = getIconForCategory(project.category);
+
+              // Add autoplayRef for each carousel
+              const autoplayRef = useRef<any>(null);
+              const [isPaused, setIsPaused] = useState(false);
+
               return (
                 <motion.div
                   key={project.title}
@@ -170,8 +174,18 @@ const Projects = () => {
                       plugins={[
                         Autoplay({
                           delay: 3000,
+                          stopOnInteraction: false,
+                          stopOnMouseEnter: true,
                         }),
                       ]}
+                      onMouseEnter={() => {
+                        setIsPaused(true);
+                        if (autoplayRef.current) autoplayRef.current.stop();
+                      }}
+                      onMouseLeave={() => {
+                        setIsPaused(false);
+                        if (autoplayRef.current) autoplayRef.current.play();
+                      }}
                     >
                       <CarouselContent>
                         {project.images.map((image, imageIndex) => (
