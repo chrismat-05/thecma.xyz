@@ -32,7 +32,7 @@ const Projects = () => {
         { label: '🌐 Open Source', color: 'primary' },
       ],
       technologies: ['Python', 'CLI', 'PyPi'],
-      images: ['../../media/Quotzy/quotzy(1).png', '../../media/Quotzy/quotzy(2).png', '../../media/Quotzy/quotzy(3).png'],
+      images: ['../../media/IsItSecure/IsItSecure1.png', '../../media/IsItSecure/IsItSecure2.png', '../../media/IsItSecure/IsItSecure3.png', '../../media/IsItSecure/IsItSecure4.png', '../../media/IsItSecure/IsItSecure5.png'],
       link: null,
       github: 'https://github.com/chrismat-05/IsItSecure',
       package: 'https://pypi.org/project/isitsecure/',
