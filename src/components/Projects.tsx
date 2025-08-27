@@ -258,39 +258,78 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <div className="flex gap-3">
-                      {project.link && (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
-                        >
-                          <Globe size={16} />
-                          Visit Site
-                        </a>
-                      )}
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-                        >
-                          <Github size={16} />
-                          View Code
-                        </a>
-                      )}
-                      {project.package && (
-                        <a
-                          href={project.package}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-                        >
-                          <Package size={16} />
-                          View Package
-                        </a>
+                    <div className="flex flex-col gap-2">
+                      {/* If all three links exist, split into two rows */}
+                      {project.link && project.github && project.package ? (
+                        <>
+                          <div className="flex gap-3">
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
+                            >
+                              <Globe size={16} />
+                              Visit Site
+                            </a>
+                          </div>
+                          <div className="flex gap-3">
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Github size={16} />
+                              View Code
+                            </a>
+                            <a
+                              href={project.package}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Package size={16} />
+                              View Package
+                            </a>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="flex gap-3">
+                          {project.link && (
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
+                            >
+                              <Globe size={16} />
+                              Visit Site
+                            </a>
+                          )}
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Github size={16} />
+                              View Code
+                            </a>
+                          )}
+                          {project.package && (
+                            <a
+                              href={project.package}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Package size={16} />
+                              View Package
+                            </a>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>
