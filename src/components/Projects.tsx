@@ -156,7 +156,6 @@ const Projects = () => {
             {projects.map((project, index) => {
               const CategoryIcon = getIconForCategory(project.category);
 
-              // Add autoplayRef for each carousel
               const autoplayRef = useRef<any>(null);
               const [isPaused, setIsPaused] = useState(false);
 
@@ -273,7 +272,6 @@ const Projects = () => {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      {/* If all three links exist, split into two rows */}
                       {project.link && project.github && project.package ? (
                         <>
                           <div className="flex gap-3">
