@@ -24,6 +24,21 @@ const Projects = () => {
       category: 'major'
     },
     {
+      title: 'IsItSecure?',
+      description: 'A comprehensive password security scanner that analyzes password strength and checks breach exposure using privacy-preserving techniques.',
+      tags: [
+        { label: '📄 Minor Project', color: 'muted' },
+        { label: '📦 Package', color: 'accent' },
+        { label: '🌐 Open Source', color: 'primary' },
+      ],
+      technologies: ['Python', 'CLI', 'PyPi'],
+      images: ['../../media/Quotzy/quotzy(1).png', '../../media/Quotzy/quotzy(2).png', '../../media/Quotzy/quotzy(3).png'],
+      link: null,
+      github: 'https://github.com/chrismat-05/IsItSecure',
+      package: 'https://pypi.org/project/isitsecure/',
+      category: 'minor'
+    },
+    {
       title: 'ScanThePolicy',
       description: 'ScanThePolicy helps users quickly understand complex privacy policies and terms of service. Paste text or a URL, and get highlights, breakdowns, and a privacy risk score. The app features a modern Vite/React frontend and a FastAPI backend powered by NLP.',
       tags: [
