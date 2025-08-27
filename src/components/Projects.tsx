@@ -49,6 +49,7 @@ const Projects = () => {
       images: ['../../media/Quotzy/quotzy(1).png', '../../media/Quotzy/quotzy(2).png', '../../media/Quotzy/quotzy(3).png'],
       link: null,
       github: 'https://github.com/chrismat-05/quotzy',
+      package: 'https://www.npmjs.com/package/quotzy',
       category: 'minor'
     },
     {
