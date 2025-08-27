@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { ExternalLink, Github, Folder, Package, Globe, Zap } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
@@ -22,6 +21,21 @@ const Projects = () => {
       link: 'https://forms.thecma.xyz/',
       github: null,
       category: 'major'
+    },
+    {
+      title: 'IsItSecure?',
+      description: 'A comprehensive password security scanner that analyzes password strength and checks breach exposure using privacy-preserving techniques.',
+      tags: [
+        { label: '📄 Minor Project', color: 'muted' },
+        { label: '📦 Package', color: 'accent' },
+        { label: '🌐 Open Source', color: 'primary' },
+      ],
+      technologies: ['Python', 'CLI', 'PyPi'],
+      images: ['../../media/IsItSecure/IsItSecure1.png', '../../media/IsItSecure/IsItSecure2.png', '../../media/IsItSecure/IsItSecure3.png', '../../media/IsItSecure/IsItSecure4.png', '../../media/IsItSecure/IsItSecure5.png'],
+      link: null,
+      github: 'https://github.com/chrismat-05/IsItSecure',
+      package: 'https://pypi.org/project/isitsecure/',
+      category: 'minor'
     },
     {
       title: 'ScanThePolicy',
@@ -49,6 +63,7 @@ const Projects = () => {
       images: ['../../media/Quotzy/quotzy(1).png', '../../media/Quotzy/quotzy(2).png', '../../media/Quotzy/quotzy(3).png'],
       link: null,
       github: 'https://github.com/chrismat-05/quotzy',
+      package: 'https://www.npmjs.com/package/quotzy',
       category: 'minor'
     },
     {
@@ -140,6 +155,10 @@ const Projects = () => {
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {projects.map((project, index) => {
               const CategoryIcon = getIconForCategory(project.category);
+
+              const autoplayRef = useRef<any>(null);
+              const [isPaused, setIsPaused] = useState(false);
+
               return (
                 <motion.div
                   key={project.title}
@@ -154,8 +173,18 @@ const Projects = () => {
                       plugins={[
                         Autoplay({
                           delay: 3000,
+                          stopOnInteraction: false,
+                          stopOnMouseEnter: true,
                         }),
                       ]}
+                      onMouseEnter={() => {
+                        setIsPaused(true);
+                        if (autoplayRef.current) autoplayRef.current.stop();
+                      }}
+                      onMouseLeave={() => {
+                        setIsPaused(false);
+                        if (autoplayRef.current) autoplayRef.current.play();
+                      }}
                     >
                       <CarouselContent>
                         {project.images.map((image, imageIndex) => (
@@ -242,28 +271,77 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <div className="flex gap-3">
-                      {project.link && (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
-                        >
-                          <Globe size={16} />
-                          Visit Site
-                        </a>
-                      )}
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-                        >
-                          <Github size={16} />
-                          View Code
-                        </a>
+                    <div className="flex flex-col gap-2">
+                      {project.link && project.github && project.package ? (
+                        <>
+                          <div className="flex gap-3">
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
+                            >
+                              <Globe size={16} />
+                              Visit Site
+                            </a>
+                          </div>
+                          <div className="flex gap-3">
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Github size={16} />
+                              View Code
+                            </a>
+                            <a
+                              href={project.package}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Package size={16} />
+                              View Package
+                            </a>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="flex gap-3">
+                          {project.link && (
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
+                            >
+                              <Globe size={16} />
+                              Visit Site
+                            </a>
+                          )}
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Github size={16} />
+                              View Code
+                            </a>
+                          )}
+                          {project.package && (
+                            <a
+                              href={project.package}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Package size={16} />
+                              View Package
+                            </a>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>
