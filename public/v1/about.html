@@ -385,30 +385,45 @@
             margin-top: 40px;
         }
 
-        .tech-skill {
-            margin-bottom: 20px;
-        }
+        .tech-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 20px;
+}
 
-        .tech-skill-name {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 15px;
-        }
+.tech-item {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    width: 138px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
 
-        .skill-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
+.tech-item:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(255, 153, 0, 0.15);
+    border: 2px solid #ff9900;
+}
 
-        .skill-progress {
-            height: 100%;
-            border-radius: 4px;
-            background: var(--gradient);
-        }
+.tech-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
 
+.tech-item span {
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
         /* Footer */
         footer {
             padding: 50px 0 30px;
@@ -727,67 +742,34 @@
         <!-- Tech Skills -->
         <div class="tech-skills">
             <h2 class="section-title">Technical Skills</h2>
-            <div class="tech-skill">
-                <div class="tech-skill-name">
+            <div class="tech-icons">
+                <div class="tech-item">
+                    <img src="../media/python.png" alt="Python">
                     <span>Python</span>
-                    <span>25%</span>
                 </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 25%"></div>
-                </div>
-            </div>
-            <div class="tech-skill">
-                <div class="tech-skill-name">
+                <div class="tech-item">
+                    <img src="../media/c.png" alt="C">
                     <span>C</span>
-                    <span>30%</span>
                 </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 30%"></div>
-                </div>
-            </div>
-            <div class="tech-skill">
-                <div class="tech-skill-name">
-                    <span>HTML/CSS</span>
-                    <span>80%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 80%"></div>
-                </div>
-            </div>
-            <div class="tech-skill">
-                <div class="tech-skill-name">
+                <div class="tech-item">
+                    <img src="../media/vbnet.png" alt="VB.Net">
                     <span>VB.Net</span>
-                    <span>60%</span>
                 </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 60%"></div>
-                </div>
-            </div>
-            <div class="tech-skill">
-                <div class="tech-skill-name">
+                <div class="tech-item">
+                    <img src="../media/java.png" alt="Java">
                     <span>Java</span>
-                    <span>30%</span>
                 </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 30%"></div>
+                <div class="tech-item">
+                    <img src="../media/html5.png" alt="HTML5">
+                    <span>HTML5</span>
                 </div>
-            </div>
-			<div class="tech-skill">
-                <div class="tech-skill-name">
+                <div class="tech-item">
+                    <img src="../media/mysql.png" alt="MySQL">
                     <span>MySQL</span>
-                    <span>80%</span>
                 </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 80%"></div>
-                </div>
-            </div>
-			<div class="tech-skill">
-                <div class="tech-skill-name">
+                <div class="tech-item">
+                    <img src="../media/sqlplus.png" alt="SQL+">
                     <span>SQL+</span>
-                    <span>65%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 65%"></div>
                 </div>
             </div>
         </div>
