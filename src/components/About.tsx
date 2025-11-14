@@ -12,7 +12,7 @@ const About = () => {
   const education = [
     {
       year: '2023 - Present',
-      institution: 'Kristu Jayanti College',
+      institution: 'Kristu Jayanti University',
       degree: 'Bachelor of Computer Applications'
     },
     {
