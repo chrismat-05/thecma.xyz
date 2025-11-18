@@ -47,7 +47,7 @@ const Contact = () => {
       icon: Handshake,
       label: 'Fiverr',
       href: 'https://www.fiverr.com/s/zWgryod',
-      color: 'hover:text-green-600',
+      color: 'hover:text-green-400',
       glow: 'glow-green',
     },
   ];
