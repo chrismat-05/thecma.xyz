@@ -13,7 +13,7 @@ const Hero = () => {
     { icon: Mail, href: 'mailto:chrismaje63@gmail.com', label: 'Email' },
     { icon: MessageSquareMore, href: 'https://wa.me/+918848914245', label: 'WhatsApp' },
     { icon: Phone, href: 'tel:+918848914245', label: 'Call' },
-    { icon: Handshake, href: 'http://www.fiverr.com/s/zWgryod', label: 'Fiverr' },
+    { icon: Handshake, href: 'https://www.fiverr.com/s/zWgryod', label: 'Fiverr' },
   ];
 
   return (
