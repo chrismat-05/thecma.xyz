@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Github, Linkedin, Mail, Phone, MessageSquareMore } from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, MessageSquareMore, Handshake } from 'lucide-react';
 import { Link } from 'react-scroll';
 import Player from 'lottie-react';
 import devLottie from './ui/dev-lottie.json';
@@ -13,6 +13,7 @@ const Hero = () => {
     { icon: Mail, href: 'mailto:chrismaje63@gmail.com', label: 'Email' },
     { icon: MessageSquareMore, href: 'https://wa.me/+918848914245', label: 'WhatsApp' },
     { icon: Phone, href: 'tel:+918848914245', label: 'Call' },
+    { icon: Handshake, href: 'https://www.fiverr.com/s/zWgryod', label: 'Fiverr' },
   ];
 
   return (
@@ -118,6 +119,7 @@ const Hero = () => {
                 if (social.label === "Email") hoverColor = "hover:text-red-500";
                 if (social.label === "WhatsApp") hoverColor = "hover:text-green-500";
                 if (social.label === "Call") hoverColor = "hover:text-purple-500";
+                if (social.label === "Fiverr") hoverColor = "hover:text-green-600";
                 return (
                   <motion.a
                     key={social.label}
