@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Mail, Phone, Github, Linkedin, Award, Send, CheckCircle, MessageSquareMore } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin, Award, Send, CheckCircle, MessageSquareMore, Handshake } from 'lucide-react';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -44,11 +44,11 @@ const Contact = () => {
       glow: 'glow-red',
     },
     {
-      icon: Award,
-      label: 'Credly',
-      href: 'https://www.credly.com/users/chrismaje',
-      color: 'hover:text-orange-400',
-      glow: 'glow-orange',
+      icon: Handshake,
+      label: 'Fiverr',
+      href: 'http://www.fiverr.com/s/zWgryod',
+      color: 'hover:text-green-600',
+      glow: 'glow-green',
     },
   ];
 
@@ -101,7 +101,7 @@ const Contact = () => {
                       case 'WhatsApp': glowClass = 'hover:glow-green'; outerGlowClass = 'outer-glow-green'; break;
                       case 'Call': glowClass = 'hover:glow-purple'; outerGlowClass = 'outer-glow-purple'; break;
                       case 'Email': glowClass = 'hover:glow-red'; outerGlowClass = 'outer-glow-red'; break;
-                      case 'Credly': glowClass = 'hover:glow-orange'; outerGlowClass = 'outer-glow-orange'; break;
+                      case 'Fiverr': glowClass = 'hover:glow-green'; outerGlowClass = 'outer-glow-green'; break;
                       default: glowClass = ''; outerGlowClass = '';
                     }
                     return (

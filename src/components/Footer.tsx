@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
 import { Link } from 'react-scroll';
-import { Github, Linkedin, Mail, Phone, MessageSquareMore, Award, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, MessageSquareMore, Award, MapPin, Handshake } from 'lucide-react';
 
 const socialLinks = [
   {
@@ -34,6 +34,12 @@ const socialLinks = [
     label: 'Email',
     href: 'mailto:chrismaje63@gmail.com',
     color: 'hover:text-red-400',
+  },
+  {
+    icon: Handshake,
+    label: 'Fiverr',
+    href: 'http://www.fiverr.com/s/zWgryod',
+    color: 'hover:text-green-600',
   },
   {
     icon: Award,
