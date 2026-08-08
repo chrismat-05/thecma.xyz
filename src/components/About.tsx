@@ -11,7 +11,12 @@ const About = () => {
 
   const education = [
     {
-      year: '2023 - Present',
+      year: '2026 - Present',
+      institution: 'Kristu Jayanti University',
+      degree: 'MSc. Cybersecurity'
+    },
+    {
+      year: '2023 - 2026',
       institution: 'Kristu Jayanti University',
       degree: 'Bachelor of Computer Applications'
     },
@@ -161,20 +166,19 @@ const About = () => {
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                className="space-y-6 lg:ml-[-200px] lg:w-[calc(100%+200px)]"
-              >
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  I'm a BCA student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  From Cybersecurity to videography, I love exploring new things and trying them out while trying to bridge the gap between technical expertise and creative expression, always seeking new technologies and opportunities to grow.
-                </p>
-              </motion.div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="space-y-6 lg:ml-[-200px] lg:w-[calc(100%+200px)]"
+            >
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                I'm a Cybersecurity student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field.
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                From Cybersecurity to videography, I love exploring new things and trying them out while trying to bridge the gap between technical expertise and creative expression, always seeking new technologies and opportunities to grow.
+              </p>
+            </motion.div>
           </div>
 
           <motion.div
@@ -269,7 +273,7 @@ const About = () => {
             <div className="relative">
               <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-primary/30 transform -translate-y-1/2"></div>
               
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {education.map((edu, index) => (
                   <motion.div
                     key={index}

@@ -2,7 +2,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ade31f20-79d0-4bd0-bf74-83a0bbfc7760/deploy-status)](https://app.netlify.com/projects/chrismat/deploys)
 
 ## Overview
-This project is a personal portfolio website built to showcase my skills, projects, certifications, and creative work. It is designed with a unique cinematic style, custom components, and a fun, interactive UI. The codebase is open source, but the data, media, and styling are proprietary.
+This project is a personal portfolio website built to showcase my skills, projects, certifications, and creative work as a Cybersecurity student. It is designed with a unique cinematic style, custom components, and a fun, interactive UI. The codebase is open source, but the data, media, and styling are proprietary.
 
 ## Features
 - Animated hero section with typewriter effect
