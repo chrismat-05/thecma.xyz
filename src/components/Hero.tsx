@@ -60,9 +60,11 @@ const Hero = () => {
             >
               <TypeAnimation
                 sequence={[ 
+                  'Aspiring Cybersecurity Professional',
+                  2000,
                   'Aspiring Software Developer',
                   2000,
-                  'BCA Student',
+                  'Cybersecurity Student',
                   2000,
                   'Ethical Hacking Explorer',
                   2000,
