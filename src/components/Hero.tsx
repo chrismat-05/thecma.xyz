@@ -61,7 +61,9 @@ const Hero = () => {
                 sequence={[ 
                   'Aspiring Software Developer',
                   2000,
-                  'BCA Student',
+                  'Aspiring Cybersecurity Professional',
+                  2000,
+                  'Cybersecurity Student',
                   2000,
                   'Ethical Hacking Explorer',
                   2000,

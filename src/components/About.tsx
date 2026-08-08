@@ -168,7 +168,7 @@ const About = () => {
                 className="space-y-6 lg:ml-[-200px] lg:w-[calc(100%+200px)]"
               >
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  I'm a BCA student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field.
+                  I'm a Cybersecurity student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   From Cybersecurity to videography, I love exploring new things and trying them out while trying to bridge the gap between technical expertise and creative expression, always seeking new technologies and opportunities to grow.
