@@ -70,9 +70,6 @@ const Contact = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Get In Touch</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Ready to collaborate? Let's connect and create something amazing together.
-            </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12">

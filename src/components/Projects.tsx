@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { ExternalLink, Github, Folder, Package, Globe, Zap } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
@@ -21,22 +20,36 @@ const Projects = () => {
       images: ['../../media/forms.thecma.xyz/forms.thecma (1).png', '../../media/forms.thecma.xyz/forms.thecma (2).png', '../../media/forms.thecma.xyz/forms.thecma (3).png', '../../media/forms.thecma.xyz/forms.thecma (4).png', '../../media/forms.thecma.xyz/forms.thecma (5).png', '../../media/forms.thecma.xyz/forms.thecma (6).png', '../../media/forms.thecma.xyz/forms.thecma (7).png'],
       link: 'https://forms.thecma.xyz/',
       github: null,
-      status: 'live',
       category: 'major'
     },
     {
-      title: 'CMA',
-      description: 'Revamped with a fresh stack: Vite framework with TypeScript, React for components, Tailwind CSS for styling, Framer Motion for animations. The new design embraces a clean one-page layout with multiple sections, delivering a fast, visually engaging, and seamless browsing experience.',
+      title: 'IsItSecure?',
+      description: 'A comprehensive password security scanner that analyzes password strength and checks breach exposure using privacy-preserving techniques.',
       tags: [
         { label: '📄 Minor Project', color: 'muted' },
-        { label: '🟢 Live', color: 'success' },
+        { label: '📦 Package', color: 'accent' },
+        { label: '🌐 Open Source', color: 'primary' },
       ],
-      technologies: ['Vite', 'React', 'Typescript', 'Tailwind CSS', 'Framer Motion'],
-      images: ['../../media/Portfolio/1.png', '../../media/Portfolio/2.png', '../../media/Portfolio/3.png', '../../media/Portfolio/4.png', '../../media/Portfolio/5.png', '../../media/Portfolio/6.png', '../../media/Portfolio/7.png'],
-      link: 'https://forms.thecma.xyz/',
-      github: null,
-      status: 'live',
-      category: 'major'
+      technologies: ['Python', 'CLI', 'PyPi'],
+      images: ['../../media/IsItSecure/IsItSecure1.png', '../../media/IsItSecure/IsItSecure2.png', '../../media/IsItSecure/IsItSecure3.png', '../../media/IsItSecure/IsItSecure4.png', '../../media/IsItSecure/IsItSecure5.png'],
+      link: null,
+      github: 'https://github.com/chrismat-05/IsItSecure',
+      package: 'https://pypi.org/project/isitsecure/',
+      category: 'minor'
+    },
+    {
+      title: 'ScanThePolicy',
+      description: 'ScanThePolicy helps users quickly understand complex privacy policies and terms of service. Paste text or a URL, and get highlights, breakdowns, and a privacy risk score. The app features a modern Vite/React frontend and a FastAPI backend powered by NLP.',
+      tags: [
+        { label: '📄 Minor Project', color: 'primary' },
+        { label: '🟢 Live', color: 'success' },
+        { label: '🌐 Open Source', color: 'primary' },
+      ],
+      technologies: ['React', 'Javascript', 'Python'],
+      images: ['../../media/ScanThePolicy/home.png', '../../media/ScanThePolicy/text_input.png', '../../media/ScanThePolicy/url_input.png'],
+      link: null,
+      github: 'https://github.com/chrismat-05/ScanThePolicy',
+      category: 'minor'
     },
     {
       title: 'Quotzy',
@@ -50,7 +63,7 @@ const Projects = () => {
       images: ['../../media/Quotzy/quotzy(1).png', '../../media/Quotzy/quotzy(2).png', '../../media/Quotzy/quotzy(3).png'],
       link: null,
       github: 'https://github.com/chrismat-05/quotzy',
-      status: 'open-source',
+      package: 'https://www.npmjs.com/package/quotzy',
       category: 'minor'
     },
     {
@@ -64,8 +77,7 @@ const Projects = () => {
       technologies: ['React', 'Security Analysis', 'Docker'],
       images: ['../../media/scrihdr/scrihdr1.png', '../../media/scrihdr/scrihdr2.png', '../../media/scrihdr/scrihdr3.png'],
       link: 'https://scrihdr.thecma.xyz/',
-      github: null,
-      status: 'live',
+      github: 'https://github.com/chrismat-05/SecuriHeader',
       category: 'minor'
     },
     {
@@ -79,22 +91,21 @@ const Projects = () => {
       technologies: ['React', 'Tailwind CSS', 'Axios', 'Framer Motion'],
       images: ['../../media/reqapi/reqapi1.png', '../../media/reqapi/reqapi2.png'],
       link: 'https://reqapi.thecma.xyz/',
-      github: null,
-      status: 'live',
+      github: 'https://github.com/chrismat-05/Req-API',
       category: 'minor'
     },
     {
-      title: 'theCMA.xyz (v1)',
-      description: 'My personal portfolio website, built primarily with HTML5, CSS3, and a touch of JavaScript for interactivity. A fully static site hosted on GitHub Pages with a custom domain.',
+      title: 'IPLocator',
+      description: 'A professional IP address lookup and analysis tool. Instantly discover detailed information about any IP address, including location, ISP details, security insights, and network information',
       tags: [
         { label: '📄 Minor Project', color: 'muted' },
         { label: '🟢 Live', color: 'success' },
+        { label: '🌐 Open Source', color: 'primary' },
       ],
-      technologies: ['HTML5', 'CSS3', 'JavaScript'],
-      images: ['../../media/theCMA.xyz/thecma.xyz-home.png', '../../media/theCMA.xyz/thecma.xyz-about.png', '../../media/theCMA.xyz/thecma.xyz-creative.png', '../../media/theCMA.xyz/thecma.xyz-projects.png', '../../media/theCMA.xyz/thecma.xyz-contact.png'],
-      link: 'https://thecma.xyz/v1',
-      github: null,
-      status: 'live',
+      technologies: ['React JS', 'Vite', 'Framer', 'Tailwind CSS', 'Framer'],
+      images: ['../../media/IPLocator/1.png', '../../media/IPLocator/2.png'],
+      link: 'https://iplocator.thecma.xyz/',
+      github: 'https://github.com/chrismat-05/IPLocator',
       category: 'minor'
     },
     {
@@ -109,7 +120,6 @@ const Projects = () => {
       images: ['../../media/AMC/AMC1.png', '../../media/AMC/AMC2.png', '../../media/AMC/AMC3.png', '../../media/AMC/AMC4.png', '../../media/AMC/AMC5.png', '../../media/AMC/AMC6.png', '../../media/AMC/AMC7.png', '../../media/AMC/AMC8.png'],
       link: null,
       github: 'https://github.com/chrismat-05/AMC',
-      status: 'open-source',
       category: 'college'
     },
   ];
@@ -140,14 +150,15 @@ const Projects = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text leading-[1.8] pb-2">Featured Projects</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A collection of projects showcasing my technical skills and creative problem-solving
-            </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {projects.map((project, index) => {
               const CategoryIcon = getIconForCategory(project.category);
+
+              const autoplayRef = useRef<any>(null);
+              const [isPaused, setIsPaused] = useState(false);
+
               return (
                 <motion.div
                   key={project.title}
@@ -162,8 +173,18 @@ const Projects = () => {
                       plugins={[
                         Autoplay({
                           delay: 3000,
+                          stopOnInteraction: false,
+                          stopOnMouseEnter: true,
                         }),
                       ]}
+                      onMouseEnter={() => {
+                        setIsPaused(true);
+                        if (autoplayRef.current) autoplayRef.current.stop();
+                      }}
+                      onMouseLeave={() => {
+                        setIsPaused(false);
+                        if (autoplayRef.current) autoplayRef.current.play();
+                      }}
                     >
                       <CarouselContent>
                         {project.images.map((image, imageIndex) => (
@@ -250,28 +271,77 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <div className="flex gap-3">
-                      {project.link && (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
-                        >
-                          <Globe size={16} />
-                          Visit Site
-                        </a>
-                      )}
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-                        >
-                          <Github size={16} />
-                          View Code
-                        </a>
+                    <div className="flex flex-col gap-2">
+                      {project.link && project.github && project.package ? (
+                        <>
+                          <div className="flex gap-3">
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
+                            >
+                              <Globe size={16} />
+                              Visit Site
+                            </a>
+                          </div>
+                          <div className="flex gap-3">
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Github size={16} />
+                              View Code
+                            </a>
+                            <a
+                              href={project.package}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Package size={16} />
+                              View Package
+                            </a>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="flex gap-3">
+                          {project.link && (
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
+                            >
+                              <Globe size={16} />
+                              Visit Site
+                            </a>
+                          )}
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Github size={16} />
+                              View Code
+                            </a>
+                          )}
+                          {project.package && (
+                            <a
+                              href={project.package}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                            >
+                              <Package size={16} />
+                              View Package
+                            </a>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>
