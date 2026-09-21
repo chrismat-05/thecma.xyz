@@ -1,0 +1,46 @@
+[
+  {
+    "id": "testimonial-1",
+    "name": "Alexander Hayes",
+    "role": "Founder & CEO",
+    "company": "Nexus Media Labs",
+    "website": "https://nexusmedia.io",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
+    "rating": 5,
+    "verified": true,
+    "quote": "Chris brought an extraordinary level of design precision and engineering polish to our platform. His eye for subtle micro-interactions and dark-mode aesthetics transformed our product from ordinary to world-class."
+  },
+  {
+    "id": "testimonial-2",
+    "name": "Elena Rostova",
+    "role": "Head of Product",
+    "company": "CipherShield Security",
+    "website": "https://ciphershield.tech",
+    "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&q=80",
+    "rating": 5,
+    "verified": true,
+    "quote": "Rarely do you find a developer who commands both deep cybersecurity architecture and high-end frontend craftsmanship. Chris engineered our tooling with zero compromises on security or user delight."
+  },
+  {
+    "id": "testimonial-3",
+    "name": "Marcus Vance",
+    "role": "Creative Director",
+    "company": "Voxel & Form Studio",
+    "website": "https://voxelandform.design",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
+    "rating": 5,
+    "verified": true,
+    "quote": "Working with Chris felt effortless. He translated our complex WebGL concepts and kinetic layouts into silky 60fps reality. A true creative technologist whose work speaks for itself."
+  },
+  {
+    "id": "testimonial-4",
+    "name": "Sophia Lin",
+    "role": "Lead Architect",
+    "company": "HyperFlow Systems",
+    "website": "https://hyperflow.dev",
+    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80",
+    "rating": 5,
+    "verified": true,
+    "quote": "Delivered ahead of schedule with immaculate code quality. His attention to accessible interaction design, performance profiling, and responsive mechanics was genuinely impressive."
+  }
+]

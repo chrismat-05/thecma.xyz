@@ -1,298 +1,305 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { GraduationCap, Award, Calendar, Code, Database, Palette, Globe } from 'lucide-react';
-import { ExternalLink } from 'lucide-react';
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { GraduationCap, Award, Code, Database, Globe, Palette, ExternalLink, CheckCircle2 } from "lucide-react";
+import { SectionTitleReveal } from "@/components/ui/SectionTitleReveal";
 
-const About = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+export const About: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
 
   const education = [
     {
-      year: '2023 - Present',
-      institution: 'Kristu Jayanti University',
-      degree: 'Bachelor of Computer Applications'
+      year: "2023 - Present",
+      institution: "Kristu Jayanti University",
+      degree: "Bachelor of Computer Applications",
+      focus: "Cybersecurity & Software Systems",
     },
     {
-      year: '2023',
-      institution: 'The Indian School, Kingdom of Bahrain',
-      degree: 'Higher Secondary Education',
-      description: 'Commerce stream with Computer Science. Achieved 79% in final examinations.',
+      year: "2023",
+      institution: "The Indian School, Kingdom of Bahrain",
+      degree: "Higher Secondary Education",
+      focus: "Commerce stream with Computer Science (80%)",
     },
     {
-      year: '2021',
-      institution: 'The Indian School, Kingdom of Bahrain',
-      degree: 'Secondary Education',
-      description: 'Achieved 81% in final examinations.',
-    },
-  ];
-
-  const certifications = [
-    {
-      title: 'Salesforce Administrator Explorer',
-      issuer: 'Nasscom',
-      date: 'July 2025',
-      status: 'No Expiration',
-      link: 'https://fsp-assessment-certificates.s3.ap-southeast-1.amazonaws.com/%27/s3/buckets/fsp-assessment-certificates%27/CHRIS%2BMATHEW%2BAJE_148550316.pdf.pdf'
-    },
-    {
-      title: 'Problem Solving',
-      issuer: 'HackerRank',
-      date: 'May 2025',
-      status: 'No Expiration',
-      link: 'https://www.hackerrank.com/certificates/fbca630d6812'
-    },
-    {
-      title: 'REST API',
-      issuer: 'HackerRank',
-      date: 'May 2025',
-      status: 'No Expiration',
-      link: 'https://www.hackerrank.com/certificates/7067cb8f76d2'
-    },
-    {
-      title: 'Securing MongoDB Atlas: Authentication & Authorization',
-      issuer: 'MongoDB',
-      date: 'May 2025',
-      status: 'No Expiration',
-      link: 'https://www.credly.com/badges/d42ba4a5-27fa-4bbb-ae5f-5b87323f3b2e/linked_in_profile'
-    },
-    {
-      title: 'Securing MongoDB Self-Managed: Authentication & Authorization ',
-      issuer: 'MongoDB',
-      date: 'May 2025',
-      status: 'No Expiration',
-      link: 'https://www.credly.com/badges/f0b99dd0-aabf-48a3-8eed-02a0b1ec833a/linked_in_profile'
-    },
-    {
-      title: 'Ethical Hacking',
-      issuer: 'NSDC Academy & Internshala',
-      date: 'March 2025',
-      status: 'No Expiration',
-      link: 'https://trainings.internshala.com/s/v/3610844/1c4beaba'
-    },
-    {
-      title: 'Digital Engineering',
-      issuer: 'Nasscom',
-      date: 'October 2023',
-      status: 'No Expiration',
-      link: 'https://fsp-assessment-certificates.s3-ap-southeast-1.amazonaws.com/ChrisMathewAje-124647283.pdf'
-    },
-    {
-      title: 'Get started with Figma',
-      issuer: 'Coursera',
-      date: 'October 2023',
-      status: 'No Expiration',
-      link: 'https://www.coursera.org/account/accomplishments/verify/KG4BZ57MXM64'
-    },
-    {
-      title: 'Work with Components in Figma',
-      issuer: 'Coursera',
-      date: 'October 2023',
-      status: 'No Expiration',
-      link: 'https://www.coursera.org/account/accomplishments/verify/JPM7L2GU3CGM'
-    },
-    {
-      title: 'HTML',
-      issuer: 'University of Michigan',
-      date: 'April 2023',
-      status: 'No Expiration',
-      link: 'https://www.coursera.org/account/accomplishments/verify/45YW8F3CQXG2'
+      year: "2021",
+      institution: "The Indian School, Kingdom of Bahrain",
+      degree: "Secondary Education",
+      focus: "Academic Excellence (81%)",
     },
   ];
 
   const skillCategories = [
     {
-      title: 'Languages',
+      title: "Languages",
       icon: Code,
-      skills: ['JavaScript', 'TypeScript', 'Python', 'VB.Net', 'CSS', 'HTML'],
+      skills: ["TypeScript", "JavaScript", "Python", "VB.NET", "CSS3 / HTML5"],
     },
     {
-      title: 'Frameworks',
+      title: "Frameworks & 3D",
       icon: Globe,
-      skills: ['React', 'Tailwind CSS', 'Node.js', 'Express.js', '.NET'],
+      skills: ["React", "Three.js / WebGL", "Tailwind CSS", "Node.js", "Express.js"],
     },
     {
-      title: 'Databases',
+      title: "Databases & Cloud",
       icon: Database,
-      skills: ['Supabase', 'Firebase', 'SQL Plus', 'SQL Lite', 'MySQL', 'PostgreSQL'],
+      skills: ["Supabase", "Firebase & Firestore", "PostgreSQL", "MongoDB Atlas", "SQL Server"],
     },
     {
-      title: 'Creative',
+      title: "Creative Tech & Studio",
       icon: Palette,
-      skills: ['Videography', 'Direction', 'Graphic Design', 'Sound Design'],
+      skills: ["Motion Graphics", "Videography & Direction", "Figma Design Systems", "Sound Design"],
+    },
+  ];
+
+  const certifications = [
+    {
+      title: "Salesforce Administrator Explorer",
+      issuer: "Nasscom",
+      date: "July 2025",
+      link: "https://fsp-assessment-certificates.s3.ap-southeast-1.amazonaws.com/%27/s3/buckets/fsp-assessment-certificates%27/CHRIS%2BMATHEW%2BAJE_148550316.pdf.pdf",
+    },
+    {
+      title: "Problem Solving",
+      issuer: "HackerRank",
+      date: "May 2025",
+      link: "https://www.hackerrank.com/certificates/fbca630d6812",
+    },
+    {
+      title: "REST API Architecture",
+      issuer: "HackerRank",
+      date: "May 2025",
+      link: "https://www.hackerrank.com/certificates/7067cb8f76d2",
+    },
+    {
+      title: "Securing MongoDB Atlas: Auth & Access",
+      issuer: "MongoDB",
+      date: "May 2025",
+      link: "https://www.credly.com/badges/d42ba4a5-27fa-4bbb-ae5f-5b87323f3b2e/linked_in_profile",
+    },
+    {
+      title: "Ethical Hacking & Penetration Testing",
+      issuer: "NSDC Academy & Internshala",
+      date: "March 2025",
+      link: "https://trainings.internshala.com/s/v/3610844/1c4beaba",
+    },
+    {
+      title: "Digital Engineering Certification",
+      issuer: "Nasscom",
+      date: "October 2023",
+      link: "https://fsp-assessment-certificates.s3-ap-southeast-1.amazonaws.com/ChrisMathewAje-124647283.pdf",
+    },
+    {
+      title: "Advanced Component Systems in Figma",
+      issuer: "Coursera",
+      date: "October 2023",
+      link: "https://www.coursera.org/account/accomplishments/verify/JPM7L2GU3CGM",
     },
   ];
 
   return (
-    <section id="about" className="py-20 relative overflow-hidden">
-      <div className="container mx-auto px-4">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-6xl mx-auto"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">About Me</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
-          </motion.div>
+    <section id="about" ref={containerRef} className="relative bg-black text-white">
+      <div className="container mx-auto px-4 max-w-6xl py-28">
+        <SectionTitleReveal
+          badge="// NARRATIVE & BACKGROUND"
+          title="About The Engineer."
+          subtitle="A fusion of cybersecurity rigor, technical discipline, and high-impact digital craftsmanship."
+          align="left"
+        />
 
-          <div className="bg-card/20 backdrop-blur-sm border-t border-border rounded-xl p-8 mb-20">
-            <div className="grid lg:grid-cols-2 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="relative"
-              >
-                <div className="relative w-80 h-80 mx-auto lg:mx-0">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full animate-glow-pulse"></div>
-                  <div className="absolute inset-2 bg-background rounded-full overflow-hidden">
-                    <img src='../../media/cover.png'></img>
-                  </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Sticky Left Column (40% width) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-8">
+            <div className="relative group">
+              {/* Photo Frame with subtle glow */}
+              <div className="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto lg:mx-0 rounded-3xl overflow-hidden border border-white/20 bg-neutral-900/60 p-2 backdrop-blur-xl shadow-2xl shadow-black/80">
+                <div className="w-full h-full rounded-2xl overflow-hidden relative">
+                  <img
+                    src="/media/cover.png"
+                    alt="Chris Mathew Aje"
+                    className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                className="space-y-6 lg:ml-[-200px] lg:w-[calc(100%+200px)]"
-              >
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  I'm a Cybersecurity student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  From Cybersecurity to videography, I love exploring new things and trying them out while trying to bridge the gap between technical expertise and creative expression, always seeking new technologies and opportunities to grow.
-                </p>
-              </motion.div>
+              {/* Status pill */}
+              <div className="absolute -bottom-3 left-6 sm:left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/90 border border-white/20 backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs font-mono text-neutral-300">Bengaluru, India • Available</span>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-3xl font-bold tracking-tight text-white">Chris Mathew Aje</h3>
+              <p className="text-neutral-400 font-mono text-xs uppercase tracking-widest mt-1">
+                Developer • Cybersecurity Specialist • Creator
+              </p>
+            </div>
+
+            <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
+              Cybersecurity student and creative developer bridging technical resilience with cinematic UI/UX. Passionate about privacy, zero-knowledge mechanics, and modern WebGL digital systems.
+            </p>
+
+            {/* Circular Scroll Progress Meter */}
+            <div className="pt-4 border-t border-white/10 flex items-center gap-4">
+              <div className="relative w-12 h-12 flex items-center justify-center">
+                <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                  <path
+                    className="text-neutral-800"
+                    strokeWidth="3"
+                    stroke="currentColor"
+                    fill="none"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                  <motion.path
+                    className="text-white"
+                    strokeDasharray="100, 100"
+                    strokeWidth="3.2"
+                    strokeLinecap="round"
+                    stroke="currentColor"
+                    fill="none"
+                    style={{
+                      pathLength: scrollYProgress,
+                    }}
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                </svg>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-400">
+                  Storyline Progress
+                </span>
+                <span className="text-xs text-neutral-500 font-mono">
+                  Scroll through profile milestones
+                </span>
+              </div>
             </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="mb-20"
-          >
-            <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3">
-              <Code className="text-primary" size={32} />
-              Skills & Expertise
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
-              {skillCategories.map((category, categoryIndex) => {
-                const CategoryIcon = category.icon;
-                return (
-                  <motion.div
-                    key={category.title}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{ delay: 1 + categoryIndex * 0.1, duration: 0.6 }}
-                    className="skill-card"
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <CategoryIcon className="text-primary" size={24} />
-                      <h4 className="text-lg font-semibold text-foreground">{category.title}</h4>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {category.skills.map((skill, skillIndex) => (
-                        <span
-                          key={skill}
-                          className="inline-block px-4 py-2 bg-muted/30 text-gray-300 text-sm rounded-full font-medium"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                );
-              })}
+          {/* Right Column: Progressive Storytelling Timeline (60% width) */}
+          <div className="lg:col-span-7 space-y-16">
+            {/* 1. Quick Intro Narrative Card */}
+            <div className="p-8 rounded-3xl bg-neutral-900/30 border border-white/[0.08] backdrop-blur-sm space-y-4">
+              <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest block">
+                01 // Philosophy & Ethos
+              </span>
+              <h4 className="text-2xl font-bold text-white tracking-tight">
+                Where security integrity meets interactive elegance.
+              </h4>
+              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+                From auditing cryptographic hashes to directing cinematic videography, I love operating at the intersection of left-brain technical depth and right-brain aesthetic instinct. Every interface should be as robust beneath the surface as it is captivating to navigate.
+              </p>
             </div>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 1.4, duration: 0.6 }}
-            className="mb-20"
-          >
-            <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3">
-              <Award className="text-primary" size={32} />
-              Certifications
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {certifications.map((cert, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ delay: 1.6 + index * 0.1, duration: 0.6 }}
-                  className="project-card relative p-4"
-                >
-                  {cert.link && (
-                    <a
-                      href={cert.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="absolute top-3 right-3 text-muted-foreground hover:text-primary transition-colors"
-                      title="Open certificate in new tab"
-                    >
-                      <ExternalLink size={18} />
-                    </a>
-                  )}
-                  <h4 className="text-[17px] font-semibold text-foreground mb-2">{cert.title}</h4>
-                  <p className="text-primary font-medium mb-2">{cert.issuer}</p>
-                  <p className="text-sm text-gray-300 mb-1">Issued {cert.date}</p>
-                  <p className="text-sm text-muted-foreground">{cert.status}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+            {/* 2. Education Milestone */}
+            <div className="p-8 rounded-3xl bg-neutral-900/30 border border-white/[0.08] backdrop-blur-sm space-y-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
+                  <GraduationCap size={20} />
+                </div>
+                <h4 className="text-xl font-bold text-white tracking-tight">
+                  Academic Background
+                </h4>
+              </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 1.8, duration: 0.6 }}
-          >
-            <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3">
-              <GraduationCap className="text-primary" size={32} />
-              Education
-            </h3>
-            <div className="relative">
-              <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-primary/30 transform -translate-y-1/2"></div>
-              
-              <div className="grid md:grid-cols-3 gap-8">
-                {education.map((edu, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{ delay: 2 + index * 0.2, duration: 0.6 }}
-                       className="relative"
-                     >
-                       <div className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:bg-card/80 hover:border-primary/50 hover:scale-105 transition-all duration-300 mt-8 md:mt-12">
-                      <div className="flex items-center justify-center gap-2 mb-3">
-                        <Calendar size={16} className="text-primary" />
-                        <span className="text-primary font-semibold text-center">{edu.year}</span>
-                      </div>
-                      <h4 className="text-lg font-semibold text-foreground mb-2 text-center">{edu.degree}</h4>
-                      <h5 className="text-md text-muted-foreground mb-3 text-center">{edu.institution}</h5>
-                      <p className="text-sm text-muted-foreground text-center">{edu.description}</p>
+              <div className="space-y-6 divide-y divide-white/[0.06]">
+                {education.map((item, idx) => (
+                  <div key={idx} className={idx > 0 ? "pt-5" : ""}>
+                    <div className="flex justify-between items-baseline">
+                      <h5 className="font-semibold text-white text-base">{item.degree}</h5>
+                      <span className="text-xs font-mono text-neutral-400">{item.year}</span>
                     </div>
-                  </motion.div>
+                    <p className="text-neutral-400 text-sm mt-0.5">{item.institution}</p>
+                    <p className="text-neutral-500 text-xs mt-1 font-mono">{item.focus}</p>
+                  </div>
                 ))}
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+
+            {/* 3. Skills & Expertise Grid */}
+            <div className="p-8 rounded-3xl bg-neutral-900/30 border border-white/[0.08] backdrop-blur-sm space-y-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
+                  <Code size={20} />
+                </div>
+                <h4 className="text-xl font-bold text-white tracking-tight">
+                  Skills & Technical Domains
+                </h4>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                {skillCategories.map((category, idx) => {
+                  const Icon = category.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="p-5 rounded-2xl bg-black/40 border border-white/[0.06] space-y-3 hover:border-white/20 transition-colors"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon size={16} className="text-neutral-400" />
+                        <h6 className="font-semibold text-white text-sm">{category.title}</h6>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {category.skills.map((skill, sIdx) => (
+                          <span
+                            key={sIdx}
+                            className="px-2.5 py-1 text-xs font-mono rounded-lg bg-white/[0.04] text-neutral-300 border border-white/[0.06]"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 4. Certifications & Credentials */}
+            <div className="p-8 rounded-3xl bg-neutral-900/30 border border-white/[0.08] backdrop-blur-sm space-y-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
+                  <Award size={20} />
+                </div>
+                <h4 className="text-xl font-bold text-white tracking-tight">
+                  Verified Certifications
+                </h4>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-3">
+                {certifications.map((cert, idx) => (
+                  <a
+                    key={idx}
+                    href={cert.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-4 rounded-xl bg-black/40 border border-white/[0.06] hover:border-white/30 transition-all duration-200 flex flex-col justify-between group"
+                    data-cursor="button"
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <span className="font-semibold text-xs text-white group-hover:text-white line-clamp-2">
+                          {cert.title}
+                        </span>
+                        <ExternalLink
+                          size={13}
+                          className="text-neutral-500 group-hover:text-white shrink-0 mt-0.5"
+                        />
+                      </div>
+                      <p className="text-[11px] text-neutral-400">{cert.issuer}</p>
+                    </div>
+                    <span className="text-[10px] font-mono text-neutral-500 mt-3 block">
+                      {cert.date}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

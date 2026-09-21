@@ -1,375 +1,223 @@
-import React, { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { ExternalLink, Github, Folder, Package, Globe, Zap } from 'lucide-react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import Autoplay from 'embla-carousel-autoplay';
+import React, { useState, useRef } from "react";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Github, Package, Globe, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+import projectsData from "@/content/projects.json";
+import { SectionTitleReveal } from "@/components/ui/SectionTitleReveal";
 
-const Projects = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+interface ProjectItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  year: string;
+  featured: boolean;
+  tags: string[];
+  technologies: string[];
+  category: string;
+  thumbnail: string;
+  images: string[];
+  link: string | null;
+  github: string | null;
+  package: string | null;
+}
 
-  const projects = [
-    {
-      title: 'forms.thecma.xyz',
-      description: 'Built with HTML, CSS, JavaScript, and formBuilder.js, the platform enables users to create, preview, and share customizable forms with themes, analytics, and export options. Data is securely handled using Firebase Auth and Firestore.',
-      tags: [
-        { label: '🗂️ Major Project', color: 'primary' },
-        { label: '🧪 Testing', color: 'secondary' },
-      ],
-      technologies: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Firestore', 'TypeScript', 'Handlebars', 'Resend'],
-      images: ['../../media/forms.thecma.xyz/forms.thecma (1).png', '../../media/forms.thecma.xyz/forms.thecma (2).png', '../../media/forms.thecma.xyz/forms.thecma (3).png', '../../media/forms.thecma.xyz/forms.thecma (4).png', '../../media/forms.thecma.xyz/forms.thecma (5).png', '../../media/forms.thecma.xyz/forms.thecma (6).png', '../../media/forms.thecma.xyz/forms.thecma (7).png'],
-      link: 'https://forms.thecma.xyz/',
-      github: null,
-      category: 'major'
-    },
-    {
-      title: 'IsItSecure?',
-      description: 'A comprehensive password security scanner that analyzes password strength and checks breach exposure using privacy-preserving techniques.',
-      tags: [
-        { label: '📄 Minor Project', color: 'muted' },
-        { label: '📦 Package', color: 'accent' },
-        { label: '🌐 Open Source', color: 'primary' },
-      ],
-      technologies: ['Python', 'CLI', 'PyPi'],
-      images: ['../../media/IsItSecure/IsItSecure1.png', '../../media/IsItSecure/IsItSecure2.png', '../../media/IsItSecure/IsItSecure3.png', '../../media/IsItSecure/IsItSecure4.png', '../../media/IsItSecure/IsItSecure5.png'],
-      link: null,
-      github: 'https://github.com/chrismat-05/IsItSecure',
-      package: 'https://pypi.org/project/isitsecure/',
-      category: 'minor'
-    },
-    {
-      title: 'ScanThePolicy',
-      description: 'ScanThePolicy helps users quickly understand complex privacy policies and terms of service. Paste text or a URL, and get highlights, breakdowns, and a privacy risk score. The app features a modern Vite/React frontend and a FastAPI backend powered by NLP.',
-      tags: [
-        { label: '📄 Minor Project', color: 'primary' },
-        { label: '🟢 Live', color: 'success' },
-        { label: '🌐 Open Source', color: 'primary' },
-      ],
-      technologies: ['React', 'Javascript', 'Python'],
-      images: ['../../media/ScanThePolicy/home.png', '../../media/ScanThePolicy/text_input.png', '../../media/ScanThePolicy/url_input.png'],
-      link: null,
-      github: 'https://github.com/chrismat-05/ScanThePolicy',
-      category: 'minor'
-    },
-    {
-      title: 'Quotzy',
-      description: 'Quotzy is a fully open-source quote generator built as both a CLI tool and a JS module. It features handpicked quotes across six diverse categories. Published to npm and GitHub Packages.',
-      tags: [
-        { label: '📄 Minor Project', color: 'muted' },
-        { label: '📦 Package', color: 'accent' },
-        { label: '🌐 Open Source', color: 'primary' },
-      ],
-      technologies: ['Node.js', 'CLI', 'npm'],
-      images: ['../../media/Quotzy/quotzy(1).png', '../../media/Quotzy/quotzy(2).png', '../../media/Quotzy/quotzy(3).png'],
-      link: null,
-      github: 'https://github.com/chrismat-05/quotzy',
-      package: 'https://www.npmjs.com/package/quotzy',
-      category: 'minor'
-    },
-    {
-      title: 'SecuriHeader',
-      description: 'A tool that analyzes the HTTP response headers of any website and checks for missing or misconfigured security-related headers. Ideal for developers and security-conscious users.',
-      tags: [
-        { label: '📄 Minor Project', color: 'muted' },
-        { label: '🟢 Live', color: 'success' },
-        { label: '🌐 Open Source', color: 'primary' },
-      ],
-      technologies: ['React', 'Security Analysis', 'Docker'],
-      images: ['../../media/scrihdr/scrihdr1.png', '../../media/scrihdr/scrihdr2.png', '../../media/scrihdr/scrihdr3.png'],
-      link: 'https://scrihdr.thecma.xyz/',
-      github: 'https://github.com/chrismat-05/SecuriHeader',
-      category: 'minor'
-    },
-    {
-      title: 'Req API',
-      description: 'A lightweight, developer-friendly API request debugger built using React, Tailwind CSS, Axios, and Framer Motion. Allows users to test HTTP methods with instant formatted responses.',
-      tags: [
-        { label: '📄 Minor Project', color: 'muted' },
-        { label: '🟢 Live', color: 'success' },
-        { label: '🌐 Open Source', color: 'primary' },
-      ],
-      technologies: ['React', 'Tailwind CSS', 'Axios', 'Framer Motion'],
-      images: ['../../media/reqapi/reqapi1.png', '../../media/reqapi/reqapi2.png'],
-      link: 'https://reqapi.thecma.xyz/',
-      github: 'https://github.com/chrismat-05/Req-API',
-      category: 'minor'
-    },
-    {
-      title: 'IPLocator',
-      description: 'A professional IP address lookup and analysis tool. Instantly discover detailed information about any IP address, including location, ISP details, security insights, and network information',
-      tags: [
-        { label: '📄 Minor Project', color: 'muted' },
-        { label: '🟢 Live', color: 'success' },
-        { label: '🌐 Open Source', color: 'primary' },
-      ],
-      technologies: ['React JS', 'Vite', 'Framer', 'Tailwind CSS', 'Framer'],
-      images: ['../../media/IPLocator/1.png', '../../media/IPLocator/2.png'],
-      link: 'https://iplocator.thecma.xyz/',
-      github: 'https://github.com/chrismat-05/IPLocator',
-      category: 'minor'
-    },
-    {
-      title: 'AMC',
-      description: 'A user-friendly Annual Maintenance Contract (AMC) Management System built using VB.NET and SQL Server 2022. Streamlines contract, client, asset, and service request management.',
-      tags: [
-        { label: '🟢 Live', color: 'success' },
-        { label: '🌐 Open Source', color: 'primary' },
-        { label: '🎓 College Project', color: 'accent' },
-      ],
-      technologies: ['VB.NET', 'SQL Server 2022', 'Windows Forms'],
-      images: ['../../media/AMC/AMC1.png', '../../media/AMC/AMC2.png', '../../media/AMC/AMC3.png', '../../media/AMC/AMC4.png', '../../media/AMC/AMC5.png', '../../media/AMC/AMC6.png', '../../media/AMC/AMC7.png', '../../media/AMC/AMC8.png'],
-      link: null,
-      github: 'https://github.com/chrismat-05/AMC',
-      category: 'college'
-    },
-  ];
+export const Projects: React.FC = () => {
+  // Only the 5 featured projects for the homepage
+  const featuredProjects: ProjectItem[] = (projectsData as ProjectItem[]).filter(
+    (p) => p.featured
+  );
 
-  const getIconForCategory = (category: string) => {
-    switch (category) {
-      case 'major': return Package;
-      case 'college': return Folder;
-      default: return Zap;
-    }
+  const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
+  const [activeThumbnail, setActiveThumbnail] = useState<string>("");
+
+  // Smooth floating cursor tracking
+  const mouseX = useMotionValue(-500);
+  const mouseY = useMotionValue(-500);
+
+  const smoothX = useSpring(mouseX, { stiffness: 150, damping: 15 });
+  const smoothY = useSpring(mouseY, { stiffness: 150, damping: 15 });
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
   };
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden">
-      <div className="container mx-auto px-4">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-7xl mx-auto"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text leading-[1.8] pb-2">Featured Projects</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
-          </motion.div>
+    <section
+      id="projects"
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      className="py-32 relative overflow-hidden"
+    >
+      <div className="container mx-auto px-4 max-w-6xl">
+        <SectionTitleReveal
+          badge="// SELECTED CASE STUDIES"
+          title="Interactive Projects Showcase."
+          subtitle="A curation of high-impact platforms, open-source security utilities, and developer architecture."
+          align="left"
+        />
 
-          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {projects.map((project, index) => {
-              const CategoryIcon = getIconForCategory(project.category);
+        {/* Vertical list layout */}
+        <div className="flex flex-col divide-y divide-white/[0.08] border-y border-white/[0.08] relative">
+          {featuredProjects.map((project, index) => {
+            const rowNumber = (index + 1).toString().padStart(2, "0");
+            const isHovered = activeProject?.id === project.id;
 
-              const autoplayRef = useRef<any>(null);
-              const [isPaused, setIsPaused] = useState(false);
-
-              return (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
-                  className="project-card"
-                >
-                  <div className="relative">
-                    <Carousel
-                      opts={{ loop: true }}
-                      plugins={[
-                        Autoplay({
-                          delay: 3000,
-                          stopOnInteraction: false,
-                          stopOnMouseEnter: true,
-                        }),
-                      ]}
-                      onMouseEnter={() => {
-                        setIsPaused(true);
-                        if (autoplayRef.current) autoplayRef.current.stop();
-                      }}
-                      onMouseLeave={() => {
-                        setIsPaused(false);
-                        if (autoplayRef.current) autoplayRef.current.play();
-                      }}
-                    >
-                      <CarouselContent>
-                        {project.images.map((image, imageIndex) => (
-                          <CarouselItem key={imageIndex}>
-                            <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-t-xl overflow-hidden">
-                              <img
-                                src={image}
-                                alt={`${project.title} screenshot ${imageIndex + 1}`}
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                          </CarouselItem>
-                        ))}
-                      </CarouselContent>
-                      {project.images.length > 1 && (
-                        <>
-                          <CarouselPrevious className="absolute left-2 top-1/2" />
-                          <CarouselNext className="absolute right-2 top-1/2" />
-                        </>
-                      )}
-                    </Carousel>
+            return (
+              <div
+                key={project.id}
+                onMouseEnter={() => {
+                  setActiveProject(project);
+                  setActiveThumbnail(project.thumbnail);
+                }}
+                onMouseLeave={() => {
+                  setActiveProject(null);
+                }}
+                className="group relative py-8 md:py-10 px-4 transition-all duration-300 hover:bg-white/[0.03] hover:border-white/20 cursor-pointer"
+                data-cursor-text="Explore"
+              >
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  {/* Left: Index + Title */}
+                  <div className="flex items-baseline gap-6 md:gap-10 transition-transform duration-300 group-hover:translate-x-4">
+                    <span className="font-mono text-sm md:text-base text-neutral-500 font-medium">
+                      {rowNumber}
+                    </span>
+                    <div>
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white group-hover:text-white transition-colors duration-200">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm md:text-base text-neutral-400 mt-1 font-normal">
+                        {project.subtitle}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="p-6 border-b border-border/50">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <CategoryIcon className="text-primary" size={24} />
-                        <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-                          {project.title}
-                        </h3>
-                      </div>
-                      <div className="flex gap-2">
-                        {project.link && (
-                          <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
-                          >
-                            <ExternalLink size={18} />
-                          </a>
-                        )}
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
-                          >
-                            <Github size={18} />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag, tagIndex) => (
+                  {/* Right: Tags + Year + Action Arrow */}
+                  <div className="flex items-center gap-6 justify-between md:justify-end">
+                    <div className="hidden sm:flex flex-wrap gap-2 max-w-xs justify-end">
+                      {project.tags.slice(0, 3).map((tag, tIdx) => (
                         <span
-                          key={tagIndex}
-                          className="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full"
+                          key={tIdx}
+                          className="px-2.5 py-1 text-xs font-mono rounded-full bg-white/[0.05] border border-white/10 text-neutral-300"
                         >
-                          {tag.label}
+                          {tag}
                         </span>
                       ))}
                     </div>
-                  </div>
 
-                  <div className="p-6">
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
-                      {project.description}
-                    </p>
-
-                    <div className="mb-6">
-                      <h4 className="text-sm font-semibold text-foreground mb-3">Built with:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="px-2 py-1 text-xs bg-muted/50 text-grey-300 rounded border border-border"
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                    <div className="flex items-center gap-4">
+                      <span className="font-mono text-sm text-neutral-500">{project.year}</span>
+                      <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-300 group-hover:rotate-45">
+                        <ArrowUpRight size={18} />
                       </div>
                     </div>
-
-                    <div className="flex flex-col gap-2">
-                      {project.link && project.github && project.package ? (
-                        <>
-                          <div className="flex gap-3">
-                            <a
-                              href={project.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
-                            >
-                              <Globe size={16} />
-                              Visit Site
-                            </a>
-                          </div>
-                          <div className="flex gap-3">
-                            <a
-                              href={project.github}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-                            >
-                              <Github size={16} />
-                              View Code
-                            </a>
-                            <a
-                              href={project.package}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-                            >
-                              <Package size={16} />
-                              View Package
-                            </a>
-                          </div>
-                        </>
-                      ) : (
-                        <div className="flex gap-3">
-                          {project.link && (
-                            <a
-                              href={project.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300"
-                            >
-                              <Globe size={16} />
-                              Visit Site
-                            </a>
-                          )}
-                          {project.github && (
-                            <a
-                              href={project.github}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-                            >
-                              <Github size={16} />
-                              View Code
-                            </a>
-                          )}
-                          {project.package && (
-                            <a
-                              href={project.package}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-                            >
-                              <Package size={16} />
-                              View Package
-                            </a>
-                          )}
-                        </div>
-                      )}
-                    </div>
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 1.4, duration: 0.6 }}
-            className="text-center mt-16"
-          >
-            <p className="text-lg text-muted-foreground mb-6">
-              Interested in collaborating on a project?
-            </p>
-            <a
-              href="https://github.com/chrismat-05"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-hero-primary inline-flex items-center gap-2"
+                {/* Mobile inline preview card (visible on small screens <768px) */}
+                <div className="mt-4 md:hidden block rounded-2xl overflow-hidden border border-white/10 bg-neutral-900/60 p-2">
+                  <div className="aspect-video w-full rounded-xl overflow-hidden mb-3">
+                    <img
+                      src={project.thumbnail}
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black text-xs font-medium"
+                      >
+                        <Globe size={14} /> Live Demo
+                      </a>
+                    )}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/20 text-white text-xs font-medium"
+                      >
+                        <Github size={14} /> Source Code
+                      </a>
+                    )}
+                    {project.package && (
+                      <a
+                        href={project.package}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/20 text-white text-xs font-medium"
+                      >
+                        <Package size={14} /> Package
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Floating cursor preview (Desktop >= 768px) */}
+        <AnimatePresence>
+          {activeProject && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="hidden md:block pointer-events-none fixed z-40 w-[340px] h-[220px] rounded-2xl overflow-hidden border border-white/30 shadow-2xl shadow-black/80 bg-neutral-900/90 backdrop-blur-md"
+              style={{
+                top: 0,
+                left: 0,
+                x: smoothX,
+                y: smoothY,
+                translateX: "24px",
+                translateY: "-50%",
+              }}
             >
-              <Github size={20} />
-              View All Projects on GitHub
-            </a>
-          </motion.div>
-        </motion.div>
+              <img
+                src={activeThumbnail}
+                alt={activeProject.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4">
+                <span className="text-white font-bold text-sm tracking-wide">
+                  {activeProject.title}
+                </span>
+                <span className="text-neutral-400 text-xs mt-0.5">
+                  {activeProject.technologies.slice(0, 4).join(" • ")}
+                </span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* View All Projects CTA */}
+        <div className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-sm">
+          <div>
+            <h4 className="text-xl font-bold text-white tracking-tight">
+              Looking for more experiments & open-source projects?
+            </h4>
+            <p className="text-neutral-400 text-sm mt-1">
+              Browse our complete archive of CLI tools, Python packages, and academic systems.
+            </p>
+          </div>
+          <Link
+            to="/projects"
+            className="btn-hero-primary whitespace-nowrap"
+            data-magnetic="true"
+          >
+            Explore All Projects
+          </Link>
+        </div>
       </div>
     </section>
   );
