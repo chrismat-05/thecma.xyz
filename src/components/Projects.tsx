@@ -66,8 +66,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       style={{
         top: `${topStickyOffset}px`,
         zIndex: index + 10,
-        // The space below each card gives the user room to scroll each subsequent card into view
-        marginBottom: index === total - 1 ? "6rem" : "60vh",
+        // Consistent scroll track so EVERY card (including 4 and 5) has room to scroll up and stack
+        marginBottom: "60vh",
       }}
     >
       <motion.div
