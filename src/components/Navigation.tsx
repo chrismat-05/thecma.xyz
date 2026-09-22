@@ -49,11 +49,11 @@ export const Navigation: React.FC = () => {
     <AnimatePresence>
       {showDock && (
         <motion.nav
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 40, x: "-50%" }}
+          animate={{ opacity: 1, y: 0, x: "-50%" }}
+          exit={{ opacity: 0, y: 40, x: "-50%" }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 rounded-full border border-white/15 bg-neutral-950/80 backdrop-blur-2xl shadow-2xl shadow-black/90"
+          className="fixed bottom-6 left-1/2 z-50 flex items-center gap-1.5 p-1.5 rounded-full border border-white/15 bg-neutral-950/80 backdrop-blur-2xl shadow-2xl shadow-black/90"
           aria-label="Bottom Navigation Dock"
         >
           {navItems.map((item) => {
