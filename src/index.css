@@ -128,9 +128,9 @@
     -webkit-text-fill-color: transparent;
   }
 
-  /* Editorial Title Display Font */
+  /* Avant-Garde Futuristic Display Font for Section Titles */
   .font-display {
-    font-family: 'Syne', 'Kanit', -apple-system, sans-serif;
+    font-family: 'Unbounded', 'Syne', -apple-system, sans-serif;
   }
 
   .font-tech {

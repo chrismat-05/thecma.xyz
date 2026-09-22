@@ -66,7 +66,7 @@ export const SplitFlapChar: React.FC<SplitFlapCharProps> = ({
 
   return (
     <span
-      className="inline-flex flex-col relative overflow-hidden select-none font-mono font-black"
+      className="inline-flex flex-col relative overflow-hidden select-none font-inherit"
       style={{
         perspective: "600px",
         display: "inline-block",
@@ -76,7 +76,7 @@ export const SplitFlapChar: React.FC<SplitFlapCharProps> = ({
         className={`inline-block transition-transform duration-75 ${
           isFlipping
             ? "scale-y-90 text-neutral-300 -translate-y-0.5"
-            : "scale-y-100 text-white translate-y-0"
+            : "scale-y-100 text-inherit translate-y-0"
         }`}
         style={{
           transformOrigin: "50% 50%",
