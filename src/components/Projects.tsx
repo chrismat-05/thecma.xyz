@@ -52,18 +52,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const col1Img2 = project.images[1] || project.thumbnail;
   const col2Img = project.images[2] || project.images[1] || project.thumbnail;
 
-  // Scale down and slightly dim only when the NEXT card covers this card
-  // (Card 5 is the top of the deck, so it never scales down or dims)
-  const isLast = index === total - 1;
-  const cardStart = (index * 0.85) / total;
-  const cardEnd = ((index + 1) * 0.85) / total;
-  const targetScale = isLast ? 1 : 1 - (total - 1 - index) * 0.02;
+  // Scale down and slightly dim uniformly as user scrolls past each card
+  const cardStart = index / total;
+  const cardEnd = (index + 1) / total;
+  const targetScale = 1 - (total - 1 - index) * 0.02;
   const scale = useTransform(progress, [cardStart, cardEnd], [1, targetScale]);
-  const brightness = useTransform(
-    progress,
-    [cardStart, cardEnd],
-    [1, isLast ? 1 : 0.7]
-  );
+  const brightness = useTransform(progress, [cardStart, cardEnd], [1, 0.75]);
 
   return (
     <div
@@ -71,9 +65,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       style={{
         top: `${topStickyOffset}px`,
         zIndex: index + 10,
-        // Card 1-4 get 75vh of scroll track so the next card can climb and cover them.
-        // Card 5 is the final card, so 0 extra vertical gap is needed before the bottom CTA.
-        marginBottom: isLast ? "1.5rem" : "75vh",
+        // Uniform scroll track for all cards so all 5 cards stack identically
+        marginBottom: "70vh",
       }}
     >
       <motion.div
