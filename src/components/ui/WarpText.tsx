@@ -20,20 +20,44 @@ export const WarpText: React.FC<WarpTextProps> = ({
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
   const [isHovering, setIsHovering] = useState(false);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLSpanElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-    setIsHovering(true);
-  }, []);
+  // Track cursor globally across the hero area so it reacts fluidly as mouse approaches
+  useEffect(() => {
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const clientX = e.clientX;
+      const clientY = e.clientY;
 
-  const handleMouseLeave = useCallback(() => {
-    setIsHovering(false);
-    setMousePos(null);
-  }, []);
+      // Check if within influence distance of the hero text
+      const distX = Math.max(rect.left - clientX, 0, clientX - rect.right);
+      const distY = Math.max(rect.top - clientY, 0, clientY - rect.bottom);
+      const dist = Math.hypot(distX, distY);
+
+      if (dist < radius + 80) {
+        setMousePos({
+          x: clientX - rect.left,
+          y: clientY - rect.top,
+        });
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+        setMousePos(null);
+      }
+    };
+
+    const handleMouseLeave = () => {
+      setIsHovering(false);
+      setMousePos(null);
+    };
+
+    window.addEventListener("mousemove", handleGlobalMouseMove, { passive: true });
+    document.body.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      window.removeEventListener("mousemove", handleGlobalMouseMove);
+      document.body.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [radius]);
 
   // Split into words, then characters to maintain word-break flow
   const words = text.split(" ");
@@ -122,14 +146,14 @@ const WarpChar: React.FC<WarpCharProps> = ({
     const dist = Math.sqrt(dx * dx + dy * dy);
 
     if (dist < radius) {
-      const force = Math.pow(1 - dist / radius, 1.6) * 32 * intensity;
+      const force = Math.pow(1 - dist / radius, 1.4) * 38 * intensity;
       const angle = Math.atan2(dy, dx);
       // Fluid repulsion and dynamic chromatic shear
-      const targetX = -Math.cos(angle) * force * 0.9;
-      const targetY = -Math.sin(angle) * force * 1.2;
-      const targetScale = 1 + (force / 32) * 0.18;
-      const targetRotate = (targetX / 15) * 8;
-      const targetShift = (force / 32) * 6;
+      const targetX = -Math.cos(angle) * force * 1.1;
+      const targetY = -Math.sin(angle) * force * 1.3;
+      const targetScale = 1 + (force / 38) * 0.22;
+      const targetRotate = (targetX / 14) * 10;
+      const targetShift = (force / 38) * 8;
 
       setTransform({
         x: targetX,
