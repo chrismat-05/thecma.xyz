@@ -46,8 +46,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // Progressive scale-down as subsequent cards stack over it
   const scale = useTransform(progress, range, [1, targetScale]);
 
-  // Top offset for stacked deck rim: starts at ~75px + index * 22px
-  const topOffset = 75 + index * 22;
+  // Top offset for stacked deck rim: starts at ~80px + index * 24px
+  const topOffset = 80 + index * 24;
   const rowNumber = (index + 1).toString().padStart(2, "0");
 
   const color = project.themeColor || "#ffffff";
@@ -55,10 +55,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <div
       ref={containerRef}
-      className="sticky w-full flex items-center justify-center"
+      className="sticky w-full flex items-center justify-center pointer-events-auto"
       style={{
         top: `${topOffset}px`,
-        marginBottom: `${(total - index - 1) * 45}px`,
+        zIndex: index + 10,
       }}
     >
       <div className="relative w-full max-w-6xl">
@@ -67,7 +67,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div
           className="absolute -inset-6 sm:-inset-10 rounded-[50px] blur-[80px] sm:blur-[110px] opacity-40 group-hover:opacity-70 transition-opacity duration-700 pointer-events-none -z-10"
           style={{
-            background: `radial-gradient(circle at 60% 40%, ${color}88, ${color}33 50%, transparent 80%)`,
+            background: `radial-gradient(circle at 60% 40%, ${color}99, ${color}33 50%, transparent 80%)`,
           }}
         />
 
@@ -239,13 +239,18 @@ export const Projects: React.FC = () => {
   });
 
   // Dynamic background atmospheric color transition based on scroll position!
-  // Colors: forms.thecma (blue) -> isitsecure (green) -> scanthepolicy (purple) -> securiheader (cyan) -> reqapi (amber)
+  // Screenshot-extracted true colors:
+  // 1. forms.thecma.xyz (#9333ea - Vibrant Purple UI)
+  // 2. IsItSecure (#0284c7 - Oceanic Security Blue)
+  // 3. ScanThePolicy (#3b82f6 - Legal Navy Blue)
+  // 4. SecuriHeader (#059669 - Terminal Security Emerald)
+  // 5. Req API (#6366f1 - Indigo / Slate API Interface)
   const bgColors = [
-    "rgba(59, 130, 246, 0.4)",   // Vibrant Blue (#3b82f6)
-    "rgba(16, 185, 129, 0.4)",   // Vibrant Emerald (#10b981)
-    "rgba(139, 92, 246, 0.4)",   // Vibrant Violet (#8b5cf6)
-    "rgba(6, 182, 212, 0.4)",    // Vibrant Cyan (#06b6d4)
-    "rgba(245, 158, 11, 0.4)",   // Vibrant Amber (#f59e0b)
+    "rgba(147, 51, 234, 0.42)", // forms.thecma.xyz
+    "rgba(2, 132, 199, 0.42)",  // IsItSecure
+    "rgba(59, 130, 246, 0.42)",  // ScanThePolicy
+    "rgba(5, 150, 105, 0.42)",  // SecuriHeader
+    "rgba(99, 102, 241, 0.42)", // Req API
   ];
 
   const ambientBg = useTransform(
@@ -258,7 +263,7 @@ export const Projects: React.FC = () => {
     <section
       id="projects"
       ref={containerRef}
-      className="py-28 relative overflow-hidden bg-black text-white"
+      className="pt-28 pb-36 relative bg-black text-white"
     >
       {/* SECTION-SCOPED FULLSTAGE AMBIENT COLOR AURA:
           Stays behind the cards and transitions smoothly through the project screenshot colors as you scroll */}
@@ -281,23 +286,32 @@ export const Projects: React.FC = () => {
           align="left"
         />
 
-        {/* Stack of Taller Cards */}
-        <div className="relative flex flex-col items-center w-full space-y-20 pb-24 z-10">
+        {/* Stack of Taller Cards: each card has its own sticky scroll envelope */}
+        <div className="relative flex flex-col items-center w-full z-10 mt-12">
           {featuredProjects.map((project, index) => {
             const targetScale = 1 - (featuredProjects.length - index) * 0.04;
             const step = 1 / featuredProjects.length;
             const range: [number, number] = [index * step, 1];
 
             return (
-              <ProjectCard
+              <div
                 key={project.id}
-                project={project}
-                index={index}
-                total={featuredProjects.length}
-                range={range}
-                targetScale={targetScale}
-                progress={scrollYProgress}
-              />
+                className="w-full"
+                style={{
+                  // Generates scroll track length so each card sticks and subsequent cards slide over it
+                  height: index === featuredProjects.length - 1 ? "auto" : "110vh",
+                  marginBottom: index === featuredProjects.length - 1 ? "4rem" : "0",
+                }}
+              >
+                <ProjectCard
+                  project={project}
+                  index={index}
+                  total={featuredProjects.length}
+                  range={range}
+                  targetScale={targetScale}
+                  progress={scrollYProgress}
+                />
+              </div>
             );
           })}
         </div>
