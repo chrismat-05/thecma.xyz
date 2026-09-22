@@ -1,8 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export const LanyardHeroScene: React.FC = () => {
+interface LanyardProps {
+  scrollProgress?: number; // 0 (start) to 1 (full zoom in)
+}
+
+export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const scrollRef = useRef<number>(scrollProgress);
+  scrollRef.current = scrollProgress;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -14,6 +20,7 @@ export const LanyardHeroScene: React.FC = () => {
     // Scene & Camera
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+    // Initial camera position at z = 7.5
     camera.position.set(0, 0, 7.5);
 
     let renderer: THREE.WebGLRenderer;
@@ -33,79 +40,22 @@ export const LanyardHeroScene: React.FC = () => {
     container.appendChild(renderer.domElement);
 
     // ==========================================
-    // 1. Volumetric Light Rays Radial Cone
-    // ==========================================
-    const rayVertexShader = `
-      varying vec2 vUv;
-      varying vec3 vPosition;
-      void main() {
-        vUv = uv;
-        vPosition = position;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `;
-
-    const rayFragmentShader = `
-      uniform float uTime;
-      uniform float uScroll;
-      varying vec2 vUv;
-      varying vec3 vPosition;
-
-      void main() {
-        vec2 center = vec2(0.5, 0.5);
-        vec2 pos = vUv - center;
-        float angle = atan(pos.y, pos.x);
-        float dist = length(pos);
-
-        // Rotating rays
-        float rays = sin(angle * 12.0 + uTime * 0.5 + uScroll * 4.0) * 0.5 + 0.5;
-        rays = pow(rays, 3.0);
-
-        // Radial fade
-        float falloff = smoothstep(0.5, 0.05, dist);
-        float coreGlow = smoothstep(0.15, 0.0, dist) * 1.5;
-
-        // Monochrome silver volumetric beam
-        vec3 rayColor = vec3(0.9, 0.92, 0.95);
-        float intensity = (rays * falloff * 0.35 + coreGlow * 0.4) * (1.0 - uScroll * 0.6);
-
-        gl_FragColor = vec4(rayColor, intensity);
-      }
-    `;
-
-    const rayMaterial = new THREE.ShaderMaterial({
-      vertexShader: rayVertexShader,
-      fragmentShader: rayFragmentShader,
-      uniforms: {
-        uTime: { value: 0 },
-        uScroll: { value: 0 },
-      },
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
-
-    const rayPlane = new THREE.Mesh(new THREE.PlaneGeometry(12, 12), rayMaterial);
-    rayPlane.position.set(0, 0.5, -2);
-    scene.add(rayPlane);
-
-    // ==========================================
-    // 2. Physics Hanging Lanyard & ID Card
+    // Physics Hanging Lanyard & ID Card
     // ==========================================
     const lanyardGroup = new THREE.Group();
     scene.add(lanyardGroup);
 
-    // Anchor at top [0, 2.8, 0]
-    const anchorY = 2.8;
+    // Anchor at top [0, 2.9, 0]
+    const anchorY = 2.9;
 
     // Segmented chain rope
-    const numLinks = 12;
+    const numLinks = 13;
     const linkLength = 0.22;
     const linkGeometry = new THREE.CylinderGeometry(0.02, 0.02, linkLength, 8);
     const ropeMaterial = new THREE.MeshStandardMaterial({
-      color: 0x333333,
-      metalness: 0.8,
-      roughness: 0.3,
+      color: 0x3a3a3a,
+      metalness: 0.85,
+      roughness: 0.25,
     });
 
     const links: THREE.Mesh[] = [];
@@ -116,16 +66,16 @@ export const LanyardHeroScene: React.FC = () => {
     }
 
     // Clip ring
-    const ringGeo = new THREE.TorusGeometry(0.1, 0.025, 8, 24);
+    const ringGeo = new THREE.TorusGeometry(0.11, 0.025, 8, 24);
     const clipRing = new THREE.Mesh(
       ringGeo,
-      new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.9, roughness: 0.1 })
+      new THREE.MeshStandardMaterial({ color: 0xeeeeee, metalness: 0.95, roughness: 0.1 })
     );
     lanyardGroup.add(clipRing);
 
     // Frosted Holographic ID Badge Card
-    const cardWidth = 1.9;
-    const cardHeight = 2.8;
+    const cardWidth = 2.0;
+    const cardHeight = 2.9;
     const cardGeo = new THREE.BoxGeometry(cardWidth, cardHeight, 0.05);
 
     // Badge Canvas Texture
@@ -134,50 +84,63 @@ export const LanyardHeroScene: React.FC = () => {
     badgeCanvas.height = 760;
     const bctx = badgeCanvas.getContext("2d");
     if (bctx) {
-      // Dark slate background
-      bctx.fillStyle = "#0c0d12";
+      // Dark sleek obsidian background
+      bctx.fillStyle = "#090a0f";
       bctx.fillRect(0, 0, 512, 760);
 
-      // Silver metallic header
+      // Silver metallic top accent bar
       const grad = bctx.createLinearGradient(0, 0, 512, 0);
-      grad.addColorStop(0, "#222");
+      grad.addColorStop(0, "#1a1a1a");
       grad.addColorStop(0.5, "#ffffff");
-      grad.addColorStop(1, "#222");
+      grad.addColorStop(1, "#1a1a1a");
       bctx.fillStyle = grad;
-      bctx.fillRect(40, 50, 432, 4);
+      bctx.fillRect(40, 45, 432, 5);
 
       // Studio tag
-      bctx.fillStyle = "#888888";
+      bctx.fillStyle = "#a1a1aa";
       bctx.font = "bold 20px monospace";
-      bctx.fillText("CHRIS MATHEW AJE // ACCESS", 50, 95);
+      bctx.fillText("CHRIS MATHEW AJE // PASS", 50, 95);
 
-      // Hologram chip
-      bctx.strokeStyle = "rgba(255,255,255,0.4)";
+      // Hologram chip icon
+      bctx.strokeStyle = "rgba(255,255,255,0.6)";
       bctx.lineWidth = 2;
       bctx.strokeRect(50, 130, 80, 60);
-      bctx.fillStyle = "rgba(255,255,255,0.15)";
+      bctx.fillStyle = "rgba(255,255,255,0.12)";
       bctx.fillRect(50, 130, 80, 60);
+      bctx.strokeStyle = "rgba(255,255,255,0.3)";
+      bctx.beginPath();
+      bctx.moveTo(90, 130);
+      bctx.lineTo(90, 190);
+      bctx.stroke();
 
       // Headline title
       bctx.fillStyle = "#ffffff";
-      bctx.font = "bold 38px sans-serif";
+      bctx.font = "900 40px sans-serif";
       bctx.fillText("CREATIVE", 50, 260);
       bctx.fillText("ENGINEER", 50, 305);
 
       // Sub details
-      bctx.fillStyle = "#999999";
-      bctx.font = "20px sans-serif";
-      bctx.fillText("CYBERSECURITY & DEV", 50, 360);
-      bctx.fillText("STATUS: ACTIVE / VERIFIED", 50, 395);
+      bctx.fillStyle = "#71717a";
+      bctx.font = "600 18px sans-serif";
+      bctx.fillText("CYBERSECURITY & DEV", 50, 355);
+
+      // Verified pill
+      bctx.fillStyle = "rgba(255, 255, 255, 0.15)";
+      bctx.beginPath();
+      bctx.roundRect ? bctx.roundRect(50, 385, 170, 32, 16) : bctx.rect(50, 385, 170, 32);
+      bctx.fill();
+      bctx.fillStyle = "#ffffff";
+      bctx.font = "bold 13px monospace";
+      bctx.fillText("● ACTIVE 2025", 65, 406);
 
       // Barcode simulation
       bctx.fillStyle = "#ffffff";
       for (let x = 50; x < 460; x += Math.random() > 0.5 ? 8 : 14) {
-        bctx.fillRect(x, 620, Math.random() > 0.5 ? 3 : 6, 60);
+        bctx.fillRect(x, 610, Math.random() > 0.5 ? 3 : 6, 65);
       }
       bctx.font = "14px monospace";
-      bctx.fillStyle = "#666";
-      bctx.fillText("UID: 8848-9142-CMA-2025", 50, 710);
+      bctx.fillStyle = "#52525b";
+      bctx.fillText("ID: 8848-9142-CMA-STUDIO", 50, 715);
     }
 
     const badgeTexture = new THREE.CanvasTexture(badgeCanvas);
@@ -189,29 +152,34 @@ export const LanyardHeroScene: React.FC = () => {
       new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.7, roughness: 0.2 }),
       new THREE.MeshStandardMaterial({
         map: badgeTexture,
-        roughness: 0.25,
-        metalness: 0.15,
+        roughness: 0.2,
+        metalness: 0.1,
       }), // Front face
-      new THREE.MeshStandardMaterial({ color: 0x0a0a0a, roughness: 0.4 }), // Back face
+      new THREE.MeshStandardMaterial({ color: 0x07070a, roughness: 0.4 }), // Back face
     ];
 
     const badgeCard = new THREE.Mesh(cardGeo, cardMaterials);
     lanyardGroup.add(badgeCard);
 
     // Ambient & Directional Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
-    dirLight.position.set(5, 5, 5);
-    scene.add(dirLight);
+    // Directional light from top center illuminating the lanyard from above (matching rays)
+    const topLight = new THREE.DirectionalLight(0xffffff, 3.5);
+    topLight.position.set(0, 8, 4);
+    scene.add(topLight);
 
-    const backRimLight = new THREE.PointLight(0xffffff, 2, 10);
-    backRimLight.position.set(-3, 2, -1);
+    const frontLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    frontLight.position.set(0, 0, 5);
+    scene.add(frontLight);
+
+    const backRimLight = new THREE.PointLight(0xffffff, 2.5, 12);
+    backRimLight.position.set(0, 3, -1.5);
     scene.add(backRimLight);
 
     // ==========================================
-    // 3. Physics Simulation Variables
+    // Physics Simulation Variables
     // ==========================================
     const cardPos = { x: 0, y: anchorY - numLinks * linkLength - cardHeight / 2 + 0.2 };
     const cardVel = { x: 0, y: 0 };
@@ -220,7 +188,6 @@ export const LanyardHeroScene: React.FC = () => {
 
     let isDragging = false;
     const mouse = { x: 0, y: 0 };
-    let dragStart = { x: 0, y: 0 };
 
     const getNDCMouse = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
@@ -237,7 +204,6 @@ export const LanyardHeroScene: React.FC = () => {
       const intersects = raycaster.intersectObject(badgeCard);
       if (intersects.length > 0) {
         isDragging = true;
-        dragStart = { x: ndc.x * 4, y: ndc.y * 3 };
       }
     };
 
@@ -261,22 +227,8 @@ export const LanyardHeroScene: React.FC = () => {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
 
-    // Scroll Integration
-    let scrollY = 0;
-    const handleScroll = () => {
-      scrollY = window.scrollY;
-      const scrollFraction = Math.min(scrollY / (window.innerHeight * 1.5), 1.0);
-      rayMaterial.uniforms.uScroll.value = scrollFraction;
-
-      // Translate camera backwards z: 7.5 -> 12, fade out lanyard
-      camera.position.z = 7.5 + scrollFraction * 4.5;
-      lanyardGroup.position.y = -scrollFraction * 2.0;
-      badgeCard.scale.setScalar(1.0 - scrollFraction * 0.4);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
     // ==========================================
-    // 4. Animation Loop
+    // Animation Loop
     // ==========================================
     const clock = new THREE.Clock();
     let animationId: number;
@@ -284,17 +236,32 @@ export const LanyardHeroScene: React.FC = () => {
     const restX = 0;
     const restY = anchorY - numLinks * linkLength - cardHeight / 2 + 0.1;
 
+    let currentCameraZ = 7.5;
+    let currentCardScale = 1.0;
+
     const animate = () => {
       const elapsed = clock.getElapsedTime();
-      rayMaterial.uniforms.uTime.value = elapsed;
 
-      // Subtle natural breeze when not dragging
+      // Zoom in calculation:
+      // When scrollProgress is 0 -> Camera at z: 7.5, Lanyard at normal size
+      // When scrollProgress goes from 0 -> 1 -> Camera zooms in towards card (z: 7.5 -> 2.6)
+      // and scales card in so it seamlessly reveals through into the hero section!
+      const targetProgress = scrollRef.current;
+      const targetZ = 7.5 - targetProgress * 4.9; // zooms into 2.6
+      currentCameraZ += (targetZ - currentCameraZ) * 0.1;
+      camera.position.z = currentCameraZ;
+
+      // Card scale boosts slightly as we zoom in for dramatic effect
+      const targetScale = 1.0 + targetProgress * 0.35;
+      currentCardScale += (targetScale - currentCardScale) * 0.1;
+      badgeCard.scale.setScalar(currentCardScale);
+
+      // Natural breeze when not dragging
       if (!isDragging) {
-        const breezeX = Math.sin(elapsed * 1.5) * 0.12;
-        const breezeAngle = Math.sin(elapsed * 1.2) * 0.05;
+        const breezeX = Math.sin(elapsed * 1.6) * 0.1;
+        const breezeAngle = Math.sin(elapsed * 1.2) * 0.04;
 
-        // Spring physics return to rest
-        const k = 0.06; // Spring stiffness
+        const k = 0.07;
         const damping = 0.88;
 
         const forceX = (restX + breezeX - cardPos.x) * k;
@@ -306,39 +273,33 @@ export const LanyardHeroScene: React.FC = () => {
         cardPos.x += cardVel.x;
         cardPos.y += cardVel.y;
 
-        // Angle rotation physics
         const targetAngle = (cardPos.x - restX) * 0.35 + breezeAngle;
         const angleForce = (targetAngle - cardAngle) * 0.08;
         cardAngleVel = (cardAngleVel + angleForce) * damping;
         cardAngle += cardAngleVel;
       }
 
-      // Update badge position and rotation
       badgeCard.position.set(cardPos.x, cardPos.y, 0);
       badgeCard.rotation.z = cardAngle;
-      badgeCard.rotation.y = Math.sin(elapsed * 0.8) * 0.15 + (isDragging ? (mouse.x - cardPos.x) * 0.3 : 0);
+      badgeCard.rotation.y = Math.sin(elapsed * 0.8) * 0.12 + (isDragging ? (mouse.x - cardPos.x) * 0.3 : 0);
 
-      // Update clip ring
-      const topOfCardY = cardPos.y + cardHeight / 2;
+      const topOfCardY = cardPos.y + (cardHeight * currentCardScale) / 2;
       clipRing.position.set(cardPos.x, topOfCardY + 0.08, 0);
       clipRing.rotation.z = cardAngle;
 
-      // Calculate smooth catenary / segment positions for rope links
+      // Rope links
       const startPoint = new THREE.Vector3(0, anchorY, 0);
       const endPoint = new THREE.Vector3(cardPos.x, topOfCardY + 0.15, 0);
 
       for (let i = 0; i < numLinks; i++) {
         const t = (i + 0.5) / numLinks;
-        // Interpolate position
         const currentLink = links[i];
         const px = THREE.MathUtils.lerp(startPoint.x, endPoint.x, t);
-        // Add subtle catenary sag
         const sag = Math.sin(t * Math.PI) * 0.15 * Math.abs(cardPos.x);
         const py = THREE.MathUtils.lerp(startPoint.y, endPoint.y, t) - sag;
 
         currentLink.position.set(px, py, 0);
 
-        // Orient link along curve
         const nextT = Math.min((i + 1.5) / numLinks, 1.0);
         const nextX = THREE.MathUtils.lerp(startPoint.x, endPoint.x, nextT);
         const nextY = THREE.MathUtils.lerp(startPoint.y, endPoint.y, nextT);
@@ -367,7 +328,6 @@ export const LanyardHeroScene: React.FC = () => {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -380,7 +340,7 @@ export const LanyardHeroScene: React.FC = () => {
     <div
       ref={containerRef}
       className="absolute inset-0 z-10 w-full h-full pointer-events-auto cursor-grab active:cursor-grabbing select-none"
-      data-cursor-text="Drag Badge"
+      data-cursor-text="Drag Card"
     />
   );
 };
