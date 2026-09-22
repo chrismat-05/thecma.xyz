@@ -45,15 +45,15 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     const lanyardGroup = new THREE.Group();
     scene.add(lanyardGroup);
 
-    // Anchor at top [0, 2.9, 0]
-    const anchorY = 2.9;
+    // Anchor at top [0, 2.7, 0]
+    const anchorY = 2.7;
 
-    // Segmented chain rope
-    const numLinks = 13;
-    const linkLength = 0.22;
-    const linkGeometry = new THREE.CylinderGeometry(0.02, 0.02, linkLength, 8);
+    // Segmented chain rope: tuned length so card rests centered in the middle of the screen
+    const numLinks = 8;
+    const linkLength = 0.16;
+    const linkGeometry = new THREE.CylinderGeometry(0.018, 0.018, linkLength, 8);
     const ropeMaterial = new THREE.MeshStandardMaterial({
-      color: 0x3a3a3a,
+      color: 0x4a4a4a,
       metalness: 0.85,
       roughness: 0.25,
     });
@@ -179,9 +179,12 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     scene.add(backRimLight);
 
     // ==========================================
-    // Physics Simulation Variables
+    // Physics Simulation Variables:
+    // Rest position places the ID badge card exactly in the vertical center (y ≈ 0.0)
     // ==========================================
-    const cardPos = { x: 0, y: anchorY - numLinks * linkLength - cardHeight / 2 + 0.2 };
+    const restX = 0;
+    const restY = 0.0;
+    const cardPos = { x: restX, y: restY };
     const cardVel = { x: 0, y: 0 };
     let cardAngle = 0;
     let cardAngleVel = 0;
@@ -232,9 +235,6 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     // ==========================================
     const clock = new THREE.Clock();
     let animationId: number;
-
-    const restX = 0;
-    const restY = anchorY - numLinks * linkLength - cardHeight / 2 + 0.1;
 
     let currentCameraZ = 7.5;
     let currentCardScale = 1.0;

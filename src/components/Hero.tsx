@@ -76,20 +76,21 @@ export const Hero: React.FC = () => {
           <LanyardHeroScene scrollProgress={zoomProgress} />
         </motion.div>
 
-        {/* Phase 1 Overlay: Intro Prompt when opening website */}
+        {/* Phase 1 Overlay: Intro Prompt when opening website positioned in the bottom-left corner */}
         <motion.div
           style={{ opacity: lanyardIntroOpacity }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 pointer-events-none text-center"
+          className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12 z-20 flex items-center gap-3.5 pointer-events-none"
         >
-          <span className="px-4 py-1.5 rounded-full border border-white/15 bg-black/70 backdrop-blur-md text-xs font-mono tracking-widest uppercase text-neutral-300">
-            Scroll to zoom in &amp; enter
-          </span>
+          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/15 bg-black/70 backdrop-blur-md text-xs font-mono tracking-widest uppercase text-neutral-300 shadow-2xl">
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            <span>Scroll to zoom in &amp; enter</span>
+          </div>
           <motion.div
-            animate={{ y: [0, 8, 0] }}
+            animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-            className="text-white/70"
+            className="text-white/70 p-2 rounded-full border border-white/10 bg-black/40 backdrop-blur-md"
           >
-            <ArrowDown size={18} />
+            <ArrowDown size={16} />
           </motion.div>
         </motion.div>
 
