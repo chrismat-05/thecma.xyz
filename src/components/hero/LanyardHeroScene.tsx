@@ -279,13 +279,33 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
         cardAngle += cardAngleVel;
       }
 
+      // Dynamic 3D Cursor Tilt:
+      // Calculate cursor offset relative to badge position in 3D world space
+      // Badge faces/tilts towards where the cursor is pointing across screen
+      let cursorTiltY = 0;
+      let cursorTiltX = 0;
+
+      if (!isDragging) {
+        // Horizontal look angle: cursor to right rotates Y positively, cursor to left negatively
+        const dx = mouse.x - cardPos.x;
+        cursorTiltY = Math.max(Math.min(dx * 0.18, 0.55), -0.55);
+
+        // Vertical look angle: cursor up tilts card upwards (positive X), cursor down tilts downwards
+        const dy = mouse.y - cardPos.y;
+        cursorTiltX = Math.max(Math.min(-dy * 0.14, 0.4), -0.4);
+      }
+
       badgeCard.position.set(cardPos.x, cardPos.y, 0);
       badgeCard.rotation.z = cardAngle;
-      badgeCard.rotation.y = Math.sin(elapsed * 0.8) * 0.12 + (isDragging ? (mouse.x - cardPos.x) * 0.3 : 0);
+      badgeCard.rotation.y =
+        (isDragging ? (mouse.x - cardPos.x) * 0.35 : cursorTiltY) +
+        Math.sin(elapsed * 0.8) * 0.05;
+      badgeCard.rotation.x = isDragging ? 0 : cursorTiltX;
 
       const topOfCardY = cardPos.y + (cardHeight * currentCardScale) / 2;
       clipRing.position.set(cardPos.x, topOfCardY + 0.08, 0);
       clipRing.rotation.z = cardAngle;
+      clipRing.rotation.y = badgeCard.rotation.y;
 
       // Rope links
       const startPoint = new THREE.Vector3(0, anchorY, 0);
