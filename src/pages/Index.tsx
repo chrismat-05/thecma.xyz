@@ -37,14 +37,14 @@ const Index: React.FC = () => {
       {/* 4. Happy Clients Infinite Counter-Scrolling Logo Marquee */}
       <HappyClientsSection />
 
-      {/* 5. Selected 5 Projects Showcase with Floating Cursor Image Preview */}
+      {/* 5. Philosophy & Ethos / About Section with 3D Corner Artifacts & Kinetic Character Scroll */}
+      <About />
+
+      {/* 6. Selected 5 Projects Showcase with Jack 2-Column Sticky Stacked Cards */}
       <Projects />
 
-      {/* 6. What We Create / Services Bento Grid with Interactive Demos */}
+      {/* 7. What We Create / Services Bento Grid with Interactive Demos */}
       <WhatWeCreateSection />
-
-      {/* 7. Pinned Storytelling About Section with Circular Scroll Progress */}
-      <About />
 
       {/* 8. 3D Stacked Deck Testimonials Section with Gesture Swipes */}
       <TestimonialsSection />

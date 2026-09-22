@@ -38,9 +38,9 @@ export const Navigation: React.FC = () => {
   // 6. Contact -> Send (Direct transmission)
   const navItems = [
     { name: 'Home', to: 'hero', icon: Home, route: '/' },
+    { name: 'About', to: 'about', icon: User, route: '/#about' },
     { name: 'Projects', to: 'projects', icon: FolderGit2, route: '/#projects' },
     { name: 'Services', to: 'services', icon: Layers, route: '/#services' },
-    { name: 'About', to: 'about', icon: User, route: '/#about' },
     { name: 'Reviews', to: 'testimonials', icon: Star, route: '/#testimonials' },
     { name: 'Contact', to: 'contact', icon: Send, route: '/#contact' },
   ];
