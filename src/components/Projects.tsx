@@ -1,10 +1,8 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
-import { ArrowUpRight, Github, Package, Globe } from "lucide-react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ArrowUpRight, Layers } from "lucide-react";
 import projectsData from "@/content/projects.json";
-import { SectionTitleReveal } from "@/components/ui/SectionTitleReveal";
-import { LiveProjectButton } from "@/components/ui/LiveProjectButton";
+import { SplitFlapText } from "@/components/ui/SplitFlapText";
 
 interface ProjectItem {
   id: string;
@@ -23,304 +21,278 @@ interface ProjectItem {
   link: string | null;
   github: string | null;
   package: string | null;
+  client?: string;
+  outcome?: string;
 }
-
-interface ProjectCardProps {
-  project: ProjectItem;
-  index: number;
-  total: number;
-  progress: MotionValue<number>;
-}
-
-const ProjectCard: React.FC<ProjectCardProps> = ({
-  project,
-  index,
-  total,
-  progress,
-}) => {
-  // TristanMedia catalog stacking logic:
-  // Each card is sticky and locks at `top: 90px + index * 48px`.
-  // As the user continues scrolling down, the NEXT card slides over the current card's body,
-  // leaving the top 48px header tab (with `// 01 TITLE`, tags, year) exposed!
-  const headerTabHeight = 52;
-  const topStickyOffset = 84 + index * headerTabHeight;
-  const rowNumber = (index + 1).toString().padStart(2, "0");
-  const color = project.themeColor || "#ffffff";
-
-  // Gallery images
-  const col1Img1 = project.images[0] || project.thumbnail;
-  const col1Img2 = project.images[1] || project.thumbnail;
-  const col2Img = project.images[2] || project.images[1] || project.thumbnail;
-
-  // Scale down and slightly dim uniformly as user scrolls past each card
-  const cardStart = index / total;
-  const cardEnd = (index + 1) / total;
-  const targetScale = 1 - (total - 1 - index) * 0.02;
-  const scale = useTransform(progress, [cardStart, cardEnd], [1, targetScale]);
-  const brightness = useTransform(progress, [cardStart, cardEnd], [1, 0.75]);
-
-  return (
-    <div
-      className="sticky w-full flex justify-center pointer-events-auto transition-all"
-      style={{
-        top: `${topStickyOffset}px`,
-        zIndex: index + 10,
-        // Cards 0 to (total - 2) get 70vh so the next card can scroll up and stack over them.
-        // The last card is already at the top of the stack, so it doesn't need empty scroll runway before the CTA!
-        marginBottom: index === total - 1 ? "1.5rem" : "70vh",
-      }}
-    >
-      <motion.div
-        style={{
-          scale,
-          filter: useTransform(brightness, (b) => `brightness(${b})`),
-        }}
-        className="relative w-full max-w-6xl rounded-[28px] sm:rounded-[38px] md:rounded-[48px] border border-white/20 bg-[#0a0a0a] shadow-[0_-15px_50px_rgba(0,0,0,0.85),0_25px_60px_rgba(0,0,0,0.95)] overflow-hidden transition-shadow duration-500"
-      >
-        {/* Direct subtle color accent line at top border rim */}
-        <div
-          className="h-[2px] w-full"
-          style={{
-            background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
-          }}
-        />
-
-        {/* Inner Card Container */}
-        <div className="p-5 sm:p-7 md:p-8 flex flex-col justify-between">
-          {/* CATALOG HEADER TAB (Always visible even when stacked underneath next cards) */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 sm:pb-5 border-b border-white/10">
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-              <span
-                className="font-mono text-xs sm:text-sm font-bold tracking-wider"
-                style={{ color }}
-              >
-                // {rowNumber}
-              </span>
-              <h3 className="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-white uppercase">
-                {project.title}
-              </h3>
-              <span
-                className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[11px] font-mono uppercase tracking-wider font-semibold border backdrop-blur-md"
-                style={{
-                  borderColor: `${color}40`,
-                  backgroundColor: `${color}15`,
-                  color: color,
-                }}
-              >
-                {project.category}
-              </span>
-            </div>
-
-            {/* Top Right: Year & Actions */}
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs text-neutral-400">
-                [{project.year}]
-              </span>
-              {project.link ? (
-                <LiveProjectButton href={project.link} label="Live Site" />
-              ) : project.github ? (
-                <LiveProjectButton href={project.github} label="Source" />
-              ) : project.package ? (
-                <LiveProjectButton href={project.package} label="Package" />
-              ) : null}
-            </div>
-          </div>
-
-          {/* Middle Row: Subtitle & Description */}
-          <div className="py-3 flex flex-col md:flex-row md:items-center justify-between gap-3">
-            <p className="text-[#D7E2EA] text-xs sm:text-sm max-w-3xl leading-relaxed opacity-90">
-              {project.description}
-            </p>
-            <div className="flex flex-wrap gap-1.5 shrink-0">
-              {project.technologies.slice(0, 4).map((tech, tIdx) => (
-                <span
-                  key={tIdx}
-                  className="px-2 py-0.5 text-[10px] font-mono rounded bg-white/[0.05] text-neutral-300 border border-white/10"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Visual Showcase (TristanMedia / Catalog cinematic layout) */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 pt-1">
-            {/* Left Column: 2 Stacked Previews */}
-            <div className="md:col-span-4 flex flex-col gap-3">
-              <div className="w-full h-[120px] sm:h-[150px] md:h-[165px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 relative group/img">
-                <img
-                  src={col1Img1}
-                  alt={`${project.title} screenshot 1`}
-                  className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-              </div>
-
-              <div className="w-full h-[140px] sm:h-[170px] md:h-[195px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 relative group/img">
-                <img
-                  src={col1Img2}
-                  alt={`${project.title} screenshot 2`}
-                  className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
-
-            {/* Right Column: Hero Showcase */}
-            <div className="md:col-span-8">
-              <div className="w-full h-[270px] sm:h-[330px] md:h-[370px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 relative group/img shadow-2xl">
-                <img
-                  src={col2Img}
-                  alt={`${project.title} hero showcase`}
-                  className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-
-                {/* Central circular TristanMedia "VIEW" beacon on hover */}
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 backdrop-blur-[2px]"
-                  >
-                    <div
-                      className="w-16 h-16 rounded-full flex items-center justify-center font-mono text-xs uppercase tracking-widest text-white font-bold shadow-2xl transition-transform hover:scale-110 active:scale-95"
-                      style={{
-                        backgroundColor: color,
-                        boxShadow: `0 0 40px ${color}99`,
-                      }}
-                    >
-                      VIEW
-                    </div>
-                  </a>
-                )}
-
-                {/* Status pill */}
-                <div className="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-[11px] font-mono text-neutral-300 flex items-center gap-2">
-                  <span
-                    className="w-2 h-2 rounded-full animate-pulse"
-                    style={{ backgroundColor: color }}
-                  />
-                  <span>Featured Case Study</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
-};
 
 export const Projects: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const featuredProjects: ProjectItem[] = (projectsData as ProjectItem[]).filter(
     (p) => p.featured
   );
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  // TristanMedia Active Card Detection via getBoundingClientRect & requestAnimationFrame
+  useEffect(() => {
+    let ticking = false;
 
-  // Dynamic background atmospheric color transition based on scroll position!
-  // Screenshot-extracted true colors:
-  // 1. forms.thecma.xyz (#9333ea - Vibrant Purple UI)
-  // 2. IsItSecure (#0284c7 - Oceanic Security Blue)
-  // 3. ScanThePolicy (#3b82f6 - Legal Navy Blue)
-  // 4. SecuriHeader (#059669 - Terminal Security Emerald)
-  // 5. Req API (#6366f1 - Indigo / Slate API Interface)
-  const bgColors = [
-    "rgba(147, 51, 234, 0.55)", // forms.thecma.xyz (Vibrant Purple)
-    "rgba(2, 132, 199, 0.55)",  // IsItSecure (Deep Cyan/Blue)
-    "rgba(59, 130, 246, 0.55)",  // ScanThePolicy (Cobalt Blue)
-    "rgba(5, 150, 105, 0.55)",  // SecuriHeader (Emerald Green)
-    "rgba(99, 102, 241, 0.55)", // Req API (Indigo)
-  ];
+    const checkActiveCard = () => {
+      if (!containerRef.current) {
+        ticking = false;
+        return;
+      }
+      const cards = containerRef.current.querySelectorAll<HTMLDivElement>("[data-st-card]");
+      let currentActive = 0;
+      cards.forEach((card, i) => {
+        const rect = card.getBoundingClientRect();
+        // Exact formula from TristanMedia StackedProjects.jsx:
+        // top: 72 + i * 52
+        const expectedStickyTop = 72 + i * 52;
+        if (rect.top <= expectedStickyTop + 25) {
+          currentActive = i;
+        }
+      });
+      setActiveIndex(currentActive);
+      ticking = false;
+    };
 
-  const ambientBg = useTransform(
-    scrollYProgress,
-    [0, 0.25, 0.5, 0.75, 1],
-    bgColors
-  );
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(checkActiveCard);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    checkActiveCard();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [featuredProjects]);
+
+  const handleCardClick = (project: ProjectItem, index: number) => {
+    // If clicking an inactive predecessor tab, scroll it into focus
+    if (index < activeIndex && cardRefs.current[index]) {
+      cardRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    // Navigate or open live link
+    const targetUrl = project.link || project.github || project.package;
+    if (targetUrl) {
+      window.open(targetUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  if (!featuredProjects || featuredProjects.length === 0) return null;
 
   return (
-    <section
+    <div
       id="projects"
       ref={containerRef}
-      className="pt-24 pb-20 relative bg-[#060606] text-white min-h-screen"
+      className="relative w-full py-20 px-4 md:px-6 select-none bg-[#060606] text-white"
     >
-      {/* SECTION-SCOPED FULLSTAGE AMBIENT COLOR WASH:
-          Sticky to viewport across entire projects scroll length, radiating the current screenshot's color
-          Feathered at top and bottom edges so it blends seamlessly into adjacent sections */}
-      <div
-        className="sticky top-0 left-0 w-full h-screen pointer-events-none -mb-[100vh] z-0 overflow-hidden"
-        style={{
-          maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
-        }}
-      >
-        <motion.div
-          className="absolute inset-0 w-full h-full transition-all duration-700 blur-[130px] opacity-70"
-          style={{
-            background: useTransform(
-              ambientBg,
-              (col) =>
-                `radial-gradient(ellipse 90% 70% at 50% 50%, ${col}, transparent 75%)`
-            ),
-          }}
-        />
-      </div>
-
-      <div className="container mx-auto px-4 max-w-7xl relative z-10">
-        <SectionTitleReveal
-          badge="// SELECTED CASE STUDIES"
-          title="Featured Projects Stack."
-          subtitle="A curation of high-impact platforms, open-source security tools, and interactive web architectures. Scroll to reveal each deck."
-          align="left"
-        />
-
-        {/* CONTINUOUS STACKING CATALOG CONTAINER:
-            All cards share this same parent container so position:sticky stacks each card neatly over previous ones */}
-        <div className="relative w-full z-10 mt-12">
-          {featuredProjects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              total={featuredProjects.length}
-              progress={scrollYProgress}
+      {/* Ambient Blurred Background Layers (st-scbg from TristanMedia) */}
+      <div className="absolute inset-0 left-[calc(50%-50vw)] w-[100vw] overflow-hidden pointer-events-none z-0">
+        {featuredProjects.map((project, i) => {
+          const bgImg =
+            (project.images && project.images[0]) ||
+            project.thumbnail ||
+            "";
+          return (
+            <div
+              key={`bg-${project.id || i}`}
+              className="absolute inset-[-40px] bg-cover bg-center transition-opacity duration-700 ease-out"
+              style={{
+                backgroundImage: `url("${bgImg}")`,
+                filter: "blur(60px) saturate(1.4)",
+                transform: "scale(1.12)",
+                opacity: activeIndex === i ? 0.38 : 0,
+              }}
+              aria-hidden="true"
             />
-          ))}
-        </div>
+          );
+        })}
+      </div>
 
-        {/* Bottom CTA to View All Projects */}
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10 rounded-[32px] border border-white/15 bg-white/[0.03] backdrop-blur-md relative z-10">
-          <div>
-            <h4 className="text-2xl font-bold text-white tracking-tight">
-              Looking for more experiments &amp; open-source tools?
-            </h4>
-            <p className="text-neutral-400 text-sm mt-1">
-              Browse the complete repository archive of CLI utilities, packages, and academic systems.
-            </p>
-          </div>
-          <Link
-            to="/projects"
-            className="btn-hero-primary whitespace-nowrap"
-            data-magnetic="true"
-          >
-            Explore All Projects
-          </Link>
+      {/* Section Header (TristanMedia layout) */}
+      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mb-16 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col md:flex-row md:items-end justify-between">
+        <div>
+          <span className="text-xs uppercase tracking-[0.3em] text-red-500 font-mono block mb-2 font-semibold flex items-center gap-2">
+            <Layers className="w-4 h-4 text-red-500" />
+            FEATURED PORTFOLIO // SELECTED CASE STUDIES
+          </span>
+          <SplitFlapText
+            text="PROJECTS"
+            className="text-3xl md:text-6xl font-bold text-white uppercase font-display"
+          />
         </div>
       </div>
-    </section>
+
+      {/* Sticky Stacking Cards Container */}
+      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col pb-48">
+        {featuredProjects.map((project, i) => {
+          // Tabbed cascading offsets: 52px tab clearance per stacked card
+          const desktopTop = 72 + i * 52;
+          const imageSrc =
+            (project.images && project.images[0]) ||
+            project.thumbnail ||
+            "";
+          const description =
+            project.description || project.subtitle || "";
+          const tags =
+            project.technologies && project.technologies.length > 0
+              ? project.technologies
+              : project.tags || [];
+          const isCovered = activeIndex > i;
+          const depthScale = isCovered
+            ? Math.max(0.95, 1 - (activeIndex - i) * 0.015)
+            : 1.0;
+          const targetUrl = project.link || project.github || project.package;
+          const actionLabel = project.link
+            ? "Live Site"
+            : project.package
+            ? "View Package"
+            : "Source Code";
+
+          return (
+            <div
+              key={project.id || i}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              data-st-card={i}
+              onClick={() => handleCardClick(project, i)}
+              data-cursor={isCovered ? "SELECT" : "VIEW"}
+              className="group cursor-pointer rounded-2xl overflow-hidden border border-neutral-800/90 bg-neutral-950/95 transition-all duration-500 shadow-[0_-16px_50px_rgba(0,0,0,0.85)] hover:border-red-600 backdrop-blur-xl origin-top min-h-[440px] sm:min-h-[500px]"
+              style={{
+                position: "sticky",
+                top: `${desktopTop}px`,
+                zIndex: i + 1,
+                marginTop: i === 0 ? "0px" : "40px",
+                transform: `scale(${depthScale})`,
+                willChange: "transform",
+                filter: isCovered ? "brightness(0.90)" : "brightness(1.0)",
+              }}
+            >
+              {/* Top Hero Header Bar (Always visible when stacked like folder index tabs) */}
+              <div className="px-5 sm:px-7 py-3.5 bg-neutral-900/95 border-b border-neutral-800/90 flex items-center justify-between gap-4 transition-colors group-hover:bg-neutral-900">
+                {/* Left: Indicator, Index & Project Title */}
+                <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <span
+                    className={`w-2.5 h-2.5 rounded-full shrink-0 transition-all ${
+                      activeIndex === i
+                        ? "bg-red-600 shadow-[0_0_12px_rgba(229,9,20,0.9)] animate-pulse"
+                        : "bg-neutral-600"
+                    }`}
+                  />
+                  <span className="font-mono text-xs text-red-500 font-bold uppercase tracking-wider shrink-0">
+                    // 0{i + 1}
+                  </span>
+                  <h3 className="text-base sm:text-xl md:text-2xl font-bold text-white uppercase tracking-tight truncate group-hover:text-red-500 transition-colors font-display">
+                    {project.title}
+                  </h3>
+                  {project.subtitle && (
+                    <span className="hidden xl:inline text-xs font-mono text-neutral-400 truncate max-w-xs">
+                      - {project.subtitle}
+                    </span>
+                  )}
+                </div>
+
+                {/* Right: Category, Year */}
+                <div className="flex items-center gap-2 sm:gap-5 font-mono text-xs text-neutral-400 shrink-0">
+                  <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-neutral-300 uppercase tracking-widest text-[11px] hidden sm:inline">
+                    {project.category || "CASE STUDY"}
+                  </span>
+                  <span className="hidden md:inline text-neutral-600">•</span>
+                  <span className="text-red-500 font-bold font-mono text-xs sm:text-sm">
+                    {project.year}
+                  </span>
+                </div>
+              </div>
+
+              {/* Widescreen Media Viewport */}
+              <div className="relative w-full h-[280px] sm:h-[380px] md:h-[460px] lg:h-[520px] overflow-hidden bg-black">
+                <img
+                  src={imageSrc}
+                  alt={project.title}
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority={i === 0 ? "high" : "low"}
+                  className="w-full h-full object-cover filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent pointer-events-none" />
+
+                {/* Floating Category Pill */}
+                <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-black/75 border border-white/15 backdrop-blur-md text-[10px] font-mono text-white uppercase tracking-widest sm:hidden">
+                  {project.category || "FEATURED"}
+                </div>
+              </div>
+
+              {/* Card Editorial Footer */}
+              <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-end justify-between gap-6 bg-neutral-950/80">
+                <div className="max-w-3xl space-y-3">
+                  <p className="text-sm md:text-base text-neutral-300 leading-relaxed font-sans line-clamp-2">
+                    {description}
+                  </p>
+
+                  {/* Tags */}
+                  {tags.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-2 pt-1">
+                      {tags.slice(0, 4).map((item, tagIdx) => (
+                        <span
+                          key={tagIdx}
+                          className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-neutral-900 border border-neutral-800 text-neutral-300"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {targetUrl && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(targetUrl, "_blank", "noopener,noreferrer");
+                    }}
+                    className="shrink-0 px-6 py-3.5 rounded-full border border-neutral-700 bg-neutral-900 hover:border-red-600 hover:bg-red-600 text-white font-mono text-xs uppercase tracking-[0.2em] font-semibold transition-all flex items-center gap-2 group/btn self-start md:self-auto shadow-lg"
+                  >
+                    <span>{actionLabel}</span>
+                    <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Bottom CTA to View Full Archive */}
+      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-24 pt-10 border-t border-neutral-900 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+        <div>
+          <h4 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">
+            Looking for more experiments &amp; open-source tools?
+          </h4>
+          <p className="text-xs md:text-sm text-neutral-400 font-sans mt-1">
+            Browse all works across web architectures, security utilities, and CLI tools.
+          </p>
+        </div>
+
+        <Link
+          to="/projects"
+          data-cursor="VIEW"
+          className="px-8 py-4 rounded-full bg-red-600 text-white font-mono text-xs uppercase tracking-[0.25em] font-bold hover:bg-red-700 hover:scale-105 transition-all shadow-[0_0_25px_rgba(229,9,20,0.5)] shrink-0"
+        >
+          View All Works →
+        </Link>
+      </div>
+    </div>
   );
 };
 

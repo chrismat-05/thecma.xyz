@@ -5,16 +5,23 @@ interface AnimatedTextProps {
   text: string;
   className?: string;
   scrollOffset?: [string, string];
+  initialOpacity?: number;
 }
 
 interface CharSpanProps {
   char: string;
   progress: MotionValue<number>;
   range: [number, number];
+  initialOpacity?: number;
 }
 
-const CharSpan: React.FC<CharSpanProps> = ({ char, progress, range }) => {
-  const opacity = useTransform(progress, range, [0.2, 1]);
+const CharSpan: React.FC<CharSpanProps> = ({
+  char,
+  progress,
+  range,
+  initialOpacity = 0.1,
+}) => {
+  const opacity = useTransform(progress, range, [initialOpacity, 1]);
 
   return (
     <span className="relative inline-block">
@@ -35,6 +42,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
   text,
   className = "",
   scrollOffset = ["start 0.85", "end 0.35"],
+  initialOpacity = 0.1,
 }) => {
   const containerRef = useRef<HTMLParagraphElement | null>(null);
 
@@ -67,6 +75,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
                   char={char}
                   progress={scrollYProgress}
                   range={[start, Math.min(end + 0.05, 1)]}
+                  initialOpacity={initialOpacity}
                 />
               );
             })}

@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { TypeAnimation } from "react-type-animation";
-import { Github, Linkedin, Mail, Phone, MessageSquareMore, Handshake, ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { Link as ScrollLink } from "react-scroll";
 import { LanyardHeroScene } from "@/components/hero/LanyardHeroScene";
 import { LightRays } from "@/components/backgrounds/LightRays";
+import { Waves } from "@/components/backgrounds/Waves";
+import { ThreadsBackground } from "@/components/backgrounds/ThreadsBackground";
 import { WarpText } from "@/components/ui/WarpText";
 import { Magnet } from "@/components/ui/Magnet";
 import { ContactButton } from "@/components/ui/ContactButton";
@@ -12,45 +13,33 @@ import { ContactButton } from "@/components/ui/ContactButton";
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // Scroll tracking across the 250vh Hero & Lanyard sequence
+  // Scroll tracking across the 240vh Hero & Lanyard sequence
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
   // 1. Initial State (Progress 0.0 -> 0.45):
-  // You see ONLY the lanyard card hanging with ReactBits light rays casting from top center down to it.
   // Introductory prompt invites the user to scroll to zoom in.
   const lanyardIntroOpacity = useTransform(scrollYProgress, [0, 0.25, 0.45], [1, 0.8, 0]);
 
   // 2. Zoom in progression (Progress 0.0 -> 0.7):
-  // As user scrolls down, lanyard zooms in towards camera
   const [zoomProgress, setZoomProgress] = React.useState(0);
   React.useEffect(() => {
     return scrollYProgress.onChange((latest) => {
-      // Map 0 to 0.7 scroll into 0 to 1 zoom
       const val = Math.min(Math.max(latest / 0.65, 0), 1);
       setZoomProgress(val);
     });
   }, [scrollYProgress]);
 
-  // 3. Lanyard fades away as it completes zoom into the hero reveal (Progress 0.55 -> 0.85)
+  // 3. Lanyard fades away as it completes zoom into the hero reveal (Progress 0.55 -> 0.8)
   const lanyardSceneOpacity = useTransform(scrollYProgress, [0, 0.55, 0.8], [1, 1, 0]);
   const lanyardScale = useTransform(scrollYProgress, [0, 0.7], [1, 1.8]);
 
-  // 4. Hero Content Section emerges as the lanyard zooms past into the screen (Progress 0.5 -> 0.85)
+  // 4. Hero Content Section emerges as the lanyard zooms past into the screen (Progress 0.45 -> 0.85)
   const heroContentOpacity = useTransform(scrollYProgress, [0.45, 0.7, 1], [0, 0.85, 1]);
   const heroContentY = useTransform(scrollYProgress, [0.45, 0.75], [80, 0]);
   const heroContentScale = useTransform(scrollYProgress, [0.45, 0.75], [0.92, 1]);
-
-  const socialLinks = [
-    { icon: Github, href: "https://github.com/chrismat-05", label: "GitHub" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/chrismaje/", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:chrismaje63@gmail.com", label: "Email" },
-    { icon: MessageSquareMore, href: "https://wa.me/+918848914245", label: "WhatsApp" },
-    { icon: Phone, href: "tel:+918848914245", label: "Call" },
-    { icon: Handshake, href: "https://www.fiverr.com/s/zWgryod", label: "Fiverr" },
-  ];
 
   return (
     <div
@@ -60,10 +49,45 @@ export const Hero: React.FC = () => {
     >
       {/* Sticky Fullscreen Stage */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* ReactBits Light Rays coming from TOP CENTER downwards towards the lanyard - only active while lanyard is visible */}
+        {/* Layer 1: Ambient Perlin Noise Waves with interactive cursor displacement */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-35">
+          <Waves
+            lineColor="rgba(215, 226, 234, 0.14)"
+            backgroundColor="transparent"
+            waveSpeedX={0.012}
+            waveSpeedY={0.005}
+            waveAmpX={36}
+            waveAmpY={18}
+            xGap={14}
+            yGap={34}
+            friction={0.925}
+            tension={0.005}
+            maxCursorMove={90}
+            showCursorDot={false}
+          />
+        </div>
+
+        {/* Layer 2: Subtle Silk Mathematical Threads for depth */}
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden opacity-25">
+          <ThreadsBackground
+            threadsCount={14}
+            accentColor="rgba(187, 204, 215, 0.22)"
+          />
+        </div>
+
+        {/* Layer 3: Dynamic Radial Center Vignette & Ambient Glow */}
+        <div
+          className="absolute inset-0 z-[2] pointer-events-none overflow-hidden"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 65% at 50% 50%, rgba(187, 204, 215, 0.07), transparent 70%), radial-gradient(ellipse 60% 40% at 50% 90%, rgba(229, 9, 20, 0.05), transparent 60%)",
+          }}
+        />
+
+        {/* Layer 4: ReactBits Light Rays shining from TOP CENTER down onto the lanyard */}
         <motion.div
           style={{ opacity: lanyardSceneOpacity }}
-          className="absolute inset-0 z-0 pointer-events-none"
+          className="absolute inset-0 z-[3] pointer-events-none"
         >
           <LightRays className="opacity-90" />
         </motion.div>
@@ -104,7 +128,10 @@ export const Hero: React.FC = () => {
           className="absolute inset-0 z-20 w-full h-full flex flex-col justify-between px-6 md:px-10 py-6 md:py-8 pointer-events-auto"
         >
           {/* Top Navbar Row */}
-          <nav aria-label="Hero Navigation" className="w-full flex items-center justify-between text-[#D7E2EA] font-medium uppercase tracking-wider text-xs sm:text-sm md:text-base lg:text-[1.15rem] pt-2 relative z-30">
+          <nav
+            aria-label="Hero Navigation"
+            className="w-full flex items-center justify-between text-[#D7E2EA] font-medium uppercase tracking-wider text-xs sm:text-sm md:text-base lg:text-[1.15rem] pt-2 relative z-30"
+          >
             <ScrollLink
               to="about"
               smooth={true}

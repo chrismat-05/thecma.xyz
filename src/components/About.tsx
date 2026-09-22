@@ -10,7 +10,7 @@ export const About: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const narrativeText =
-    "With more than five years of experience in cybersecurity and digital design, I bridge technical resilience with high-impact creative engineering. Driven by zero-knowledge mechanics, interactive systems, and cinematic design to help modern brands stand out. Let's build something unforgettable together!";
+    "I'm a Cybersecurity student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field. From Cybersecurity to videography, I love exploring new things and trying them out while trying to bridge the gap between technical expertise and creative expression, always seeking new technologies and opportunities to grow.";
 
   return (
     <section
@@ -55,6 +55,7 @@ export const About: React.FC = () => {
         <div className="max-w-[720px] mx-auto mb-12 sm:mb-14 md:mb-16">
           <AnimatedText
             text={narrativeText}
+            initialOpacity={0.12}
             className="text-[#D7E2EA] font-normal text-center leading-relaxed text-base sm:text-xl md:text-2xl"
           />
         </div>

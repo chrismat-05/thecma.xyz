@@ -1,6 +1,101 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
-interface WavesProps {
+class Grad {
+  x: number;
+  y: number;
+  z: number;
+  constructor(x: number, y: number, z: number) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+  dot2(x: number, y: number): number {
+    return this.x * x + this.y * y;
+  }
+}
+
+class Noise {
+  grad3: Grad[];
+  p: number[];
+  perm: number[];
+  gradP: Grad[];
+
+  constructor(seed = 0) {
+    this.grad3 = [
+      new Grad(1, 1, 0),
+      new Grad(-1, 1, 0),
+      new Grad(1, -1, 0),
+      new Grad(-1, -1, 0),
+      new Grad(1, 0, 1),
+      new Grad(-1, 0, 1),
+      new Grad(1, 0, -1),
+      new Grad(-1, 0, -1),
+      new Grad(0, 1, 1),
+      new Grad(0, -1, 1),
+      new Grad(0, 1, -1),
+      new Grad(0, -1, -1),
+    ];
+    this.p = [
+      151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36, 103, 30, 69, 142, 8, 99, 37, 240,
+      21, 10, 23, 190, 6, 148, 247, 120, 234, 75, 0, 26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32, 57, 177, 33, 88,
+      237, 149, 56, 87, 174, 20, 125, 136, 171, 168, 68, 175, 74, 165, 71, 134, 139, 48, 27, 166, 77, 146, 158, 231, 83,
+      111, 229, 122, 60, 211, 133, 230, 220, 105, 92, 41, 55, 46, 245, 40, 244, 102, 143, 54, 65, 25, 63, 161, 1, 216,
+      80, 73, 209, 76, 132, 187, 208, 89, 18, 169, 200, 196, 135, 130, 116, 188, 159, 86, 164, 100, 109, 198, 173, 186,
+      3, 64, 52, 217, 226, 250, 124, 123, 5, 202, 38, 147, 118, 126, 255, 82, 85, 212, 207, 206, 59, 227, 47, 16, 58,
+      17, 182, 189, 28, 42, 223, 183, 170, 213, 119, 248, 152, 2, 44, 154, 163, 70, 221, 153, 101, 155, 167, 43, 172, 9,
+      129, 22, 39, 253, 19, 98, 108, 110, 79, 113, 224, 232, 178, 185, 112, 104, 218, 246, 97, 228, 251, 34, 242, 193,
+      238, 210, 144, 12, 191, 179, 162, 241, 81, 51, 145, 235, 249, 14, 239, 107, 49, 192, 214, 31, 181, 199, 106, 157,
+      184, 84, 204, 176, 115, 121, 50, 45, 127, 4, 150, 254, 138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128,
+      195, 78, 66, 215, 61, 156, 180,
+    ];
+    this.perm = new Array(512);
+    this.gradP = new Array(512);
+    this.seed(seed);
+  }
+
+  seed(seed: number) {
+    if (seed > 0 && seed < 1) seed *= 65536;
+    seed = Math.floor(seed);
+    if (seed < 256) seed |= seed << 8;
+    for (let i = 0; i < 256; i++) {
+      const v = i & 1 ? this.p[i] ^ (seed & 255) : this.p[i] ^ ((seed >> 8) & 255);
+      this.perm[i] = this.perm[i + 256] = v;
+      this.gradP[i] = this.gradP[i + 256] = this.grad3[v % 12];
+    }
+  }
+
+  fade(t: number): number {
+    return t * t * t * (t * (t * 6 - 15) + 10);
+  }
+
+  lerp(a: number, b: number, t: number): number {
+    return (1 - t) * a + t * b;
+  }
+
+  perlin2(x: number, y: number): number {
+    let X = Math.floor(x);
+    let Y = Math.floor(y);
+    x -= X;
+    y -= Y;
+    X &= 255;
+    Y &= 255;
+    const n00 = this.gradP[X + this.perm[Y]].dot2(x, y);
+    const n01 = this.gradP[X + this.perm[Y + 1]].dot2(x, y - 1);
+    const n10 = this.gradP[X + 1 + this.perm[Y]].dot2(x - 1, y);
+    const n11 = this.gradP[X + 1 + this.perm[Y + 1]].dot2(x - 1, y - 1);
+    const u = this.fade(x);
+    return this.lerp(this.lerp(n00, n10, u), this.lerp(n01, n11, u), this.fade(y));
+  }
+}
+
+interface Point {
+  x: number;
+  y: number;
+  wave: { x: number; y: number };
+  cursor: { x: number; y: number; vx: number; vy: number };
+}
+
+export interface WavesProps {
   lineColor?: string;
   backgroundColor?: string;
   waveSpeedX?: number;
@@ -12,255 +107,290 @@ interface WavesProps {
   friction?: number;
   tension?: number;
   maxCursorMove?: number;
+  showCursorDot?: boolean;
+  style?: React.CSSProperties;
   className?: string;
 }
 
 export const Waves: React.FC<WavesProps> = ({
   lineColor = "rgba(255, 255, 255, 0.12)",
   backgroundColor = "transparent",
-  waveSpeedX = 0.012,
-  waveSpeedY = 0.008,
-  waveAmpX = 18,
-  waveAmpY = 12,
-  xGap = 24, // Subtle dense vertical strands
-  yGap = 28,
-  friction = 0.92,
-  tension = 0.008,
-  maxCursorMove = 60,
+  waveSpeedX = 0.0125,
+  waveSpeedY = 0.005,
+  waveAmpX = 32,
+  waveAmpY = 16,
+  xGap = 16,
+  yGap = 32,
+  friction = 0.925,
+  tension = 0.005,
+  maxCursorMove = 100,
+  showCursorDot = false,
+  style = {},
   className = "",
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+  const boundingRef = useRef({ width: 0, height: 0, left: 0, top: 0 });
+  const noiseRef = useRef(new Noise(Math.random()));
+  const linesRef = useRef<Point[][]>([]);
+  const mouseRef = useRef({
+    x: -100,
+    y: -100,
+    lx: 0,
+    ly: 0,
+    sx: 0,
+    sy: 0,
+    v: 0,
+    vs: 0,
+    a: 0,
+    set: false,
+  });
+
+  const configRef = useRef({
+    lineColor,
+    waveSpeedX,
+    waveSpeedY,
+    waveAmpX,
+    waveAmpY,
+    friction,
+    tension,
+    maxCursorMove,
+    xGap,
+    yGap,
+  });
+  const frameIdRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    configRef.current = {
+      lineColor,
+      waveSpeedX,
+      waveSpeedY,
+      waveAmpX,
+      waveAmpY,
+      friction,
+      tension,
+      maxCursorMove,
+      xGap,
+      yGap,
+    };
+  }, [lineColor, waveSpeedX, waveSpeedY, waveAmpX, waveAmpY, friction, tension, maxCursorMove, xGap, yGap]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    ctxRef.current = canvas.getContext("2d");
 
-    let animationFrameId: number;
-    let width = 0;
-    let height = 0;
-
-    // Mouse coordinates relative to viewport
-    const mouse = {
-      x: -2000,
-      y: -2000,
-      lx: -2000,
-      ly: -2000,
-      sx: 0,
-      sy: 0,
-      v: 0,
-      vs: 0,
-      a: 0,
-      set: false,
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.clientX - rect.left;
-      const clientY = e.clientY - rect.top;
-
-      if (!mouse.set) {
-        mouse.x = clientX;
-        mouse.y = clientY;
-        mouse.lx = clientX;
-        mouse.ly = clientY;
-        mouse.set = true;
-      } else {
-        mouse.x = clientX;
-        mouse.y = clientY;
-      }
-    };
-
-    const handleMouseLeave = () => {
-      mouse.x = -2000;
-      mouse.y = -2000;
-      mouse.set = false;
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    document.body.addEventListener("mouseleave", handleMouseLeave);
-
-    // Particle nodes for waving vertical curves
-    interface Point {
-      x: number;
-      y: number;
-      originX: number;
-      originY: number;
-      vx: number;
-      vy: number;
+    function setSize() {
+      if (!container || !canvas) return;
+      boundingRef.current = container.getBoundingClientRect();
+      canvas.width = boundingRef.current.width;
+      canvas.height = boundingRef.current.height;
     }
 
-    let lines: Point[][] = [];
-
-    const initLines = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = window.innerWidth;
-      height = window.innerHeight;
-
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      ctx.scale(dpr, dpr);
-
-      lines = [];
-      const totalColumns = Math.ceil(width / xGap) + 1;
-      const totalPointsPerColumn = Math.ceil(height / yGap) + 2;
-
-      for (let i = 0; i < totalColumns; i++) {
-        const points: Point[] = [];
-        const posX = i * xGap;
-
-        for (let j = 0; j < totalPointsPerColumn; j++) {
-          const posY = j * yGap;
-          points.push({
-            x: posX,
-            y: posY,
-            originX: posX,
-            originY: posY,
-            vx: 0,
-            vy: 0,
+    function setLines() {
+      const { width, height } = boundingRef.current;
+      linesRef.current = [];
+      const oWidth = width + 200;
+      const oHeight = height + 30;
+      const { xGap, yGap } = configRef.current;
+      const totalLines = Math.ceil(oWidth / xGap);
+      const totalPoints = Math.ceil(oHeight / yGap);
+      const xStart = (width - xGap * totalLines) / 2;
+      const yStart = (height - yGap * totalPoints) / 2;
+      for (let i = 0; i <= totalLines; i++) {
+        const pts: Point[] = [];
+        for (let j = 0; j <= totalPoints; j++) {
+          pts.push({
+            x: xStart + xGap * i,
+            y: yStart + yGap * j,
+            wave: { x: 0, y: 0 },
+            cursor: { x: 0, y: 0, vx: 0, vy: 0 },
           });
         }
-        lines.push(points);
+        linesRef.current.push(pts);
       }
-    };
+    }
 
-    initLines();
+    function movePoints(time: number) {
+      const lines = linesRef.current;
+      const mouse = mouseRef.current;
+      const noise = noiseRef.current;
+      const { waveSpeedX, waveSpeedY, waveAmpX, waveAmpY, friction, tension, maxCursorMove } = configRef.current;
+      lines.forEach((pts) => {
+        pts.forEach((p) => {
+          const move = noise.perlin2((p.x + time * waveSpeedX) * 0.002, (p.y + time * waveSpeedY) * 0.0015) * 12;
+          p.wave.x = Math.cos(move) * waveAmpX;
+          p.wave.y = Math.sin(move) * waveAmpY;
 
-    const handleResize = () => {
-      initLines();
-    };
-    window.addEventListener("resize", handleResize);
+          const dx = p.x - mouse.sx;
+          const dy = p.y - mouse.sy;
+          const dist = Math.hypot(dx, dy);
+          const l = Math.max(175, mouse.vs);
+          if (dist < l) {
+            const s = 1 - dist / l;
+            const f = Math.cos(dist * 0.001) * s;
+            p.cursor.vx += Math.cos(mouse.a) * f * l * mouse.vs * 0.00065;
+            p.cursor.vy += Math.sin(mouse.a) * f * l * mouse.vs * 0.00065;
+          }
 
-    let time = 0;
-    let isVisible = true;
+          p.cursor.vx += (0 - p.cursor.x) * tension;
+          p.cursor.vy += (0 - p.cursor.y) * tension;
+          p.cursor.vx *= friction;
+          p.cursor.vy *= friction;
+          p.cursor.x += p.cursor.vx * 2;
+          p.cursor.y += p.cursor.vy * 2;
+          p.cursor.x = Math.min(maxCursorMove, Math.max(-maxCursorMove, p.cursor.x));
+          p.cursor.y = Math.min(maxCursorMove, Math.max(-maxCursorMove, p.cursor.y));
+        });
+      });
+    }
 
-    const handleVisibilityChange = () => {
-      isVisible = document.visibilityState === "visible";
-      if (isVisible) {
-        render();
-      } else {
-        cancelAnimationFrame(animationFrameId);
-      }
-    };
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+    function moved(point: Point, withCursor = true) {
+      const x = point.x + point.wave.x + (withCursor ? point.cursor.x : 0);
+      const y = point.y + point.wave.y + (withCursor ? point.cursor.y : 0);
+      return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+    }
 
-    const render = () => {
-      if (!isVisible) return;
-      time++;
-
+    function drawLines() {
+      const { width, height } = boundingRef.current;
+      const ctx = ctxRef.current;
+      if (!ctx || width === 0 || height === 0) return;
       ctx.clearRect(0, 0, width, height);
-      if (backgroundColor !== "transparent") {
-        ctx.fillStyle = backgroundColor;
-        ctx.fillRect(0, 0, width, height);
-      }
+      ctx.beginPath();
+      ctx.strokeStyle = configRef.current.lineColor;
+      linesRef.current.forEach((points) => {
+        if (!points || points.length === 0) return;
+        let p1 = moved(points[0], false);
+        ctx.moveTo(p1.x, p1.y);
+        points.forEach((p, idx) => {
+          const isLast = idx === points.length - 1;
+          p1 = moved(p, !isLast);
+          const p2 = moved(points[idx + 1] || points[points.length - 1], !isLast);
+          ctx.lineTo(p1.x, p1.y);
+          if (isLast) ctx.moveTo(p2.x, p2.y);
+        });
+      });
+      ctx.stroke();
+    }
 
-      // Calculate mouse speed
+    let isRunning = false;
+
+    function tick(t: number) {
+      if (!isRunning) return;
+      const mouse = mouseRef.current;
       mouse.sx += (mouse.x - mouse.sx) * 0.1;
       mouse.sy += (mouse.y - mouse.sy) * 0.1;
       const dx = mouse.x - mouse.lx;
       const dy = mouse.y - mouse.ly;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      mouse.v = dist;
-      mouse.vs += (dist - mouse.vs) * 0.1;
+      const d = Math.hypot(dx, dy);
+      mouse.v = d;
+      mouse.vs += (d - mouse.vs) * 0.1;
       mouse.vs = Math.min(100, mouse.vs);
       mouse.lx = mouse.x;
       mouse.ly = mouse.y;
       mouse.a = Math.atan2(dy, dx);
-
-      ctx.lineWidth = 1.0;
-      ctx.strokeStyle = lineColor;
-
-      for (let i = 0; i < lines.length; i++) {
-        const points = lines[i];
-        ctx.beginPath();
-
-        for (let j = 0; j < points.length; j++) {
-          const p = points[j];
-
-          // Harmonic ambient mathematical wave
-          const waveOffset =
-            Math.sin(time * waveSpeedX + i * 0.12 + j * 0.08) * waveAmpX +
-            Math.cos(time * waveSpeedY + j * 0.14) * (waveAmpY * 0.6);
-
-          // Cursor interaction: displacement when cursor moves near nodes
-          if (mouse.set) {
-            const mdx = p.x - mouse.sx;
-            const mdy = p.y - mouse.sy;
-            const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-            const radius = 180;
-
-            if (mdist < radius) {
-              const force = (1 - mdist / radius) * maxCursorMove;
-              const angle = Math.atan2(mdy, mdx);
-              p.vx += Math.cos(angle) * force * 0.12;
-              p.vy += Math.sin(angle) * force * 0.08;
-            }
-          }
-
-          // Spring physics easing back to home
-          const targetX = p.originX + waveOffset;
-          const targetY = p.originY;
-
-          p.vx += (targetX - p.x) * tension;
-          p.vy += (targetY - p.y) * tension;
-
-          p.vx *= friction;
-          p.vy *= friction;
-
-          p.x += p.vx;
-          p.y += p.vy;
-
-          if (j === 0) {
-            ctx.moveTo(p.x, p.y);
-          } else {
-            const prev = points[j - 1];
-            // Smooth quadratic bezier interpolation
-            const cx = (prev.x + p.x) / 2;
-            const cy = (prev.y + p.y) / 2;
-            ctx.quadraticCurveTo(prev.x, prev.y, cx, cy);
-          }
-        }
-        ctx.stroke();
+      if (container) {
+        container.style.setProperty("--x", `${mouse.sx}px`);
+        container.style.setProperty("--y", `${mouse.sy}px`);
       }
 
-      animationFrameId = requestAnimationFrame(render);
-    };
+      movePoints(t);
+      drawLines();
+      if (isRunning) {
+        frameIdRef.current = requestAnimationFrame(tick);
+      }
+    }
 
-    render();
+    function onResize() {
+      setSize();
+      setLines();
+    }
+
+    function updateMouse(clientX: number, clientY: number) {
+      const mouse = mouseRef.current;
+      const b = boundingRef.current;
+      mouse.x = clientX - b.left;
+      mouse.y = clientY - b.top;
+      if (!mouse.set) {
+        mouse.sx = mouse.x;
+        mouse.sy = mouse.y;
+        mouse.lx = mouse.x;
+        mouse.ly = mouse.y;
+        mouse.set = true;
+      }
+    }
+
+    function onMouseMove(e: MouseEvent) {
+      updateMouse(e.clientX, e.clientY);
+    }
+
+    function onTouchMove(e: TouchEvent) {
+      if (e.touches && e.touches[0]) {
+        updateMouse(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }
+
+    setSize();
+    setLines();
+
+    // Viewport-aware observer: 0% CPU/GPU when scrolled off-screen
+    let visibilityObserver: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== "undefined" && container) {
+      visibilityObserver = new IntersectionObserver(
+        (entries) => {
+          const isVisible = entries[0]?.isIntersecting;
+          if (isVisible && !isRunning) {
+            isRunning = true;
+            frameIdRef.current = requestAnimationFrame(tick);
+          } else if (!isVisible && isRunning) {
+            isRunning = false;
+            if (frameIdRef.current) cancelAnimationFrame(frameIdRef.current);
+          }
+        },
+        { threshold: 0.05 }
+      );
+      visibilityObserver.observe(container);
+    } else {
+      isRunning = true;
+      frameIdRef.current = requestAnimationFrame(tick);
+    }
+
+    window.addEventListener("resize", onResize);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("resize", handleResize);
-      document.body.removeEventListener("mouseleave", handleMouseLeave);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      isRunning = false;
+      if (visibilityObserver) visibilityObserver.disconnect();
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchmove", onTouchMove);
+      if (frameIdRef.current) cancelAnimationFrame(frameIdRef.current);
     };
-  }, [
-    lineColor,
-    backgroundColor,
-    waveSpeedX,
-    waveSpeedY,
-    waveAmpX,
-    waveAmpY,
-    xGap,
-    yGap,
-    friction,
-    tension,
-    maxCursorMove,
-  ]);
+  }, []);
 
   return (
     <div
       ref={containerRef}
-      className={`fixed inset-0 pointer-events-none z-0 overflow-hidden ${className}`}
+      style={{
+        backgroundColor,
+        ...style,
+      }}
+      className={`absolute top-0 left-0 w-full h-full overflow-hidden ${className}`}
     >
-      <canvas ref={canvasRef} className="w-full h-full" />
+      {showCursorDot && (
+        <div
+          className="absolute top-0 left-0 bg-red-600/40 rounded-full w-[0.5rem] h-[0.5rem] pointer-events-none"
+          style={{
+            transform: "translate3d(calc(var(--x) - 50%), calc(var(--y) - 50%), 0)",
+            willChange: "transform",
+          }}
+        />
+      )}
+      <canvas ref={canvasRef} className="block w-full h-full" />
     </div>
   );
 };
