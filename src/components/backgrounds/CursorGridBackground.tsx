@@ -182,7 +182,14 @@ export const CursorGridBackground: React.FC<CursorGridBackgroundProps> = ({
     <canvas
       ref={canvasRef}
       className={`absolute inset-0 pointer-events-none z-0 ${className}`}
-      style={{ opacity, willChange: "transform" }}
+      style={{
+        opacity,
+        willChange: "transform",
+        maskImage:
+          "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+        WebkitMaskImage:
+          "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+      }}
     />
   );
 };

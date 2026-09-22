@@ -262,8 +262,17 @@ export const Projects: React.FC = () => {
       className="pt-24 pb-20 relative bg-[#060606] text-white min-h-screen"
     >
       {/* SECTION-SCOPED FULLSTAGE AMBIENT COLOR WASH:
-          Sticky to viewport across entire projects scroll length, radiating the current screenshot's color */}
-      <div className="sticky top-0 left-0 w-full h-screen pointer-events-none -mb-[100vh] z-0 overflow-hidden">
+          Sticky to viewport across entire projects scroll length, radiating the current screenshot's color
+          Feathered at top and bottom edges so it blends seamlessly into adjacent sections */}
+      <div
+        className="sticky top-0 left-0 w-full h-screen pointer-events-none -mb-[100vh] z-0 overflow-hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+        }}
+      >
         <motion.div
           className="absolute inset-0 w-full h-full transition-all duration-700 blur-[130px] opacity-70"
           style={{

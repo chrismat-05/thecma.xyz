@@ -38,8 +38,18 @@ export const TestimonialsSection: React.FC = () => {
       id="testimonials"
       className="py-32 relative overflow-hidden bg-black text-white"
     >
-      {/* 1. ReactBits ChromaGrid with cursor chromatic glow & grid lines */}
-      <ChromaGrid gridSize={42} radius={320} />
+      {/* 1. ReactBits ChromaGrid with cursor chromatic glow & grid lines (feathered at edges to blend seamlessly) */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+        }}
+      >
+        <ChromaGrid gridSize={42} radius={320} />
+      </div>
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10 mb-14">
         <SectionTitleReveal
