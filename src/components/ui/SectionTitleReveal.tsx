@@ -57,7 +57,7 @@ export const SectionTitleReveal: React.FC<SectionTitleRevealProps> = ({
       )}
 
       {/* Main Split-Flap Mechanical Headline */}
-      <HeadingTag className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.15] group/title cursor-default select-none">
+      <HeadingTag className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-white leading-[1.12] group/title cursor-default select-none uppercase">
         <SplitFlapText
           text={title}
           triggerKey={triggerCount}

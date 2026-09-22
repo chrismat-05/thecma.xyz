@@ -121,4 +121,13 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  /* Editorial Title Display Font */
+  .font-display {
+    font-family: 'Syne', 'Kanit', -apple-system, sans-serif;
+  }
+
+  .font-tech {
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
+  }
 }
