@@ -88,6 +88,34 @@ export const Navigation: React.FC = () => {
 
             // In-page section scroll link on homepage
             if (isHome) {
+              if (item.name === 'Home') {
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => {
+                      // Scroll to where the hero stage is fully revealed (around 1.4x viewport height)
+                      const targetY = window.innerHeight * 1.35;
+                      window.scrollTo({
+                        top: targetY,
+                        behavior: 'smooth',
+                      });
+                    }}
+                    className="relative p-3 rounded-full text-neutral-400 hover:text-white hover:bg-white/[0.08] active:scale-95 transition-all duration-200 cursor-pointer group flex items-center justify-center"
+                    title={item.name}
+                    data-cursor="button"
+                    data-cursor-text="Hero"
+                  >
+                    <Icon size={18} className="transition-transform duration-200 group-hover:scale-110" />
+                    <span className="sr-only">{item.name}</span>
+
+                    {/* Discreet hover tooltip pill */}
+                    <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/15 text-[10px] font-mono font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl whitespace-nowrap">
+                      Hero Section
+                    </span>
+                  </button>
+                );
+              }
+
               return (
                 <ScrollLink
                   key={item.name}
