@@ -20,29 +20,11 @@ export const WarpText: React.FC<WarpTextProps> = ({
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
   const [isHovering, setIsHovering] = useState(false);
 
-  // Track cursor globally across the hero area so it reacts fluidly as mouse approaches
+  // Track cursor globally across the window with direct client coordinates
   useEffect(() => {
     const handleGlobalMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const clientX = e.clientX;
-      const clientY = e.clientY;
-
-      // Check if within influence distance of the hero text
-      const distX = Math.max(rect.left - clientX, 0, clientX - rect.right);
-      const distY = Math.max(rect.top - clientY, 0, clientY - rect.bottom);
-      const dist = Math.hypot(distX, distY);
-
-      if (dist < radius + 80) {
-        setMousePos({
-          x: clientX - rect.left,
-          y: clientY - rect.top,
-        });
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-        setMousePos(null);
-      }
+      setMousePos({ x: e.clientX, y: e.clientY });
+      setIsHovering(true);
     };
 
     const handleMouseLeave = () => {
@@ -51,13 +33,13 @@ export const WarpText: React.FC<WarpTextProps> = ({
     };
 
     window.addEventListener("mousemove", handleGlobalMouseMove, { passive: true });
-    document.body.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       window.removeEventListener("mousemove", handleGlobalMouseMove);
-      document.body.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [radius]);
+  }, []);
 
   // Split into words, then characters to maintain word-break flow
   const words = text.split(" ");
@@ -133,11 +115,10 @@ const WarpChar: React.FC<WarpCharProps> = ({
       return;
     }
 
-    const containerRect = containerRef.current.getBoundingClientRect();
     const charRect = charRef.current.getBoundingClientRect();
 
-    const charCenterX = charRect.left + charRect.width / 2 - containerRect.left;
-    const charCenterY = charRect.top + charRect.height / 2 - containerRect.top;
+    const charCenterX = charRect.left + charRect.width / 2;
+    const charCenterY = charRect.top + charRect.height / 2;
 
     const dx = mousePos.x - charCenterX;
     const dy = mousePos.y - charCenterY;
