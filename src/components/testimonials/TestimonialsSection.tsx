@@ -1,213 +1,187 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, PanInfo } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight, Quote, CheckCircle, ExternalLink } from "lucide-react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Quote, ExternalLink, CheckCircle } from "lucide-react";
 import testimonialsData from "@/content/testimonials.json";
 import { SectionTitleReveal } from "@/components/ui/SectionTitleReveal";
+import { ChromaGrid } from "@/components/backgrounds/ChromaGrid";
 
 interface Testimonial {
   id: string;
   name: string;
   role: string;
   company: string;
+  handle: string;
   website: string;
   avatar: string;
   rating: number;
   verified: boolean;
+  partnership: string;
   quote: string;
+  chromaColor: string;
 }
 
 export const TestimonialsSection: React.FC = () => {
   const testimonials = testimonialsData as Testimonial[];
-  const [activeIndex, setActiveIndex] = useState(0);
 
-  const nextCard = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
-  };
+  // Split into Top Row (4 cards) and Bottom Row (4 cards)
+  const topRow = testimonials.slice(0, 4);
+  const bottomRow = testimonials.slice(4, 8);
 
-  const prevCard = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  // Duplicate for seamless, jitter-free infinite loop
+  const doubleTopRow = [...topRow, ...topRow, ...topRow];
+  const doubleBottomRow = [...bottomRow, ...bottomRow, ...bottomRow];
 
-  const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (info.offset.x < -80) {
-      nextCard();
-    } else if (info.offset.x > 80) {
-      prevCard();
-    }
-  };
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") {
-        setActiveIndex((prev) => (prev + 1) % testimonials.length);
-      }
-      if (e.key === "ArrowLeft") {
-        setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [testimonials.length]);
+  const [isPaused, setIsPaused] = useState(false);
 
   return (
-    <section id="testimonials" className="py-32 relative overflow-hidden bg-black text-white">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section
+      id="testimonials"
+      className="py-32 relative overflow-hidden bg-black text-white"
+    >
+      {/* 1. ReactBits ChromaGrid with cursor chromatic glow & grid lines */}
+      <ChromaGrid gridSize={42} radius={320} />
+
+      <div className="container mx-auto px-4 max-w-7xl relative z-10 mb-14">
         <SectionTitleReveal
-          badge="// CLIENT PERSPECTIVES"
-          title="Endorsements & Testimonials."
-          subtitle="Feedback from enterprise founders, engineering leads, and creative partners."
-          align="center"
+          badge="// CLIENT VOICES"
+          title="TESTIMONIALS"
+          subtitle="Real-world feedback from founders, production leads, and enterprise architecture partners."
+          align="left"
         />
+      </div>
 
-        {/* 3D Stacked Deck Container */}
-        <div className="relative max-w-2xl mx-auto h-[440px] flex items-center justify-center">
-          {testimonials.map((testimonial, index) => {
-            // Determine relative position from activeIndex
-            const position = (index - activeIndex + testimonials.length) % testimonials.length;
+      {/* 2. Dual-Lane Smooth Rolling Marquees with edge feather masks */}
+      <div
+        className="relative w-full overflow-hidden flex flex-col gap-6"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+        }}
+      >
+        {/* Row 1: Rolling Left */}
+        <motion.div
+          className="flex gap-6 w-max"
+          animate={{ x: ["0%", "-33.333%"] }}
+          transition={{
+            ease: "linear",
+            duration: 40,
+            repeat: Infinity,
+          }}
+          style={{
+            animationPlayState: isPaused ? "paused" : "running",
+          }}
+        >
+          {doubleTopRow.map((t, index) => (
+            <TestimonialCard key={`top-${t.id}-${index}`} item={t} />
+          ))}
+        </motion.div>
 
-            // Only render top 3 cards for the 3D stack
-            if (position > 2) return null;
-
-            const isFront = position === 0;
-            const yOffset = position * 16;
-            const scale = 1 - position * 0.06;
-            const zIndex = 30 - position * 10;
-            const opacity = 1 - position * 0.28;
-            const blur = position === 0 ? 0 : position * 2;
-
-            return (
-              <motion.div
-                key={testimonial.id}
-                drag={isFront ? "x" : false}
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.8}
-                onDragEnd={isFront ? handleDragEnd : undefined}
-                animate={{
-                  y: yOffset,
-                  scale: scale,
-                  zIndex: zIndex,
-                  opacity: opacity,
-                  filter: `blur(${blur}px)`,
-                }}
-                transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                className={`absolute inset-0 rounded-3xl p-8 sm:p-10 bg-[#0d0e12] border border-white/[0.12] shadow-2xl shadow-black/90 flex flex-col justify-between ${
-                  isFront ? "cursor-grab active:cursor-grabbing" : "pointer-events-none"
-                }`}
-                style={{ willChange: "transform" }}
-                data-cursor-text={isFront ? "Swipe" : undefined}
-              >
-                {/* Large decorative quotation mark & Star rating */}
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex gap-1">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          size={16}
-                          className={
-                            i < testimonial.rating
-                              ? "fill-white text-white"
-                              : "text-neutral-700"
-                          }
-                        />
-                      ))}
-                    </div>
-
-                    <div className="w-10 h-10 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center text-neutral-400">
-                      <Quote size={18} />
-                    </div>
-                  </div>
-
-                  <p className="text-lg sm:text-xl md:text-2xl text-neutral-100 font-normal leading-relaxed">
-                    "{testimonial.quote}"
-                  </p>
-                </div>
-
-                {/* Client Avatar & Meta */}
-                <div className="flex items-center justify-between pt-6 border-t border-white/[0.08]">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20">
-                      <img
-                        src={testimonial.avatar}
-                        alt={testimonial.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <span className="font-semibold text-white text-sm sm:text-base">
-                          {testimonial.name}
-                        </span>
-                        {testimonial.verified && (
-                          <CheckCircle
-                            size={14}
-                            className="text-white fill-white/20"
-                            title="Verified Client"
-                          />
-                        )}
-                      </div>
-                      <p className="text-xs text-neutral-400">
-                        {testimonial.role} • {testimonial.company}
-                      </p>
-                    </div>
-                  </div>
-
-                  {testimonial.website && (
-                    <a
-                      href={testimonial.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-colors"
-                      title="Visit Client Website"
-                      data-cursor="button"
-                    >
-                      <ExternalLink size={16} />
-                    </a>
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Deck Controls & Pagination Indicator */}
-        <div className="mt-12 flex items-center justify-center gap-6">
-          <button
-            onClick={prevCard}
-            aria-label="Previous testimonial"
-            className="w-12 h-12 rounded-full border border-white/15 bg-white/[0.04] hover:bg-white/10 flex items-center justify-center text-white transition-all hover:scale-105 active:scale-95"
-            data-cursor="button"
-          >
-            <ChevronLeft size={20} />
-          </button>
-
-          <div className="flex gap-2">
-            {testimonials.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveIndex(idx)}
-                aria-label={`Go to slide ${idx + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  idx === activeIndex
-                    ? "w-8 bg-white"
-                    : "w-2 bg-white/20 hover:bg-white/40"
-                }`}
-              />
-            ))}
-          </div>
-
-          <button
-            onClick={nextCard}
-            aria-label="Next testimonial"
-            className="w-12 h-12 rounded-full border border-white/15 bg-white/[0.04] hover:bg-white/10 flex items-center justify-center text-white transition-all hover:scale-105 active:scale-95"
-            data-cursor="button"
-          >
-            <ChevronRight size={20} />
-          </button>
-        </div>
+        {/* Row 2: Rolling Right (Opposite Direction) */}
+        <motion.div
+          className="flex gap-6 w-max"
+          animate={{ x: ["-33.333%", "0%"] }}
+          transition={{
+            ease: "linear",
+            duration: 42,
+            repeat: Infinity,
+          }}
+          style={{
+            animationPlayState: isPaused ? "paused" : "running",
+          }}
+        >
+          {doubleBottomRow.map((t, index) => (
+            <TestimonialCard key={`bottom-${t.id}-${index}`} item={t} />
+          ))}
+        </motion.div>
       </div>
     </section>
+  );
+};
+
+const TestimonialCard: React.FC<{ item: Testimonial }> = ({ item }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative w-[340px] sm:w-[380px] h-[270px] rounded-3xl p-6 sm:p-7 flex flex-col justify-between border border-white/[0.08] bg-[#0c0d12] backdrop-blur-xl transition-all duration-500 overflow-hidden cursor-pointer select-none group"
+      style={{
+        boxShadow: isHovered
+          ? `0 20px 40px -15px ${item.chromaColor}`
+          : "0 10px 30px -10px rgba(0,0,0,0.8)",
+      }}
+      data-cursor="button"
+    >
+      {/* Dynamic colorful radial glow highlight matching TristanMedia on hover */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at 50% 0%, ${item.chromaColor}, transparent 75%)`,
+        }}
+      />
+
+      {/* Top subtle hairline rim */}
+      <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 group-hover:via-white/50 to-transparent transition-all" />
+
+      {/* Card Content Top */}
+      <div className="relative z-10">
+        {/* Header tags: Partnership Tag + Quote icon */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-white/60 group-hover:bg-white animate-pulse" />
+            <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 font-medium">
+              {item.partnership}
+            </span>
+          </div>
+          <Quote
+            size={16}
+            className="text-neutral-600 group-hover:text-white/60 transition-colors"
+          />
+        </div>
+
+        {/* Quote text */}
+        <p className="text-xs sm:text-sm text-neutral-200 font-normal leading-relaxed line-clamp-4">
+          "{item.quote}"
+        </p>
+      </div>
+
+      {/* Card Content Bottom: Client Info */}
+      <div className="relative z-10 pt-4 border-t border-white/[0.06] flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-full overflow-hidden border border-white/20">
+            <img
+              src={item.avatar}
+              alt={item.name}
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+            />
+          </div>
+          <div>
+            <div className="flex items-center gap-1">
+              <span className="font-semibold text-xs text-white">
+                {item.name}
+              </span>
+              {item.verified && (
+                <CheckCircle size={12} className="text-white/80 fill-white/20" />
+              )}
+            </div>
+            <p className="text-[10px] text-neutral-400">
+              {item.role} • {item.company}
+            </p>
+          </div>
+        </div>
+
+        {/* Handle / link */}
+        <div className="flex items-center gap-1 font-mono text-[10px] text-neutral-500 group-hover:text-white transition-colors">
+          <span>{item.handle}</span>
+          <ExternalLink size={10} className="shrink-0" />
+        </div>
+      </div>
+    </div>
   );
 };
 
