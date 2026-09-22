@@ -16,7 +16,7 @@ export const WarpText: React.FC<WarpTextProps> = ({
   radius = 180,
   as: Component = "span",
 }) => {
-  const containerRef = useRef<HTMLSpanElement | null>(null);
+  const containerRef = useRef<HTMLElement | null>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
   const [isHovering, setIsHovering] = useState(false);
 
@@ -64,9 +64,7 @@ export const WarpText: React.FC<WarpTextProps> = ({
 
   return (
     <Component
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      ref={containerRef as any}
       className={`relative inline-flex flex-wrap items-center justify-center cursor-default select-none group/warp ${className}`}
     >
       {words.map((word, wIdx) => (
@@ -90,7 +88,7 @@ export const WarpText: React.FC<WarpTextProps> = ({
 
 interface WarpCharProps {
   char: string;
-  containerRef: React.RefObject<HTMLSpanElement>;
+  containerRef: React.RefObject<HTMLElement | null>;
   mousePos: { x: number; y: number } | null;
   isHovering: boolean;
   intensity: number;

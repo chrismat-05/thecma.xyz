@@ -3,11 +3,13 @@ import React, { useEffect, useRef } from "react";
 interface ChromaGlowProps {
   className?: string;
   radius?: number; // Cursor glow radius in px
+  gridSize?: number;
 }
 
 export const ChromaGrid: React.FC<ChromaGlowProps> = ({
   className = "",
   radius = 320,
+  gridSize = 40,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
