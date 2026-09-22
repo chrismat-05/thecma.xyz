@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Github, Package, Globe, ExternalLink } from "lucide-react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { ArrowUpRight, Github, Package, Globe, Layers } from "lucide-react";
 import { Link } from "react-router-dom";
 import projectsData from "@/content/projects.json";
 import { SectionTitleReveal } from "@/components/ui/SectionTitleReveal";
@@ -22,192 +22,225 @@ interface ProjectItem {
   package: string | null;
 }
 
+interface ProjectCardProps {
+  project: ProjectItem;
+  index: number;
+  total: number;
+  range: [number, number];
+  targetScale: number;
+  progress: MotionValue<number>;
+}
+
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  project,
+  index,
+  total,
+  range,
+  targetScale,
+  progress,
+}) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  // Progressive scale-down as subsequent cards stack over it
+  const scale = useTransform(progress, range, [1, targetScale]);
+  
+  // Stacking offset: each card stops slightly further down to create the layered deck rim
+  // Sticky top positioning at ~90px + index * 24px
+  const topOffset = 90 + index * 24;
+
+  const rowNumber = (index + 1).toString().padStart(2, "0");
+
+  return (
+    <div
+      ref={containerRef}
+      className="sticky w-full flex items-center justify-center"
+      style={{
+        top: `${topOffset}px`,
+        marginBottom: `${(total - index - 1) * 30}px`,
+      }}
+    >
+      <motion.div
+        style={{
+          scale,
+        }}
+        className="w-full max-w-5xl rounded-[32px] sm:rounded-[36px] bg-[#0c0d12] border border-white/[0.14] shadow-2xl shadow-black/90 overflow-hidden relative group p-6 sm:p-10 lg:p-12 transition-all duration-300"
+      >
+        {/* Ambient subtle top inner light rim */}
+        <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+
+        {/* Ambient background glow */}
+        <div className="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-white/[0.03] blur-3xl pointer-events-none" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column: Project Details (7 cols) */}
+          <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-6">
+            <div>
+              {/* Top Meta: Number + Category badge + Year */}
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-xs sm:text-sm text-neutral-500 font-bold tracking-wider">
+                    // {rowNumber}
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-[11px] font-mono text-neutral-300">
+                    {project.category.toUpperCase()}
+                  </span>
+                </div>
+                <span className="font-mono text-xs sm:text-sm text-neutral-400">
+                  {project.year}
+                </span>
+              </div>
+
+              {/* Title & Subtitle */}
+              <h3 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.1]">
+                {project.title}
+              </h3>
+              <p className="text-sm sm:text-base text-neutral-300 font-medium mt-2">
+                {project.subtitle}
+              </p>
+
+              {/* Description */}
+              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed mt-4">
+                {project.description}
+              </p>
+            </div>
+
+            {/* Tags & Tech */}
+            <div className="space-y-4 pt-2">
+              <div className="flex flex-wrap gap-1.5">
+                {project.technologies.map((tech, tIdx) => (
+                  <span
+                    key={tIdx}
+                    className="px-2.5 py-1 text-[11px] font-mono rounded-lg bg-black/60 text-neutral-300 border border-white/10"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/[0.08]">
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-hero-primary !py-2.5 !px-5 text-xs font-semibold flex items-center gap-2"
+                    data-cursor="button"
+                    data-magnetic="true"
+                  >
+                    <Globe size={14} />
+                    <span>Visit Platform</span>
+                    <ArrowUpRight size={14} />
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-hero-outline !py-2.5 !px-5 text-xs font-medium flex items-center gap-2"
+                    data-cursor="button"
+                  >
+                    <Github size={14} />
+                    <span>Source Code</span>
+                  </a>
+                )}
+                {project.package && (
+                  <a
+                    href={project.package}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-hero-outline !py-2.5 !px-5 text-xs font-medium flex items-center gap-2"
+                    data-cursor="button"
+                  >
+                    <Package size={14} />
+                    <span>Package Registry</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: High-Impact Card Visual Preview (6 cols) */}
+          <div className="lg:col-span-6">
+            <div className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 bg-neutral-950/80 shadow-2xl relative group/preview">
+              <img
+                src={project.thumbnail}
+                alt={project.title}
+                className="w-full h-full object-cover group-hover/preview:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 pointer-events-none" />
+
+              {/* Floating Tag */}
+              <div className="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-[10px] font-mono text-neutral-300 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                Featured Project
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
 export const Projects: React.FC = () => {
-  // Only the 5 featured projects for the homepage
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const featuredProjects: ProjectItem[] = (projectsData as ProjectItem[]).filter(
     (p) => p.featured
   );
 
-  const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
-  const [activeThumbnail, setActiveThumbnail] = useState<string>("");
-
-  // Smooth floating cursor tracking
-  const mouseX = useMotionValue(-500);
-  const mouseY = useMotionValue(-500);
-
-  const smoothX = useSpring(mouseX, { stiffness: 150, damping: 15 });
-  const smoothY = useSpring(mouseY, { stiffness: 150, damping: 15 });
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    mouseX.set(e.clientX);
-    mouseY.set(e.clientY);
-  };
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
 
   return (
     <section
       id="projects"
       ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className="py-32 relative overflow-hidden"
+      className="py-24 relative overflow-visible"
     >
       <div className="container mx-auto px-4 max-w-6xl">
         <SectionTitleReveal
           badge="// SELECTED CASE STUDIES"
-          title="Interactive Projects Showcase."
-          subtitle="A curation of high-impact platforms, open-source security utilities, and developer architecture."
+          title="Featured Projects Stack."
+          subtitle="A curation of high-impact platforms, open-source security tools, and interactive web architectures."
           align="left"
         />
 
-        {/* Vertical list layout */}
-        <div className="flex flex-col divide-y divide-white/[0.08] border-y border-white/[0.08] relative">
+        {/* Stack of Cards Container */}
+        <div className="relative flex flex-col items-center w-full space-y-16 pb-20">
           {featuredProjects.map((project, index) => {
-            const rowNumber = (index + 1).toString().padStart(2, "0");
-            const isHovered = activeProject?.id === project.id;
+            // Target scale decreases as card gets layered under upcoming cards
+            const targetScale = 1 - (featuredProjects.length - index) * 0.04;
+            const step = 1 / featuredProjects.length;
+            const range: [number, number] = [index * step, 1];
 
             return (
-              <div
+              <ProjectCard
                 key={project.id}
-                onMouseEnter={() => {
-                  setActiveProject(project);
-                  setActiveThumbnail(project.thumbnail);
-                }}
-                onMouseLeave={() => {
-                  setActiveProject(null);
-                }}
-                className="group relative py-8 md:py-10 px-4 transition-all duration-300 hover:bg-white/[0.03] hover:border-white/20 cursor-pointer"
-                data-cursor-text="Explore"
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                  {/* Left: Index + Title */}
-                  <div className="flex items-baseline gap-6 md:gap-10 transition-transform duration-300 group-hover:translate-x-4">
-                    <span className="font-mono text-sm md:text-base text-neutral-500 font-medium">
-                      {rowNumber}
-                    </span>
-                    <div>
-                      <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white group-hover:text-white transition-colors duration-200">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm md:text-base text-neutral-400 mt-1 font-normal">
-                        {project.subtitle}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right: Tags + Year + Action Arrow */}
-                  <div className="flex items-center gap-6 justify-between md:justify-end">
-                    <div className="hidden sm:flex flex-wrap gap-2 max-w-xs justify-end">
-                      {project.tags.slice(0, 3).map((tag, tIdx) => (
-                        <span
-                          key={tIdx}
-                          className="px-2.5 py-1 text-xs font-mono rounded-full bg-white/[0.05] border border-white/10 text-neutral-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center gap-4">
-                      <span className="font-mono text-sm text-neutral-500">{project.year}</span>
-                      <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-300 group-hover:rotate-45">
-                        <ArrowUpRight size={18} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Mobile inline preview card (visible on small screens <768px) */}
-                <div className="mt-4 md:hidden block rounded-2xl overflow-hidden border border-white/10 bg-neutral-900/60 p-2">
-                  <div className="aspect-video w-full rounded-xl overflow-hidden mb-3">
-                    <img
-                      src={project.thumbnail}
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black text-xs font-medium"
-                      >
-                        <Globe size={14} /> Live Demo
-                      </a>
-                    )}
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/20 text-white text-xs font-medium"
-                      >
-                        <Github size={14} /> Source Code
-                      </a>
-                    )}
-                    {project.package && (
-                      <a
-                        href={project.package}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/20 text-white text-xs font-medium"
-                      >
-                        <Package size={14} /> Package
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
+                project={project}
+                index={index}
+                total={featuredProjects.length}
+                range={range}
+                targetScale={targetScale}
+                progress={scrollYProgress}
+              />
             );
           })}
         </div>
 
-        {/* Floating cursor preview (Desktop >= 768px) */}
-        <AnimatePresence>
-          {activeProject && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="hidden md:block pointer-events-none fixed z-40 w-[340px] h-[220px] rounded-2xl overflow-hidden border border-white/30 shadow-2xl shadow-black/80 bg-neutral-900/90 backdrop-blur-md"
-              style={{
-                top: 0,
-                left: 0,
-                x: smoothX,
-                y: smoothY,
-                translateX: "24px",
-                translateY: "-50%",
-              }}
-            >
-              <img
-                src={activeThumbnail}
-                alt={activeProject.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4">
-                <span className="text-white font-bold text-sm tracking-wide">
-                  {activeProject.title}
-                </span>
-                <span className="text-neutral-400 text-xs mt-0.5">
-                  {activeProject.technologies.slice(0, 4).join(" • ")}
-                </span>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* View All Projects CTA */}
-        <div className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-sm">
+        {/* Bottom CTA to View All Projects */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-sm">
           <div>
             <h4 className="text-xl font-bold text-white tracking-tight">
-              Looking for more experiments & open-source projects?
+              Looking for more experiments &amp; open-source tools?
             </h4>
             <p className="text-neutral-400 text-sm mt-1">
-              Browse our complete archive of CLI tools, Python packages, and academic systems.
+              Browse the complete repository archive of CLI utilities, packages, and academic systems.
             </p>
           </div>
           <Link
