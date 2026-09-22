@@ -29,8 +29,6 @@ interface ProjectCardProps {
   project: ProjectItem;
   index: number;
   total: number;
-  range: [number, number];
-  targetScale: number;
   progress: MotionValue<number>;
 }
 
@@ -38,59 +36,71 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   index,
   total,
-  range,
-  targetScale,
   progress,
 }) => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  // Progressive scale-down as subsequent cards stack over it
-  const scale = useTransform(progress, range, [1, targetScale]);
-
-  // Top offset for stacked deck rim: starts at ~75px + index * 26px
-  const topOffset = 75 + index * 26;
+  // TristanMedia catalog stacking logic:
+  // Each card is sticky and locks at `top: 90px + index * 48px`.
+  // As the user continues scrolling down, the NEXT card slides over the current card's body,
+  // leaving the top 48px header tab (with `// 01 TITLE`, tags, year) exposed!
+  const headerTabHeight = 52;
+  const topStickyOffset = 84 + index * headerTabHeight;
   const rowNumber = (index + 1).toString().padStart(2, "0");
-
   const color = project.themeColor || "#ffffff";
 
-  // Pick gallery screenshots
+  // Gallery images
   const col1Img1 = project.images[0] || project.thumbnail;
   const col1Img2 = project.images[1] || project.thumbnail;
   const col2Img = project.images[2] || project.images[1] || project.thumbnail;
 
+  // Scale down slightly as user scrolls past this card
+  // Active range where this card is being covered
+  const cardStart = index / total;
+  const cardEnd = (index + 1) / total;
+  const targetScale = 1 - (total - 1 - index) * 0.025;
+  const scale = useTransform(progress, [cardStart, cardEnd], [1, targetScale]);
+  const brightness = useTransform(progress, [cardStart, cardEnd], [1, 0.75]);
+
   return (
     <div
-      ref={containerRef}
-      className="sticky w-full flex items-center justify-center pointer-events-auto"
+      className="sticky w-full flex justify-center pointer-events-auto transition-all"
       style={{
-        top: `${topOffset}px`,
+        top: `${topStickyOffset}px`,
         zIndex: index + 10,
+        // The space below each card gives the user room to scroll each subsequent card into view
+        marginBottom: index === total - 1 ? "6rem" : "60vh",
       }}
     >
-      <div className="relative w-full max-w-6xl">
-        {/* DIRECT BACKDROP BLOOM BEHIND THIS SPECIFIC CARD:
-            Radiates outwards with the project image's distinct vibrant color */}
+      <motion.div
+        style={{
+          scale,
+          filter: useTransform(brightness, (b) => `brightness(${b})`),
+        }}
+        className="relative w-full max-w-6xl rounded-[28px] sm:rounded-[38px] md:rounded-[48px] border border-white/20 bg-[#0a0a0a] shadow-[0_-15px_50px_rgba(0,0,0,0.85),0_25px_60px_rgba(0,0,0,0.95)] overflow-hidden transition-shadow duration-500"
+      >
+        {/* Direct subtle color accent line at top border rim */}
         <div
-          className="absolute -inset-6 sm:-inset-10 rounded-[50px] blur-[80px] sm:blur-[110px] opacity-45 group-hover:opacity-75 transition-opacity duration-700 pointer-events-none -z-10"
+          className="h-[2px] w-full"
           style={{
-            background: `radial-gradient(circle at 60% 40%, ${color}99, ${color}33 50%, transparent 80%)`,
+            background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
           }}
         />
 
-        <motion.div
-          style={{
-            scale,
-          }}
-          className="w-full rounded-[38px] sm:rounded-[48px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-5 sm:p-7 md:p-9 shadow-2xl shadow-black/95 overflow-hidden relative group transition-colors duration-500 flex flex-col justify-between"
-        >
-          {/* Top Row: Huge Number + Category + Project Name + Live Project Button */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 sm:pb-8 border-b border-white/10">
-            <div className="flex flex-wrap items-baseline gap-3 sm:gap-5">
-              <span className="font-black text-3xl sm:text-5xl md:text-6xl text-white font-mono tracking-tight">
-                {rowNumber}
-              </span>
+        {/* Inner Card Container */}
+        <div className="p-5 sm:p-7 md:p-8 flex flex-col justify-between">
+          {/* CATALOG HEADER TAB (Always visible even when stacked underneath next cards) */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 sm:pb-5 border-b border-white/10">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <span
-                className="px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider font-semibold border backdrop-blur-md"
+                className="font-mono text-xs sm:text-sm font-bold tracking-wider"
+                style={{ color }}
+              >
+                // {rowNumber}
+              </span>
+              <h3 className="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-white uppercase">
+                {project.title}
+              </h3>
+              <span
+                className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[11px] font-mono uppercase tracking-wider font-semibold border backdrop-blur-md"
                 style={{
                   borderColor: `${color}40`,
                   backgroundColor: `${color}15`,
@@ -99,33 +109,33 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               >
                 {project.category}
               </span>
-              <h3 className="text-xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
-                {project.title}
-              </h3>
             </div>
 
-            {/* Live Project Button */}
+            {/* Top Right: Year & Actions */}
             <div className="flex items-center gap-3">
+              <span className="font-mono text-xs text-neutral-400">
+                [{project.year}]
+              </span>
               {project.link ? (
-                <LiveProjectButton href={project.link} label="Live Project" />
+                <LiveProjectButton href={project.link} label="Live Site" />
               ) : project.github ? (
-                <LiveProjectButton href={project.github} label="View GitHub" />
+                <LiveProjectButton href={project.github} label="Source" />
               ) : project.package ? (
-                <LiveProjectButton href={project.package} label="View PyPI" />
+                <LiveProjectButton href={project.package} label="Package" />
               ) : null}
             </div>
           </div>
 
-          {/* Middle Row: Description & Tech tags */}
-          <div className="py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <p className="text-[#D7E2EA] text-xs sm:text-sm md:text-base font-light max-w-3xl leading-relaxed">
+          {/* Middle Row: Subtitle & Description */}
+          <div className="py-3 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <p className="text-[#D7E2EA] text-xs sm:text-sm max-w-3xl leading-relaxed opacity-90">
               {project.description}
             </p>
-            <div className="flex flex-wrap gap-2 shrink-0">
+            <div className="flex flex-wrap gap-1.5 shrink-0">
               {project.technologies.slice(0, 4).map((tech, tIdx) => (
                 <span
                   key={tIdx}
-                  className="px-2.5 py-1 text-[11px] font-mono rounded-lg bg-white/[0.05] text-neutral-300 border border-white/10"
+                  className="px-2 py-0.5 text-[10px] font-mono rounded bg-white/[0.05] text-neutral-300 border border-white/10"
                 >
                   {tech}
                 </span>
@@ -133,57 +143,75 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             </div>
           </div>
 
-          {/* Bottom Row: Jack-style 2-Column Image Gallery Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pt-2">
-            {/* Left Column (40% width / 5 cols): 2 Stacked Images */}
-            <div className="md:col-span-5 flex flex-col gap-4 sm:gap-5">
-              <div className="w-full h-[140px] sm:h-[180px] md:h-[210px] rounded-[24px] sm:rounded-[36px] md:rounded-[44px] overflow-hidden border border-white/15 bg-neutral-950/80 shadow-lg relative group/img">
+          {/* Visual Showcase (TristanMedia / Catalog cinematic layout) */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 pt-1">
+            {/* Left Column: 2 Stacked Previews */}
+            <div className="md:col-span-4 flex flex-col gap-3">
+              <div className="w-full h-[120px] sm:h-[150px] md:h-[165px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 relative group/img">
                 <img
                   src={col1Img1}
                   alt={`${project.title} screenshot 1`}
                   className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              <div className="w-full h-[170px] sm:h-[220px] md:h-[260px] rounded-[24px] sm:rounded-[36px] md:rounded-[44px] overflow-hidden border border-white/15 bg-neutral-950/80 shadow-lg relative group/img">
+              <div className="w-full h-[140px] sm:h-[170px] md:h-[195px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 relative group/img">
                 <img
                   src={col1Img2}
                   alt={`${project.title} screenshot 2`}
                   className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
 
-            {/* Right Column (60% width / 7 cols): 1 Tall Hero Image */}
-            <div className="md:col-span-7">
-              <div className="w-full h-[320px] sm:h-[415px] md:h-[490px] rounded-[28px] sm:rounded-[40px] md:rounded-[50px] overflow-hidden border border-white/15 bg-neutral-950/80 shadow-2xl relative group/img">
+            {/* Right Column: Hero Showcase */}
+            <div className="md:col-span-8">
+              <div className="w-full h-[270px] sm:h-[330px] md:h-[370px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 relative group/img shadow-2xl">
                 <img
                   src={col2Img}
                   alt={`${project.title} hero showcase`}
                   className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
 
-                {/* Corner Status Pill */}
-                <div className="absolute bottom-5 right-5 px-3.5 py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-xs font-mono text-neutral-300 flex items-center gap-2 shadow-xl">
+                {/* Central circular TristanMedia "VIEW" beacon on hover */}
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 backdrop-blur-[2px]"
+                  >
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center font-mono text-xs uppercase tracking-widest text-white font-bold shadow-2xl transition-transform hover:scale-110 active:scale-95"
+                      style={{
+                        backgroundColor: color,
+                        boxShadow: `0 0 40px ${color}99`,
+                      }}
+                    >
+                      VIEW
+                    </div>
+                  </a>
+                )}
+
+                {/* Status pill */}
+                <div className="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-[11px] font-mono text-neutral-300 flex items-center gap-2">
                   <span
                     className="w-2 h-2 rounded-full animate-pulse"
                     style={{ backgroundColor: color }}
                   />
-                  <span className="text-[11px] font-semibold text-white">
-                    Interactive Production Showcase
-                  </span>
+                  <span>Featured Case Study</span>
                 </div>
               </div>
             </div>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </div>
   );
 };
@@ -208,11 +236,11 @@ export const Projects: React.FC = () => {
   // 4. SecuriHeader (#059669 - Terminal Security Emerald)
   // 5. Req API (#6366f1 - Indigo / Slate API Interface)
   const bgColors = [
-    "rgba(147, 51, 234, 0.42)", // forms.thecma.xyz
-    "rgba(2, 132, 199, 0.42)",  // IsItSecure
-    "rgba(59, 130, 246, 0.42)",  // ScanThePolicy
-    "rgba(5, 150, 105, 0.42)",  // SecuriHeader
-    "rgba(99, 102, 241, 0.42)", // Req API
+    "rgba(147, 51, 234, 0.55)", // forms.thecma.xyz (Vibrant Purple)
+    "rgba(2, 132, 199, 0.55)",  // IsItSecure (Deep Cyan/Blue)
+    "rgba(59, 130, 246, 0.55)",  // ScanThePolicy (Cobalt Blue)
+    "rgba(5, 150, 105, 0.55)",  // SecuriHeader (Emerald Green)
+    "rgba(99, 102, 241, 0.55)", // Req API (Indigo)
   ];
 
   const ambientBg = useTransform(
@@ -225,20 +253,22 @@ export const Projects: React.FC = () => {
     <section
       id="projects"
       ref={containerRef}
-      className="pt-28 pb-36 relative bg-black text-white"
+      className="pt-24 pb-36 relative bg-[#060606] text-white min-h-screen"
     >
-      {/* SECTION-SCOPED FULLSTAGE AMBIENT COLOR AURA:
-          Stays behind the cards and transitions smoothly through the project screenshot colors as you scroll */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-0 transition-all duration-700"
-        style={{
-          background: useTransform(
-            ambientBg,
-            (col) =>
-              `radial-gradient(ellipse 85% 65% at 50% 45%, ${col}, transparent 75%)`
-          ),
-        }}
-      />
+      {/* SECTION-SCOPED FULLSTAGE AMBIENT COLOR WASH:
+          Sticky to viewport across entire projects scroll length, radiating the current screenshot's color */}
+      <div className="sticky top-0 left-0 w-full h-screen pointer-events-none -mb-[100vh] z-0 overflow-hidden">
+        <motion.div
+          className="absolute inset-0 w-full h-full transition-all duration-700 blur-[130px] opacity-70"
+          style={{
+            background: useTransform(
+              ambientBg,
+              (col) =>
+                `radial-gradient(ellipse 90% 70% at 50% 50%, ${col}, transparent 75%)`
+            ),
+          }}
+        />
+      </div>
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <SectionTitleReveal
@@ -248,34 +278,18 @@ export const Projects: React.FC = () => {
           align="left"
         />
 
-        {/* Stack of Taller Cards: each card has its own sticky scroll envelope */}
-        <div className="relative flex flex-col items-center w-full z-10 mt-12">
-          {featuredProjects.map((project, index) => {
-            const targetScale = 1 - (featuredProjects.length - index) * 0.04;
-            const step = 1 / featuredProjects.length;
-            const range: [number, number] = [index * step, 1];
-
-            return (
-              <div
-                key={project.id}
-                className="w-full"
-                style={{
-                  // Generates scroll track length so each card sticks and subsequent cards slide over it
-                  height: index === featuredProjects.length - 1 ? "auto" : "110vh",
-                  marginBottom: index === featuredProjects.length - 1 ? "4rem" : "0",
-                }}
-              >
-                <ProjectCard
-                  project={project}
-                  index={index}
-                  total={featuredProjects.length}
-                  range={range}
-                  targetScale={targetScale}
-                  progress={scrollYProgress}
-                />
-              </div>
-            );
-          })}
+        {/* CONTINUOUS STACKING CATALOG CONTAINER:
+            All cards share this same parent container so position:sticky stacks each card neatly over previous ones */}
+        <div className="relative w-full z-10 mt-12">
+          {featuredProjects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              total={featuredProjects.length}
+              progress={scrollYProgress}
+            />
+          ))}
         </div>
 
         {/* Bottom CTA to View All Projects */}
