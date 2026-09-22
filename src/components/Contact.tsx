@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Mail, Phone, Github, Linkedin, Send, CheckCircle, MessageSquareMore, Handshake, MapPin } from 'lucide-react';
 import { SectionTitleReveal } from '@/components/ui/SectionTitleReveal';
+import { CursorGridBackground } from '@/components/backgrounds/CursorGridBackground';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -83,7 +84,10 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-32 relative overflow-hidden bg-black text-white">
-      <div className="container mx-auto px-4 max-w-6xl">
+      {/* Subtle interactive dot grid background scoped exclusively to this section */}
+      <CursorGridBackground opacity={0.4} spacing={40} />
+
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <SectionTitleReveal
           badge="// INITIATE CONTACT"
           title="Get In Touch."

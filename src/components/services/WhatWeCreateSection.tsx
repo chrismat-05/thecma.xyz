@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Layers, Sparkles, Smartphone, Cpu, ShieldCheck, Terminal, Palette, ArrowRight } from "lucide-react";
 import { SectionTitleReveal } from "@/components/ui/SectionTitleReveal";
+import { CursorGridBackground } from "@/components/backgrounds/CursorGridBackground";
 
 export const WhatWeCreateSection: React.FC = () => {
   // Mini interactive state for Card 2 (Color Palette Generator)
@@ -38,8 +39,11 @@ export const WhatWeCreateSection: React.FC = () => {
   };
 
   return (
-    <section id="services" className="py-32 relative overflow-hidden">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section id="services" className="py-32 relative overflow-hidden bg-black text-white">
+      {/* Subtle interactive dot grid background scoped exclusively to this section */}
+      <CursorGridBackground opacity={0.5} spacing={40} />
+
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <SectionTitleReveal
           badge="// CAPABILITIES & SERVICES"
           title="What We Engineer & Design."

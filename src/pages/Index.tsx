@@ -8,15 +8,11 @@ import About from '@/components/About';
 import TestimonialsSection from '@/components/testimonials/TestimonialsSection';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import { CursorGridBackground } from '@/components/backgrounds/CursorGridBackground';
 
 const Index: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-x-clip selection:bg-white selection:text-black">
-      {/* 1. High-performance GPU cursor dot grid background */}
-      <CursorGridBackground />
-
-      {/* 2. Sleek Floating Pill Navigation */}
+      {/* Sleek Floating Pill Navigation */}
       <Navigation />
 
       {/* 3. Hero Section with 3D Physics Lanyard Reveal & Wave Shader */}

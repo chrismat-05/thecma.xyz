@@ -1,6 +1,18 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 
-export const CursorGridBackground: React.FC = () => {
+interface CursorGridBackgroundProps {
+  className?: string;
+  spacing?: number;
+  influenceRadius?: number;
+  opacity?: number;
+}
+
+export const CursorGridBackground: React.FC<CursorGridBackgroundProps> = ({
+  className = "",
+  spacing = 36,
+  influenceRadius = 180,
+  opacity = 0.7,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -11,28 +23,26 @@ export const CursorGridBackground: React.FC = () => {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let width = 0;
+    let height = 0;
 
-    // Mouse coordinates & velocity
+    // Mouse coordinates relative to this canvas container
     const mouse = {
-      x: -1000,
-      y: -1000,
-      targetX: -1000,
-      targetY: -1000,
+      x: -2000,
+      y: -2000,
+      targetX: -2000,
+      targetY: -2000,
     };
 
-    const SPACING = 36;
+    const SPACING = spacing;
     const BASE_RADIUS = 1.2;
-    const INFLUENCE_RADIUS = 180;
+    const INFLUENCE_RADIUS = influenceRadius;
 
     interface Node {
       baseX: number;
       baseY: number;
       x: number;
       y: number;
-      vx: number;
-      vy: number;
       radius: number;
       targetRadius: number;
       alpha: number;
@@ -42,9 +52,13 @@ export const CursorGridBackground: React.FC = () => {
     let nodes: Node[] = [];
 
     const initGrid = () => {
+      const parent = canvas.parentElement;
+      const rect = parent ? parent.getBoundingClientRect() : { width: window.innerWidth, height: window.innerHeight };
+
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = window.innerWidth;
-      height = window.innerHeight;
+      width = rect.width;
+      height = rect.height;
+
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
@@ -64,8 +78,6 @@ export const CursorGridBackground: React.FC = () => {
             baseY: y,
             x: x,
             y: y,
-            vx: 0,
-            vy: 0,
             radius: BASE_RADIUS,
             targetRadius: BASE_RADIUS,
             alpha: 0.12,
@@ -78,8 +90,15 @@ export const CursorGridBackground: React.FC = () => {
     initGrid();
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouse.targetX = e.clientX;
-      mouse.targetY = e.clientY;
+      const rect = canvas.getBoundingClientRect();
+      // Mouse coordinates relative to this section canvas
+      mouse.targetX = e.clientX - rect.left;
+      mouse.targetY = e.clientY - rect.top;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.targetX = -2000;
+      mouse.targetY = -2000;
     };
 
     const handleResize = () => {
@@ -88,6 +107,7 @@ export const CursorGridBackground: React.FC = () => {
 
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("resize", handleResize);
+    document.body.addEventListener("mouseleave", handleMouseLeave);
 
     let isVisible = true;
     const handleVisibilityChange = () => {
@@ -112,7 +132,6 @@ export const CursorGridBackground: React.FC = () => {
       for (let i = 0; i < nodes.length; i++) {
         const node = nodes[i];
 
-        // Euclidean distance
         const dx = mouse.x - node.baseX;
         const dy = mouse.y - node.baseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -122,7 +141,6 @@ export const CursorGridBackground: React.FC = () => {
           node.targetRadius = BASE_RADIUS + factor * 2.5;
           node.targetAlpha = 0.12 + factor * 0.75;
 
-          // Repulsive spring force
           const angle = Math.atan2(dy, dx);
           const push = factor * 8;
           const targetPosX = node.baseX - Math.cos(angle) * push;
@@ -133,7 +151,6 @@ export const CursorGridBackground: React.FC = () => {
         } else {
           node.targetRadius = BASE_RADIUS;
           node.targetAlpha = 0.12;
-          // Spring back to home position
           node.x += (node.baseX - node.x) * 0.08;
           node.y += (node.baseY - node.y) * 0.08;
         }
@@ -156,15 +173,16 @@ export const CursorGridBackground: React.FC = () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
+      document.body.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [spacing, influenceRadius]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-80"
-      style={{ willChange: "transform" }}
+      className={`absolute inset-0 pointer-events-none z-0 ${className}`}
+      style={{ opacity, willChange: "transform" }}
     />
   );
 };
