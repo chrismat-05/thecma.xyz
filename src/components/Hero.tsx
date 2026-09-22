@@ -57,8 +57,13 @@ export const Hero: React.FC = () => {
     >
       {/* Sticky Fullscreen Stage */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* ReactBits Light Rays coming from TOP CENTER downwards towards the lanyard */}
-        <LightRays className="z-0 opacity-90" />
+        {/* ReactBits Light Rays coming from TOP CENTER downwards towards the lanyard - only active while lanyard is visible */}
+        <motion.div
+          style={{ opacity: lanyardSceneOpacity }}
+          className="absolute inset-0 z-0 pointer-events-none"
+        >
+          <LightRays className="opacity-90" />
+        </motion.div>
 
         {/* 3D Lanyard Scene with Interactive Physics & Zoom */}
         <motion.div
