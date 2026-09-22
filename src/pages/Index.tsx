@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
+import { Waves } from '@/components/backgrounds/Waves';
 import { HappyClientsSection } from '@/components/clients/HappyClientsSection';
 import Projects from '@/components/Projects';
 import WhatWeCreateSection from '@/components/services/WhatWeCreateSection';
@@ -12,6 +13,21 @@ import Footer from '@/components/Footer';
 const Index: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-x-clip selection:bg-white selection:text-black">
+      {/* Subtle, interactive organic waves background reacting to cursor movements */}
+      <Waves
+        className="opacity-35"
+        lineColor="rgba(255, 255, 255, 0.08)"
+        waveAmpX={14}
+        waveAmpY={10}
+        waveSpeedX={0.010}
+        waveSpeedY={0.007}
+        xGap={26}
+        yGap={30}
+        friction={0.92}
+        tension={0.009}
+        maxCursorMove={70}
+      />
+
       {/* Sleek Floating Pill Navigation */}
       <Navigation />
 
