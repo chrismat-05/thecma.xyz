@@ -1,15 +1,13 @@
 import React, { useEffect, useRef } from "react";
 
-interface ChromaGridProps {
+interface ChromaGlowProps {
   className?: string;
-  gridSize?: number; // Size of grid squares in px
   radius?: number; // Cursor glow radius in px
 }
 
-export const ChromaGrid: React.FC<ChromaGridProps> = ({
+export const ChromaGrid: React.FC<ChromaGlowProps> = ({
   className = "",
-  gridSize = 36,
-  radius = 280,
+  radius = 320,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -61,47 +59,34 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
 
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Draw base faint subtle grid lines
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-
-      for (let x = 0; x < width; x += gridSize) {
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, height);
-      }
-      for (let y = 0; y < height; y += gridSize) {
-        ctx.moveTo(0, y);
-        ctx.lineTo(width, y);
-      }
-      ctx.stroke();
-
-      // 2. Draw Chroma Radial Glow on cursor (Chromatic dispersion)
+      // Chroma Radial Glow on cursor (Chromatic dispersion with NO grid lines)
       if (mouse.x > -500 && mouse.y > -500) {
         // Red / Rose chromatic inner ring
         const redGrad = ctx.createRadialGradient(
-          mouse.x - 6,
-          mouse.y - 4,
+          mouse.x - 8,
+          mouse.y - 6,
           0,
           mouse.x,
           mouse.y,
           radius
         );
-        redGrad.addColorStop(0, "rgba(244, 63, 94, 0.22)");
-        redGrad.addColorStop(0.4, "rgba(225, 29, 72, 0.1)");
+        redGrad.addColorStop(0, "rgba(244, 63, 94, 0.28)");
+        redGrad.addColorStop(0.35, "rgba(225, 29, 72, 0.14)");
+        redGrad.addColorStop(0.75, "rgba(225, 29, 72, 0.03)");
         redGrad.addColorStop(1, "transparent");
 
         // Cyan / Blue chromatic shift
         const blueGrad = ctx.createRadialGradient(
-          mouse.x + 8,
-          mouse.y + 6,
+          mouse.x + 10,
+          mouse.y + 8,
           0,
           mouse.x,
           mouse.y,
-          radius * 1.2
+          radius * 1.25
         );
-        blueGrad.addColorStop(0, "rgba(56, 189, 248, 0.18)");
-        blueGrad.addColorStop(0.5, "rgba(99, 102, 241, 0.08)");
+        blueGrad.addColorStop(0, "rgba(56, 189, 248, 0.24)");
+        blueGrad.addColorStop(0.45, "rgba(99, 102, 241, 0.12)");
+        blueGrad.addColorStop(0.8, "rgba(99, 102, 241, 0.02)");
         blueGrad.addColorStop(1, "transparent");
 
         ctx.globalCompositeOperation = "screen";
@@ -111,26 +96,6 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
 
         ctx.fillStyle = blueGrad;
         ctx.fillRect(0, 0, width, height);
-
-        // Highlight grid intersections near cursor
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-
-        const startX = Math.max(0, Math.floor((mouse.x - radius) / gridSize) * gridSize);
-        const endX = Math.min(width, Math.ceil((mouse.x + radius) / gridSize) * gridSize);
-        const startY = Math.max(0, Math.floor((mouse.y - radius) / gridSize) * gridSize);
-        const endY = Math.min(height, Math.ceil((mouse.y + radius) / gridSize) * gridSize);
-
-        for (let x = startX; x <= endX; x += gridSize) {
-          ctx.moveTo(x, startY);
-          ctx.lineTo(x, endY);
-        }
-        for (let y = startY; y <= endY; y += gridSize) {
-          ctx.moveTo(startX, y);
-          ctx.lineTo(endX, y);
-        }
-        ctx.stroke();
 
         ctx.globalCompositeOperation = "source-over";
       }
@@ -148,7 +113,7 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
         container.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
-  }, [gridSize, radius]);
+  }, [radius]);
 
   return (
     <div
