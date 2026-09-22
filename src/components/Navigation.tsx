@@ -29,20 +29,20 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHome]);
 
-  // Iconography:
-  // 1. Home -> House icon
-  // 2. Projects -> FolderGit2 (Git projects folder)
-  // 3. Services -> Layers (Architectural stacks)
-  // 4. About -> User (Profile)
-  // 5. Testimonials -> Star (Universal 5-star rating symbol)
-  // 6. Contact -> Send (Direct transmission)
+  // Iconography & Destination definitions:
+  // 1. Home -> Scrolls to top on homepage, or links to '/'
+  // 2. About -> Links directly to dedicated '/about' page (background, experience, certs)
+  // 3. Projects -> Links directly to dedicated '/projects' page (complete project archives)
+  // 4. Services -> Scrolls to '#services'
+  // 5. Reviews -> Scrolls to '#testimonials'
+  // 6. Contact -> Scrolls to '#contact'
   const navItems = [
-    { name: 'Home', to: 'hero', icon: Home, route: '/' },
-    { name: 'About', to: 'about', icon: User, route: '/#about' },
-    { name: 'Projects', to: 'projects', icon: FolderGit2, route: '/#projects' },
-    { name: 'Services', to: 'services', icon: Layers, route: '/#services' },
-    { name: 'Reviews', to: 'testimonials', icon: Star, route: '/#testimonials' },
-    { name: 'Contact', to: 'contact', icon: Send, route: '/#contact' },
+    { name: 'Home', to: 'hero', icon: Home, route: '/', isPage: false },
+    { name: 'About', to: 'about', icon: User, route: '/about', isPage: true },
+    { name: 'Projects', to: 'projects', icon: FolderGit2, route: '/projects', isPage: true },
+    { name: 'Services', to: 'services', icon: Layers, route: '/#services', isPage: false },
+    { name: 'Reviews', to: 'testimonials', icon: Star, route: '/#testimonials', isPage: false },
+    { name: 'Contact', to: 'contact', icon: Send, route: '/#contact', isPage: false },
   ];
 
   return (
@@ -59,6 +59,34 @@ export const Navigation: React.FC = () => {
           {navItems.map((item) => {
             const Icon = item.icon;
 
+            // If it's a dedicated page route (About -> /about, Projects -> /projects)
+            if (item.isPage) {
+              const isActivePage = location.pathname === item.route;
+              return (
+                <Link
+                  key={item.name}
+                  to={item.route}
+                  className={`relative p-3 rounded-full transition-all duration-200 group flex items-center justify-center ${
+                    isActivePage
+                      ? "text-white bg-white/15 shadow-lg shadow-white/10"
+                      : "text-neutral-400 hover:text-white hover:bg-white/[0.08] active:scale-95"
+                  }`}
+                  title={item.name}
+                  data-cursor="button"
+                  data-cursor-text={item.name}
+                >
+                  <Icon size={18} className="transition-transform duration-200 group-hover:scale-110" />
+                  <span className="sr-only">{item.name}</span>
+
+                  {/* Discreet hover tooltip pill */}
+                  <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/15 text-[10px] font-mono font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl whitespace-nowrap">
+                    {item.name} Page
+                  </span>
+                </Link>
+              );
+            }
+
+            // In-page section scroll link on homepage
             if (isHome) {
               return (
                 <ScrollLink
@@ -66,7 +94,7 @@ export const Navigation: React.FC = () => {
                   to={item.to}
                   spy={true}
                   smooth={true}
-                  offset={-60}
+                  offset={-70}
                   duration={500}
                   className="relative p-3 rounded-full text-neutral-400 hover:text-white hover:bg-white/[0.08] active:scale-95 transition-all duration-200 cursor-pointer group flex items-center justify-center"
                   activeClass="!text-white !bg-white/15 shadow-lg shadow-white/10"
