@@ -23,16 +23,16 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
       className={`group relative inline-flex items-center justify-center rounded-full font-medium uppercase tracking-widest text-white cursor-pointer select-none transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${className}`}
       style={{
         background:
-          "linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)",
+          "linear-gradient(135deg, #1f232b 0%, #111317 50%, #050608 100%)",
         boxShadow:
-          "0px 4px 4px rgba(181, 1, 167, 0.25), inset 4px 4px 12px #7721B1",
-        outline: "2px solid #FFFFFF",
-        outlineOffset: "-3px",
+          "0 10px 30px -10px rgba(0, 0, 0, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.25), inset 0 -2px 6px rgba(0, 0, 0, 0.8)",
+        outline: "1.5px solid rgba(215, 226, 234, 0.7)",
+        outlineOffset: "-2px",
       }}
       data-cursor="button"
       data-magnetic="true"
     >
-      <span className="px-7 py-3 sm:px-9 sm:py-3.5 md:px-11 md:py-4 text-xs sm:text-sm md:text-base font-semibold tracking-wider">
+      <span className="px-7 py-3 sm:px-9 sm:py-3.5 md:px-11 md:py-4 text-xs sm:text-sm md:text-base font-semibold tracking-wider text-[#D7E2EA] group-hover:text-white transition-colors">
         {label}
       </span>
     </span>

@@ -103,54 +103,54 @@ export const Hero: React.FC = () => {
           className="absolute inset-0 z-20 w-full h-full flex flex-col justify-between px-6 md:px-10 py-6 md:py-8 pointer-events-auto"
         >
           {/* Top Navbar Row */}
-          <div className="w-full flex items-center justify-between text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-lg lg:text-[1.3rem] pt-2">
+          <nav aria-label="Hero Navigation" className="w-full flex items-center justify-between text-[#D7E2EA] font-medium uppercase tracking-wider text-xs sm:text-sm md:text-base lg:text-[1.15rem] pt-2 relative z-30">
             <ScrollLink
               to="about"
               smooth={true}
-              offset={-60}
-              duration={500}
-              className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
+              offset={-70}
+              duration={600}
+              className="cursor-pointer hover:text-white transition-colors duration-200 py-2 px-1"
               data-cursor="button"
             >
               About
             </ScrollLink>
             <ScrollLink
-              to="services"
-              smooth={true}
-              offset={-60}
-              duration={500}
-              className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
-              data-cursor="button"
-            >
-              Services
-            </ScrollLink>
-            <ScrollLink
               to="projects"
               smooth={true}
-              offset={-60}
-              duration={500}
-              className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
+              offset={-70}
+              duration={600}
+              className="cursor-pointer hover:text-white transition-colors duration-200 py-2 px-1"
               data-cursor="button"
             >
               Projects
             </ScrollLink>
             <ScrollLink
+              to="services"
+              smooth={true}
+              offset={-70}
+              duration={600}
+              className="cursor-pointer hover:text-white transition-colors duration-200 py-2 px-1"
+              data-cursor="button"
+            >
+              Services
+            </ScrollLink>
+            <ScrollLink
               to="contact"
               smooth={true}
-              offset={-60}
-              duration={500}
-              className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
+              offset={-70}
+              duration={600}
+              className="cursor-pointer hover:text-white transition-colors duration-200 py-2 px-1"
               data-cursor="button"
             >
               Contact
             </ScrollLink>
-          </div>
+          </nav>
 
           {/* Center Area: Massive Hero Heading + Overlaid Magnetic Portrait */}
-          <div className="relative w-full flex-1 flex flex-col items-center justify-center -mt-6 sm:-mt-4 md:-mt-8 overflow-hidden">
-            {/* Massive Jack-style Hero Heading with .hero-heading gradient + WarpText */}
-            <div className="w-full text-center overflow-hidden">
-              <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[13.5vw] sm:text-[14.5vw] md:text-[15.5vw] lg:text-[16.5vw] select-none">
+          <div className="relative w-full flex-1 flex flex-col items-center justify-center overflow-hidden">
+            {/* Massive Hero Heading with .hero-heading gradient + WarpText */}
+            <div className="w-full text-center overflow-hidden relative z-0">
+              <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[13vw] sm:text-[14vw] md:text-[14.5vw] lg:text-[15.5vw] select-none">
                 <WarpText
                   text="HI, I'M CHRIS"
                   as="span"
@@ -161,18 +161,18 @@ export const Hero: React.FC = () => {
               </h1>
             </div>
 
-            {/* Jack-style Centered Magnetic Portrait */}
-            <div className="absolute left-1/2 -translate-x-1/2 z-10 bottom-0 sm:bottom-0 pointer-events-auto">
-              <Magnet padding={160} strength={3.5}>
-                <div className="relative w-[260px] sm:w-[340px] md:w-[420px] lg:w-[480px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]">
+            {/* Centered Magnetic Portrait: Scaled down and positioned cleanly so it doesn't obstruct the text or buttons */}
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-10 pointer-events-auto">
+              <Magnet padding={120} strength={3.5}>
+                <div className="relative w-[180px] sm:w-[240px] md:w-[300px] lg:w-[350px] max-h-[42vh] flex items-end justify-center drop-shadow-[0_20px_40px_rgba(0,0,0,0.85)]">
                   <img
                     src="/media/chris.png"
                     alt="Chris Mathew Aje"
-                    className="w-full h-auto object-contain pointer-events-none select-none filter contrast-110 drop-shadow-2xl"
+                    className="w-full h-auto max-h-[42vh] object-contain pointer-events-none select-none filter contrast-110 drop-shadow-2xl"
                     loading="eager"
                   />
-                  {/* Subtle soft rim glow behind portrait */}
-                  <div className="absolute inset-0 -z-10 rounded-full blur-3xl opacity-30 bg-gradient-to-t from-purple-600/40 via-blue-500/20 to-transparent pointer-events-none" />
+                  {/* Soft atmospheric backlight aura */}
+                  <div className="absolute inset-0 -z-10 rounded-full blur-3xl opacity-25 bg-gradient-to-t from-white/20 via-blue-500/15 to-transparent pointer-events-none" />
                 </div>
               </Magnet>
             </div>
