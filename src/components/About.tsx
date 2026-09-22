@@ -143,40 +143,6 @@ export const About: React.FC = () => {
               Cybersecurity student and creative developer bridging technical resilience with cinematic UI/UX. Passionate about privacy, zero-knowledge mechanics, and modern WebGL digital systems.
             </p>
 
-            {/* Circular Scroll Progress Meter */}
-            <div className="pt-4 border-t border-white/10 flex items-center gap-4">
-              <div className="relative w-12 h-12 flex items-center justify-center">
-                <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
-                  <path
-                    className="text-neutral-800"
-                    strokeWidth="3"
-                    stroke="currentColor"
-                    fill="none"
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                  <motion.path
-                    className="text-white"
-                    strokeDasharray="100, 100"
-                    strokeWidth="3.2"
-                    strokeLinecap="round"
-                    stroke="currentColor"
-                    fill="none"
-                    style={{
-                      pathLength: scrollYProgress,
-                    }}
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                </svg>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-mono uppercase tracking-wider text-neutral-400">
-                  Storyline Progress
-                </span>
-                <span className="text-xs text-neutral-500 font-mono">
-                  Scroll through profile milestones
-                </span>
-              </div>
-            </div>
           </div>
 
           {/* Right Column: Progressive Storytelling Timeline (60% width) */}
