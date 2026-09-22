@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { SplitFlapText } from "@/components/ui/SplitFlapText";
 
 export const HappyClientsSection: React.FC = () => {
   const metrics = [
@@ -44,8 +45,11 @@ export const HappyClientsSection: React.FC = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               // Trusted By Innovators Worldwide
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
-              Engineering with standard-defining technologies.
+            <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight">
+              <SplitFlapText
+                text="Engineering with standard-defining technologies."
+                onHoverTrigger={true}
+              />
             </h3>
           </div>
 

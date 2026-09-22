@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import { SplitFlapText } from "@/components/ui/SplitFlapText";
 
 interface SectionTitleRevealProps {
   title: string;
@@ -20,8 +21,14 @@ export const SectionTitleReveal: React.FC<SectionTitleRevealProps> = ({
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const [triggerCount, setTriggerCount] = useState<number>(0);
 
-  const words = title.split(" ");
+  // Trigger flap cycle on first appearance in view
+  useEffect(() => {
+    if (isInView) {
+      setTriggerCount((prev) => prev + 1);
+    }
+  }, [isInView]);
 
   const alignClass =
     align === "left"
@@ -29,34 +36,6 @@ export const SectionTitleReveal: React.FC<SectionTitleRevealProps> = ({
       : align === "right"
       ? "text-right items-end"
       : "text-center items-center";
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const wordVariants = {
-    hidden: {
-      y: "120%",
-      opacity: 0,
-      rotateX: 45,
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      rotateX: 0,
-      transition: {
-        duration: 0.85,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
 
   const HeadingTag = tag;
 
@@ -77,22 +56,14 @@ export const SectionTitleReveal: React.FC<SectionTitleRevealProps> = ({
         </motion.div>
       )}
 
-      {/* Main Kinetic Headline */}
-      <HeadingTag className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white perspective-[1000px] leading-[1.15]">
-        <motion.span
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="inline-flex flex-wrap gap-x-3 gap-y-1"
-        >
-          {words.map((word, i) => (
-            <span key={i} className="inline-block overflow-hidden pb-1">
-              <motion.span variants={wordVariants} className="inline-block">
-                {word}
-              </motion.span>
-            </span>
-          ))}
-        </motion.span>
+      {/* Main Split-Flap Mechanical Headline */}
+      <HeadingTag className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.15] group/title cursor-default select-none">
+        <SplitFlapText
+          text={title}
+          triggerKey={triggerCount}
+          onHoverTrigger={true}
+          className="group-hover/title:text-neutral-200 transition-colors"
+        />
       </HeadingTag>
 
       {/* Subtitle with soft fade-in */}
@@ -109,3 +80,5 @@ export const SectionTitleReveal: React.FC<SectionTitleRevealProps> = ({
     </div>
   );
 };
+
+export default SectionTitleReveal;
