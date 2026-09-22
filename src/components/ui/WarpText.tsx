@@ -158,8 +158,8 @@ const WarpChar: React.FC<WarpCharProps> = ({
         willChange: "transform",
       }}
     >
-      {/* Front crisp letter */}
-      <span className="relative z-10 text-white font-black">{char}</span>
+      {/* Front crisp letter inheriting text-fill or gradient styling */}
+      <span className="relative z-10 font-black">{char}</span>
 
       {/* ReactBits Chromatic aberration RGB warp channels */}
       {transform.rgbShift > 0.3 && (

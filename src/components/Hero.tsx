@@ -146,11 +146,11 @@ export const Hero: React.FC = () => {
             </ScrollLink>
           </nav>
 
-          {/* Center Area: Massive Hero Heading + Overlaid Magnetic Portrait */}
+          {/* Center Area: Massive Hero Heading + Elegantly Integrated Magnetic Portrait */}
           <div className="relative w-full flex-1 flex flex-col items-center justify-center overflow-hidden">
-            {/* Massive Hero Heading with .hero-heading gradient + WarpText */}
-            <div className="w-full text-center overflow-hidden relative z-0">
-              <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[13vw] sm:text-[14vw] md:text-[14.5vw] lg:text-[15.5vw] select-none">
+            {/* Massive Hero Heading with crisp high-contrast silver gradient */}
+            <div className="w-full text-center overflow-hidden relative z-20 pointer-events-auto">
+              <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[12.5vw] sm:text-[13.5vw] md:text-[14vw] lg:text-[14.5vw] select-none drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)]">
                 <WarpText
                   text="HI, I'M CHRIS"
                   as="span"
@@ -161,18 +161,19 @@ export const Hero: React.FC = () => {
               </h1>
             </div>
 
-            {/* Centered Magnetic Portrait: Scaled down and positioned cleanly so it doesn't obstruct the text or buttons */}
+            {/* Centered Magnetic Portrait: Scaled and framed with a luxury arch silhouette behind the bottom of the letters */}
             <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-10 pointer-events-auto">
-              <Magnet padding={120} strength={3.5}>
-                <div className="relative w-[180px] sm:w-[240px] md:w-[300px] lg:w-[350px] max-h-[42vh] flex items-end justify-center drop-shadow-[0_20px_40px_rgba(0,0,0,0.85)]">
+              <Magnet padding={120} strength={3}>
+                <div className="relative w-[160px] sm:w-[210px] md:w-[260px] lg:w-[290px] h-[220px] sm:h-[280px] md:h-[330px] lg:h-[370px] rounded-t-[100px] sm:rounded-t-[140px] md:rounded-t-[160px] overflow-hidden border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black shadow-[0_20px_50px_rgba(0,0,0,0.95)] group/portrait">
                   <img
                     src="/media/chris.png"
                     alt="Chris Mathew Aje"
-                    className="w-full h-auto max-h-[42vh] object-contain pointer-events-none select-none filter contrast-110 drop-shadow-2xl"
+                    className="w-full h-full object-cover object-top select-none filter contrast-105 group-hover/portrait:scale-105 transition-transform duration-700 ease-out"
                     loading="eager"
                   />
-                  {/* Soft atmospheric backlight aura */}
-                  <div className="absolute inset-0 -z-10 rounded-full blur-3xl opacity-25 bg-gradient-to-t from-white/20 via-blue-500/15 to-transparent pointer-events-none" />
+                  {/* Subtle inner shadow and rim light */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black to-transparent pointer-events-none" />
                 </div>
               </Magnet>
             </div>
