@@ -48,6 +48,8 @@
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(215, 226, 234, 0.3) #080808;
   }
 
   body {
@@ -64,19 +66,23 @@
     color: #000000;
   }
 
-  /* Custom scrollbar */
+  /* Custom Luxury Stealth Scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #050505;
+    background: #080808;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: linear-gradient(180deg, rgba(215, 226, 234, 0.45) 0%, rgba(100, 105, 115, 0.35) 100%);
     border-radius: 9999px;
+    border: 2px solid #080808;
+    transition: all 0.3s ease;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.35);
+    background: linear-gradient(180deg, #BBCCD7 0%, #646973 100%);
+    box-shadow: 0 0 10px rgba(187, 204, 215, 0.4);
   }
 }
 
