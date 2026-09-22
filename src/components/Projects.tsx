@@ -72,8 +72,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         top: `${topStickyOffset}px`,
         zIndex: index + 10,
         // Card 1-4 get 75vh of scroll track so the next card can climb and cover them.
-        // Card 5 gets 40vh so it firmly rests on top of Card 4 and stays fully visible before reaching the CTA.
-        marginBottom: isLast ? "35vh" : "75vh",
+        // Card 5 is the final card, so 0 extra vertical gap is needed before the bottom CTA.
+        marginBottom: isLast ? "1.5rem" : "75vh",
       }}
     >
       <motion.div
@@ -259,7 +259,7 @@ export const Projects: React.FC = () => {
     <section
       id="projects"
       ref={containerRef}
-      className="pt-24 pb-36 relative bg-[#060606] text-white min-h-screen"
+      className="pt-24 pb-20 relative bg-[#060606] text-white min-h-screen"
     >
       {/* SECTION-SCOPED FULLSTAGE AMBIENT COLOR WASH:
           Sticky to viewport across entire projects scroll length, radiating the current screenshot's color */}
@@ -299,7 +299,7 @@ export const Projects: React.FC = () => {
         </div>
 
         {/* Bottom CTA to View All Projects */}
-        <div className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-6 p-10 rounded-[32px] border border-white/15 bg-white/[0.03] backdrop-blur-md relative z-10">
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10 rounded-[32px] border border-white/15 bg-white/[0.03] backdrop-blur-md relative z-10">
           <div>
             <h4 className="text-2xl font-bold text-white tracking-tight">
               Looking for more experiments &amp; open-source tools?
