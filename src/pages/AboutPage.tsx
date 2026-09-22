@@ -9,16 +9,22 @@ import { ContactButton } from "@/components/ui/ContactButton";
 export const AboutPage: React.FC = () => {
   const education = [
     {
-      year: "2023 - Present",
+      year: "2026 - 2028",
       institution: "Kristu Jayanti University",
+      degree: "Master of Science in Cybersecurity",
+      focus: "Advanced Cyber Threat Intelligence & Security Engineering",
+    },
+    {
+      year: "2023 - 2026",
+      institution: "Kristu Jayanti College",
       degree: "Bachelor of Computer Applications",
-      focus: "Cybersecurity & Software Systems",
+      focus: "First Class with Distinction",
     },
     {
       year: "2023",
       institution: "The Indian School, Kingdom of Bahrain",
       degree: "Higher Secondary Education",
-      focus: "Commerce stream with Computer Science (80%)",
+      focus: "Commerce stream with Computer Science (79%)",
     },
     {
       year: "2021",
@@ -65,34 +71,52 @@ export const AboutPage: React.FC = () => {
       link: "https://www.hackerrank.com/certificates/fbca630d6812",
     },
     {
-      title: "REST API Architecture",
+      title: "REST API",
       issuer: "HackerRank",
       date: "May 2025",
       link: "https://www.hackerrank.com/certificates/7067cb8f76d2",
     },
     {
-      title: "Securing MongoDB Atlas: Auth & Access",
+      title: "Securing MongoDB Atlas: Authentication & Authorization",
       issuer: "MongoDB",
       date: "May 2025",
       link: "https://www.credly.com/badges/d42ba4a5-27fa-4bbb-ae5f-5b87323f3b2e/linked_in_profile",
     },
     {
-      title: "Ethical Hacking & Penetration Testing",
+      title: "Securing MongoDB Self-Managed: Authentication & Authorization",
+      issuer: "MongoDB",
+      date: "May 2025",
+      link: "https://www.credly.com/badges/f0b99dd0-aabf-48a3-8eed-02a0b1ec833a/linked_in_profile",
+    },
+    {
+      title: "Ethical Hacking",
       issuer: "NSDC Academy & Internshala",
       date: "March 2025",
       link: "https://trainings.internshala.com/s/v/3610844/1c4beaba",
     },
     {
-      title: "Digital Engineering Certification",
+      title: "Digital Engineering",
       issuer: "Nasscom",
       date: "October 2023",
       link: "https://fsp-assessment-certificates.s3-ap-southeast-1.amazonaws.com/ChrisMathewAje-124647283.pdf",
     },
     {
-      title: "Advanced Component Systems in Figma",
+      title: "Get started with Figma",
+      issuer: "Coursera",
+      date: "October 2023",
+      link: "https://www.coursera.org/account/accomplishments/verify/KG4BZ57MXM64",
+    },
+    {
+      title: "Work with Components in Figma",
       issuer: "Coursera",
       date: "October 2023",
       link: "https://www.coursera.org/account/accomplishments/verify/JPM7L2GU3CGM",
+    },
+    {
+      title: "HTML",
+      issuer: "University of Michigan",
+      date: "April 2023",
+      link: "https://www.coursera.org/account/accomplishments/verify/45YW8F3CQXG2",
     },
   ];
 
@@ -144,7 +168,7 @@ export const AboutPage: React.FC = () => {
             <div>
               <h3 className="text-3xl font-black tracking-tight text-white">Chris Mathew Aje</h3>
               <p className="text-neutral-400 font-mono text-xs uppercase tracking-widest mt-1">
-                Developer • Cybersecurity Specialist • Creator
+                Web Dev &amp; Designer
               </p>
             </div>
 

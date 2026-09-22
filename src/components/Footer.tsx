@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
               CHRIS MATHEW AJE // THECMA.XYZ
             </div>
             <h3 className="text-2xl font-bold tracking-tight text-white mb-2">
-              Creative Technologist &amp; Security Engineer
+              Web Dev &amp; Designer
             </h3>
             <p className="text-neutral-400 text-sm max-w-md leading-relaxed mb-4">
               Building next-generation digital products, robust security tools, and interactive WebGL experiences.
@@ -79,7 +79,7 @@ export const Footer: React.FC = () => {
 
         <div className="border-t border-white/[0.08] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-neutral-500 text-xs font-mono">
-            © {new Date().getFullYear()} Chris Mathew Aje. Designed &amp; engineered in dark mode.
+            © {new Date().getFullYear()} Chris Mathew Aje. All rights reserved.
           </p>
 
           <div className="flex items-center gap-3">

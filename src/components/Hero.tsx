@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { Link as ScrollLink } from "react-scroll";
+import { Link } from "react-router-dom";
 import { LanyardHeroScene } from "@/components/hero/LanyardHeroScene";
 import { LightRays } from "@/components/backgrounds/LightRays";
 import { Waves } from "@/components/backgrounds/Waves";
@@ -142,16 +143,13 @@ export const Hero: React.FC = () => {
             >
               About
             </ScrollLink>
-            <ScrollLink
-              to="projects"
-              smooth={true}
-              offset={-70}
-              duration={600}
+            <Link
+              to="/projects"
               className="cursor-pointer hover:text-white transition-colors duration-200 py-2 px-1"
               data-cursor="button"
             >
               Projects
-            </ScrollLink>
+            </Link>
             <ScrollLink
               to="services"
               smooth={true}
@@ -211,7 +209,7 @@ export const Hero: React.FC = () => {
           <div className="w-full flex items-end justify-between pb-4 sm:pb-6 md:pb-8 relative z-20">
             {/* Left: Jack-style fluid uppercase descriptor */}
             <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[170px] sm:max-w-[230px] md:max-w-[280px] text-xs sm:text-sm md:text-base lg:text-[1.1rem]">
-              a creative engineer driven by crafting striking, resilient &amp; unforgettable digital systems
+              bridging creative visual design with performant, modern web development
             </p>
 
             {/* Right: Jack signature multi-layered gradient ContactButton */}

@@ -122,7 +122,7 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       // Sub details
       bctx.fillStyle = "#71717a";
       bctx.font = "600 18px sans-serif";
-      bctx.fillText("CYBERSECURITY & DEV", 50, 355);
+      bctx.fillText("WEB DEV & DESIGNER", 50, 355);
 
       // Verified pill
       bctx.fillStyle = "rgba(255, 255, 255, 0.15)";

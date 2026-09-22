@@ -122,8 +122,8 @@ export const Projects: React.FC = () => {
       {/* Section Header (TristanMedia layout) */}
       <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mb-16 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col md:flex-row md:items-end justify-between">
         <div>
-          <span className="text-xs uppercase tracking-[0.3em] text-red-500 font-mono block mb-2 font-semibold flex items-center gap-2">
-            <Layers className="w-4 h-4 text-red-500" />
+          <span className="text-xs uppercase tracking-[0.3em] text-[#D7E2EA]/80 font-mono block mb-2 font-semibold flex items-center gap-2">
+            <Layers className="w-4 h-4 text-[#D7E2EA]" />
             FEATURED PORTFOLIO // SELECTED CASE STUDIES
           </span>
           <SplitFlapText
@@ -168,7 +168,7 @@ export const Projects: React.FC = () => {
               data-st-card={i}
               onClick={() => handleCardClick(project, i)}
               data-cursor={isCovered ? "SELECT" : "VIEW"}
-              className="group cursor-pointer rounded-2xl overflow-hidden border border-neutral-800/90 bg-neutral-950/95 transition-all duration-500 shadow-[0_-16px_50px_rgba(0,0,0,0.85)] hover:border-red-600 backdrop-blur-xl origin-top min-h-[440px] sm:min-h-[500px]"
+              className="group cursor-pointer rounded-2xl overflow-hidden border border-white/10 bg-neutral-950/95 transition-all duration-500 shadow-[0_-16px_50px_rgba(0,0,0,0.85)] hover:border-white/30 backdrop-blur-xl origin-top min-h-[440px] sm:min-h-[500px]"
               style={{
                 position: "sticky",
                 top: `${desktopTop}px`,
@@ -180,20 +180,20 @@ export const Projects: React.FC = () => {
               }}
             >
               {/* Top Hero Header Bar (Always visible when stacked like folder index tabs) */}
-              <div className="px-5 sm:px-7 py-3.5 bg-neutral-900/95 border-b border-neutral-800/90 flex items-center justify-between gap-4 transition-colors group-hover:bg-neutral-900">
+              <div className="px-5 sm:px-7 py-3.5 bg-neutral-900/95 border-b border-white/10 flex items-center justify-between gap-4 transition-colors group-hover:bg-neutral-900">
                 {/* Left: Indicator, Index & Project Title */}
                 <div className="flex items-center gap-3 sm:gap-4 min-w-0">
                   <span
                     className={`w-2.5 h-2.5 rounded-full shrink-0 transition-all ${
                       activeIndex === i
-                        ? "bg-red-600 shadow-[0_0_12px_rgba(229,9,20,0.9)] animate-pulse"
+                        ? "bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)] animate-pulse"
                         : "bg-neutral-600"
                     }`}
                   />
-                  <span className="font-mono text-xs text-red-500 font-bold uppercase tracking-wider shrink-0">
+                  <span className="font-mono text-xs text-[#D7E2EA] font-bold uppercase tracking-wider shrink-0">
                     // 0{i + 1}
                   </span>
-                  <h3 className="text-base sm:text-xl md:text-2xl font-bold text-white uppercase tracking-tight truncate group-hover:text-red-500 transition-colors font-display">
+                  <h3 className="text-base sm:text-xl md:text-2xl font-bold text-white uppercase tracking-tight truncate group-hover:text-neutral-200 transition-colors font-display">
                     {project.title}
                   </h3>
                   {project.subtitle && (
@@ -209,7 +209,7 @@ export const Projects: React.FC = () => {
                     {project.category || "CASE STUDY"}
                   </span>
                   <span className="hidden md:inline text-neutral-600">•</span>
-                  <span className="text-red-500 font-bold font-mono text-xs sm:text-sm">
+                  <span className="text-[#D7E2EA] font-bold font-mono text-xs sm:text-sm">
                     {project.year}
                   </span>
                 </div>
@@ -261,7 +261,7 @@ export const Projects: React.FC = () => {
                       e.stopPropagation();
                       window.open(targetUrl, "_blank", "noopener,noreferrer");
                     }}
-                    className="shrink-0 px-6 py-3.5 rounded-full border border-neutral-700 bg-neutral-900 hover:border-red-600 hover:bg-red-600 text-white font-mono text-xs uppercase tracking-[0.2em] font-semibold transition-all flex items-center gap-2 group/btn self-start md:self-auto shadow-lg"
+                    className="shrink-0 px-7 py-3 rounded-full border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black hover:border-white/50 hover:bg-white/[0.08] text-[#D7E2EA] hover:text-white font-mono text-xs uppercase tracking-[0.2em] font-semibold transition-all flex items-center gap-2 group/btn self-start md:self-auto shadow-lg hover:shadow-white/[0.05]"
                   >
                     <span>{actionLabel}</span>
                     <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
@@ -274,7 +274,7 @@ export const Projects: React.FC = () => {
       </div>
 
       {/* Bottom CTA to View Full Archive */}
-      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-24 pt-10 border-t border-neutral-900 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-24 pt-10 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         <div>
           <h4 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">
             Looking for more experiments &amp; open-source tools?
@@ -287,9 +287,10 @@ export const Projects: React.FC = () => {
         <Link
           to="/projects"
           data-cursor="VIEW"
-          className="px-8 py-4 rounded-full bg-red-600 text-white font-mono text-xs uppercase tracking-[0.25em] font-bold hover:bg-red-700 hover:scale-105 transition-all shadow-[0_0_25px_rgba(229,9,20,0.5)] shrink-0"
+          className="group inline-flex items-center gap-2 rounded-full border border-white/25 hover:border-white/60 text-[#D7E2EA] hover:text-white bg-gradient-to-b from-white/10 via-neutral-900/60 to-black px-8 py-3.5 text-xs font-mono uppercase tracking-[0.2em] font-semibold transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.06)] shrink-0"
         >
-          View All Works →
+          <span>View All Works</span>
+          <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       </div>
     </div>
