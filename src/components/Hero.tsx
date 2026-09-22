@@ -5,6 +5,7 @@ import { Github, Linkedin, Mail, Phone, MessageSquareMore, Handshake, ArrowDown 
 import { Link as ScrollLink } from "react-scroll";
 import { LanyardHeroScene } from "@/components/hero/LanyardHeroScene";
 import { LightRays } from "@/components/backgrounds/LightRays";
+import { WarpText } from "@/components/ui/WarpText";
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -106,14 +107,19 @@ export const Hero: React.FC = () => {
               <span>INTERACTIVE STUDIO // 2025 PORTFOLIO</span>
             </div>
 
-            {/* Large Editorial Headline */}
-            <div className="space-y-2">
+            {/* Large Editorial Headline with ReactBits WarpText */}
+            <div className="space-y-3">
               <span className="block text-sm sm:text-base font-mono uppercase tracking-[0.25em] text-neutral-400">
                 Creative Technologist &amp; Engineer
               </span>
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.05]">
-                Chris Mathew Aje.
-              </h1>
+              <div className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.05] flex items-center justify-center">
+                <WarpText
+                  text="Chris Mathew Aje."
+                  as="h1"
+                  intensity={1.2}
+                  radius={200}
+                />
+              </div>
             </div>
 
             {/* Kinetic Typing Subtitle */}
