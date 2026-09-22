@@ -52,9 +52,9 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Kanit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     overflow-x: hidden;
-    background-color: #030303;
+    background-color: #0C0C0C;
     selection-background-color: #ffffff;
     selection-color: #000000;
   }
@@ -113,5 +113,12 @@
 
   .gradient-silver {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-neutral-100 via-zinc-300 to-neutral-400;
+  }
+
+  /* Jack Signature 3D Creator Hero Heading Gradient */
+  .hero-heading {
+    background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }

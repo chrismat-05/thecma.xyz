@@ -6,6 +6,8 @@ import { Link as ScrollLink } from "react-scroll";
 import { LanyardHeroScene } from "@/components/hero/LanyardHeroScene";
 import { LightRays } from "@/components/backgrounds/LightRays";
 import { WarpText } from "@/components/ui/WarpText";
+import { Magnet } from "@/components/ui/Magnet";
+import { ContactButton } from "@/components/ui/ContactButton";
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -91,99 +93,101 @@ export const Hero: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        {/* Phase 2: Revealed Hero Content Section */}
+        {/* Phase 2: Revealed Hero Content Section (Jack 3D Creator Style) */}
         <motion.div
           style={{
             opacity: heroContentOpacity,
             y: heroContentY,
             scale: heroContentScale,
           }}
-          className="container mx-auto px-4 relative z-20 max-w-6xl pointer-events-none flex flex-col items-center justify-center text-center"
+          className="absolute inset-0 z-20 w-full h-full flex flex-col justify-between px-6 md:px-10 py-6 md:py-8 pointer-events-auto"
         >
-          <div className="flex flex-col items-center text-center space-y-8 max-w-3xl mx-auto pointer-events-auto">
-            {/* Studio Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-black/80 backdrop-blur-md text-xs font-mono text-neutral-300">
-              <span className="w-2 h-2 rounded-full bg-white animate-ping" />
-              <span>INTERACTIVE STUDIO // 2025 PORTFOLIO</span>
-            </div>
+          {/* Top Navbar Row */}
+          <div className="w-full flex items-center justify-between text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-lg lg:text-[1.3rem] pt-2">
+            <ScrollLink
+              to="about"
+              smooth={true}
+              offset={-60}
+              duration={500}
+              className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
+              data-cursor="button"
+            >
+              About
+            </ScrollLink>
+            <ScrollLink
+              to="services"
+              smooth={true}
+              offset={-60}
+              duration={500}
+              className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
+              data-cursor="button"
+            >
+              Services
+            </ScrollLink>
+            <ScrollLink
+              to="projects"
+              smooth={true}
+              offset={-60}
+              duration={500}
+              className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
+              data-cursor="button"
+            >
+              Projects
+            </ScrollLink>
+            <ScrollLink
+              to="contact"
+              smooth={true}
+              offset={-60}
+              duration={500}
+              className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
+              data-cursor="button"
+            >
+              Contact
+            </ScrollLink>
+          </div>
 
-            {/* Large Editorial Headline with ReactBits WarpText */}
-            <div className="space-y-3">
-              <span className="block text-sm sm:text-base font-mono uppercase tracking-[0.25em] text-neutral-400">
-                Creative Technologist &amp; Engineer
-              </span>
-              <div className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.05] flex items-center justify-center">
+          {/* Center Area: Massive Hero Heading + Overlaid Magnetic Portrait */}
+          <div className="relative w-full flex-1 flex flex-col items-center justify-center -mt-6 sm:-mt-4 md:-mt-8 overflow-hidden">
+            {/* Massive Jack-style Hero Heading with .hero-heading gradient + WarpText */}
+            <div className="w-full text-center overflow-hidden">
+              <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[13.5vw] sm:text-[14.5vw] md:text-[15.5vw] lg:text-[16.5vw] select-none">
                 <WarpText
-                  text="Chris Mathew Aje."
-                  as="h1"
-                  intensity={1.2}
-                  radius={200}
+                  text="HI, I'M CHRIS"
+                  as="span"
+                  intensity={1.1}
+                  radius={220}
+                  className="hero-heading"
                 />
-              </div>
+              </h1>
             </div>
 
-            {/* Kinetic Typing Subtitle */}
-            <div className="text-lg sm:text-2xl font-mono text-neutral-300 h-10 flex items-center justify-center">
-              <TypeAnimation
-                sequence={[
-                  "Creative Web Agency & Systems",
-                  2000,
-                  "Cybersecurity & Threat Scanner",
-                  2000,
-                  "Immersive 3D & WebGL Platforms",
-                  2000,
-                  "High-Velocity Full-Stack Engineering",
-                  2000,
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-              />
+            {/* Jack-style Centered Magnetic Portrait */}
+            <div className="absolute left-1/2 -translate-x-1/2 z-10 bottom-0 sm:bottom-0 pointer-events-auto">
+              <Magnet padding={160} strength={3.5}>
+                <div className="relative w-[260px] sm:w-[340px] md:w-[420px] lg:w-[480px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]">
+                  <img
+                    src="/media/chris.png"
+                    alt="Chris Mathew Aje"
+                    className="w-full h-auto object-contain pointer-events-none select-none filter contrast-110 drop-shadow-2xl"
+                    loading="eager"
+                  />
+                  {/* Subtle soft rim glow behind portrait */}
+                  <div className="absolute inset-0 -z-10 rounded-full blur-3xl opacity-30 bg-gradient-to-t from-purple-600/40 via-blue-500/20 to-transparent pointer-events-none" />
+                </div>
+              </Magnet>
             </div>
+          </div>
 
-            {/* Interactive CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto justify-center">
-              <ScrollLink
-                to="projects"
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="btn-hero-primary cursor-pointer"
-                data-magnetic="true"
-                data-cursor-text="View"
-              >
-                Explore Selected Work
-              </ScrollLink>
-              <ScrollLink
-                to="contact"
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="btn-hero-outline cursor-pointer"
-                data-magnetic="true"
-              >
-                Get In Touch
-              </ScrollLink>
-            </div>
+          {/* Bottom Bar: Left Fluid Descriptor + Right Jack Signature ContactButton */}
+          <div className="w-full flex items-end justify-between pb-4 sm:pb-6 md:pb-8 relative z-20">
+            {/* Left: Jack-style fluid uppercase descriptor */}
+            <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[170px] sm:max-w-[230px] md:max-w-[280px] text-xs sm:text-sm md:text-base lg:text-[1.1rem]">
+              a creative engineer driven by crafting striking, resilient &amp; unforgettable digital systems
+            </p>
 
-            {/* Social Links */}
-            <div className="flex items-center gap-5 pt-6">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white hover:text-black flex items-center justify-center text-neutral-400 transition-all duration-300 hover:scale-110"
-                    title={social.label}
-                    data-cursor="button"
-                  >
-                    <Icon size={18} />
-                  </a>
-                );
-              })}
+            {/* Right: Jack signature multi-layered gradient ContactButton */}
+            <div>
+              <ContactButton label="Contact Me" to="contact" />
             </div>
           </div>
         </motion.div>

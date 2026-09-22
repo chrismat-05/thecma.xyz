@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ProjectsPage from "./pages/ProjectsPage";
+import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 import React from "react";
 import { MagneticCustomCursor } from "./components/cursor/MagneticCustomCursor";
@@ -21,6 +22,7 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/about" element={<AboutPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

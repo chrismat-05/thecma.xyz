@@ -1,271 +1,125 @@
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { GraduationCap, Award, Code, Database, Globe, Palette, ExternalLink, CheckCircle2 } from "lucide-react";
-import { SectionTitleReveal } from "@/components/ui/SectionTitleReveal";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
+import { AnimatedText } from "@/components/ui/AnimatedText";
+import { ContactButton } from "@/components/ui/ContactButton";
+import { SplitFlapText } from "@/components/ui/SplitFlapText";
 
 export const About: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
 
-  const education = [
+  // Four decorative 3D assets from Jack 3D Creator specification
+  const decorative3D = [
     {
-      year: "2023 - Present",
-      institution: "Kristu Jayanti University",
-      degree: "Bachelor of Computer Applications",
-      focus: "Cybersecurity & Software Systems",
+      id: "moon",
+      url: "https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png",
+      alt: "3D Moon Icon",
+      className: "w-[120px] sm:w-[160px] md:w-[210px] top-[4%] left-[1%] sm:left-[2%] md:left-[4%]",
+      initial: { opacity: 0, x: -80, y: 0 },
+      delay: 0.1,
     },
     {
-      year: "2023",
-      institution: "The Indian School, Kingdom of Bahrain",
-      degree: "Higher Secondary Education",
-      focus: "Commerce stream with Computer Science (80%)",
+      id: "object",
+      url: "https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png",
+      alt: "3D Geometric Cylinder",
+      className: "w-[100px] sm:w-[140px] md:w-[180px] bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%]",
+      initial: { opacity: 0, x: -80, y: 0 },
+      delay: 0.25,
     },
     {
-      year: "2021",
-      institution: "The Indian School, Kingdom of Bahrain",
-      degree: "Secondary Education",
-      focus: "Academic Excellence (81%)",
+      id: "lego",
+      url: "https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png",
+      alt: "3D Lego Piece",
+      className: "w-[120px] sm:w-[160px] md:w-[210px] top-[4%] right-[1%] sm:right-[2%] md:right-[4%]",
+      initial: { opacity: 0, x: 80, y: 0 },
+      delay: 0.15,
+    },
+    {
+      id: "group",
+      url: "https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png",
+      alt: "3D Torus Group",
+      className: "w-[130px] sm:w-[170px] md:w-[220px] bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%]",
+      initial: { opacity: 0, x: 80, y: 0 },
+      delay: 0.3,
     },
   ];
 
-  const skillCategories = [
-    {
-      title: "Languages",
-      icon: Code,
-      skills: ["TypeScript", "JavaScript", "Python", "VB.NET", "CSS3 / HTML5"],
-    },
-    {
-      title: "Frameworks & 3D",
-      icon: Globe,
-      skills: ["React", "Three.js / WebGL", "Tailwind CSS", "Node.js", "Express.js"],
-    },
-    {
-      title: "Databases & Cloud",
-      icon: Database,
-      skills: ["Supabase", "Firebase & Firestore", "PostgreSQL", "MongoDB Atlas", "SQL Server"],
-    },
-    {
-      title: "Creative Tech & Studio",
-      icon: Palette,
-      skills: ["Motion Graphics", "Videography & Direction", "Figma Design Systems", "Sound Design"],
-    },
-  ];
-
-  const certifications = [
-    {
-      title: "Salesforce Administrator Explorer",
-      issuer: "Nasscom",
-      date: "July 2025",
-      link: "https://fsp-assessment-certificates.s3.ap-southeast-1.amazonaws.com/%27/s3/buckets/fsp-assessment-certificates%27/CHRIS%2BMATHEW%2BAJE_148550316.pdf.pdf",
-    },
-    {
-      title: "Problem Solving",
-      issuer: "HackerRank",
-      date: "May 2025",
-      link: "https://www.hackerrank.com/certificates/fbca630d6812",
-    },
-    {
-      title: "REST API Architecture",
-      issuer: "HackerRank",
-      date: "May 2025",
-      link: "https://www.hackerrank.com/certificates/7067cb8f76d2",
-    },
-    {
-      title: "Securing MongoDB Atlas: Auth & Access",
-      issuer: "MongoDB",
-      date: "May 2025",
-      link: "https://www.credly.com/badges/d42ba4a5-27fa-4bbb-ae5f-5b87323f3b2e/linked_in_profile",
-    },
-    {
-      title: "Ethical Hacking & Penetration Testing",
-      issuer: "NSDC Academy & Internshala",
-      date: "March 2025",
-      link: "https://trainings.internshala.com/s/v/3610844/1c4beaba",
-    },
-    {
-      title: "Digital Engineering Certification",
-      issuer: "Nasscom",
-      date: "October 2023",
-      link: "https://fsp-assessment-certificates.s3-ap-southeast-1.amazonaws.com/ChrisMathewAje-124647283.pdf",
-    },
-    {
-      title: "Advanced Component Systems in Figma",
-      issuer: "Coursera",
-      date: "October 2023",
-      link: "https://www.coursera.org/account/accomplishments/verify/JPM7L2GU3CGM",
-    },
-  ];
+  const narrativeText =
+    "With more than five years of experience in cybersecurity and digital design, I bridge technical resilience with high-impact creative engineering. Driven by zero-knowledge mechanics, interactive systems, and cinematic design to help modern brands stand out. Let's build something unforgettable together!";
 
   return (
-    <section id="about" ref={containerRef} className="relative bg-black text-white">
-      <div className="container mx-auto px-4 max-w-6xl py-28">
-        <SectionTitleReveal
-          badge="// NARRATIVE & BACKGROUND"
-          title="About The Engineer."
-          subtitle="A fusion of cybersecurity rigor, technical discipline, and high-impact digital craftsmanship."
-          align="left"
-        />
+    <section
+      id="about"
+      ref={containerRef}
+      className="relative min-h-screen bg-[#0C0C0C] text-white flex flex-col items-center justify-center overflow-hidden px-5 sm:px-8 md:px-10 py-24 sm:py-32"
+    >
+      {/* 4 Floating Decorative 3D Corner Artifacts with Entry Physics */}
+      {decorative3D.map((item) => (
+        <motion.div
+          key={item.id}
+          initial={item.initial}
+          whileInView={{ opacity: 1, x: 0, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.9, delay: item.delay, ease: [0.25, 0.1, 0.25, 1] }}
+          className={`absolute pointer-events-none select-none z-10 ${item.className}`}
+        >
+          <img
+            src={item.url}
+            alt={item.alt}
+            className="w-full h-auto object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+            loading="lazy"
+          />
+        </motion.div>
+      ))}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Sticky Left Column (40% width) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-8">
-            <div className="relative group">
-              {/* Photo Frame with subtle glow */}
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto lg:mx-0 rounded-3xl overflow-hidden border border-white/20 bg-neutral-900/60 p-2 backdrop-blur-xl shadow-2xl shadow-black/80">
-                <div className="w-full h-full rounded-2xl overflow-hidden relative">
-                  <img
-                    src="/media/cover.png"
-                    alt="Chris Mathew Aje"
-                    className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                </div>
-              </div>
+      <div className="container mx-auto max-w-4xl relative z-20 flex flex-col items-center text-center">
+        {/* Massive Jack-style Centered Gradient Heading with SplitFlapText on hover */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mb-10 sm:mb-14 md:mb-16"
+        >
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-400 block mb-4">
+            // NARRATIVE &amp; ETHOS
+          </span>
+          <h2 className="hero-heading font-black uppercase leading-none tracking-tight text-[11vw] sm:text-[10vw] md:text-[8vw] lg:text-[140px] select-none">
+            <SplitFlapText text="ABOUT ME" onHoverTrigger={true} className="hero-heading" />
+          </h2>
+        </motion.div>
 
-              {/* Status pill */}
-              <div className="absolute -bottom-3 left-6 sm:left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/90 border border-white/20 backdrop-blur-md">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-xs font-mono text-neutral-300">Bengaluru, India • Available</span>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-3xl font-bold tracking-tight text-white">Chris Mathew Aje</h3>
-              <p className="text-neutral-400 font-mono text-xs uppercase tracking-widest mt-1">
-                Developer • Cybersecurity Specialist • Creator
-              </p>
-            </div>
-
-            <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
-              Cybersecurity student and creative developer bridging technical resilience with cinematic UI/UX. Passionate about privacy, zero-knowledge mechanics, and modern WebGL digital systems.
-            </p>
-
-          </div>
-
-          {/* Right Column: Progressive Storytelling Timeline (60% width) */}
-          <div className="lg:col-span-7 space-y-16">
-            {/* 1. Quick Intro Narrative Card */}
-            <div className="p-8 rounded-3xl bg-neutral-900/30 border border-white/[0.08] backdrop-blur-sm space-y-4">
-              <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest block">
-                01 // Philosophy & Ethos
-              </span>
-              <h4 className="text-2xl font-bold text-white tracking-tight">
-                Where security integrity meets interactive elegance.
-              </h4>
-              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-                From auditing cryptographic hashes to directing cinematic videography, I love operating at the intersection of left-brain technical depth and right-brain aesthetic instinct. Every interface should be as robust beneath the surface as it is captivating to navigate.
-              </p>
-            </div>
-
-            {/* 2. Education Milestone */}
-            <div className="p-8 rounded-3xl bg-neutral-900/30 border border-white/[0.08] backdrop-blur-sm space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
-                  <GraduationCap size={20} />
-                </div>
-                <h4 className="text-xl font-bold text-white tracking-tight">
-                  Academic Background
-                </h4>
-              </div>
-
-              <div className="space-y-6 divide-y divide-white/[0.06]">
-                {education.map((item, idx) => (
-                  <div key={idx} className={idx > 0 ? "pt-5" : ""}>
-                    <div className="flex justify-between items-baseline">
-                      <h5 className="font-semibold text-white text-base">{item.degree}</h5>
-                      <span className="text-xs font-mono text-neutral-400">{item.year}</span>
-                    </div>
-                    <p className="text-neutral-400 text-sm mt-0.5">{item.institution}</p>
-                    <p className="text-neutral-500 text-xs mt-1 font-mono">{item.focus}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 3. Skills & Expertise Grid */}
-            <div className="p-8 rounded-3xl bg-neutral-900/30 border border-white/[0.08] backdrop-blur-sm space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
-                  <Code size={20} />
-                </div>
-                <h4 className="text-xl font-bold text-white tracking-tight">
-                  Skills & Technical Domains
-                </h4>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                {skillCategories.map((category, idx) => {
-                  const Icon = category.icon;
-                  return (
-                    <div
-                      key={idx}
-                      className="p-5 rounded-2xl bg-black/40 border border-white/[0.06] space-y-3 hover:border-white/20 transition-colors"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Icon size={16} className="text-neutral-400" />
-                        <h6 className="font-semibold text-white text-sm">{category.title}</h6>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {category.skills.map((skill, sIdx) => (
-                          <span
-                            key={sIdx}
-                            className="px-2.5 py-1 text-xs font-mono rounded-lg bg-white/[0.04] text-neutral-300 border border-white/[0.06]"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* 4. Certifications & Credentials */}
-            <div className="p-8 rounded-3xl bg-neutral-900/30 border border-white/[0.08] backdrop-blur-sm space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
-                  <Award size={20} />
-                </div>
-                <h4 className="text-xl font-bold text-white tracking-tight">
-                  Verified Certifications
-                </h4>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-3">
-                {certifications.map((cert, idx) => (
-                  <a
-                    key={idx}
-                    href={cert.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 rounded-xl bg-black/40 border border-white/[0.06] hover:border-white/30 transition-all duration-200 flex flex-col justify-between group"
-                    data-cursor="button"
-                  >
-                    <div>
-                      <div className="flex items-start justify-between gap-2 mb-1">
-                        <span className="font-semibold text-xs text-white group-hover:text-white line-clamp-2">
-                          {cert.title}
-                        </span>
-                        <ExternalLink
-                          size={13}
-                          className="text-neutral-500 group-hover:text-white shrink-0 mt-0.5"
-                        />
-                      </div>
-                      <p className="text-[11px] text-neutral-400">{cert.issuer}</p>
-                    </div>
-                    <span className="text-[10px] font-mono text-neutral-500 mt-3 block">
-                      {cert.date}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
+        {/* Jack-style Character-by-Character Scroll Opacity Reveal Paragraph */}
+        <div className="max-w-[620px] mx-auto mb-14 sm:mb-16 md:mb-20">
+          <AnimatedText
+            text={narrativeText}
+            className="text-[#D7E2EA] font-medium text-center leading-relaxed text-base sm:text-xl md:text-2xl"
+          />
         </div>
+
+        {/* Bottom CTA Row: Jack Signature ContactButton + View Full Profile Link */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-col sm:flex-row items-center gap-5 justify-center"
+        >
+          <ContactButton label="Contact Me" to="contact" />
+
+          <Link
+            to="/about"
+            className="group inline-flex items-center gap-2 rounded-full border-2 border-[#D7E2EA]/40 hover:border-[#D7E2EA] text-[#D7E2EA] hover:text-white px-7 py-3 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:bg-white/[0.05]"
+            data-cursor="button"
+          >
+            <span>Full Background &amp; Certs</span>
+            <ArrowUpRight
+              size={16}
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

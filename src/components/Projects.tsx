@@ -4,6 +4,7 @@ import { ArrowUpRight, Github, Package, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import projectsData from "@/content/projects.json";
 import { SectionTitleReveal } from "@/components/ui/SectionTitleReveal";
+import { LiveProjectButton } from "@/components/ui/LiveProjectButton";
 
 interface ProjectItem {
   id: string;
@@ -46,11 +47,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // Progressive scale-down as subsequent cards stack over it
   const scale = useTransform(progress, range, [1, targetScale]);
 
-  // Top offset for stacked deck rim: starts at ~80px + index * 24px
-  const topOffset = 80 + index * 24;
+  // Top offset for stacked deck rim: starts at ~75px + index * 26px
+  const topOffset = 75 + index * 26;
   const rowNumber = (index + 1).toString().padStart(2, "0");
 
   const color = project.themeColor || "#ffffff";
+
+  // Pick gallery screenshots
+  const col1Img1 = project.images[0] || project.thumbnail;
+  const col1Img2 = project.images[1] || project.thumbnail;
+  const col2Img = project.images[2] || project.images[1] || project.thumbnail;
 
   return (
     <div
@@ -63,9 +69,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     >
       <div className="relative w-full max-w-6xl">
         {/* DIRECT BACKDROP BLOOM BEHIND THIS SPECIFIC CARD:
-            Glows outwards with the project image's distinct vibrant color */}
+            Radiates outwards with the project image's distinct vibrant color */}
         <div
-          className="absolute -inset-6 sm:-inset-10 rounded-[50px] blur-[80px] sm:blur-[110px] opacity-40 group-hover:opacity-70 transition-opacity duration-700 pointer-events-none -z-10"
+          className="absolute -inset-6 sm:-inset-10 rounded-[50px] blur-[80px] sm:blur-[110px] opacity-45 group-hover:opacity-75 transition-opacity duration-700 pointer-events-none -z-10"
           style={{
             background: `radial-gradient(circle at 60% 40%, ${color}99, ${color}33 50%, transparent 80%)`,
           }}
@@ -75,146 +81,102 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           style={{
             scale,
           }}
-          className="w-full min-h-[560px] lg:min-h-[620px] rounded-[36px] sm:rounded-[44px] bg-[#0b0c10]/95 backdrop-blur-2xl border border-white/[0.14] shadow-2xl shadow-black/95 overflow-hidden relative group p-8 sm:p-12 lg:p-14 flex flex-col justify-between transition-colors duration-500"
+          className="w-full rounded-[38px] sm:rounded-[48px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-5 sm:p-7 md:p-9 shadow-2xl shadow-black/95 overflow-hidden relative group transition-colors duration-500 flex flex-col justify-between"
         >
-          {/* Inner subtle ambient color bloom in card corner */}
-          <div
-            className="absolute -top-24 -right-24 w-96 h-96 rounded-full blur-[90px] opacity-25 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"
-            style={{ backgroundColor: color }}
-          />
+          {/* Top Row: Huge Number + Category + Project Name + Live Project Button */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 sm:pb-8 border-b border-white/10">
+            <div className="flex flex-wrap items-baseline gap-3 sm:gap-5">
+              <span className="font-black text-3xl sm:text-5xl md:text-6xl text-white font-mono tracking-tight">
+                {rowNumber}
+              </span>
+              <span
+                className="px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider font-semibold border backdrop-blur-md"
+                style={{
+                  borderColor: `${color}40`,
+                  backgroundColor: `${color}15`,
+                  color: color,
+                }}
+              >
+                {project.category}
+              </span>
+              <h3 className="text-xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
+                {project.title}
+              </h3>
+            </div>
 
-          {/* Top hairline border glowing with project theme color */}
-          <div
-            className="absolute inset-x-0 top-0 h-[2px] pointer-events-none"
-            style={{
-              background: `linear-gradient(to right, transparent, ${color}, transparent)`,
-            }}
-          />
+            {/* Live Project Button */}
+            <div className="flex items-center gap-3">
+              {project.link ? (
+                <LiveProjectButton href={project.link} label="Live Project" />
+              ) : project.github ? (
+                <LiveProjectButton href={project.github} label="View GitHub" />
+              ) : project.package ? (
+                <LiveProjectButton href={project.package} label="View PyPI" />
+              ) : null}
+            </div>
+          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center flex-1">
-            {/* Left Column: Project Details (6 cols) */}
-            <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-8">
-              <div className="space-y-4">
-                {/* Top Meta: Index + Category Pill + Year */}
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs sm:text-sm font-bold tracking-wider text-neutral-400">
-                      // {rowNumber}
-                    </span>
-                    <span
-                      className="px-3.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider font-semibold border backdrop-blur-md"
-                      style={{
-                        borderColor: `${color}40`,
-                        backgroundColor: `${color}15`,
-                        color: color,
-                      }}
-                    >
-                      {project.category}
-                    </span>
-                  </div>
-                  <span className="font-mono text-xs sm:text-sm text-neutral-400">
-                    {project.year}
-                  </span>
-                </div>
+          {/* Middle Row: Description & Tech tags */}
+          <div className="py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <p className="text-[#D7E2EA] text-xs sm:text-sm md:text-base font-light max-w-3xl leading-relaxed">
+              {project.description}
+            </p>
+            <div className="flex flex-wrap gap-2 shrink-0">
+              {project.technologies.slice(0, 4).map((tech, tIdx) => (
+                <span
+                  key={tIdx}
+                  className="px-2.5 py-1 text-[11px] font-mono rounded-lg bg-white/[0.05] text-neutral-300 border border-white/10"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
 
-                {/* Title & Subtitle */}
-                <h3 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08] pt-1">
-                  {project.title}
-                </h3>
-                <p className="text-base sm:text-lg text-neutral-300 font-medium leading-relaxed">
-                  {project.subtitle}
-                </p>
-
-                {/* Detailed Description */}
-                <p className="text-sm text-neutral-400 leading-relaxed pt-1">
-                  {project.description}
-                </p>
+          {/* Bottom Row: Jack-style 2-Column Image Gallery Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pt-2">
+            {/* Left Column (40% width / 5 cols): 2 Stacked Images */}
+            <div className="md:col-span-5 flex flex-col gap-4 sm:gap-5">
+              <div className="w-full h-[140px] sm:h-[180px] md:h-[210px] rounded-[24px] sm:rounded-[36px] md:rounded-[44px] overflow-hidden border border-white/15 bg-neutral-950/80 shadow-lg relative group/img">
+                <img
+                  src={col1Img1}
+                  alt={`${project.title} screenshot 1`}
+                  className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              {/* Tags, Technologies & CTAs */}
-              <div className="space-y-6 pt-4 border-t border-white/[0.08]">
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 block mb-2.5">
-                    CORE TECHNOLOGIES:
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="px-3 py-1 text-xs font-mono rounded-xl bg-black/70 text-neutral-300 border border-white/10"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex flex-wrap items-center gap-3 pt-2">
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-hero-primary !py-3.5 !px-6 text-xs font-bold inline-flex items-center gap-2"
-                      data-cursor="button"
-                      data-magnetic="true"
-                      style={{
-                        boxShadow: `0 0 25px ${color}55`,
-                      }}
-                    >
-                      <Globe size={15} />
-                      <span>Explore Live Site</span>
-                      <ArrowUpRight size={15} />
-                    </a>
-                  )}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-hero-outline !py-3.5 !px-6 text-xs font-medium inline-flex items-center gap-2 hover:border-white/40"
-                      data-cursor="button"
-                    >
-                      <Github size={15} />
-                      <span>View Repository</span>
-                    </a>
-                  )}
-                  {project.package && (
-                    <a
-                      href={project.package}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-hero-outline !py-3.5 !px-6 text-xs font-medium inline-flex items-center gap-2"
-                      data-cursor="button"
-                    >
-                      <Package size={15} />
-                      <span>Package</span>
-                    </a>
-                  )}
-                </div>
+              <div className="w-full h-[170px] sm:h-[220px] md:h-[260px] rounded-[24px] sm:rounded-[36px] md:rounded-[44px] overflow-hidden border border-white/15 bg-neutral-950/80 shadow-lg relative group/img">
+                <img
+                  src={col1Img2}
+                  alt={`${project.title} screenshot 2`}
+                  className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
 
-            {/* Right Column: Taller Immersive Visual Showcase (6 cols) */}
-            <div className="lg:col-span-6 h-full flex items-center justify-center">
-              <div className="w-full h-[320px] sm:h-[400px] lg:h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 bg-neutral-950/90 shadow-2xl relative group/preview">
+            {/* Right Column (60% width / 7 cols): 1 Tall Hero Image */}
+            <div className="md:col-span-7">
+              <div className="w-full h-[320px] sm:h-[415px] md:h-[490px] rounded-[28px] sm:rounded-[40px] md:rounded-[50px] overflow-hidden border border-white/15 bg-neutral-950/80 shadow-2xl relative group/img">
                 <img
-                  src={project.thumbnail}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover/preview:scale-105 transition-transform duration-700 ease-out"
+                  src={col2Img}
+                  alt={`${project.title} hero showcase`}
+                  className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-                {/* Glowing Corner Indicator with matching project color */}
-                <div className="absolute bottom-5 right-5 px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-xs font-mono text-neutral-300 flex items-center gap-2 shadow-lg">
+                {/* Corner Status Pill */}
+                <div className="absolute bottom-5 right-5 px-3.5 py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-xs font-mono text-neutral-300 flex items-center gap-2 shadow-xl">
                   <span
                     className="w-2 h-2 rounded-full animate-pulse"
                     style={{ backgroundColor: color }}
                   />
                   <span className="text-[11px] font-semibold text-white">
-                    Featured Case Study
+                    Interactive Production Showcase
                   </span>
                 </div>
               </div>
