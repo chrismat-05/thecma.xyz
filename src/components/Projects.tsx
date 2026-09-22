@@ -65,8 +65,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       style={{
         top: `${topStickyOffset}px`,
         zIndex: index + 10,
-        // Uniform scroll track for all cards so all 5 cards stack identically
-        marginBottom: "70vh",
+        // Cards 0 to (total - 2) get 70vh so the next card can scroll up and stack over them.
+        // The last card is already at the top of the stack, so it doesn't need empty scroll runway before the CTA!
+        marginBottom: index === total - 1 ? "1.5rem" : "70vh",
       }}
     >
       <motion.div
