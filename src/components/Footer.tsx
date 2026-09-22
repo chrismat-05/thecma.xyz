@@ -5,13 +5,13 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Link } from 'react-router-dom';
 
 const socialLinks = [
-  { icon: Github, label: 'GitHub', href: 'https://github.com/chrismat-05' },
-  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/chrismaje/' },
-  { icon: MessageSquareMore, label: 'WhatsApp', href: 'https://wa.me/+918848914245' },
-  { icon: Phone, label: 'Call', href: 'tel:+918848914245' },
-  { icon: Mail, label: 'Email', href: 'mailto:chrismaje63@gmail.com' },
-  { icon: Handshake, label: 'Fiverr', href: 'https://www.fiverr.com/s/zWgryod' },
-  { icon: Award, label: 'Credly', href: 'https://www.credly.com/users/chrismaje' },
+  { icon: Github, label: 'GitHub', href: 'https://github.com/chrismat-05', brandColor: '#2b3137' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/chrismaje/', brandColor: '#0077b5' },
+  { icon: MessageSquareMore, label: 'WhatsApp', href: 'https://wa.me/+918848914245', brandColor: '#25D366' },
+  { icon: Phone, label: 'Call', href: 'tel:+918848914245', brandColor: '#0284c7' },
+  { icon: Mail, label: 'Email', href: 'mailto:chrismaje63@gmail.com', brandColor: '#ea4335' },
+  { icon: Handshake, label: 'Fiverr', href: 'https://www.fiverr.com/s/zWgryod', brandColor: '#1dbf73' },
+  { icon: Award, label: 'Credly', href: 'https://www.credly.com/users/chrismaje', brandColor: '#ff6f00' },
 ];
 
 export const Footer: React.FC = () => {
@@ -94,6 +94,8 @@ export const Footer: React.FC = () => {
                   className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:border-white/30 transition-colors"
                   title={social.label}
                   data-cursor="button"
+                  data-cursor-color={social.brandColor}
+                  data-cursor-text={social.label}
                 >
                   <Icon size={15} />
                 </a>

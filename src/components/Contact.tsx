@@ -22,31 +22,37 @@ const Contact = () => {
       icon: Github,
       label: 'GitHub',
       href: 'https://github.com/chrismat-05',
+      brandColor: '#2b3137',
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/chrismaje/',
+      brandColor: '#0077b5',
     },
     {
       icon: MessageSquareMore,
       label: 'WhatsApp',
       href: 'https://wa.me/+918848914245',
+      brandColor: '#25D366',
     },
     {
       icon: Phone,
       label: 'Call',
       href: 'tel:+918848914245',
+      brandColor: '#0284c7',
     },
     {
       icon: Mail,
       label: 'Email',
       href: 'mailto:chrismaje63@gmail.com',
+      brandColor: '#ea4335',
     },
     {
       icon: Handshake,
       label: 'Fiverr',
       href: 'https://www.fiverr.com/s/zWgryod',
+      brandColor: '#1dbf73',
     },
   ];
 
@@ -155,9 +161,11 @@ const Contact = () => {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-11 h-11 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white hover:text-black flex items-center justify-center text-neutral-400 transition-all duration-300 hover:scale-110"
+                        className="w-11 h-11 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:text-white flex items-center justify-center text-neutral-400 transition-all duration-300 hover:scale-110"
                         title={social.label}
                         data-cursor="button"
+                        data-cursor-color={social.brandColor}
+                        data-cursor-text={social.label}
                       >
                         <Icon size={18} />
                       </a>

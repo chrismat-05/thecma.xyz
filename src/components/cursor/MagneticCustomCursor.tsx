@@ -4,17 +4,20 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 interface CursorContextType {
   setCursorText: (text: string | null) => void;
   setCursorVariant: (variant: "default" | "button" | "hidden") => void;
+  setCursorColor: (color: string | null) => void;
 }
 
 const CursorContext = createContext<CursorContextType>({
   setCursorText: () => {},
   setCursorVariant: () => {},
+  setCursorColor: () => {},
 });
 
 export const useCursor = () => useContext(CursorContext);
 
 export const MagneticCustomCursor: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cursorText, setCursorText] = useState<string | null>(null);
+  const [cursorColor, setCursorColor] = useState<string | null>(null);
   const [cursorVariant, setCursorVariant] = useState<"default" | "button" | "hidden">("default");
   const [isCoarse, setIsCoarse] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -50,11 +53,10 @@ export const MagneticCustomCursor: React.FC<{ children: React.ReactNode }> = ({ 
       ) as HTMLElement | null;
 
       const textAttr = target.closest("[data-cursor-text]")?.getAttribute("data-cursor-text");
-      if (textAttr) {
-        setCursorText(textAttr);
-      } else {
-        setCursorText(null);
-      }
+      const colorAttr = target.closest("[data-cursor-color]")?.getAttribute("data-cursor-color");
+
+      setCursorText(textAttr || null);
+      setCursorColor(colorAttr || null);
 
       if (interactive) {
         setCursorVariant("button");
@@ -76,44 +78,58 @@ export const MagneticCustomCursor: React.FC<{ children: React.ReactNode }> = ({ 
   }, [isVisible, mouseX, mouseY]);
 
   if (isCoarse) {
-    return <CursorContext.Provider value={{ setCursorText, setCursorVariant }}>{children}</CursorContext.Provider>;
+    return (
+      <CursorContext.Provider value={{ setCursorText, setCursorVariant, setCursorColor }}>
+        {children}
+      </CursorContext.Provider>
+    );
   }
 
   return (
-    <CursorContext.Provider value={{ setCursorText, setCursorVariant }}>
+    <CursorContext.Provider value={{ setCursorText, setCursorVariant, setCursorColor }}>
       {children}
       {isVisible && (
         <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden">
           {/* Inner small dot */}
           <motion.div
-            className="fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-10"
+            className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full pointer-events-none z-10"
             style={{
               x: mouseX,
               y: mouseY,
               translateX: "-50%",
               translateY: "-50%",
               opacity: cursorVariant === "button" ? 0 : 1,
+              backgroundColor: cursorColor || "#ffffff",
             }}
           />
 
           {/* Outer trailing magnetic ring / expanding pill */}
           <motion.div
-            className={`fixed top-0 left-0 rounded-full pointer-events-none flex items-center justify-center font-mono text-[10px] tracking-wider uppercase text-black font-semibold transition-colors duration-200 ${
-              cursorText
-                ? "bg-white text-black shadow-lg shadow-white/30"
-                : cursorVariant === "button"
-                ? "bg-white/90 text-black backdrop-blur-md"
-                : "border border-white/40 bg-white/[0.04]"
-            }`}
+            className="fixed top-0 left-0 rounded-full pointer-events-none flex items-center justify-center font-mono text-[10px] tracking-wider uppercase font-bold transition-colors duration-200"
             style={{
               x: smoothX,
               y: smoothY,
               translateX: "-50%",
               translateY: "-50%",
+              backgroundColor: cursorColor
+                ? cursorColor
+                : cursorText
+                ? "#ffffff"
+                : cursorVariant === "button"
+                ? "rgba(255, 255, 255, 0.9)"
+                : "rgba(255, 255, 255, 0.04)",
+              color: cursorColor ? "#ffffff" : "#000000",
+              borderColor: cursorColor ? "transparent" : cursorVariant === "button" ? "transparent" : "rgba(255, 255, 255, 0.4)",
+              borderWidth: cursorColor || cursorVariant === "button" ? "0px" : "1px",
+              boxShadow: cursorColor
+                ? `0 0 25px ${cursorColor}aa, inset 0 0 10px rgba(255, 255, 255, 0.3)`
+                : cursorText
+                ? "0 8px 25px rgba(255, 255, 255, 0.35)"
+                : undefined,
             }}
             animate={{
-              width: cursorText ? 72 : cursorVariant === "button" ? 48 : 36,
-              height: cursorText ? 72 : cursorVariant === "button" ? 48 : 36,
+              width: cursorColor ? 56 : cursorText ? 72 : cursorVariant === "button" ? 46 : 34,
+              height: cursorColor ? 56 : cursorText ? 72 : cursorVariant === "button" ? 46 : 34,
               scale: cursorVariant === "button" ? 1.15 : 1,
             }}
             transition={{ type: "spring", stiffness: 350, damping: 25 }}
@@ -122,7 +138,7 @@ export const MagneticCustomCursor: React.FC<{ children: React.ReactNode }> = ({ 
               <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-center px-1 leading-none"
+                className="text-center px-1 leading-none text-black font-semibold"
               >
                 {cursorText}
               </motion.span>
