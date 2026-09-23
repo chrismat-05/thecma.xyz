@@ -134,7 +134,7 @@ export const Projects: React.FC = () => {
       </div>
 
       {/* Sticky Stacking Cards Container */}
-      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col pb-48">
+      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col pb-6 sm:pb-8">
         {featuredProjects.map((project, i) => {
           // Tabbed cascading offsets: 52px tab clearance per stacked card
           const desktopTop = 72 + i * 52;
@@ -274,7 +274,7 @@ export const Projects: React.FC = () => {
       </div>
 
       {/* Bottom CTA to View Full Archive */}
-      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-24 pt-10 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         <div>
           <h4 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">
             Looking for more experiments &amp; open-source tools?
