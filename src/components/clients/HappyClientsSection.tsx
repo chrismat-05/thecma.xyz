@@ -29,10 +29,13 @@ export const HappyClientsSection: React.FC = () => {
           <div>
             <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight">
               <SplitFlapText
-                text="Happy Clients"
+                text="Trusted By."
                 onHoverTrigger={true}
               />
             </h3>
+            <p className="text-sm font-mono text-neutral-400 mt-2">
+              Founders, creators, communities &amp; early-stage teams.
+            </p>
           </div>
 
           {/* Metrics summary: 2 clean metrics with rollup animation */}
