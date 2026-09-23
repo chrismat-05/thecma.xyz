@@ -83,7 +83,9 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     badgeCanvas.width = 512;
     badgeCanvas.height = 760;
     const bctx = badgeCanvas.getContext("2d");
-    if (bctx) {
+
+    const renderBadge = (photo?: HTMLImageElement) => {
+      if (!bctx) return;
       // Dark sleek obsidian background
       bctx.fillStyle = "#090a0f";
       bctx.fillRect(0, 0, 512, 760);
@@ -98,52 +100,145 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
 
       // Studio tag
       bctx.fillStyle = "#a1a1aa";
-      bctx.font = "bold 20px monospace";
+      bctx.font = "bold 18px monospace";
       bctx.fillText("CHRIS MATHEW AJE // PASS", 50, 95);
 
-      // Hologram chip icon
+      // Hologram chip icon on left
       bctx.strokeStyle = "rgba(255,255,255,0.6)";
       bctx.lineWidth = 2;
-      bctx.strokeRect(50, 130, 80, 60);
+      bctx.strokeRect(50, 125, 75, 55);
       bctx.fillStyle = "rgba(255,255,255,0.12)";
-      bctx.fillRect(50, 130, 80, 60);
+      bctx.fillRect(50, 125, 75, 55);
       bctx.strokeStyle = "rgba(255,255,255,0.3)";
       bctx.beginPath();
-      bctx.moveTo(90, 130);
-      bctx.lineTo(90, 190);
+      bctx.moveTo(87, 125);
+      bctx.lineTo(87, 180);
       bctx.stroke();
 
-      // Headline title
+      // Headline title on left
       bctx.fillStyle = "#ffffff";
-      bctx.font = "900 40px sans-serif";
-      bctx.fillText("CREATIVE", 50, 260);
-      bctx.fillText("ENGINEER", 50, 305);
+      bctx.font = "900 36px sans-serif";
+      bctx.fillText("CHRIS", 50, 225);
+      bctx.fillText("MATHEW", 50, 265);
 
       // Sub details
-      bctx.fillStyle = "#71717a";
-      bctx.font = "600 18px sans-serif";
-      bctx.fillText("WEB DEV & DESIGNER", 50, 355);
+      bctx.fillStyle = "#a1a1aa";
+      bctx.font = "600 15px sans-serif";
+      bctx.fillText("WEB DEV & DESIGNER", 50, 305);
 
       // Verified pill
       bctx.fillStyle = "rgba(255, 255, 255, 0.15)";
       bctx.beginPath();
-      bctx.roundRect ? bctx.roundRect(50, 385, 170, 32, 16) : bctx.rect(50, 385, 170, 32);
+      bctx.roundRect ? bctx.roundRect(50, 335, 170, 32, 16) : bctx.rect(50, 335, 170, 32);
       bctx.fill();
       bctx.fillStyle = "#ffffff";
       bctx.font = "bold 13px monospace";
-      bctx.fillText("● ACTIVE 2022", 65, 406);
+      bctx.fillText("● ACTIVE 2022", 65, 356);
+
+      // Portrait Photo Frame on right (X: 275, Y: 125, W: 185, H: 242)
+      const px = 275;
+      const py = 125;
+      const pw = 185;
+      const ph = 242;
+      const pr = 20;
+
+      // Photo frame background
+      bctx.fillStyle = "#12131a";
+      bctx.beginPath();
+      bctx.roundRect ? bctx.roundRect(px, py, pw, ph, pr) : bctx.rect(px, py, pw, ph);
+      bctx.fill();
+
+      if (photo && photo.complete && photo.naturalWidth > 0) {
+        bctx.save();
+        bctx.beginPath();
+        bctx.roundRect ? bctx.roundRect(px, py, pw, ph, pr) : bctx.rect(px, py, pw, ph);
+        bctx.clip();
+        // Crop chris.png centered on face/upper chest
+        bctx.drawImage(photo, 150, 50, 1260, 1450, px, py, pw, ph);
+        // Subtle dark rim gradient over bottom of photo
+        const pGrad = bctx.createLinearGradient(0, py + ph - 60, 0, py + ph);
+        pGrad.addColorStop(0, "transparent");
+        pGrad.addColorStop(1, "rgba(0,0,0,0.6)");
+        bctx.fillStyle = pGrad;
+        bctx.fillRect(px, py, pw, ph);
+        bctx.restore();
+      } else {
+        // Modern silhouette placeholder while loading
+        bctx.fillStyle = "rgba(255, 255, 255, 0.15)";
+        bctx.beginPath();
+        bctx.arc(px + pw / 2, py + 85, 36, 0, Math.PI * 2);
+        bctx.fill();
+        bctx.beginPath();
+        bctx.arc(px + pw / 2, py + 185, 60, Math.PI, 0, true);
+        bctx.fill();
+      }
+
+      // Metallic rim highlight around photo
+      bctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+      bctx.lineWidth = 2;
+      bctx.beginPath();
+      bctx.roundRect ? bctx.roundRect(px, py, pw, ph, pr) : bctx.rect(px, py, pw, ph);
+      bctx.stroke();
+
+      // Divider line with subtle glow
+      bctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+      bctx.lineWidth = 1;
+      bctx.beginPath();
+      bctx.moveTo(50, 400);
+      bctx.lineTo(462, 400);
+      bctx.stroke();
+
+      // Security & Specialization details
+      bctx.fillStyle = "#71717a";
+      bctx.font = "11px monospace";
+      bctx.fillText("SPECIALIZATION", 50, 435);
+      bctx.fillStyle = "#ffffff";
+      bctx.font = "bold 15px sans-serif";
+      bctx.fillText("CREATIVE WEB & DESIGN", 50, 458);
+
+      bctx.fillStyle = "#71717a";
+      bctx.font = "11px monospace";
+      bctx.fillText("AUTHENTICATION LEVEL", 50, 500);
+      bctx.fillStyle = "#ffffff";
+      bctx.font = "bold 15px sans-serif";
+      bctx.fillText("PRODUCTION // VERIFIED", 50, 523);
+
+      bctx.fillStyle = "#71717a";
+      bctx.font = "11px monospace";
+      bctx.fillText("ISSUED BY", 275, 435);
+      bctx.fillStyle = "#ffffff";
+      bctx.font = "bold 15px sans-serif";
+      bctx.fillText("THECMA.XYZ // IN", 275, 458);
+
+      bctx.fillStyle = "#71717a";
+      bctx.font = "11px monospace";
+      bctx.fillText("SECURITY PROTOCOL", 275, 500);
+      bctx.fillStyle = "#a1a1aa";
+      bctx.font = "13px monospace";
+      bctx.fillText("ZERO-KNOWLEDGE", 275, 523);
 
       // Barcode simulation
       bctx.fillStyle = "#ffffff";
       for (let x = 50; x < 460; x += Math.random() > 0.5 ? 8 : 14) {
-        bctx.fillRect(x, 610, Math.random() > 0.5 ? 3 : 6, 65);
+        bctx.fillRect(x, 595, Math.random() > 0.5 ? 3 : 6, 65);
       }
       bctx.font = "14px monospace";
-      bctx.fillStyle = "#52525b";
-      bctx.fillText("ID: 88489-14245-CMA-STUDIO", 50, 715);
-    }
+      bctx.fillStyle = "#71717a";
+      bctx.fillText("ID: 88489-14245-CMA-STUDIO", 50, 700);
+    };
+
+    renderBadge();
 
     const badgeTexture = new THREE.CanvasTexture(badgeCanvas);
+
+    // Asynchronously load Chris's actual photo and update 3D canvas texture
+    const portraitImage = new Image();
+    portraitImage.crossOrigin = "anonymous";
+    portraitImage.src = "/media/chris.png";
+    portraitImage.onload = () => {
+      renderBadge(portraitImage);
+      badgeTexture.needsUpdate = true;
+    };
 
     const cardMaterials = [
       new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.5, roughness: 0.2 }),
