@@ -60,16 +60,7 @@ export const HappyClientsSection: React.FC = () => {
             "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
         }}
       >
-        <motion.div
-          className="flex items-center gap-14 sm:gap-20 md:gap-24 w-max"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            ease: "linear",
-            duration: 35,
-            repeat: Infinity,
-          }}
-          whileHover={{ animationPlayState: "paused" }}
-        >
+        <div className="animate-marquee-scroll flex items-center gap-14 sm:gap-20 md:gap-24 w-max">
           {marqueeItems.map((item, index) => (
             <div
               key={`${item.name}-${index}`}
@@ -98,7 +89,7 @@ export const HappyClientsSection: React.FC = () => {
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

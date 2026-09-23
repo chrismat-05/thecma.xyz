@@ -136,4 +136,25 @@
   .font-tech {
     font-family: 'Space Grotesk', -apple-system, sans-serif;
   }
+
+  /* Smooth Infinite Marquee with rock-solid hover pause */
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee-scroll {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 35s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-marquee-scroll:hover {
+    animation-play-state: paused !important;
+  }
 }
