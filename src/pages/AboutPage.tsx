@@ -176,7 +176,7 @@ export const AboutPage: React.FC = () => {
             </p>
 
             <div className="pt-4">
-              <ContactButton label="Initiate Contact" href="mailto:chrismaje63@gmail.com" isScroll={false} />
+              <ContactButton label="Initiate Contact" href="mailto:chrismaje05@gmail.com" isScroll={false} />
             </div>
           </div>
 

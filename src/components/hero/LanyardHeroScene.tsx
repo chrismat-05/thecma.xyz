@@ -131,7 +131,7 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       // Top Header Row
       bctx.fillStyle = "#ffffff";
       bctx.font = "bold 13px monospace";
-      bctx.fillText("THECMA.XYZ", 36, 64);
+      bctx.fillText("CMA Tech", 36, 64);
       bctx.fillStyle = "#71717a";
       bctx.font = "12px monospace";
       bctx.fillText(" // ACCESS PASS", 126, 64);
@@ -282,7 +282,7 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       bctx.fillText("NETWORK DOMAIN", lx + 14, upperY + 240);
       bctx.fillStyle = "#ffffff";
       bctx.font = "bold 13px monospace";
-      bctx.fillText("THECMA.XYZ", lx + 14, upperY + 260);
+      bctx.fillText("CMA Tech", lx + 14, upperY + 260);
       bctx.fillStyle = "#a1a1aa";
       bctx.font = "10px monospace";
       bctx.fillText("KEY: CMA-88489", lx + 14, upperY + 282);
@@ -332,7 +332,7 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       bctx.font = "11px monospace";
       bctx.fillText("PASS: CHRIS MATHEW AJE", 36, midY + 154);
       bctx.textAlign = "right";
-      bctx.fillText("STUDIO: THECMA.XYZ", 476, midY + 154);
+      bctx.fillText("STUDIO: CMA", 476, midY + 154);
       bctx.textAlign = "left";
 
       // --- BOTTOM SECTION (Security Barcode & Serial Identification) ---

@@ -9,7 +9,7 @@ const socialLinks = [
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/chrismaje/', brandColor: '#0077b5' },
   { icon: MessageSquareMore, label: 'WhatsApp', href: 'https://wa.me/+918848914245', brandColor: '#25D366' },
   { icon: Phone, label: 'Call', href: 'tel:+918848914245', brandColor: '#0284c7' },
-  { icon: Mail, label: 'Email', href: 'mailto:chrismaje63@gmail.com', brandColor: '#ea4335' },
+  { icon: Mail, label: 'Email', href: 'mailto:chrismaje05@gmail.com', brandColor: '#ea4335' },
   { icon: Handshake, label: 'Fiverr', href: 'https://www.fiverr.com/s/zWgryod', brandColor: '#1dbf73' },
   { icon: Award, label: 'Credly', href: 'https://www.credly.com/users/chrismaje', brandColor: '#ff6f00' },
 ];
@@ -67,7 +67,7 @@ export const Footer: React.FC = () => {
 
             <div className="pt-6">
               <a
-                href="mailto:chrismaje63@gmail.com"
+                href="mailto:chrismaje05@gmail.com"
                 className="btn-hero-outline"
                 data-cursor="button"
               >

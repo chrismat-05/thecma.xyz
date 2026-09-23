@@ -46,7 +46,7 @@ This project is licensed under the MIT License with the following exceptions:
 ## Contact
 - [GitHub](https://github.com/chrismat-05)
 - [LinkedIn](https://www.linkedin.com/in/chrismaje/)
-- [Email](mailto:chrismaje63@gmail.com)
+- [Email](mailto:chrismaje05@gmail.com)
 
 ---
 

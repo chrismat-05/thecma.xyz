@@ -45,7 +45,7 @@ const Contact = () => {
     {
       icon: Mail,
       label: 'Email',
-      href: 'mailto:chrismaje63@gmail.com',
+      href: 'mailto:chrismaje05@gmail.com',
       brandColor: '#ea4335',
     },
     {
@@ -123,7 +123,7 @@ const Contact = () => {
 
               <div className="space-y-4">
                 <a
-                  href="mailto:chrismaje63@gmail.com"
+                  href="mailto:chrismaje05@gmail.com"
                   className="flex items-center gap-4 p-4 rounded-2xl bg-neutral-900/40 border border-white/10 hover:border-white/30 transition-colors"
                   data-cursor="button"
                 >
@@ -132,7 +132,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-xs font-mono text-neutral-500 uppercase tracking-wider">Email Transmission</div>
-                    <div className="text-sm font-medium text-white">chrismaje63@gmail.com</div>
+                    <div className="text-sm font-medium text-white">chrismaje05@gmail.com</div>
                   </div>
                 </a>
 
