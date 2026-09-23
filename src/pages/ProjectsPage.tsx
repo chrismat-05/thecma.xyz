@@ -12,7 +12,8 @@ import {
   Layers,
   X,
   ChevronRight,
-  ExternalLink
+  ExternalLink,
+  Eye
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import projectsData from "@/content/projects.json";
@@ -185,26 +186,44 @@ export const ProjectsPage: React.FC = () => {
                 )}
 
                 {/* Actions */}
-                <div className="flex flex-wrap items-center gap-3 pt-2">
-                  {spotlightProject.link && (
-                    <a
-                      href={spotlightProject.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-7 py-3 rounded-full border border-white/25 bg-gradient-to-b from-white/15 via-white/[0.05] to-black hover:border-white/60 text-[#D7E2EA] hover:text-white font-mono text-xs uppercase tracking-[0.15em] font-semibold transition-all flex items-center gap-2 shadow-lg"
-                      data-cursor="button"
-                    >
-                      <Globe size={14} />
-                      <span>Live Platform</span>
-                      <ArrowUpRight size={14} />
-                    </a>
-                  )}
+                <div className="flex items-center justify-between gap-3 pt-2">
+                  <div className="flex items-center gap-3">
+                    {spotlightProject.link ? (
+                      <a
+                        href={spotlightProject.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-7 py-3 rounded-full border border-white/25 bg-gradient-to-b from-white/15 via-white/[0.05] to-black hover:border-white/60 text-[#D7E2EA] hover:text-white font-mono text-xs uppercase tracking-[0.15em] font-semibold transition-all flex items-center gap-2 shadow-lg"
+                        data-cursor="button"
+                      >
+                        <Globe size={14} />
+                        <span>Live Platform</span>
+                        <ArrowUpRight size={14} />
+                      </a>
+                    ) : spotlightProject.github ? (
+                      <a
+                        href={spotlightProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-7 py-3 rounded-full border border-white/25 bg-gradient-to-b from-white/15 via-white/[0.05] to-black hover:border-white/60 text-[#D7E2EA] hover:text-white font-mono text-xs uppercase tracking-[0.15em] font-semibold transition-all flex items-center gap-2 shadow-lg"
+                        data-cursor="button"
+                      >
+                        <Github size={14} />
+                        <span>Source Code</span>
+                        <ArrowUpRight size={14} />
+                      </a>
+                    ) : null}
+                  </div>
+
+                  {/* Icon-based button aligned to the right to open modal */}
                   <button
                     onClick={() => setPreviewProject(spotlightProject)}
-                    className="px-6 py-3 rounded-full border border-white/15 hover:border-white/40 text-neutral-300 hover:text-white font-mono text-xs uppercase tracking-wider transition-colors"
+                    className="w-12 h-12 rounded-full border border-white/20 bg-white/[0.05] hover:bg-white/15 hover:border-white/50 text-[#D7E2EA] hover:text-white flex items-center justify-center transition-all duration-300 shadow-lg group/modalbtn ml-auto"
+                    title="View Project Details"
+                    aria-label="View Project Details"
                     data-cursor="button"
                   >
-                    Deep Inspection
+                    <Eye size={20} className="group-hover/modalbtn:scale-110 transition-transform" />
                   </button>
                 </div>
               </div>
@@ -407,30 +426,32 @@ export const ProjectsPage: React.FC = () => {
 
                   {/* Card Action Footer */}
                   <div className="p-6 pt-0 border-t border-white/[0.08] flex items-center justify-between gap-3 mt-auto">
+                    {targetUrl ? (
+                      <a
+                        href={targetUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 rounded-full border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black hover:border-white/50 text-[#D7E2EA] hover:text-white text-xs font-mono uppercase tracking-wider font-semibold transition-all inline-flex items-center gap-1.5 shadow-md mt-4"
+                        data-cursor="button"
+                      >
+                        {project.link ? <Globe size={13} /> : project.package ? <Package size={13} /> : <Github size={13} />}
+                        <span>{actionLabel}</span>
+                        <ArrowUpRight size={13} />
+                      </a>
+                    ) : (
+                      <div className="mt-4" />
+                    )}
+
+                    {/* Icon-based button aligned to the right to open modal */}
                     <button
                       onClick={() => setPreviewProject(project)}
-                      className="text-xs font-mono uppercase tracking-wider text-neutral-400 hover:text-white transition-colors pt-4 inline-flex items-center gap-1"
+                      className="w-9 h-9 rounded-full border border-white/20 bg-white/[0.05] hover:bg-white/15 hover:border-white/50 text-[#D7E2EA] hover:text-white flex items-center justify-center transition-all duration-300 shadow-md group/modalbtn ml-auto mt-4"
+                      title="View Project Details"
+                      aria-label="View Project Details"
                       data-cursor="button"
                     >
-                      <span>Preview</span>
-                      <ChevronRight size={14} />
+                      <Eye size={15} className="group-hover/modalbtn:scale-110 transition-transform" />
                     </button>
-
-                    <div className="flex items-center gap-2 pt-4">
-                      {targetUrl && (
-                        <a
-                          href={targetUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2 rounded-full border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black hover:border-white/50 text-[#D7E2EA] hover:text-white text-xs font-mono uppercase tracking-wider font-semibold transition-all inline-flex items-center gap-1.5 shadow-md"
-                          data-cursor="button"
-                        >
-                          {project.link ? <Globe size={13} /> : project.package ? <Package size={13} /> : <Github size={13} />}
-                          <span>{actionLabel}</span>
-                          <ArrowUpRight size={13} />
-                        </a>
-                      )}
-                    </div>
                   </div>
                 </motion.div>
               );
