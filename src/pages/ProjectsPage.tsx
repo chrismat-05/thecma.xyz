@@ -1,6 +1,5 @@
-import React, { useState, useMemo, useEffect } from "react";
-import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useMemo } from "react";
+import { motion } from "framer-motion";
 import {
   ArrowLeft,
   Search,
@@ -10,7 +9,6 @@ import {
   ArrowUpRight,
   Sparkles,
   Layers,
-  X,
   ChevronRight,
   ExternalLink,
   Eye
@@ -46,51 +44,6 @@ export const ProjectsPage: React.FC = () => {
   const allProjects = projectsData as ProjectItem[];
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedService, setSelectedService] = useState<string>("all");
-  const [previewProject, setPreviewProject] = useState<ProjectItem | null>(null);
-
-  const serviceFilters = [
-    { label: "All Services", value: "all" },
-    ...servicesData.map((s) => ({
-      label: s.title,
-      value: s.id,
-    })),
-  ];
-
-  const filteredProjects = useMemo(() => {
-    return allProjects.filter((project) => {
-      const matchesService =
-        selectedService === "all" ||
-        (project.servicesOffered && project.servicesOffered.includes(selectedService));
-      const matchesSearch =
-        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (project.subtitle && project.subtitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        project.technologies.some((t) =>
-          t.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      return matchesService && matchesSearch;
-    });
-  }, [allProjects, selectedService, searchQuery]);
-
-  // Lock body scroll and attach Esc key listener when modal is open
-  useEffect(() => {
-    if (previewProject) {
-      document.body.style.overflow = "hidden";
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          setPreviewProject(null);
-        }
-      };
-      window.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.body.style.overflow = "unset";
-        window.removeEventListener("keydown", handleKeyDown);
-      };
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [previewProject]);
-
   // Spotlight featured project (defaults to forms-thecma or first project)
   const spotlightProject = useMemo(() => {
     return allProjects.find((p) => p.featured && p.id === "forms-thecma") || allProjects[0];
@@ -142,9 +95,11 @@ export const ProjectsPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white uppercase font-display tracking-tight">
-                    {spotlightProject.title}
-                  </h2>
+                  <Link to={`/projects/${spotlightProject.id}`} className="group/title block">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white uppercase font-display tracking-tight group-hover/title:text-neutral-200 transition-colors">
+                      {spotlightProject.title}
+                    </h2>
+                  </Link>
                   <p className="text-neutral-400 font-mono text-xs uppercase tracking-wider mt-1">
                     {spotlightProject.subtitle}
                   </p>
@@ -215,24 +170,24 @@ export const ProjectsPage: React.FC = () => {
                     ) : null}
                   </div>
 
-                  {/* Icon-based button aligned to the right to open modal */}
-                  <button
-                    onClick={() => setPreviewProject(spotlightProject)}
+                  {/* Icon-based button aligned to the right to open case study */}
+                  <Link
+                    to={`/projects/${spotlightProject.id}`}
                     className="w-12 h-12 rounded-full border border-white/20 bg-white/[0.05] hover:bg-white/15 hover:border-white/50 text-[#D7E2EA] hover:text-white flex items-center justify-center transition-all duration-300 shadow-lg group/modalbtn ml-auto"
-                    title="View Project Details"
-                    aria-label="View Project Details"
+                    title="View Project Case Study"
+                    aria-label="View Project Case Study"
                     data-cursor="button"
                   >
                     <Eye size={20} className="group-hover/modalbtn:scale-110 transition-transform" />
-                  </button>
+                  </Link>
                 </div>
               </div>
 
               {/* Right Column Showcase Visual */}
               <div className="lg:col-span-6">
-                <div
-                  onClick={() => setPreviewProject(spotlightProject)}
-                  className="w-full h-[260px] sm:h-[340px] md:h-[400px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 bg-neutral-950 relative group/img cursor-pointer shadow-2xl"
+                <Link
+                  to={`/projects/${spotlightProject.id}`}
+                  className="w-full h-[260px] sm:h-[340px] md:h-[400px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 bg-neutral-950 relative group/img cursor-pointer shadow-2xl block"
                   data-cursor="SELECT"
                 >
                   <img
@@ -242,10 +197,10 @@ export const ProjectsPage: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-[11px] font-mono text-neutral-300">
-                    <span>Click to view gallery ({spotlightProject.images.length} screens)</span>
-                    <ChevronRight size={13} />
+                    <Eye size={12} className="text-[#D7E2EA]" />
+                    <span>Explore Case Study</span>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
           </div>
@@ -345,9 +300,9 @@ export const ProjectsPage: React.FC = () => {
                 >
                   <div>
                     {/* Card Media Viewport */}
-                    <div
-                      onClick={() => setPreviewProject(project)}
-                      className="aspect-video w-full overflow-hidden bg-neutral-950 relative cursor-pointer group/thumb"
+                    <Link
+                      to={`/projects/${project.id}`}
+                      className="aspect-video w-full overflow-hidden bg-neutral-950 relative cursor-pointer group/thumb block"
                       data-cursor="VIEW"
                     >
                       <img
@@ -373,14 +328,16 @@ export const ProjectsPage: React.FC = () => {
                           +{project.images.length} images
                         </div>
                       )}
-                    </div>
+                    </Link>
 
                     {/* Card Editorial Info */}
                     <div className="p-6 sm:p-7 space-y-4">
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-neutral-100 transition-colors tracking-tight font-display">
-                          {project.title}
-                        </h3>
+                        <Link to={`/projects/${project.id}`} className="group/title block">
+                          <h3 className="text-xl sm:text-2xl font-bold text-white group-hover/title:text-neutral-200 transition-colors tracking-tight font-display">
+                            {project.title}
+                          </h3>
+                        </Link>
                         {project.subtitle && (
                           <p className="text-xs font-mono text-neutral-400 mt-1 truncate">
                             {project.subtitle}
@@ -442,189 +399,22 @@ export const ProjectsPage: React.FC = () => {
                       <div className="mt-4" />
                     )}
 
-                    {/* Icon-based button aligned to the right to open modal */}
-                    <button
-                      onClick={() => setPreviewProject(project)}
+                    {/* Icon-based button aligned to the right to open case study */}
+                    <Link
+                      to={`/projects/${project.id}`}
                       className="w-9 h-9 rounded-full border border-white/20 bg-white/[0.05] hover:bg-white/15 hover:border-white/50 text-[#D7E2EA] hover:text-white flex items-center justify-center transition-all duration-300 shadow-md group/modalbtn ml-auto mt-4"
-                      title="View Project Details"
-                      aria-label="View Project Details"
+                      title="View Case Study"
+                      aria-label="View Case Study"
                       data-cursor="button"
                     >
                       <Eye size={15} className="group-hover/modalbtn:scale-110 transition-transform" />
-                    </button>
+                    </Link>
                   </div>
                 </motion.div>
               );
             })}
           </div>
         )}
-
-        {/* 3. Interactive Quick-Preview Modal via Portal to avoid transformed parent clipping */}
-        {typeof document !== "undefined" &&
-          createPortal(
-            <AnimatePresence>
-              {previewProject && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/90 backdrop-blur-2xl overflow-y-auto"
-                  onClick={() => setPreviewProject(null)}
-                >
-                  <motion.div
-                    initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                    animate={{ scale: 1, opacity: 1, y: 0 }}
-                    exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-full max-w-4xl max-h-[85vh] rounded-[32px] border border-white/20 bg-neutral-950 p-6 sm:p-8 overflow-y-auto space-y-6 shadow-[0_0_80px_rgba(0,0,0,0.9)] relative my-auto"
-                  >
-                    {/* Modal Header */}
-                    <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
-                      <div>
-                        <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest block mb-1">
-                          // {previewProject.category.toUpperCase()} SYSTEM
-                        </span>
-                        <h3 className="text-2xl sm:text-3xl font-black text-white uppercase font-display">
-                          {previewProject.title}
-                        </h3>
-                        {previewProject.subtitle && (
-                          <p className="text-xs font-mono text-neutral-400 mt-1">
-                            {previewProject.subtitle}
-                          </p>
-                        )}
-                      </div>
-
-                      <button
-                        onClick={() => setPreviewProject(null)}
-                        className="p-2.5 rounded-full border border-white/10 hover:border-white/30 text-neutral-400 hover:text-white transition-colors bg-white/[0.03]"
-                        data-cursor="button"
-                      >
-                        <X size={18} />
-                      </button>
-                    </div>
-
-                    {/* Modal Gallery */}
-                    <div className="space-y-4">
-                      <div className="w-full h-[280px] sm:h-[400px] rounded-2xl overflow-hidden border border-white/15 bg-black">
-                        <img
-                          src={previewProject.thumbnail}
-                          alt={previewProject.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-
-                      {previewProject.images && previewProject.images.length > 1 && (
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                          {previewProject.images.slice(0, 4).map((img, i) => (
-                            <div
-                              key={i}
-                              className="h-20 sm:h-24 rounded-xl overflow-hidden border border-white/10 bg-neutral-900"
-                            >
-                              <img
-                                src={img}
-                                alt=""
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Modal Narrative & Tech */}
-                    <div className="space-y-4 pt-2">
-                      <h4 className="text-sm font-mono uppercase tracking-wider text-neutral-400">
-                        System Architecture &amp; Overview
-                      </h4>
-                      <p className="text-neutral-200 text-sm sm:text-base leading-relaxed">
-                        {previewProject.description}
-                      </p>
-
-                      <div className="pt-2">
-                        <span className="text-xs font-mono text-neutral-400 block mb-2">Technologies Used:</span>
-                        <div className="flex flex-wrap gap-2">
-                          {previewProject.technologies.map((tech, tIdx) => (
-                            <span
-                              key={tIdx}
-                              className="px-3 py-1 rounded-lg bg-white/[0.05] border border-white/15 text-xs font-mono text-white"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {previewProject.servicesOffered && previewProject.servicesOffered.length > 0 && (
-                        <div className="pt-2">
-                          <span className="text-xs font-mono text-neutral-400 block mb-2">Services Delivered:</span>
-                          <div className="flex flex-wrap gap-2">
-                            {previewProject.servicesOffered.map((srvId) => {
-                              const srv = servicesData.find((s) => s.id === srvId);
-                              if (!srv) return null;
-                              return (
-                                <span
-                                  key={srvId}
-                                  className="px-3 py-1 rounded-lg bg-white/[0.08] border border-white/20 text-xs font-mono text-white flex items-center gap-1.5"
-                                >
-                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                                  {srv.title}
-                                </span>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Modal Action Bar */}
-                    <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-                      <span className="text-xs font-mono text-neutral-500">
-                        Release Year: {previewProject.year}
-                      </span>
-
-                      <div className="flex items-center gap-3">
-                        {previewProject.github && (
-                          <a
-                            href={previewProject.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-5 py-2.5 rounded-full border border-white/20 text-neutral-300 hover:text-white text-xs font-mono uppercase tracking-wider flex items-center gap-2 hover:bg-white/[0.05] transition-colors"
-                            data-cursor="button"
-                          >
-                            <Github size={14} /> Source Code
-                          </a>
-                        )}
-                        {previewProject.package && (
-                          <a
-                            href={previewProject.package}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-5 py-2.5 rounded-full border border-white/20 text-neutral-300 hover:text-white text-xs font-mono uppercase tracking-wider flex items-center gap-2 hover:bg-white/[0.05] transition-colors"
-                            data-cursor="button"
-                          >
-                            <Package size={14} /> Package
-                          </a>
-                        )}
-                        {previewProject.link && (
-                          <a
-                            href={previewProject.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-6 py-2.5 rounded-full border border-white/25 bg-gradient-to-b from-white/15 via-white/[0.05] to-black hover:border-white/60 text-[#D7E2EA] hover:text-white text-xs font-mono uppercase tracking-wider font-semibold flex items-center gap-2 shadow-lg"
-                            data-cursor="button"
-                          >
-                            <Globe size={14} /> Live Site <ArrowUpRight size={14} />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>,
-            document.body
-          )}
       </main>
 
       <Footer />

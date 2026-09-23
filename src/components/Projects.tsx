@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowUpRight, Layers } from "lucide-react";
 import projectsData from "@/content/projects.json";
 import { SplitFlapText } from "@/components/ui/SplitFlapText";
@@ -26,6 +26,7 @@ interface ProjectItem {
 }
 
 export const Projects: React.FC = () => {
+  const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -81,11 +82,8 @@ export const Projects: React.FC = () => {
       cardRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
-    // Navigate or open live link
-    const targetUrl = project.link || project.github || project.package;
-    if (targetUrl) {
-      window.open(targetUrl, "_blank", "noopener,noreferrer");
-    }
+    // Navigate to dedicated case study page
+    navigate(`/projects/${project.id}`);
   };
 
   if (!featuredProjects || featuredProjects.length === 0) return null;
@@ -250,18 +248,32 @@ export const Projects: React.FC = () => {
                   )}
                 </div>
 
-                {targetUrl && (
+                <div className="flex items-center gap-3 shrink-0 self-start md:self-auto">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.open(targetUrl, "_blank", "noopener,noreferrer");
+                      navigate(`/projects/${project.id}`);
                     }}
-                    className="shrink-0 px-7 py-3 rounded-full border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black hover:border-white/50 hover:bg-white/[0.08] text-[#D7E2EA] hover:text-white font-mono text-xs uppercase tracking-[0.2em] font-semibold transition-all flex items-center gap-2 group/btn self-start md:self-auto shadow-lg hover:shadow-white/[0.05]"
+                    className="shrink-0 px-6 py-3 rounded-full border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black hover:border-white/50 hover:bg-white/[0.08] text-[#D7E2EA] hover:text-white font-mono text-xs uppercase tracking-[0.2em] font-semibold transition-all flex items-center gap-2 group/btn shadow-lg hover:shadow-white/[0.05]"
                   >
-                    <span>{actionLabel}</span>
+                    <span>Case Study</span>
                     <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                   </button>
-                )}
+
+                  {targetUrl && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(targetUrl, "_blank", "noopener,noreferrer");
+                      }}
+                      className="p-3 rounded-full border border-white/15 hover:border-white/40 bg-neutral-900/80 hover:bg-neutral-800 text-neutral-400 hover:text-white transition-all shadow-md"
+                      title={actionLabel}
+                      aria-label={actionLabel}
+                    >
+                      <ArrowUpRight className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           );

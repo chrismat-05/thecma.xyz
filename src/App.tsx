@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
 import ProjectsPage from "./pages/ProjectsPage";
+import ProjectDetailPage from "./pages/ProjectDetailPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 import React from "react";
@@ -42,6 +43,14 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <ProjectsPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/projects/:id"
+          element={
+            <PageTransition>
+              <ProjectDetailPage />
             </PageTransition>
           }
         />
