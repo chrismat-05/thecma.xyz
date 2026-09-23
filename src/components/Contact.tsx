@@ -117,7 +117,7 @@ const Contact = () => {
               <div>
                 <h3 className="text-2xl font-bold text-white mb-3">Let's build something exceptional.</h3>
                 <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
-                  Whether you require full-stack web applications, cybersecurity threat assessments, or high-touch digital experiences, I'm currently open to select client projects and team collaborations.
+                  Whether you require full-stack web applications, cybersecurity tools, or high-touch digital experiences, I'm currently open to client projects and team collaborations.
                 </p>
               </div>
 
@@ -210,7 +210,7 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Jane Doe"
+                      placeholder="Chris Mat"
                       className="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white placeholder-neutral-600 focus:outline-none focus:border-white transition-colors text-sm"
                     />
                   </div>
@@ -225,7 +225,7 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="jane@domain.com"
+                      placeholder="chris@gmail.com"
                       className="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white placeholder-neutral-600 focus:outline-none focus:border-white transition-colors text-sm"
                     />
                   </div>
