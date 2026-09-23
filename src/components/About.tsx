@@ -62,7 +62,7 @@ export const About: React.FC = () => {
             className="group inline-flex items-center gap-2 rounded-full border border-white/20 hover:border-white/60 text-[#D7E2EA] hover:text-white px-7 py-3 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-medium uppercase tracking-widest transition-all duration-300 hover:bg-white/[0.05]"
             data-cursor="button"
           >
-            <span>Full Background &amp; Certs</span>
+            <span>Read more About Me</span>
             <ArrowUpRight
               size={16}
               className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

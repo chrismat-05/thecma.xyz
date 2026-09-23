@@ -139,7 +139,7 @@ export const AboutPage: React.FC = () => {
 
         <SectionTitleReveal
           title="About The Engineer."
-          subtitle="A comprehensive exploration of academic milestones, cybersecurity depth, technical skill stacks, and certified credentials."
+          subtitle="A comprehensive compilation of academic milestones, cybersecurity depth, technical skill stacks, and certified credentials."
           align="left"
         />
 
@@ -191,7 +191,7 @@ export const AboutPage: React.FC = () => {
                 Where security integrity meets interactive elegance.
               </h4>
               <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-                From auditing cryptographic hashes to directing cinematic videography, I love operating at the intersection of left-brain technical depth and right-brain aesthetic instinct. Every interface should be as robust beneath the surface as it is captivating to navigate.
+                From creating cybersecurity tools to directing cinematic videography, I love operating at the intersection of left-brain technical depth and right-brain aesthetic instinct. Every interface should be as robust beneath the surface as it is captivating to navigate.
               </p>
             </div>
 

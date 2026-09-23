@@ -112,20 +112,12 @@ export const ProjectsPage: React.FC = () => {
             <span>Return to Portfolio</span>
           </Link>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs font-mono text-neutral-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>{allProjects.length} Catalogued Systems</span>
-          </div>
         </div>
 
         {/* Hero Title & Ethos */}
         <div className="mb-14">
-          <span className="text-xs uppercase tracking-[0.3em] text-[#D7E2EA]/80 font-mono block mb-2 font-semibold flex items-center gap-2">
-            <Layers className="w-4 h-4 text-[#D7E2EA]" />
-            ARCHIVE DIRECTORY // ALL EXPERIMENTAL &amp; PRODUCTION WORKS
-          </span>
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase font-display">
-            Selected Works &amp; Code.
+            Selected Works
           </h1>
           <p className="text-neutral-400 text-sm sm:text-base max-w-2xl mt-4 leading-relaxed font-sans">
             A comprehensive interactive repository of web architectures, security telemetry tools, open-source packages, and creative applications.
@@ -255,18 +247,16 @@ export const ProjectsPage: React.FC = () => {
                 <button
                   key={s.value}
                   onClick={() => setSelectedService(s.value)}
-                  className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
-                    isActive
-                      ? "bg-white text-black font-bold shadow-lg shadow-white/15 scale-105"
-                      : "bg-white/[0.03] text-neutral-400 border border-white/10 hover:text-white hover:border-white/30"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${isActive
+                    ? "bg-white text-black font-bold shadow-lg shadow-white/15 scale-105"
+                    : "bg-white/[0.03] text-neutral-400 border border-white/10 hover:text-white hover:border-white/30"
+                    }`}
                   data-cursor="button"
                 >
                   <span>{s.label}</span>
                   <span
-                    className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                      isActive ? "bg-black/15 text-black font-mono font-bold" : "bg-white/10 text-neutral-400"
-                    }`}
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full ${isActive ? "bg-black/15 text-black font-mono font-bold" : "bg-white/10 text-neutral-400"
+                      }`}
                   >
                     {count}
                   </span>
@@ -322,8 +312,8 @@ export const ProjectsPage: React.FC = () => {
               const actionLabel = project.link
                 ? "Live Site"
                 : project.package
-                ? "Package"
-                : "Source Code";
+                  ? "Package"
+                  : "Source Code";
               const targetUrl = project.link || project.package || project.github;
 
               return (
