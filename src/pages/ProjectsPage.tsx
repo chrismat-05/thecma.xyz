@@ -18,6 +18,7 @@ import projectsData from "@/content/projects.json";
 import { CursorGridBackground } from "@/components/backgrounds/CursorGridBackground";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import servicesData from "@/content/services.json";
 
 interface ProjectItem {
   id: string;
@@ -31,6 +32,7 @@ interface ProjectItem {
   tags: string[];
   technologies: string[];
   category: string;
+  servicesOffered?: string[];
   thumbnail: string;
   images: string[];
   link: string | null;
@@ -41,20 +43,22 @@ interface ProjectItem {
 export const ProjectsPage: React.FC = () => {
   const allProjects = projectsData as ProjectItem[];
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedService, setSelectedService] = useState<string>("all");
   const [previewProject, setPreviewProject] = useState<ProjectItem | null>(null);
 
-  const categories = [
-    { label: "All Works", value: "all" },
-    { label: "Major Systems", value: "major" },
-    { label: "Security & Tools", value: "minor" },
-    { label: "Academic / Enterprise", value: "college" },
+  const serviceFilters = [
+    { label: "All Services", value: "all" },
+    ...servicesData.map((s) => ({
+      label: s.title,
+      value: s.id,
+    })),
   ];
 
   const filteredProjects = useMemo(() => {
     return allProjects.filter((project) => {
-      const matchesCategory =
-        selectedCategory === "all" || project.category === selectedCategory;
+      const matchesService =
+        selectedService === "all" ||
+        (project.servicesOffered && project.servicesOffered.includes(selectedService));
       const matchesSearch =
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -62,9 +66,9 @@ export const ProjectsPage: React.FC = () => {
         project.technologies.some((t) =>
           t.toLowerCase().includes(searchQuery.toLowerCase())
         );
-      return matchesCategory && matchesSearch;
+      return matchesService && matchesSearch;
     });
-  }, [allProjects, selectedCategory, searchQuery]);
+  }, [allProjects, selectedService, searchQuery]);
 
   // Spotlight featured project (defaults to forms-thecma or first project)
   const spotlightProject = useMemo(() => {
@@ -149,6 +153,25 @@ export const ProjectsPage: React.FC = () => {
                   ))}
                 </div>
 
+                {/* Services Offered Badges */}
+                {spotlightProject.servicesOffered && spotlightProject.servicesOffered.length > 0 && (
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {spotlightProject.servicesOffered.map((srvId) => {
+                      const srv = servicesData.find((s) => s.id === srvId);
+                      if (!srv) return null;
+                      return (
+                        <span
+                          key={srvId}
+                          className="px-3 py-1 text-xs font-mono rounded-lg bg-white/[0.08] border border-white/20 text-[#D7E2EA] flex items-center gap-1.5"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          {srv.title}
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
+
                 {/* Actions */}
                 <div className="flex flex-wrap items-center gap-3 pt-2">
                   {spotlightProject.link && (
@@ -198,27 +221,42 @@ export const ProjectsPage: React.FC = () => {
         )}
 
         {/* Filter Bar & Interactive Search */}
-        <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center mb-10 pb-6 border-b border-white/10">
-          {/* Category Tabs */}
-          <div className="flex flex-wrap gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat.value}
-                onClick={() => setSelectedCategory(cat.value)}
-                className={`px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 ${
-                  selectedCategory === cat.value
-                    ? "bg-white text-black font-bold shadow-lg shadow-white/15 scale-105"
-                    : "bg-white/[0.03] text-neutral-400 border border-white/10 hover:text-white hover:border-white/30"
-                }`}
-                data-cursor="button"
-              >
-                {cat.label}
-              </button>
-            ))}
+        <div className="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center mb-10 pb-6 border-b border-white/10">
+          {/* Service Filter Tabs */}
+          <div className="flex flex-wrap gap-2 items-center">
+            {serviceFilters.map((s) => {
+              const isActive = selectedService === s.value;
+              const count =
+                s.value === "all"
+                  ? allProjects.length
+                  : allProjects.filter((p) => p.servicesOffered?.includes(s.value)).length;
+
+              return (
+                <button
+                  key={s.value}
+                  onClick={() => setSelectedService(s.value)}
+                  className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
+                    isActive
+                      ? "bg-white text-black font-bold shadow-lg shadow-white/15 scale-105"
+                      : "bg-white/[0.03] text-neutral-400 border border-white/10 hover:text-white hover:border-white/30"
+                  }`}
+                  data-cursor="button"
+                >
+                  <span>{s.label}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                      isActive ? "bg-black/15 text-black font-mono font-bold" : "bg-white/10 text-neutral-400"
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Search Input */}
-          <div className="relative w-full md:w-80">
+          <div className="relative w-full lg:w-80 shrink-0">
             <Search
               size={15}
               className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"
@@ -250,7 +288,7 @@ export const ProjectsPage: React.FC = () => {
             <button
               onClick={() => {
                 setSearchQuery("");
-                setSelectedCategory("all");
+                setSelectedService("all");
               }}
               className="mt-5 px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-mono text-white transition-colors"
               data-cursor="button"
@@ -336,6 +374,24 @@ export const ProjectsPage: React.FC = () => {
                           </span>
                         ))}
                       </div>
+
+                      {/* Services Offered Badges */}
+                      {project.servicesOffered && project.servicesOffered.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 pt-0.5">
+                          {project.servicesOffered.map((srvId) => {
+                            const srv = servicesData.find((s) => s.id === srvId);
+                            if (!srv) return null;
+                            return (
+                              <span
+                                key={srvId}
+                                className="px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-white/[0.08] text-[#D7E2EA] border border-white/15"
+                              >
+                                {srv.title}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -465,6 +521,27 @@ export const ProjectsPage: React.FC = () => {
                       ))}
                     </div>
                   </div>
+
+                  {previewProject.servicesOffered && previewProject.servicesOffered.length > 0 && (
+                    <div className="pt-2">
+                      <span className="text-xs font-mono text-neutral-400 block mb-2">Services Delivered:</span>
+                      <div className="flex flex-wrap gap-2">
+                        {previewProject.servicesOffered.map((srvId) => {
+                          const srv = servicesData.find((s) => s.id === srvId);
+                          if (!srv) return null;
+                          return (
+                            <span
+                              key={srvId}
+                              className="px-3 py-1 rounded-lg bg-white/[0.08] border border-white/20 text-xs font-mono text-white flex items-center gap-1.5"
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                              {srv.title}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Modal Action Bar */}

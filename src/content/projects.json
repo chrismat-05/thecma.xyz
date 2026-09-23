@@ -11,6 +11,7 @@
     "tags": ["Full-Stack", "Firebase", "FormBuilder", "Analytics"],
     "technologies": ["HTML", "CSS", "JavaScript", "Firebase", "Firestore", "TypeScript", "Handlebars", "Resend"],
     "category": "major",
+    "servicesOffered": ["fullstack", "design-systems"],
     "thumbnail": "/media/forms.thecma.xyz/forms.thecma (1).png",
     "images": [
       "/media/forms.thecma.xyz/forms.thecma (1).png",
@@ -37,6 +38,7 @@
     "tags": ["Cybersecurity", "CLI", "PyPI", "Zero-Knowledge"],
     "technologies": ["Python", "CLI", "PyPi"],
     "category": "minor",
+    "servicesOffered": ["cybersecurity", "fullstack"],
     "thumbnail": "/media/IsItSecure/IsItSecure1.png",
     "images": [
       "/media/IsItSecure/IsItSecure1.png",
@@ -61,6 +63,7 @@
     "tags": ["AI / NLP", "FastAPI", "React", "Privacy"],
     "technologies": ["React", "JavaScript", "Python"],
     "category": "minor",
+    "servicesOffered": ["cybersecurity", "fullstack", "design-systems"],
     "thumbnail": "/media/ScanThePolicy/home.png",
     "images": [
       "/media/ScanThePolicy/home.png",
@@ -83,6 +86,7 @@
     "tags": ["Security Audit", "Docker", "DevTools"],
     "technologies": ["React", "Security Analysis", "Docker"],
     "category": "minor",
+    "servicesOffered": ["cybersecurity", "fullstack"],
     "thumbnail": "/media/scrihdr/scrihdr1.png",
     "images": [
       "/media/scrihdr/scrihdr1.png",
@@ -105,6 +109,7 @@
     "tags": ["Developer Tools", "REST API", "Framer Motion"],
     "technologies": ["React", "Tailwind CSS", "Axios", "Framer Motion"],
     "category": "minor",
+    "servicesOffered": ["fullstack", "design-systems"],
     "thumbnail": "/media/reqapi/reqapi1.png",
     "images": [
       "/media/reqapi/reqapi1.png",
@@ -126,6 +131,7 @@
     "tags": ["npm Package", "Node.js", "CLI"],
     "technologies": ["Node.js", "CLI", "npm"],
     "category": "minor",
+    "servicesOffered": ["fullstack"],
     "thumbnail": "/media/Quotzy/quotzy(1).png",
     "images": [
       "/media/Quotzy/quotzy(1).png",
@@ -147,6 +153,7 @@
     "tags": ["Networking", "GeoIP", "Intelligence"],
     "technologies": ["React JS", "Vite", "Tailwind CSS", "Framer Motion"],
     "category": "minor",
+    "servicesOffered": ["cybersecurity", "fullstack", "design-systems"],
     "thumbnail": "/media/IPLocator/1.png",
     "images": [
       "/media/IPLocator/1.png",
@@ -167,6 +174,7 @@
     "tags": ["Enterprise", "Database", ".NET"],
     "technologies": ["VB.NET", "SQL Server 2022", "Windows Forms"],
     "category": "college",
+    "servicesOffered": ["fullstack"],
     "thumbnail": "/media/AMC/AMC1.png",
     "images": [
       "/media/AMC/AMC1.png",
