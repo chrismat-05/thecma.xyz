@@ -26,10 +26,6 @@ export const HappyClientsSection: React.FC = () => {
       <div className="container mx-auto px-4 mb-16">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.02] text-xs font-mono text-neutral-400 mb-4 uppercase tracking-wider">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              // Trusted By Visionary Clients
-            </div>
             <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight">
               <SplitFlapText
                 text="Collaborating with forward-thinking teams."

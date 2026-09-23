@@ -122,12 +122,8 @@ export const Projects: React.FC = () => {
       {/* Section Header (TristanMedia layout) */}
       <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mb-16 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col md:flex-row md:items-end justify-between">
         <div>
-          <span className="text-xs uppercase tracking-[0.3em] text-[#D7E2EA]/80 font-mono block mb-2 font-semibold flex items-center gap-2">
-            <Layers className="w-4 h-4 text-[#D7E2EA]" />
-            FEATURED PORTFOLIO // SELECTED CASE STUDIES
-          </span>
           <SplitFlapText
-            text="PROJECTS"
+            text="SELECTED WORKS"
             className="text-3xl md:text-6xl font-bold text-white uppercase font-display"
           />
         </div>
@@ -156,8 +152,8 @@ export const Projects: React.FC = () => {
           const actionLabel = project.link
             ? "Live Site"
             : project.package
-            ? "View Package"
-            : "Source Code";
+              ? "View Package"
+              : "Source Code";
 
           return (
             <div
@@ -184,11 +180,10 @@ export const Projects: React.FC = () => {
                 {/* Left: Indicator, Index & Project Title */}
                 <div className="flex items-center gap-3 sm:gap-4 min-w-0">
                   <span
-                    className={`w-2.5 h-2.5 rounded-full shrink-0 transition-all ${
-                      activeIndex === i
-                        ? "bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)] animate-pulse"
-                        : "bg-neutral-600"
-                    }`}
+                    className={`w-2.5 h-2.5 rounded-full shrink-0 transition-all ${activeIndex === i
+                      ? "bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)] animate-pulse"
+                      : "bg-neutral-600"
+                      }`}
                   />
                   <span className="font-mono text-xs text-[#D7E2EA] font-bold uppercase tracking-wider shrink-0">
                     // 0{i + 1}
@@ -274,7 +269,7 @@ export const Projects: React.FC = () => {
       </div>
 
       {/* Bottom CTA to View Full Archive */}
-      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-24 pt-10 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         <div>
           <h4 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">
             Looking for more experiments &amp; open-source tools?

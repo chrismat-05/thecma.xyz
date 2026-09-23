@@ -122,7 +122,6 @@ export const WhatWeCreateSection: React.FC = () => {
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <SectionTitleReveal
-          badge="// CAPABILITIES & DISCIPLINES"
           title="WHAT WE CREATE"
           subtitle="An accordion of specialized creative and engineering disciplines. Hover over any bar to explore capabilities."
           align="left"
@@ -143,22 +142,20 @@ export const WhatWeCreateSection: React.FC = () => {
                   stiffness: 280,
                   damping: 32,
                 }}
-                className={`relative rounded-3xl overflow-hidden cursor-pointer select-none transition-colors duration-300 ${
-                  isActive
+                className={`relative rounded-3xl overflow-hidden cursor-pointer select-none transition-colors duration-300 ${isActive
                     ? "flex-[5] border-2 border-white/40 shadow-2xl shadow-white/[0.06] bg-[#0c0d12]"
                     : "flex-[0.8] border border-white/[0.1] bg-[#090a0d] hover:border-white/25 hover:bg-[#0e0f14]"
-                }`}
+                  }`}
               >
                 {/* Background image preview with darkened gradient overlay */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.title}
-                    className={`w-full h-full object-cover transition-all duration-700 ${
-                      isActive
+                    className={`w-full h-full object-cover transition-all duration-700 ${isActive
                         ? "opacity-30 scale-105"
                         : "opacity-15 grayscale scale-100"
-                    }`}
+                      }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40" />
                 </div>
@@ -279,11 +276,10 @@ export const WhatWeCreateSection: React.FC = () => {
               <div
                 key={service.id}
                 onClick={() => setActiveIndex(index)}
-                className={`rounded-2xl overflow-hidden border transition-all duration-300 ${
-                  isActive
+                className={`rounded-2xl overflow-hidden border transition-all duration-300 ${isActive
                     ? "border-white/35 bg-[#0c0d12] p-6 shadow-xl"
                     : "border-white/10 bg-[#090a0d] p-5 hover:border-white/20"
-                }`}
+                  }`}
               >
                 <div className="flex items-center justify-between cursor-pointer">
                   <div className="flex items-center gap-3">

@@ -53,7 +53,6 @@ export const TestimonialsSection: React.FC = () => {
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10 mb-14">
         <SectionTitleReveal
-          badge="// CLIENT VOICES"
           title="TESTIMONIALS"
           subtitle="Real-world feedback from founders, production leads, and enterprise architecture partners."
           align="left"

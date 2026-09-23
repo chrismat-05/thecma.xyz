@@ -59,7 +59,7 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Netlify forms submission via fetch
     const encodedData = new URLSearchParams({
       'form-name': 'contactv2',
@@ -95,7 +95,6 @@ const Contact = () => {
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <SectionTitleReveal
-          badge="// INITIATE CONTACT"
           title="Get In Touch."
           subtitle="Have a project in mind, an opportunity, or simply want to connect? Send a transmission below."
           align="left"
