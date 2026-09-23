@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs font-mono text-neutral-400 mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              CHRIS MATHEW AJE // THECMA.XYZ
+              CHRIS MATHEW AJE
             </div>
             <h3 className="text-2xl font-bold tracking-tight text-white mb-2">
               Web Dev &amp; Designer
