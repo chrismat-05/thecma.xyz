@@ -72,7 +72,7 @@ export const SectionTitleReveal: React.FC<SectionTitleRevealProps> = ({
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
           transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="text-neutral-400 text-base md:text-lg max-w-2xl mt-5 font-normal leading-relaxed"
+          className="text-neutral-400 text-base md:text-lg max-w-2xl mt-5 font-normal leading-relaxed font-luxury-sub"
         >
           {subtitle}
         </motion.p>

@@ -63,6 +63,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+			fontFamily: {
+				luxury: ['"Cormorant Garamond"', '"Bodoni Moda"', 'serif'],
+				display: ['"Cormorant Garamond"', '"Bodoni Moda"', 'serif'],
+				sans: ['"Plus Jakarta Sans"', 'Kanit', '-apple-system', 'sans-serif'],
+				tech: ['"Space Grotesk"', 'sans-serif'],
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
