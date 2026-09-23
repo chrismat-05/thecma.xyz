@@ -44,6 +44,31 @@ export const ProjectsPage: React.FC = () => {
   const allProjects = projectsData as ProjectItem[];
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedService, setSelectedService] = useState<string>("all");
+
+  const serviceFilters = [
+    { label: "All Services", value: "all" },
+    ...servicesData.map((s) => ({
+      label: s.title,
+      value: s.id,
+    })),
+  ];
+
+  const filteredProjects = useMemo(() => {
+    return allProjects.filter((project) => {
+      const matchesService =
+        selectedService === "all" ||
+        (project.servicesOffered && project.servicesOffered.includes(selectedService));
+      const matchesSearch =
+        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (project.subtitle && project.subtitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        project.technologies.some((t) =>
+          t.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      return matchesService && matchesSearch;
+    });
+  }, [allProjects, selectedService, searchQuery]);
+
   // Spotlight featured project (defaults to forms-thecma or first project)
   const spotlightProject = useMemo(() => {
     return allProjects.find((p) => p.featured && p.id === "forms-thecma") || allProjects[0];
