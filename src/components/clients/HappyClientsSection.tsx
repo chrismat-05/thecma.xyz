@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { SplitFlapText } from "@/components/ui/SplitFlapText";
+import { RollupNumber } from "@/components/ui/RollupNumber";
 import clientsData from "@/content/happyclients.json";
 
 interface HappyClient {
@@ -12,8 +13,8 @@ interface HappyClient {
 
 export const HappyClientsSection: React.FC = () => {
   const metrics = [
-    { label: "Products Shipped", value: "15+" },
-    { label: "Client Satisfaction", value: "99.8%" },
+    { label: "Products Shipped", value: 15, suffix: "+", decimals: 0 },
+    { label: "Client Satisfaction", value: 99.8, suffix: "%", decimals: 1 },
   ];
 
   const clients: HappyClient[] = clientsData;
@@ -34,17 +35,30 @@ export const HappyClientsSection: React.FC = () => {
             </h3>
           </div>
 
-          {/* Metrics summary: 2 clean metrics */}
+          {/* Metrics summary: 2 clean metrics with rollup animation */}
           <div className="grid grid-cols-2 gap-8 border-t sm:border-t-0 sm:border-l border-white/10 pt-6 sm:pt-0 sm:pl-8">
             {metrics.map((m, idx) => (
-              <div key={idx} className="flex flex-col">
-                <span className="text-2xl lg:text-3xl font-bold font-mono text-white">
-                  {m.value}
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: idx * 0.15, ease: "easeOut" }}
+                className="flex flex-col group cursor-default"
+              >
+                <span className="text-2xl lg:text-3xl font-bold font-mono text-white tracking-tight flex items-baseline group-hover:text-emerald-400 transition-colors duration-300">
+                  <RollupNumber
+                    value={m.value}
+                    decimals={m.decimals}
+                    suffix={m.suffix}
+                    duration={2}
+                    replayOnHover={true}
+                  />
                 </span>
-                <span className="text-xs text-neutral-400 mt-1 uppercase tracking-wider">
+                <span className="text-xs text-neutral-400 mt-1 uppercase tracking-wider group-hover:text-neutral-200 transition-colors duration-300">
                   {m.label}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
