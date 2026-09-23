@@ -86,83 +86,27 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
 
     const renderBadge = (photo?: HTMLImageElement) => {
       if (!bctx) return;
-      // Deep obsidian background
-      bctx.fillStyle = "#090a10";
+      // Deep clean obsidian background
+      bctx.fillStyle = "#090a0f";
       bctx.fillRect(0, 0, 512, 760);
 
-      // Outer perimeter hairline border
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
-      bctx.lineWidth = 1;
-      bctx.strokeRect(14, 14, 484, 732);
-
-      // Industrial registration crosshairs at 4 corners
-      const drawCross = (cx: number, cy: number) => {
-        bctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
-        bctx.lineWidth = 1;
-        bctx.beginPath();
-        bctx.moveTo(cx - 5, cy);
-        bctx.lineTo(cx + 5, cy);
-        bctx.moveTo(cx, cy - 5);
-        bctx.lineTo(cx, cy + 5);
-        bctx.stroke();
-      };
-      drawCross(26, 26);
-      drawCross(486, 26);
-      drawCross(26, 734);
-      drawCross(486, 734);
-
       // Top lanyard clip punch hole simulation
-      bctx.fillStyle = "#030407";
+      bctx.fillStyle = "#040507";
       bctx.beginPath();
-      bctx.roundRect ? bctx.roundRect(216, 14, 80, 12, 6) : bctx.rect(216, 14, 80, 12);
+      bctx.roundRect ? bctx.roundRect(226, 18, 60, 10, 5) : bctx.rect(226, 18, 60, 10);
       bctx.fill();
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.22)";
-      bctx.lineWidth = 1.2;
+      bctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+      bctx.lineWidth = 1;
       bctx.stroke();
 
-      // Top silver gradient hairline accent
-      const grad = bctx.createLinearGradient(36, 0, 476, 0);
-      grad.addColorStop(0, "rgba(255, 255, 255, 0.05)");
-      grad.addColorStop(0.5, "rgba(255, 255, 255, 0.85)");
-      grad.addColorStop(1, "rgba(255, 255, 255, 0.05)");
-      bctx.fillStyle = grad;
-      bctx.fillRect(36, 38, 440, 2);
-
-      // Top Header Row
-      bctx.fillStyle = "#ffffff";
-      bctx.font = "bold 13px monospace";
-      bctx.fillText("CMA Tech", 36, 64);
-      bctx.fillStyle = "#71717a";
-      bctx.font = "12px monospace";
-      bctx.fillText(" // ACCESS PASS", 126, 64);
-
-      // Contactless NFC Wave Icon at top right
-      const nfcX = 456;
-      const nfcY = 59;
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
-      bctx.lineWidth = 2;
-      bctx.beginPath();
-      bctx.arc(nfcX, nfcY, 6, -Math.PI / 3, Math.PI / 3);
-      bctx.stroke();
-      bctx.beginPath();
-      bctx.arc(nfcX, nfcY, 12, -Math.PI / 3, Math.PI / 3);
-      bctx.stroke();
-      bctx.beginPath();
-      bctx.arc(nfcX, nfcY, 18, -Math.PI / 3, Math.PI / 3);
-      bctx.stroke();
-
-      // --- UPPER BLOCK (Balanced Two Columns: Data on Left, Photo on Right) ---
-      const upperY = 84;
-      const upperH = 300;
-
-      // RIGHT COLUMN: Portrait Photo (X: 242, Y: 84, W: 234, H: 300, R: 18)
-      const px = 242;
-      const py = upperY;
-      const pw = 234;
-      const ph = upperH;
+      // --- 1. PHOTO IN THE MIDDLE ON TOP ---
+      const pw = 230;
+      const ph = 265;
+      const px = (512 - pw) / 2; // 141 - centered
+      const py = 52;
       const pr = 18;
 
-      bctx.fillStyle = "#10111a";
+      bctx.fillStyle = "#12131a";
       bctx.beginPath();
       bctx.roundRect ? bctx.roundRect(px, py, pw, ph, pr) : bctx.rect(px, py, pw, ph);
       bctx.fill();
@@ -172,215 +116,102 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
         bctx.beginPath();
         bctx.roundRect ? bctx.roundRect(px, py, pw, ph, pr) : bctx.rect(px, py, pw, ph);
         bctx.clip();
-        // Crop chris.png centered on face/shoulders
+        // Crop chris.png centered on face & shoulders
         bctx.drawImage(photo, 140, 30, 1280, 1500, px, py, pw, ph);
-        // Subtle dark rim gradient over bottom of photo
-        const pGrad = bctx.createLinearGradient(0, py + ph - 70, 0, py + ph);
-        pGrad.addColorStop(0, "transparent");
-        pGrad.addColorStop(1, "rgba(9, 10, 16, 0.75)");
-        bctx.fillStyle = pGrad;
-        bctx.fillRect(px, py, pw, ph);
         bctx.restore();
       } else {
-        // Modern silhouette placeholder while loading
+        // Silhouette placeholder while loading
         bctx.fillStyle = "rgba(255, 255, 255, 0.12)";
         bctx.beginPath();
-        bctx.arc(px + pw / 2, py + 105, 46, 0, Math.PI * 2);
+        bctx.arc(px + pw / 2, py + 95, 42, 0, Math.PI * 2);
         bctx.fill();
         bctx.beginPath();
-        bctx.arc(px + pw / 2, py + 230, 80, Math.PI, 0, true);
+        bctx.arc(px + pw / 2, py + 215, 75, Math.PI, 0, true);
         bctx.fill();
       }
 
-      // Metallic rim highlight around photo
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
+      // Clean rim stroke around photo
+      bctx.strokeStyle = "rgba(255, 255, 255, 0.28)";
       bctx.lineWidth = 1.5;
       bctx.beginPath();
       bctx.roundRect ? bctx.roundRect(px, py, pw, ph, pr) : bctx.rect(px, py, pw, ph);
       bctx.stroke();
 
-      // LEFT COLUMN: Stacked Identity & Hardware Security Badges
-      const lx = 36;
-      const lw = 192;
+      // --- 2. MIDDLE: LEFT ALIGNED & RIGHT ALIGNED CONTENT ---
 
-      // 1. Smart Microchip Graphic (X: 36, Y: 84, W: 86, H: 62)
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
-      bctx.lineWidth = 1.5;
-      bctx.strokeRect(lx, upperY, 86, 62);
-      bctx.fillStyle = "rgba(255, 255, 255, 0.08)";
-      bctx.fillRect(lx, upperY, 86, 62);
-
-      // Gold circuit contact pads simulation
-      bctx.strokeStyle = "rgba(212, 175, 55, 0.75)";
-      bctx.lineWidth = 1;
-      bctx.strokeRect(lx + 10, upperY + 10, 66, 42);
-      bctx.beginPath();
-      bctx.moveTo(lx + 43, upperY + 10);
-      bctx.lineTo(lx + 43, upperY + 52);
-      bctx.moveTo(lx + 10, upperY + 31);
-      bctx.lineTo(lx + 76, upperY + 31);
-      bctx.stroke();
-
-      // Chip side text
-      bctx.fillStyle = "#71717a";
-      bctx.font = "bold 9px monospace";
-      bctx.fillText("EMV CHIP", lx + 98, upperY + 24);
-      bctx.fillStyle = "#a1a1aa";
-      bctx.font = "10px monospace";
-      bctx.fillText("SECURE", lx + 98, upperY + 40);
-      bctx.fillStyle = "#34d399";
-      bctx.fillText("VERIFIED", lx + 98, upperY + 56);
-
-      // 2. Status Pill: ONLINE SINCE 2022 (Y: 160, H: 38)
-      bctx.fillStyle = "rgba(255, 255, 255, 0.07)";
-      bctx.beginPath();
-      bctx.roundRect ? bctx.roundRect(lx, upperY + 76, lw, 38, 19) : bctx.rect(lx, upperY + 76, lw, 38);
-      bctx.fill();
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.18)";
-      bctx.lineWidth = 1;
-      bctx.stroke();
-
-      // Glowing green active dot
-      bctx.fillStyle = "#34d399";
-      bctx.beginPath();
-      bctx.arc(lx + 18, upperY + 95, 4.5, 0, Math.PI * 2);
-      bctx.fill();
-      bctx.fillStyle = "#ffffff";
-      bctx.font = "bold 11px monospace";
-      bctx.fillText("ONLINE SINCE 2022", lx + 30, upperY + 99);
-
-      // 3. Studio Clearance Box (Y: 212, H: 76)
-      bctx.fillStyle = "rgba(255, 255, 255, 0.04)";
-      bctx.beginPath();
-      bctx.roundRect ? bctx.roundRect(lx, upperY + 128, lw, 76, 10) : bctx.rect(lx, upperY + 128, lw, 76);
-      bctx.fill();
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
-      bctx.lineWidth = 1;
-      bctx.stroke();
-
-      bctx.fillStyle = "#71717a";
-      bctx.font = "9px monospace";
-      bctx.fillText("CLEARANCE", lx + 14, upperY + 148);
-      bctx.fillStyle = "#ffffff";
-      bctx.font = "bold 13px monospace";
-      bctx.fillText("STUDIO OPERATOR", lx + 14, upperY + 168);
-      bctx.fillStyle = "#34d399";
-      bctx.font = "10px monospace";
-      bctx.fillText("LEVEL // 01 AUTHORIZED", lx + 14, upperY + 188);
-
-      // 4. Protocol Key Box (Y: 298, H: 76)
-      bctx.fillStyle = "rgba(255, 255, 255, 0.04)";
-      bctx.beginPath();
-      bctx.roundRect ? bctx.roundRect(lx, upperY + 218, lw, 82, 10) : bctx.rect(lx, upperY + 218, lw, 82);
-      bctx.fill();
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
-      bctx.lineWidth = 1;
-      bctx.stroke();
-
-      bctx.fillStyle = "#71717a";
-      bctx.font = "9px monospace";
-      bctx.fillText("NETWORK DOMAIN", lx + 14, upperY + 240);
-      bctx.fillStyle = "#ffffff";
-      bctx.font = "bold 13px monospace";
-      bctx.fillText("CMA Tech", lx + 14, upperY + 260);
-      bctx.fillStyle = "#a1a1aa";
-      bctx.font = "10px monospace";
-      bctx.fillText("KEY: CMA-88489", lx + 14, upperY + 282);
-
-      // --- MIDDLE SECTION (Divider & Bold Typographic Identity) ---
-      const midY = 402;
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
-      bctx.lineWidth = 1;
-      bctx.beginPath();
-      bctx.moveTo(36, midY);
-      bctx.lineTo(476, midY);
-      bctx.stroke();
-
-      // Identity Label
-      bctx.fillStyle = "#71717a";
-      bctx.font = "bold 11px monospace";
-      bctx.fillText("IDENTITY // FULL NAME", 36, midY + 24);
-
-      // Bold Name spanning across card
-      bctx.fillStyle = "#ffffff";
-      bctx.font = "900 42px sans-serif";
-      bctx.fillText("CHRIS MATHEW", 36, midY + 66);
-
-      // Full-Width Role Banner
-      const roleY = midY + 84;
-      bctx.fillStyle = "rgba(255, 255, 255, 0.08)";
-      bctx.beginPath();
-      bctx.roundRect ? bctx.roundRect(36, roleY, 440, 46, 12) : bctx.rect(36, roleY, 440, 46);
-      bctx.fill();
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.18)";
-      bctx.lineWidth = 1;
-      bctx.stroke();
-
-      bctx.fillStyle = "#71717a";
-      bctx.font = "9px monospace";
-      bctx.fillText("ROLE", 50, roleY + 18);
-      bctx.fillStyle = "#ffffff";
-      bctx.font = "bold 15px monospace";
-      bctx.fillText("WEB DEV & DESIGNER", 50, roleY + 36);
-
-      bctx.fillStyle = "#34d399";
-      bctx.font = "bold 11px monospace";
-      bctx.fillText("● ACTIVE", 396, roleY + 28);
-
-      // Sub-tag Row
-      bctx.fillStyle = "#a1a1aa";
-      bctx.font = "11px monospace";
-      bctx.fillText("PASS: CHRIS MATHEW AJE", 36, midY + 154);
-      bctx.textAlign = "right";
-      bctx.fillText("STUDIO: CMA", 476, midY + 154);
+      // [LEFT ALIGNED]
+      // Name
       bctx.textAlign = "left";
-
-      // --- BOTTOM SECTION (Security Barcode & Serial Identification) ---
-      const btmY = 574;
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
-      bctx.lineWidth = 1;
-      bctx.beginPath();
-      bctx.moveTo(36, btmY);
-      bctx.lineTo(476, btmY);
-      bctx.stroke();
-
-      // Barcode container slot
-      bctx.fillStyle = "rgba(255, 255, 255, 0.03)";
-      bctx.beginPath();
-      bctx.roundRect ? bctx.roundRect(36, btmY + 14, 440, 68, 8) : bctx.rect(36, btmY + 14, 440, 68);
-      bctx.fill();
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
-      bctx.stroke();
-
-      // Procedural deterministic barcode lines
       bctx.fillStyle = "#ffffff";
-      const barPattern = [
-        3, 2, 5, 2, 2, 4, 3, 2, 6, 2, 3, 4, 2, 5, 3, 2, 4, 6, 2, 3, 5, 2, 2, 4, 3, 5, 2, 6, 2, 3,
-        4, 2, 5, 3, 2, 4, 6, 2, 3, 5, 2, 2, 4, 3, 5, 2, 4, 2, 3, 5, 2, 4, 3, 2, 6, 2, 3, 4,
-      ];
-      let barX = 48;
-      for (let i = 0; i < barPattern.length && barX < 464; i++) {
-        const w = barPattern[i];
-        bctx.fillRect(barX, btmY + 22, w, 52);
-        barX += w + ((i % 3 === 0) ? 4 : 2.5);
+      bctx.font = "900 38px sans-serif";
+      bctx.fillText("CHRIS", 50, 395);
+      bctx.fillText("MATHEW", 50, 438);
+
+      // Role
+      bctx.fillStyle = "#a1a1aa";
+      bctx.font = "bold 16px monospace";
+      bctx.fillText("WEB DEV & DESIGNER", 50, 485);
+
+      // Status: ONLINE SINCE 2022 with active green dot
+      bctx.fillStyle = "#34d399";
+      bctx.beginPath();
+      bctx.arc(56, 526, 4.5, 0, Math.PI * 2);
+      bctx.fill();
+
+      bctx.fillStyle = "#ffffff";
+      bctx.font = "bold 13px monospace";
+      bctx.fillText("ONLINE SINCE 2022", 68, 530);
+
+      // [RIGHT ALIGNED]
+      // Smart Microchip
+      const chipX = 380;
+      const chipY = 372;
+      const chipW = 82;
+      const chipH = 60;
+
+      bctx.strokeStyle = "rgba(255, 255, 255, 0.55)";
+      bctx.lineWidth = 1.5;
+      bctx.strokeRect(chipX, chipY, chipW, chipH);
+      bctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+      bctx.fillRect(chipX, chipY, chipW, chipH);
+
+      // Chip internal circuit cross
+      bctx.strokeStyle = "rgba(255, 255, 255, 0.28)";
+      bctx.beginPath();
+      bctx.moveTo(chipX + chipW / 2, chipY);
+      bctx.lineTo(chipX + chipW / 2, chipY + chipH);
+      bctx.moveTo(chipX, chipY + chipH / 2);
+      bctx.lineTo(chipX + chipW, chipY + chipH / 2);
+      bctx.stroke();
+
+      // Contactless NFC Wave Icon
+      const nfcX = 412;
+      const nfcY = 495;
+      bctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
+      bctx.lineWidth = 2;
+      bctx.beginPath();
+      bctx.arc(nfcX, nfcY, 7, -Math.PI / 3, Math.PI / 3);
+      bctx.stroke();
+      bctx.beginPath();
+      bctx.arc(nfcX, nfcY, 14, -Math.PI / 3, Math.PI / 3);
+      bctx.stroke();
+      bctx.beginPath();
+      bctx.arc(nfcX, nfcY, 21, -Math.PI / 3, Math.PI / 3);
+      bctx.stroke();
+
+      // --- 3. BOTTOM ALIGNED CONTENT ---
+
+      // Clean Barcode
+      bctx.fillStyle = "#ffffff";
+      for (let x = 50; x < 462; x += 10) {
+        bctx.fillRect(x, 608, (x % 20 === 0) ? 5 : 2.5, 62);
       }
 
-      // Centered Serial ID
-      bctx.font = "bold 13px monospace";
-      bctx.fillStyle = "#ffffff";
-      bctx.textAlign = "center";
-      bctx.fillText("ID: 88489-14245-CMA-STUDIO", 256, btmY + 106);
-
-      // Bottom Micro Stamp
-      bctx.font = "9px monospace";
-      bctx.fillStyle = "#52525b";
+      // ID Serial
+      bctx.font = "14px monospace";
+      bctx.fillStyle = "#71717a";
       bctx.textAlign = "left";
-      bctx.fillText("[OFFICIAL PASS]", 36, btmY + 130);
-      bctx.textAlign = "center";
-      bctx.fillText("SECURE ACCESS // NFC ENABLED", 256, btmY + 130);
-      bctx.textAlign = "right";
-      bctx.fillText("AUTHD. 2026", 476, btmY + 130);
-      bctx.textAlign = "left";
+      bctx.fillText("ID: 88489-14245-CMA-STUDIO", 50, 705);
     };
 
     renderBadge();
