@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
@@ -69,6 +70,25 @@ export const ProjectsPage: React.FC = () => {
       return matchesService && matchesSearch;
     });
   }, [allProjects, selectedService, searchQuery]);
+
+  // Lock body scroll and attach Esc key listener when modal is open
+  useEffect(() => {
+    if (previewProject) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setPreviewProject(null);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "unset";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [previewProject]);
 
   // Spotlight featured project (defaults to forms-thecma or first project)
   const spotlightProject = useMemo(() => {
@@ -428,168 +448,172 @@ export const ProjectsPage: React.FC = () => {
           </div>
         )}
 
-        {/* 3. Interactive Quick-Preview Modal */}
-        <AnimatePresence>
-          {previewProject && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-2xl"
-              onClick={() => setPreviewProject(null)}
-            >
-              <motion.div
-                initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                onClick={(e) => e.stopPropagation()}
-                className="w-full max-w-4xl max-h-[90vh] rounded-[32px] border border-white/20 bg-neutral-950 p-6 sm:p-8 overflow-y-auto space-y-6 shadow-2xl relative"
-              >
-                {/* Modal Header */}
-                <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
-                  <div>
-                    <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest block mb-1">
-                      // {previewProject.category.toUpperCase()} SYSTEM
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-black text-white uppercase font-display">
-                      {previewProject.title}
-                    </h3>
-                    {previewProject.subtitle && (
-                      <p className="text-xs font-mono text-neutral-400 mt-1">
-                        {previewProject.subtitle}
-                      </p>
-                    )}
-                  </div>
-
-                  <button
-                    onClick={() => setPreviewProject(null)}
-                    className="p-2.5 rounded-full border border-white/10 hover:border-white/30 text-neutral-400 hover:text-white transition-colors bg-white/[0.03]"
-                    data-cursor="button"
+        {/* 3. Interactive Quick-Preview Modal via Portal to avoid transformed parent clipping */}
+        {typeof document !== "undefined" &&
+          createPortal(
+            <AnimatePresence>
+              {previewProject && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/90 backdrop-blur-2xl overflow-y-auto"
+                  onClick={() => setPreviewProject(null)}
+                >
+                  <motion.div
+                    initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                    exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-full max-w-4xl max-h-[85vh] rounded-[32px] border border-white/20 bg-neutral-950 p-6 sm:p-8 overflow-y-auto space-y-6 shadow-[0_0_80px_rgba(0,0,0,0.9)] relative my-auto"
                   >
-                    <X size={18} />
-                  </button>
-                </div>
-
-                {/* Modal Gallery */}
-                <div className="space-y-4">
-                  <div className="w-full h-[280px] sm:h-[400px] rounded-2xl overflow-hidden border border-white/15 bg-black">
-                    <img
-                      src={previewProject.thumbnail}
-                      alt={previewProject.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {previewProject.images && previewProject.images.length > 1 && (
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                      {previewProject.images.slice(0, 4).map((img, i) => (
-                        <div
-                          key={i}
-                          className="h-20 sm:h-24 rounded-xl overflow-hidden border border-white/10 bg-neutral-900"
-                        >
-                          <img
-                            src={img}
-                            alt=""
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Modal Narrative & Tech */}
-                <div className="space-y-4 pt-2">
-                  <h4 className="text-sm font-mono uppercase tracking-wider text-neutral-400">
-                    System Architecture &amp; Overview
-                  </h4>
-                  <p className="text-neutral-200 text-sm sm:text-base leading-relaxed">
-                    {previewProject.description}
-                  </p>
-
-                  <div className="pt-2">
-                    <span className="text-xs font-mono text-neutral-400 block mb-2">Technologies Used:</span>
-                    <div className="flex flex-wrap gap-2">
-                      {previewProject.technologies.map((tech, tIdx) => (
-                        <span
-                          key={tIdx}
-                          className="px-3 py-1 rounded-lg bg-white/[0.05] border border-white/15 text-xs font-mono text-white"
-                        >
-                          {tech}
+                    {/* Modal Header */}
+                    <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
+                      <div>
+                        <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest block mb-1">
+                          // {previewProject.category.toUpperCase()} SYSTEM
                         </span>
-                      ))}
-                    </div>
-                  </div>
+                        <h3 className="text-2xl sm:text-3xl font-black text-white uppercase font-display">
+                          {previewProject.title}
+                        </h3>
+                        {previewProject.subtitle && (
+                          <p className="text-xs font-mono text-neutral-400 mt-1">
+                            {previewProject.subtitle}
+                          </p>
+                        )}
+                      </div>
 
-                  {previewProject.servicesOffered && previewProject.servicesOffered.length > 0 && (
-                    <div className="pt-2">
-                      <span className="text-xs font-mono text-neutral-400 block mb-2">Services Delivered:</span>
-                      <div className="flex flex-wrap gap-2">
-                        {previewProject.servicesOffered.map((srvId) => {
-                          const srv = servicesData.find((s) => s.id === srvId);
-                          if (!srv) return null;
-                          return (
-                            <span
-                              key={srvId}
-                              className="px-3 py-1 rounded-lg bg-white/[0.08] border border-white/20 text-xs font-mono text-white flex items-center gap-1.5"
+                      <button
+                        onClick={() => setPreviewProject(null)}
+                        className="p-2.5 rounded-full border border-white/10 hover:border-white/30 text-neutral-400 hover:text-white transition-colors bg-white/[0.03]"
+                        data-cursor="button"
+                      >
+                        <X size={18} />
+                      </button>
+                    </div>
+
+                    {/* Modal Gallery */}
+                    <div className="space-y-4">
+                      <div className="w-full h-[280px] sm:h-[400px] rounded-2xl overflow-hidden border border-white/15 bg-black">
+                        <img
+                          src={previewProject.thumbnail}
+                          alt={previewProject.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+
+                      {previewProject.images && previewProject.images.length > 1 && (
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                          {previewProject.images.slice(0, 4).map((img, i) => (
+                            <div
+                              key={i}
+                              className="h-20 sm:h-24 rounded-xl overflow-hidden border border-white/10 bg-neutral-900"
                             >
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                              {srv.title}
+                              <img
+                                src={img}
+                                alt=""
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Modal Narrative & Tech */}
+                    <div className="space-y-4 pt-2">
+                      <h4 className="text-sm font-mono uppercase tracking-wider text-neutral-400">
+                        System Architecture &amp; Overview
+                      </h4>
+                      <p className="text-neutral-200 text-sm sm:text-base leading-relaxed">
+                        {previewProject.description}
+                      </p>
+
+                      <div className="pt-2">
+                        <span className="text-xs font-mono text-neutral-400 block mb-2">Technologies Used:</span>
+                        <div className="flex flex-wrap gap-2">
+                          {previewProject.technologies.map((tech, tIdx) => (
+                            <span
+                              key={tIdx}
+                              className="px-3 py-1 rounded-lg bg-white/[0.05] border border-white/15 text-xs font-mono text-white"
+                            >
+                              {tech}
                             </span>
-                          );
-                        })}
+                          ))}
+                        </div>
+                      </div>
+
+                      {previewProject.servicesOffered && previewProject.servicesOffered.length > 0 && (
+                        <div className="pt-2">
+                          <span className="text-xs font-mono text-neutral-400 block mb-2">Services Delivered:</span>
+                          <div className="flex flex-wrap gap-2">
+                            {previewProject.servicesOffered.map((srvId) => {
+                              const srv = servicesData.find((s) => s.id === srvId);
+                              if (!srv) return null;
+                              return (
+                                <span
+                                  key={srvId}
+                                  className="px-3 py-1 rounded-lg bg-white/[0.08] border border-white/20 text-xs font-mono text-white flex items-center gap-1.5"
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                                  {srv.title}
+                                </span>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Modal Action Bar */}
+                    <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                      <span className="text-xs font-mono text-neutral-500">
+                        Release Year: {previewProject.year}
+                      </span>
+
+                      <div className="flex items-center gap-3">
+                        {previewProject.github && (
+                          <a
+                            href={previewProject.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-5 py-2.5 rounded-full border border-white/20 text-neutral-300 hover:text-white text-xs font-mono uppercase tracking-wider flex items-center gap-2 hover:bg-white/[0.05] transition-colors"
+                            data-cursor="button"
+                          >
+                            <Github size={14} /> Source Code
+                          </a>
+                        )}
+                        {previewProject.package && (
+                          <a
+                            href={previewProject.package}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-5 py-2.5 rounded-full border border-white/20 text-neutral-300 hover:text-white text-xs font-mono uppercase tracking-wider flex items-center gap-2 hover:bg-white/[0.05] transition-colors"
+                            data-cursor="button"
+                          >
+                            <Package size={14} /> Package
+                          </a>
+                        )}
+                        {previewProject.link && (
+                          <a
+                            href={previewProject.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-6 py-2.5 rounded-full border border-white/25 bg-gradient-to-b from-white/15 via-white/[0.05] to-black hover:border-white/60 text-[#D7E2EA] hover:text-white text-xs font-mono uppercase tracking-wider font-semibold flex items-center gap-2 shadow-lg"
+                            data-cursor="button"
+                          >
+                            <Globe size={14} /> Live Site <ArrowUpRight size={14} />
+                          </a>
+                        )}
                       </div>
                     </div>
-                  )}
-                </div>
-
-                {/* Modal Action Bar */}
-                <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-                  <span className="text-xs font-mono text-neutral-500">
-                    Release Year: {previewProject.year}
-                  </span>
-
-                  <div className="flex items-center gap-3">
-                    {previewProject.github && (
-                      <a
-                        href={previewProject.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-5 py-2.5 rounded-full border border-white/20 text-neutral-300 hover:text-white text-xs font-mono uppercase tracking-wider flex items-center gap-2 hover:bg-white/[0.05] transition-colors"
-                        data-cursor="button"
-                      >
-                        <Github size={14} /> Source Code
-                      </a>
-                    )}
-                    {previewProject.package && (
-                      <a
-                        href={previewProject.package}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-5 py-2.5 rounded-full border border-white/20 text-neutral-300 hover:text-white text-xs font-mono uppercase tracking-wider flex items-center gap-2 hover:bg-white/[0.05] transition-colors"
-                        data-cursor="button"
-                      >
-                        <Package size={14} /> Package
-                      </a>
-                    )}
-                    {previewProject.link && (
-                      <a
-                        href={previewProject.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-6 py-2.5 rounded-full border border-white/25 bg-gradient-to-b from-white/15 via-white/[0.05] to-black hover:border-white/60 text-[#D7E2EA] hover:text-white text-xs font-mono uppercase tracking-wider font-semibold flex items-center gap-2 shadow-lg"
-                        data-cursor="button"
-                      >
-                        <Globe size={14} /> Live Site <ArrowUpRight size={14} />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>,
+            document.body
           )}
-        </AnimatePresence>
       </main>
 
       <Footer />
