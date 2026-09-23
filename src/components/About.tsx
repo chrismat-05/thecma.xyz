@@ -24,19 +24,6 @@ export const About: React.FC = () => {
       </div>
 
       <div className="container mx-auto max-w-4xl relative z-10 flex flex-col items-center text-center">
-        {/* Monospace telemetry pill badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md mb-6"
-        >
-          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-          <span className="text-xs font-mono uppercase tracking-widest text-neutral-300 font-medium">
-            // NARRATIVE &amp; ETHOS
-          </span>
-        </motion.div>
 
         {/* Massive font-display Section Title */}
         <motion.div

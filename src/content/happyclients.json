@@ -1,0 +1,50 @@
+[
+  {
+    "id": "client-1",
+    "name": "Nexus Media Labs",
+    "logo": "",
+    "work": "Editorial platform design & interactive brand experience"
+  },
+  {
+    "id": "client-2",
+    "name": "Voxel & Form Studio",
+    "logo": "",
+    "work": "Interactive 3D WebGL transitions & design system"
+  },
+  {
+    "id": "client-3",
+    "name": "Monolith Systems",
+    "logo": "",
+    "work": "Cinematic digital architecture & web application"
+  },
+  {
+    "id": "client-4",
+    "name": "Veloce Automotive",
+    "logo": "",
+    "work": "High-conversion product showcase & interactive visualizer"
+  },
+  {
+    "id": "client-5",
+    "name": "Atelier Digital",
+    "logo": "",
+    "work": "Creative web engineering & fluid micro-interactions"
+  },
+  {
+    "id": "client-6",
+    "name": "Prism Tech",
+    "logo": "",
+    "work": "Modern responsive interface & design tokens"
+  },
+  {
+    "id": "client-7",
+    "name": "Solaris Audio",
+    "logo": "",
+    "work": "Spatial web audio portfolio & sound interaction"
+  },
+  {
+    "id": "client-8",
+    "name": "Tristan Media",
+    "logo": "",
+    "work": "Dynamic portfolio architecture & visual identity"
+  }
+]
