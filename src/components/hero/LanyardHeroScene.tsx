@@ -131,7 +131,7 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       bctx.fill();
       bctx.fillStyle = "#ffffff";
       bctx.font = "bold 13px monospace";
-      bctx.fillText("● ACTIVE 2025", 65, 406);
+      bctx.fillText("● ACTIVE 2022", 65, 406);
 
       // Barcode simulation
       bctx.fillStyle = "#ffffff";
@@ -140,7 +140,7 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       }
       bctx.font = "14px monospace";
       bctx.fillStyle = "#52525b";
-      bctx.fillText("ID: 8848-9142-CMA-STUDIO", 50, 715);
+      bctx.fillText("ID: 88489-14245-CMA-STUDIO", 50, 715);
     }
 
     const badgeTexture = new THREE.CanvasTexture(badgeCanvas);

@@ -133,7 +133,7 @@ export const ProjectsPage: React.FC = () => {
         </div>
 
         {/* 1. Bento Spotlight Banner (Dynamic Featured Showcase) */}
-        {spotlightProject && selectedCategory === "all" && !searchQuery && (
+        {spotlightProject && selectedService === "all" && !searchQuery && (
           <div className="mb-16 rounded-[32px] sm:rounded-[40px] border border-white/15 bg-gradient-to-b from-white/[0.07] via-neutral-950/80 to-black p-6 sm:p-10 relative overflow-hidden group shadow-2xl backdrop-blur-xl">
             <div
               className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-[140px] pointer-events-none opacity-40"

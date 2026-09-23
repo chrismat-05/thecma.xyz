@@ -18,7 +18,7 @@ export const AboutPage: React.FC = () => {
       year: "2023 - 2026",
       institution: "Kristu Jayanti College",
       degree: "Bachelor of Computer Applications",
-      focus: "First Class with Distinction",
+      focus: "Coding, systems, databases, web development etc. (First Class)",
     },
     {
       year: "2023",
@@ -30,7 +30,7 @@ export const AboutPage: React.FC = () => {
       year: "2021",
       institution: "The Indian School, Kingdom of Bahrain",
       degree: "Secondary Education",
-      focus: "Academic Excellence (81%)",
+      focus: "Foundational sciences, mathematics, general studies (81%)",
     },
   ];
 
@@ -138,7 +138,6 @@ export const AboutPage: React.FC = () => {
         </div>
 
         <SectionTitleReveal
-          badge="// COMPLETE NARRATIVE & BACKGROUND"
           title="About The Engineer."
           subtitle="A comprehensive exploration of academic milestones, cybersecurity depth, technical skill stacks, and certified credentials."
           align="left"
@@ -186,7 +185,7 @@ export const AboutPage: React.FC = () => {
             {/* 1. Philosophy */}
             <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/[0.08] backdrop-blur-sm space-y-4">
               <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest block">
-                01 // Philosophy & Ethos
+                01 // What I believe
               </span>
               <h4 className="text-2xl font-bold text-white tracking-tight">
                 Where security integrity meets interactive elegance.
