@@ -194,8 +194,9 @@ export const Hero: React.FC = () => {
                   <img
                     src="/media/chris.png"
                     alt="Chris Mathew Aje"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-top select-none filter contrast-105 group-hover/portrait:scale-105 transition-transform duration-700 ease-out"
-                    loading="eager"
                   />
                   {/* Subtle inner shadow and rim light */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />

@@ -242,6 +242,8 @@ export const ProjectsPage: React.FC = () => {
                   <img
                     src={spotlightProject.thumbnail}
                     alt={spotlightProject.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
@@ -404,8 +406,9 @@ export const ProjectsPage: React.FC = () => {
                       <img
                         src={project.thumbnail}
                         alt={project.title}
-                        className="w-full h-full object-cover group-hover/thumb:scale-105 transition-transform duration-700 ease-out filter brightness-95 group-hover/thumb:brightness-105"
                         loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover group-hover/thumb:scale-105 transition-transform duration-700 ease-out filter brightness-95 group-hover/thumb:brightness-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 

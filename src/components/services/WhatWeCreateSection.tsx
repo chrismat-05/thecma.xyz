@@ -62,6 +62,8 @@ export const WhatWeCreateSection: React.FC = () => {
                   <img
                     src={service.image}
                     alt={service.title}
+                    loading="lazy"
+                    decoding="async"
                     className={`w-full h-full object-cover transition-all duration-700 ${isActive
                       ? "opacity-30 scale-105"
                       : "opacity-15 grayscale scale-100"

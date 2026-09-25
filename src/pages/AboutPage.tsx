@@ -152,6 +152,8 @@ export const AboutPage: React.FC = () => {
                   <img
                     src="/media/cover.png"
                     alt="Chris Mathew Aje"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover filter contrast-110 group-hover:scale-105 transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />

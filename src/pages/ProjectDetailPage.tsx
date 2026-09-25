@@ -239,6 +239,8 @@ export const ProjectDetailPage: React.FC = () => {
             <img
               src={heroImage}
               alt={project.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-auto max-h-[720px] object-cover filter contrast-[1.02] group-hover:scale-[1.01] transition-transform duration-700 ease-out"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
@@ -333,8 +335,9 @@ export const ProjectDetailPage: React.FC = () => {
                       <img
                         src={img}
                         alt={`${project.title} detail ${idx + 2}`}
-                        className="w-full h-auto max-h-[680px] object-cover group-hover:scale-[1.01] transition-transform duration-700 ease-out"
                         loading="lazy"
+                        decoding="async"
+                        className="w-full h-auto max-h-[680px] object-cover group-hover:scale-[1.01] transition-transform duration-700 ease-out"
                       />
                     </motion.div>
                   );
@@ -361,8 +364,9 @@ export const ProjectDetailPage: React.FC = () => {
                         <img
                           src={img}
                           alt={`${project.title} showcase ${pIdx + 1}`}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                           loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                         />
                       </motion.div>
                     ))}

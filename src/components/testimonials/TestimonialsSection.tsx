@@ -166,6 +166,8 @@ const TestimonialCard: React.FC<{ item: Testimonial }> = ({ item }) => {
             <img
               src={item.avatar}
               alt={item.name}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
             />
           </div>

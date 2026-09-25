@@ -87,6 +87,8 @@ export const HappyClientsSection: React.FC = () => {
                 <img
                   src={item.logo}
                   alt={item.name}
+                  loading="lazy"
+                  decoding="async"
                   className="h-8 md:h-10 w-auto max-w-[160px] object-contain filter grayscale opacity-40 group-hover:filter-none group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
                 />
               ) : (
