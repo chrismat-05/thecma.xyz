@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowUpRight, Layers } from "lucide-react";
 import projectsData from "@/content/projects.json";
 import { SplitFlapText } from "@/components/ui/SplitFlapText";
+import { getCategoryMeta } from "@/lib/projectCategories";
 
 interface ProjectItem {
   id: string;
@@ -82,7 +83,7 @@ export const Projects: React.FC = () => {
       cardRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
-    // Navigate to dedicated case study page
+    // Navigate to dedicated project page
     navigate(`/projects/${project.id}`);
   };
 
@@ -197,10 +198,17 @@ export const Projects: React.FC = () => {
                 </div>
 
                 {/* Right: Category, Year */}
-                <div className="flex items-center gap-2 sm:gap-5 font-mono text-xs text-neutral-400 shrink-0">
-                  <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-neutral-300 uppercase tracking-widest text-[11px] hidden sm:inline">
-                    {project.category || "CASE STUDY"}
-                  </span>
+                <div className="flex items-center gap-2 sm:gap-4 font-mono text-xs text-neutral-400 shrink-0">
+                  {(() => {
+                    const catMeta = getCategoryMeta(project.category);
+                    const CatIcon = catMeta.icon;
+                    return (
+                      <span className={`px-2.5 py-1 rounded-full border text-[11px] font-mono uppercase tracking-wider font-semibold hidden sm:inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
+                        <CatIcon size={11} className="shrink-0" />
+                        <span>{catMeta.label}</span>
+                      </span>
+                    );
+                  })()}
                   <span className="hidden md:inline text-neutral-600">•</span>
                   <span className="text-[#D7E2EA] font-bold font-mono text-xs sm:text-sm">
                     {project.year}
@@ -221,9 +229,16 @@ export const Projects: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent pointer-events-none" />
 
                 {/* Floating Category Pill */}
-                <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-black/75 border border-white/15 backdrop-blur-md text-[10px] font-mono text-white uppercase tracking-widest sm:hidden">
-                  {project.category || "FEATURED"}
-                </div>
+                {(() => {
+                  const catMeta = getCategoryMeta(project.category);
+                  const CatIcon = catMeta.icon;
+                  return (
+                    <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full border backdrop-blur-md text-[10px] font-mono uppercase tracking-wider font-semibold sm:hidden inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
+                      <CatIcon size={10} className="shrink-0" />
+                      <span>{catMeta.label}</span>
+                    </div>
+                  );
+                })()}
               </div>
 
               {/* Card Editorial Footer */}
@@ -256,7 +271,7 @@ export const Projects: React.FC = () => {
                     }}
                     className="shrink-0 px-6 py-3 rounded-full border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black hover:border-white/50 hover:bg-white/[0.08] text-[#D7E2EA] hover:text-white font-mono text-xs uppercase tracking-[0.2em] font-semibold transition-all flex items-center gap-2 group/btn shadow-lg hover:shadow-white/[0.05]"
                   >
-                    <span>Case Study</span>
+                    <span>View Project</span>
                     <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                   </button>
 

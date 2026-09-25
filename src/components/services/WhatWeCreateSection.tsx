@@ -165,7 +165,7 @@ export const WhatWeCreateSection: React.FC = () => {
                           data-cursor="button"
                           data-magnetic="true"
                         >
-                          <span>EXPLORE CASE STUDIES</span>
+                          <span>EXPLORE PROJECTS</span>
                           <ArrowUpRight size={15} />
                         </Link>
                       </div>
@@ -230,7 +230,7 @@ export const WhatWeCreateSection: React.FC = () => {
                         to="/projects"
                         className="btn-hero-primary !py-2 !px-4 text-xs font-semibold inline-flex items-center gap-1.5"
                       >
-                        Explore Case Studies <ArrowUpRight size={13} />
+                        Explore Projects <ArrowUpRight size={13} />
                       </Link>
                     </div>
                   </motion.div>

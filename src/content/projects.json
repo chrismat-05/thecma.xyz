@@ -10,7 +10,7 @@
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(147, 51, 234, 0.28), transparent 70%)",
     "tags": ["Full-Stack", "Firebase", "FormBuilder", "Analytics"],
     "technologies": ["HTML", "CSS", "JavaScript", "Firebase", "Firestore", "TypeScript", "Handlebars", "Resend"],
-    "category": "major",
+    "category": "personal",
     "servicesOffered": ["fullstack", "design-systems"],
     "thumbnail": "/media/forms.thecma.xyz/forms.thecma (1).png",
     "images": [
@@ -37,7 +37,7 @@
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(2, 132, 199, 0.28), transparent 70%)",
     "tags": ["Cybersecurity", "CLI", "PyPI", "Zero-Knowledge"],
     "technologies": ["Python", "CLI", "PyPi"],
-    "category": "minor",
+    "category": "personal",
     "servicesOffered": ["cybersecurity", "fullstack"],
     "thumbnail": "/media/IsItSecure/IsItSecure1.png",
     "images": [
@@ -62,7 +62,7 @@
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(59, 130, 246, 0.28), transparent 70%)",
     "tags": ["AI / NLP", "FastAPI", "React", "Privacy"],
     "technologies": ["React", "JavaScript", "Python"],
-    "category": "minor",
+    "category": "personal",
     "servicesOffered": ["cybersecurity", "fullstack", "design-systems"],
     "thumbnail": "/media/ScanThePolicy/home.png",
     "images": [
@@ -85,7 +85,7 @@
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(5, 150, 105, 0.28), transparent 70%)",
     "tags": ["Security Audit", "Docker", "DevTools"],
     "technologies": ["React", "Security Analysis", "Docker"],
-    "category": "minor",
+    "category": "personal",
     "servicesOffered": ["cybersecurity", "fullstack"],
     "thumbnail": "/media/scrihdr/scrihdr1.png",
     "images": [
@@ -108,7 +108,7 @@
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(99, 102, 241, 0.28), transparent 70%)",
     "tags": ["Developer Tools", "REST API", "Framer Motion"],
     "technologies": ["React", "Tailwind CSS", "Axios", "Framer Motion"],
-    "category": "minor",
+    "category": "personal",
     "servicesOffered": ["fullstack", "design-systems"],
     "thumbnail": "/media/reqapi/reqapi1.png",
     "images": [
@@ -130,7 +130,7 @@
     "themeColor": "#ec4899",
     "tags": ["npm Package", "Node.js", "CLI"],
     "technologies": ["Node.js", "CLI", "npm"],
-    "category": "minor",
+    "category": "personal",
     "servicesOffered": ["fullstack"],
     "thumbnail": "/media/Quotzy/quotzy(1).png",
     "images": [
@@ -152,7 +152,7 @@
     "themeColor": "#14b8a6",
     "tags": ["Networking", "GeoIP", "Intelligence"],
     "technologies": ["React JS", "Vite", "Tailwind CSS", "Framer Motion"],
-    "category": "minor",
+    "category": "personal",
     "servicesOffered": ["cybersecurity", "fullstack", "design-systems"],
     "thumbnail": "/media/IPLocator/1.png",
     "images": [

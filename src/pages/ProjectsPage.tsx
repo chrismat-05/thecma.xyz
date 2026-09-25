@@ -19,6 +19,7 @@ import { CursorGridBackground } from "@/components/backgrounds/CursorGridBackgro
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import servicesData from "@/content/services.json";
+import { getCategoryMeta } from "@/lib/projectCategories";
 
 interface ProjectItem {
   id: string;
@@ -44,6 +45,13 @@ export const ProjectsPage: React.FC = () => {
   const allProjects = projectsData as ProjectItem[];
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedService, setSelectedService] = useState<string>("all");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  const categoryFilters = [
+    { label: "All Projects", value: "all" },
+    { label: "Personal Projects", value: "personal" },
+    { label: "College Projects", value: "college" },
+  ];
 
   const serviceFilters = [
     { label: "All Services", value: "all" },
@@ -55,6 +63,9 @@ export const ProjectsPage: React.FC = () => {
 
   const filteredProjects = useMemo(() => {
     return allProjects.filter((project) => {
+      const matchesCategory =
+        selectedCategory === "all" ||
+        (project.category && project.category.toLowerCase() === selectedCategory.toLowerCase());
       const matchesService =
         selectedService === "all" ||
         (project.servicesOffered && project.servicesOffered.includes(selectedService));
@@ -65,14 +76,17 @@ export const ProjectsPage: React.FC = () => {
         project.technologies.some((t) =>
           t.toLowerCase().includes(searchQuery.toLowerCase())
         );
-      return matchesService && matchesSearch;
+      return matchesCategory && matchesService && matchesSearch;
     });
-  }, [allProjects, selectedService, searchQuery]);
+  }, [allProjects, selectedCategory, selectedService, searchQuery]);
 
   // Spotlight featured project (defaults to forms-thecma or first project)
   const spotlightProject = useMemo(() => {
     return allProjects.find((p) => p.featured && p.id === "forms-thecma") || allProjects[0];
   }, [allProjects]);
+
+  const spotlightCatMeta = spotlightProject ? getCategoryMeta(spotlightProject.category) : null;
+  const SpotlightCatIcon = spotlightCatMeta?.icon;
 
   return (
     <div className="min-h-screen bg-[#070709] text-white relative selection:bg-white selection:text-black">
@@ -114,9 +128,19 @@ export const ProjectsPage: React.FC = () => {
             <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
               {/* Left Column Info */}
               <div className="lg:col-span-6 space-y-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/[0.05] text-[11px] font-mono uppercase tracking-widest text-[#D7E2EA]">
-                  <Sparkles size={12} className="text-[#D7E2EA]" />
-                  <span>Flagship Production Platform</span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/[0.05] text-[11px] font-mono uppercase tracking-widest text-[#D7E2EA]">
+                    <Sparkles size={12} className="text-[#D7E2EA]" />
+                    <span>Flagship Production Platform</span>
+                  </div>
+                  {spotlightCatMeta && SpotlightCatIcon && (
+                    <div
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-md border text-[11px] font-mono uppercase tracking-wider font-semibold ${spotlightCatMeta.badgeClass}`}
+                    >
+                      <SpotlightCatIcon size={12} className="shrink-0" />
+                      <span>{spotlightCatMeta.label}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -195,12 +219,12 @@ export const ProjectsPage: React.FC = () => {
                     ) : null}
                   </div>
 
-                  {/* Icon-based button aligned to the right to open case study */}
+                  {/* Icon-based button aligned to the right to open project */}
                   <Link
                     to={`/projects/${spotlightProject.id}`}
                     className="w-12 h-12 rounded-full border border-white/20 bg-white/[0.05] hover:bg-white/15 hover:border-white/50 text-[#D7E2EA] hover:text-white flex items-center justify-center transition-all duration-300 shadow-lg group/modalbtn ml-auto"
-                    title="View Project Case Study"
-                    aria-label="View Project Case Study"
+                    title="View Project"
+                    aria-label="View Project"
                     data-cursor="button"
                   >
                     <Eye size={20} className="group-hover/modalbtn:scale-110 transition-transform" />
@@ -223,7 +247,7 @@ export const ProjectsPage: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-[11px] font-mono text-neutral-300">
                     <Eye size={12} className="text-[#D7E2EA]" />
-                    <span>Explore Case Study</span>
+                    <span>Explore Project</span>
                   </div>
                 </Link>
               </div>
@@ -232,59 +256,103 @@ export const ProjectsPage: React.FC = () => {
         )}
 
         {/* Filter Bar & Interactive Search */}
-        <div className="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center mb-10 pb-6 border-b border-white/10">
-          {/* Service Filter Tabs */}
-          <div className="flex flex-wrap gap-2 items-center">
+        <div className="flex flex-col gap-5 mb-10 pb-6 border-b border-white/10">
+          {/* Top row: Category Tabs & Search Input */}
+          <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
+            {/* Category Filter Tabs */}
+            <div className="flex flex-wrap gap-2 items-center p-1 rounded-full bg-white/[0.03] border border-white/10 w-fit">
+              {categoryFilters.map((cat) => {
+                const isActive = selectedCategory === cat.value;
+                const count =
+                  cat.value === "all"
+                    ? allProjects.length
+                    : allProjects.filter((p) => p.category?.toLowerCase() === cat.value).length;
+                const catMeta = cat.value !== "all" ? getCategoryMeta(cat.value) : null;
+                const CatIcon = catMeta?.icon;
+
+                return (
+                  <button
+                    key={cat.value}
+                    onClick={() => setSelectedCategory(cat.value)}
+                    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
+                      isActive
+                        ? "bg-white text-black font-bold shadow-lg shadow-white/20 scale-105"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                    data-cursor="button"
+                  >
+                    {CatIcon && <CatIcon size={13} className={isActive ? "text-black" : "text-neutral-400"} />}
+                    <span>{cat.label}</span>
+                    <span
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${
+                        isActive ? "bg-black/15 text-black font-bold" : "bg-white/10 text-neutral-400"
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Search Input */}
+            <div className="relative w-full md:w-80 shrink-0">
+              <Search
+                size={15}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"
+              />
+              <input
+                type="text"
+                placeholder="Search stack, title, tag..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-11 pr-4 py-2.5 rounded-full bg-neutral-900/80 border border-white/15 text-white placeholder-neutral-500 focus:outline-none focus:border-white text-xs font-mono transition-colors"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Sub row: Services Offered Filter Chips */}
+          <div className="flex flex-wrap gap-2 items-center pt-1">
+            <span className="text-[11px] font-mono text-neutral-500 uppercase tracking-widest mr-1">
+              Domain:
+            </span>
             {serviceFilters.map((s) => {
               const isActive = selectedService === s.value;
               const count =
                 s.value === "all"
-                  ? allProjects.length
-                  : allProjects.filter((p) => p.servicesOffered?.includes(s.value)).length;
+                  ? allProjects.filter((p) =>
+                      selectedCategory === "all" || p.category?.toLowerCase() === selectedCategory
+                    ).length
+                  : allProjects.filter(
+                      (p) =>
+                        (selectedCategory === "all" || p.category?.toLowerCase() === selectedCategory) &&
+                        p.servicesOffered?.includes(s.value)
+                    ).length;
 
               return (
                 <button
                   key={s.value}
                   onClick={() => setSelectedService(s.value)}
-                  className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${isActive
-                    ? "bg-white text-black font-bold shadow-lg shadow-white/15 scale-105"
-                    : "bg-white/[0.03] text-neutral-400 border border-white/10 hover:text-white hover:border-white/30"
-                    }`}
+                  className={`px-3 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
+                    isActive
+                      ? "bg-white/20 border border-white/50 text-white font-semibold"
+                      : "bg-white/[0.02] text-neutral-400 border border-white/10 hover:text-neutral-200 hover:border-white/20"
+                  }`}
                   data-cursor="button"
                 >
                   <span>{s.label}</span>
-                  <span
-                    className={`text-[10px] px-1.5 py-0.5 rounded-full ${isActive ? "bg-black/15 text-black font-mono font-bold" : "bg-white/10 text-neutral-400"
-                      }`}
-                  >
-                    {count}
-                  </span>
+                  <span className="text-[10px] text-neutral-400">({count})</span>
                 </button>
               );
             })}
-          </div>
-
-          {/* Search Input */}
-          <div className="relative w-full lg:w-80 shrink-0">
-            <Search
-              size={15}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"
-            />
-            <input
-              type="text"
-              placeholder="Search stack, title, tag..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 rounded-full bg-neutral-900/80 border border-white/15 text-white placeholder-neutral-500 focus:outline-none focus:border-white text-xs font-mono transition-colors"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs"
-              >
-                Clear
-              </button>
-            )}
           </div>
         </div>
 
@@ -315,6 +383,9 @@ export const ProjectsPage: React.FC = () => {
                   : "Source Code";
               const targetUrl = project.link || project.package || project.github;
 
+              const catMeta = getCategoryMeta(project.category);
+              const CatIcon = catMeta.icon;
+
               return (
                 <motion.div
                   key={project.id}
@@ -339,9 +410,12 @@ export const ProjectsPage: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
                       {/* Header tags inside image */}
-                      <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
-                        <span className="px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-[10px] font-mono text-neutral-300">
-                          {project.category.toUpperCase()}
+                      <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none z-10">
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-md border text-[10px] font-mono uppercase tracking-wider font-semibold ${catMeta.badgeClass}`}
+                        >
+                          <CatIcon size={11} className="shrink-0" />
+                          <span>{catMeta.label}</span>
                         </span>
                         <span className="px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-[10px] font-mono text-[#D7E2EA] font-semibold">
                           {project.year}
@@ -424,12 +498,12 @@ export const ProjectsPage: React.FC = () => {
                       <div className="mt-4" />
                     )}
 
-                    {/* Icon-based button aligned to the right to open case study */}
+                    {/* Icon-based button aligned to the right to open project */}
                     <Link
                       to={`/projects/${project.id}`}
                       className="w-9 h-9 rounded-full border border-white/20 bg-white/[0.05] hover:bg-white/15 hover:border-white/50 text-[#D7E2EA] hover:text-white flex items-center justify-center transition-all duration-300 shadow-md group/modalbtn ml-auto mt-4"
-                      title="View Case Study"
-                      aria-label="View Case Study"
+                      title="View Project"
+                      aria-label="View Project"
                       data-cursor="button"
                     >
                       <Eye size={15} className="group-hover/modalbtn:scale-110 transition-transform" />

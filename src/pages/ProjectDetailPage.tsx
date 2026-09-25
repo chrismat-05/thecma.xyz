@@ -20,6 +20,7 @@ import servicesData from "@/content/services.json";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { CursorGridBackground } from "@/components/backgrounds/CursorGridBackground";
+import { getCategoryMeta } from "@/lib/projectCategories";
 
 interface ProjectItem {
   id: string;
@@ -72,7 +73,7 @@ export const ProjectDetailPage: React.FC = () => {
           Project Not Found
         </h1>
         <p className="text-neutral-400 font-mono text-sm max-w-md mb-8">
-          The requested system or case study could not be located in the catalogued archives.
+          The requested project could not be located in the catalogued archives.
         </p>
         <Link
           to="/projects"
@@ -86,6 +87,8 @@ export const ProjectDetailPage: React.FC = () => {
   }
 
   const themeColor = project.themeColor || "#9333ea";
+  const catMeta = getCategoryMeta(project.category);
+  const CatIcon = catMeta.icon;
 
   // Filter gallery images so we don't repeat the thumbnail if it's the only one
   const galleryImages = project.images && project.images.length > 0 ? project.images : [project.thumbnail];
@@ -178,8 +181,13 @@ export const ProjectDetailPage: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="flex flex-wrap items-center gap-2.5"
             >
-              <span className="px-3.5 py-1 rounded-full border border-white/15 bg-white/[0.04] text-xs font-mono uppercase tracking-widest text-[#D7E2EA]">
-                {project.category.toUpperCase()} // {project.year}
+              <span
+                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full border text-xs font-mono uppercase tracking-wider font-semibold backdrop-blur-md ${catMeta.badgeClass}`}
+              >
+                <CatIcon size={12} className="shrink-0" />
+                <span>{catMeta.label}</span>
+                <span className="opacity-40">•</span>
+                <span>{project.year}</span>
               </span>
 
               {project.servicesOffered && project.servicesOffered.map((srvId) => {
@@ -485,7 +493,7 @@ export const ProjectDetailPage: React.FC = () => {
             >
               <div className="text-center mb-8">
                 <span className="text-xs font-mono text-neutral-500 uppercase tracking-[0.25em] block">
-                  Next Case Study
+                  Next Project
                 </span>
               </div>
 
@@ -501,9 +509,20 @@ export const ProjectDetailPage: React.FC = () => {
 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
                   <div className="space-y-3">
-                    <span className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/80">
-                      {nextProject.category.toUpperCase()} // {nextProject.year}
-                    </span>
+                    {(() => {
+                      const nextCatMeta = getCategoryMeta(nextProject.category);
+                      const NextCatIcon = nextCatMeta.icon;
+                      return (
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[11px] font-mono uppercase tracking-wider font-semibold backdrop-blur-md ${nextCatMeta.badgeClass}`}
+                        >
+                          <NextCatIcon size={11} className="shrink-0" />
+                          <span>{nextCatMeta.label}</span>
+                          <span className="opacity-40">•</span>
+                          <span>{nextProject.year}</span>
+                        </span>
+                      );
+                    })()}
                     <h3 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase font-display text-white tracking-tight group-hover:text-neutral-200 transition-colors">
                       {nextProject.title}
                     </h3>
