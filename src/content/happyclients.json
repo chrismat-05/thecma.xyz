@@ -40,5 +40,12 @@
     "logo": "",
     "work": "website for creators garage studio for their showcase to get hired and so on",
     "link": "https://creatorsgarage.vercel.app/"
+  },
+  {
+    "id": "client-7",
+    "name": "Brand Me Up",
+    "logo": "/media/clients/brandmeup.png",
+    "work": "Creative design studio & corporate merchandise agency website",
+    "link": "https://brandmeup.vercel.app/"
   }
 ]
