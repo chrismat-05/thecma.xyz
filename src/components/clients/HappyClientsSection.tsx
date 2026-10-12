@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { SplitFlapText } from "@/components/ui/SplitFlapText";
 import { RollupNumber } from "@/components/ui/RollupNumber";
 import clientsData from "@/content/happyclients.json";
@@ -9,6 +10,7 @@ interface HappyClient {
   name: string;
   logo?: string;
   work: string;
+  link?: string;
 }
 
 export const HappyClientsSection: React.FC = () => {
@@ -78,36 +80,58 @@ export const HappyClientsSection: React.FC = () => {
         }}
       >
         <div className="animate-marquee-scroll flex items-center gap-14 sm:gap-20 md:gap-24 w-max">
-          {marqueeItems.map((item, index) => (
-            <div
-              key={`${item.name}-${index}`}
-              className="group relative flex items-center cursor-pointer select-none py-4"
-            >
-              {item.logo ? (
-                <img
-                  src={item.logo}
-                  alt={item.name}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-8 md:h-10 w-auto max-w-[160px] object-contain filter grayscale opacity-40 group-hover:filter-none group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
-                />
-              ) : (
-                <span className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-neutral-500 group-hover:text-white group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] group-hover:scale-105 transition-all duration-300 font-['Space_Grotesk'] whitespace-nowrap">
-                  {item.name}
-                </span>
-              )}
-
-              {/* One-liner work reveal tooltip on hover */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-bottom-6 transition-all duration-300 pointer-events-none z-30 whitespace-nowrap">
-                <div className="px-4 py-1.5 rounded-full bg-neutral-900/95 border border-white/20 backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,0.85)] flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs font-medium text-[#D7E2EA] font-sans">
-                    {item.work}
+          {marqueeItems.map((item, index) => {
+            const clientContent = (
+              <>
+                {item.logo ? (
+                  <img
+                    src={item.logo}
+                    alt={item.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-8 md:h-10 w-auto max-w-[160px] object-contain filter grayscale opacity-40 group-hover:filter-none group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                  />
+                ) : (
+                  <span className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-neutral-500 group-hover:text-white group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] group-hover:scale-105 transition-all duration-300 font-['Space_Grotesk'] whitespace-nowrap">
+                    {item.name}
                   </span>
+                )}
+
+                {/* One-liner work reveal tooltip on hover */}
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-bottom-6 transition-all duration-300 pointer-events-none z-30 whitespace-nowrap">
+                  <div className="px-4 py-1.5 rounded-full bg-neutral-900/95 border border-white/20 backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,0.85)] flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                    <span className="text-xs font-medium text-[#D7E2EA] font-sans">
+                      {item.work}
+                    </span>
+                    {item.link && (
+                      <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-emerald-400 transition-colors shrink-0" />
+                    )}
+                  </div>
                 </div>
+              </>
+            );
+
+            return item.link ? (
+              <a
+                key={`${item.name}-${index}`}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex items-center cursor-pointer select-none py-4 outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/50 rounded-lg"
+                title={`Visit ${item.name}`}
+              >
+                {clientContent}
+              </a>
+            ) : (
+              <div
+                key={`${item.name}-${index}`}
+                className="group relative flex items-center cursor-default select-none py-4"
+              >
+                {clientContent}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
