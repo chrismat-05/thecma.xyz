@@ -89,7 +89,7 @@ export const HappyClientsSection: React.FC = () => {
                     alt={item.name}
                     loading="lazy"
                     decoding="async"
-                    className="h-8 md:h-10 w-auto max-w-[160px] object-contain filter grayscale opacity-40 group-hover:filter-none group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                    className="h-10 md:h-12 w-auto max-w-[180px] object-contain filter grayscale opacity-40 group-hover:filter-none group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
                   />
                 ) : (
                   <span className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-neutral-500 group-hover:text-white group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] group-hover:scale-105 transition-all duration-300 font-['Space_Grotesk'] whitespace-nowrap">
