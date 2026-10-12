@@ -29,7 +29,7 @@ export const HappyClientsSection: React.FC = () => {
           <div>
             <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-white tracking-tight">
               <SplitFlapText
-                text="Trusted By."
+                text="Trusted By:"
                 onHoverTrigger={true}
               />
             </h3>

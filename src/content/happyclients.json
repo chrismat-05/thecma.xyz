@@ -1,50 +1,44 @@
 [
   {
     "id": "client-1",
-    "name": "Nexus Media Labs",
-    "logo": "",
-    "work": "Editorial platform design & interactive brand experience"
+    "name": "IPC Shalom",
+    "logo": "/media/clients/shalom.png",
+    "work": "church website",
+    "link": "https://www.ipcshalom.org/"
   },
   {
     "id": "client-2",
-    "name": "Voxel & Form Studio",
-    "logo": "",
-    "work": "Interactive 3D WebGL transitions & design system"
+    "name": "Shilpkala 25",
+    "logo": "/media/clients/shilpkala.png",
+    "work": "Kristu Jayanti University Fine Arts Club Fest Shilpkala 25 intra university fest website",
+    "link": "https://shilpkala2k25.vercel.app/home"
   },
   {
     "id": "client-3",
-    "name": "Monolith Systems",
+    "name": "ROOTED",
     "logo": "",
-    "work": "Cinematic digital architecture & web application"
+    "work": "guests intake form for rooted group to collect details of newcomers to store in a database for future use",
+    "link": "https://cma-rooted.vercel.app/"
   },
   {
     "id": "client-4",
-    "name": "Veloce Automotive",
-    "logo": "",
-    "work": "High-conversion product showcase & interactive visualizer"
+    "name": "On-Rec Autuer '26",
+    "logo": "/media/clients/on_rec_auteur.png",
+    "work": "kristu jayanti university media department registration link to collect submissions of media files also",
+    "link": "https://kju-auteur.vercel.app/"
   },
   {
     "id": "client-5",
-    "name": "Atelier Digital",
-    "logo": "",
-    "work": "Creative web engineering & fluid micro-interactions"
+    "name": "ICPF Bengaluru",
+    "logo": "/media/clients/icpf_bangalore.png",
+    "work": "a public website, with an admin portal for icpf bengaluru to manage events, camps: from registration, checkin, scoring, teams, feedback, with payment gateway, mailing server and all",
+    "link": "https://icpf.in/"
   },
   {
     "id": "client-6",
-    "name": "Prism Tech",
+    "name": "Creators Garage",
     "logo": "",
-    "work": "Modern responsive interface & design tokens"
-  },
-  {
-    "id": "client-7",
-    "name": "Solaris Audio",
-    "logo": "",
-    "work": "Spatial web audio portfolio & sound interaction"
-  },
-  {
-    "id": "client-8",
-    "name": "Tristan Media",
-    "logo": "",
-    "work": "Dynamic portfolio architecture & visual identity"
+    "work": "website for creators garage studio for their showcase to get hired and so on",
+    "link": "https://creatorsgarage.vercel.app/"
   }
 ]
