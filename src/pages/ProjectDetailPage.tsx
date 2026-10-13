@@ -113,7 +113,7 @@ export const ProjectDetailPage: React.FC = () => {
 
       <main className="relative z-10 pt-28 sm:pt-36 pb-32">
         <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
-          
+
           {/* Top Sticky-like Utility Bar */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -283,7 +283,7 @@ export const ProjectDetailPage: React.FC = () => {
                       Role / Discipline
                     </span>
                     <span className="text-sm sm:text-base font-mono font-bold text-white mt-1 block">
-                      Web Dev &amp; Designer
+                      Full Stack Web Dev
                     </span>
                   </div>
                   <div>

@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
               CHRIS MATHEW AJE
             </div>
             <h3 className="text-2xl font-bold tracking-tight text-white mb-2">
-              Web Dev &amp; Designer
+              Full Stack Web Dev
             </h3>
             <p className="text-neutral-400 text-sm max-w-md leading-relaxed mb-4">
               Building next-generation digital products, robust security tools, and interactive WebGL experiences.

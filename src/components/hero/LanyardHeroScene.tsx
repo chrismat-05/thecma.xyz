@@ -150,7 +150,7 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       // Role
       bctx.fillStyle = "#a1a1aa";
       bctx.font = "bold 16px monospace";
-      bctx.fillText("WEB DEV & DESIGNER", 50, 485);
+      bctx.fillText("FULL STACK WEB DEV", 50, 485);
 
       // Status: ONLINE SINCE 2022 with active green dot
       bctx.fillStyle = "#34d399";
