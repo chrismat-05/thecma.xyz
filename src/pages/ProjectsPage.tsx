@@ -49,6 +49,7 @@ export const ProjectsPage: React.FC = () => {
 
   const categoryFilters = [
     { label: "All Projects", value: "all" },
+    { label: "Client Projects", value: "client" },
     { label: "Personal Projects", value: "personal" },
     { label: "College Projects", value: "college" },
   ];
