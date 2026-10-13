@@ -1,5 +1,28 @@
 [
   {
+    "id": "client-6",
+    "name": "Creators Garage",
+    "logo": "",
+    "work": "Cinematic creative production studio portfolio",
+    "link": "https://creatorsgarage.vercel.app/"
+  },
+  {
+    "id": "client-7",
+    "name": "Brand Me Up",
+    "logo": "/media/clients/brandmeup.png",
+    "logoMode": "light",
+    "work": "Creative design studio & corporate merchandise agency",
+    "link": "https://brandmeup.vercel.app/"
+  },
+  {
+    "id": "client-5",
+    "name": "ICPF Bengaluru",
+    "logo": "/media/clients/icpf_bengaluru.png",
+    "logoMode": "light",
+    "work": "Full-stack event management portal & admin suite",
+    "link": "https://icpf.in/"
+  },
+  {
     "id": "client-1",
     "name": "IPC Shalom",
     "logo": "/media/clients/shalom.png",
@@ -16,13 +39,6 @@
     "link": "https://shilpkala2k25.vercel.app/home"
   },
   {
-    "id": "client-3",
-    "name": "ROOTED",
-    "logo": "",
-    "work": "Guest onboarding & member intake workflow",
-    "link": "https://cma-rooted.vercel.app/"
-  },
-  {
     "id": "client-4",
     "name": "On-Rec & Auteur '26",
     "logo": "/media/clients/on_rec_auteur.png",
@@ -31,26 +47,10 @@
     "link": "https://kju-auteur.vercel.app/"
   },
   {
-    "id": "client-5",
-    "name": "ICPF Bengaluru",
-    "logo": "/media/clients/icpf_bengaluru.png",
-    "logoMode": "light",
-    "work": "Full-stack event management portal & admin suite",
-    "link": "https://icpf.in/"
-  },
-  {
-    "id": "client-6",
-    "name": "Creators Garage",
+    "id": "client-3",
+    "name": "ROOTED",
     "logo": "",
-    "work": "Cinematic creative production studio portfolio",
-    "link": "https://creatorsgarage.vercel.app/"
-  },
-  {
-    "id": "client-7",
-    "name": "Brand Me Up",
-    "logo": "/media/clients/brandmeup.png",
-    "logoMode": "light",
-    "work": "Creative design studio & corporate merchandise agency",
-    "link": "https://brandmeup.vercel.app/"
+    "work": "Guest onboarding & member intake workflow",
+    "link": "https://cma-rooted.vercel.app/"
   }
 ]
