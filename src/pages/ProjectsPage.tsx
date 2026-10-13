@@ -90,11 +90,11 @@ export const ProjectsPage: React.FC = () => {
   const SpotlightCatIcon = spotlightCatMeta?.icon;
 
   return (
-    <div className="min-h-screen bg-[#070709] text-white relative selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-[#070709] text-white relative flex flex-col selection:bg-white selection:text-black">
       <CursorGridBackground opacity={0.4} />
       <Navigation />
 
-      <main className="container mx-auto px-4 max-w-7xl pt-32 sm:pt-36 pb-28 relative z-10">
+      <main className="container mx-auto px-4 max-w-7xl pt-32 sm:pt-36 pb-28 relative z-10 flex-1">
         {/* Top Breadcrumb & Return to Portfolio */}
         <div className="flex items-center justify-between mb-8">
           <Link
