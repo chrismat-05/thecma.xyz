@@ -3,6 +3,7 @@
     "id": "client-1",
     "name": "IPC Shalom",
     "logo": "/media/clients/shalom.png",
+    "logoMode": "dark",
     "work": "Official church platform & community hub",
     "link": "https://www.ipcshalom.org/"
   },
@@ -10,6 +11,7 @@
     "id": "client-2",
     "name": "Shilpkala 25",
     "logo": "/media/clients/shilpkala.png",
+    "logoMode": "light",
     "work": "Fine arts festival portal & event showcase",
     "link": "https://shilpkala2k25.vercel.app/home"
   },
@@ -24,6 +26,7 @@
     "id": "client-4",
     "name": "On-Rec & Auteur '26",
     "logo": "/media/clients/on_rec_auteur.png",
+    "logoMode": "dark",
     "work": "National film fest & media submission portal",
     "link": "https://kju-auteur.vercel.app/"
   },
@@ -31,6 +34,7 @@
     "id": "client-5",
     "name": "ICPF Bengaluru",
     "logo": "/media/clients/icpf_bengaluru.png",
+    "logoMode": "light",
     "work": "Full-stack event management portal & admin suite",
     "link": "https://icpf.in/"
   },
@@ -45,6 +49,7 @@
     "id": "client-7",
     "name": "Brand Me Up",
     "logo": "/media/clients/brandmeup.png",
+    "logoMode": "light",
     "work": "Creative design studio & corporate merchandise agency",
     "link": "https://brandmeup.vercel.app/"
   }
