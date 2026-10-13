@@ -6,12 +6,28 @@
     "description": "High-end creative production studio website showcasing cinematic commercial films, editorial automotive cinematography, visual storytelling, photography, and brand media production. Built with Next.js and Tailwind CSS featuring fluid motion pacing and rich typography.",
     "year": "2025",
     "featured": false,
-    "themeColor": "#8b5cf6",
+    "themeColor": "#59232f",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(139, 92, 246, 0.28), transparent 70%)",
-    "tags": ["Production Studio", "Cinematography", "Next.js", "Creative Direction"],
-    "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
+    "tags": [
+      "Production Studio",
+      "Cinematography",
+      "Next.js",
+      "Creative Direction"
+    ],
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Vercel"
+    ],
     "category": "client",
-    "servicesOffered": ["creative-media", "fullstack", "design-systems"],
+    "servicesOffered": [
+      "creative-media",
+      "fullstack",
+      "design-systems"
+    ],
     "thumbnail": "/media/creatorsgarage/creatorsgarage-1.png",
     "images": [
       "/media/creatorsgarage/creatorsgarage-1.png",
@@ -31,12 +47,27 @@
     "description": "Digital storefront and identity portfolio for BrandMeUp, a premier creative design studio and custom corporate merchandise agency based in Bengaluru. Showcases brand identity design systems, bespoke onboarding kits, employee appreciation gifts, and custom promotional merchandise tailored for leading Indian enterprises.",
     "year": "2025",
     "featured": false,
-    "themeColor": "#ec4899",
+    "themeColor": "#ff9900",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(236, 72, 153, 0.28), transparent 70%)",
-    "tags": ["Brand Identity", "Design Studio", "Corporate Swag", "E-Commerce"],
-    "technologies": ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
+    "tags": [
+      "Brand Identity",
+      "Design Studio",
+      "Corporate Swag",
+      "E-Commerce"
+    ],
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
     "category": "client",
-    "servicesOffered": ["design-systems", "fullstack", "creative-media"],
+    "servicesOffered": [
+      "design-systems",
+      "fullstack",
+      "creative-media"
+    ],
     "thumbnail": "/media/brandmeup/brandmeup-1.png",
     "images": [
       "/media/brandmeup/brandmeup-1.png",
@@ -56,12 +87,26 @@
     "description": "Official web platform for Inter Collegiate Prayer Fellowship (ICPF) Bengaluru. Engineered to impact new generations and redefine optimism through youth ministry events, leadership camps, regional chapter networks, and spiritual development resources across colleges in Bengaluru.",
     "year": "2025",
     "featured": false,
-    "themeColor": "#2563eb",
+    "themeColor": "#151c46",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(37, 99, 235, 0.28), transparent 70%)",
-    "tags": ["Youth Ministry", "Event Management", "Campus Outreach", "Full-Stack"],
-    "technologies": ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
+    "tags": [
+      "Youth Ministry",
+      "Event Management",
+      "Campus Outreach",
+      "Full-Stack"
+    ],
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
     "category": "client",
-    "servicesOffered": ["fullstack", "design-systems"],
+    "servicesOffered": [
+      "fullstack",
+      "design-systems"
+    ],
     "thumbnail": "/media/icpf/icpf-1.png",
     "images": [
       "/media/icpf/icpf-1.png",
@@ -81,12 +126,26 @@
     "description": "Official web platform and community hub for The Indian Pentecostal Church of God – Shalom in Bahrain, serving the diaspora community since 1981. Built with React and TypeScript, the platform delivers live stream broadcasts, bilingual announcements, ministry schedules, and archival sermon recordings.",
     "year": "2025",
     "featured": false,
-    "themeColor": "#0ea5e9",
+    "themeColor": "#bc3120",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(14, 165, 233, 0.28), transparent 70%)",
-    "tags": ["Church Platform", "Bilingual", "Livestream Hub", "Community"],
-    "technologies": ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
+    "tags": [
+      "Church Platform",
+      "Bilingual",
+      "Livestream Hub",
+      "Community"
+    ],
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
     "category": "client",
-    "servicesOffered": ["fullstack", "design-systems"],
+    "servicesOffered": [
+      "fullstack",
+      "design-systems"
+    ],
     "thumbnail": "/media/ipcshalom/ipcshalom-1.png",
     "images": [
       "/media/ipcshalom/ipcshalom-1.png",
@@ -106,12 +165,26 @@
     "description": "Official digital platform for Devanahalli City Church (DCC Bangalore), connecting the local community with Sunday gatherings, ministry outreach, and spiritual fellowship. Features an editorial layout with custom typography, service schedules, worship audio, and location telemetry for city attendees.",
     "year": "2025",
     "featured": false,
-    "themeColor": "#f59e0b",
+    "themeColor": "#aa8955",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(245, 158, 11, 0.28), transparent 70%)",
-    "tags": ["Church Platform", "Community Hub", "Vite", "Tailwind CSS"],
-    "technologies": ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
+    "tags": [
+      "Church Platform",
+      "Community Hub",
+      "Vite",
+      "Tailwind CSS"
+    ],
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
     "category": "client",
-    "servicesOffered": ["fullstack", "design-systems"],
+    "servicesOffered": [
+      "fullstack",
+      "design-systems"
+    ],
     "thumbnail": "/media/dcc/dcc-1.png",
     "images": [
       "/media/dcc/dcc-1.png",
@@ -131,12 +204,28 @@
     "description": "Interactive digital event showcase and registration management platform for Shilpkala 2025, the flagship national-level intercollegiate fine arts fest hosted by Kristu Jayanti University. Built with React and TypeScript, the platform features dynamic event category discovery, participant onboarding forms, volunteer OD workflows, and a digital backdrop showcase for stage performances.",
     "year": "2025",
     "featured": false,
-    "themeColor": "#f97316",
+    "themeColor": "#f5db3b",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(249, 115, 22, 0.28), transparent 70%)",
-    "tags": ["Kristu Jayanti University", "Arts Festival", "Event Portal", "Registration System"],
-    "technologies": ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "TanStack Query"],
+    "tags": [
+      "Kristu Jayanti University",
+      "Arts Festival",
+      "Event Portal",
+      "Registration System"
+    ],
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion",
+      "TanStack Query"
+    ],
     "category": "client",
-    "servicesOffered": ["fullstack", "design-systems", "creative-media"],
+    "servicesOffered": [
+      "fullstack",
+      "design-systems",
+      "creative-media"
+    ],
     "thumbnail": "/media/shilpkala/shilpkala-1.png",
     "images": [
       "/media/shilpkala/shilpkala-1.png",
@@ -156,12 +245,27 @@
     "description": "Digital media submission and festival entry portal built for ON-REC & AUTEUR 2026, the National Level Intercollegiate Film & Media Festival organized by the Department of Media Studies at Kristu Jayanti University. Features a cinematic dark-mode intake interface supporting narrative short films, single-take cinematography, and microseries submissions with verification protocols, cloud link validation, and dark/light mode toggles.",
     "year": "2026",
     "featured": false,
-    "themeColor": "#e11d48",
+    "themeColor": "#7e4d35",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(225, 29, 72, 0.28), transparent 70%)",
-    "tags": ["Kristu Jayanti University", "Film Festival", "Submission Portal", "Media Intake"],
-    "technologies": ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
+    "tags": [
+      "Kristu Jayanti University",
+      "Film Festival",
+      "Submission Portal",
+      "Media Intake"
+    ],
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
     "category": "client",
-    "servicesOffered": ["fullstack", "design-systems", "creative-media"],
+    "servicesOffered": [
+      "fullstack",
+      "design-systems",
+      "creative-media"
+    ],
     "thumbnail": "/media/auteur/auteur-1.png",
     "images": [
       "/media/auteur/auteur-1.png",
@@ -181,12 +285,26 @@
     "description": "A tailored guest onboarding and digital intake application engineered for Rooted Fellowship. Featuring a distraction-free multi-step form experience with real-time field validation, smooth progress tracking, and secure cloud intake to welcome new attendees and connect them with community small groups.",
     "year": "2025",
     "featured": false,
-    "themeColor": "#10b981",
+    "themeColor": "#7e4d35",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(16, 185, 129, 0.28), transparent 70%)",
-    "tags": ["Onboarding Flow", "Intake Workflow", "Multi-Step Form", "Community"],
-    "technologies": ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
+    "tags": [
+      "Onboarding Flow",
+      "Intake Workflow",
+      "Multi-Step Form",
+      "Community"
+    ],
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
     "category": "client",
-    "servicesOffered": ["fullstack", "design-systems"],
+    "servicesOffered": [
+      "fullstack",
+      "design-systems"
+    ],
     "thumbnail": "/media/rooted/rooted-1.png",
     "images": [
       "/media/rooted/rooted-1.png",
@@ -208,10 +326,27 @@
     "featured": true,
     "themeColor": "#9333ea",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(147, 51, 234, 0.28), transparent 70%)",
-    "tags": ["Full-Stack", "Firebase", "FormBuilder", "Analytics"],
-    "technologies": ["HTML", "CSS", "JavaScript", "Firebase", "Firestore", "TypeScript", "Handlebars", "Resend"],
+    "tags": [
+      "Full-Stack",
+      "Firebase",
+      "FormBuilder",
+      "Analytics"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Firebase",
+      "Firestore",
+      "TypeScript",
+      "Handlebars",
+      "Resend"
+    ],
     "category": "personal",
-    "servicesOffered": ["fullstack", "design-systems"],
+    "servicesOffered": [
+      "fullstack",
+      "design-systems"
+    ],
     "thumbnail": "/media/forms.thecma.xyz/forms.thecma (1).png",
     "images": [
       "/media/forms.thecma.xyz/forms.thecma (1).png",
@@ -235,10 +370,22 @@
     "featured": true,
     "themeColor": "#0284c7",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(2, 132, 199, 0.28), transparent 70%)",
-    "tags": ["Cybersecurity", "CLI", "PyPI", "Zero-Knowledge"],
-    "technologies": ["Python", "CLI", "PyPi"],
+    "tags": [
+      "Cybersecurity",
+      "CLI",
+      "PyPI",
+      "Zero-Knowledge"
+    ],
+    "technologies": [
+      "Python",
+      "CLI",
+      "PyPi"
+    ],
     "category": "personal",
-    "servicesOffered": ["cybersecurity", "fullstack"],
+    "servicesOffered": [
+      "cybersecurity",
+      "fullstack"
+    ],
     "thumbnail": "/media/IsItSecure/IsItSecure1.png",
     "images": [
       "/media/IsItSecure/IsItSecure1.png",
@@ -260,10 +407,23 @@
     "featured": true,
     "themeColor": "#3b82f6",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(59, 130, 246, 0.28), transparent 70%)",
-    "tags": ["AI / NLP", "FastAPI", "React", "Privacy"],
-    "technologies": ["React", "JavaScript", "Python"],
+    "tags": [
+      "AI / NLP",
+      "FastAPI",
+      "React",
+      "Privacy"
+    ],
+    "technologies": [
+      "React",
+      "JavaScript",
+      "Python"
+    ],
     "category": "personal",
-    "servicesOffered": ["cybersecurity", "fullstack", "design-systems"],
+    "servicesOffered": [
+      "cybersecurity",
+      "fullstack",
+      "design-systems"
+    ],
     "thumbnail": "/media/ScanThePolicy/home.png",
     "images": [
       "/media/ScanThePolicy/home.png",
@@ -283,10 +443,21 @@
     "featured": true,
     "themeColor": "#059669",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(5, 150, 105, 0.28), transparent 70%)",
-    "tags": ["Security Audit", "Docker", "DevTools"],
-    "technologies": ["React", "Security Analysis", "Docker"],
+    "tags": [
+      "Security Audit",
+      "Docker",
+      "DevTools"
+    ],
+    "technologies": [
+      "React",
+      "Security Analysis",
+      "Docker"
+    ],
     "category": "personal",
-    "servicesOffered": ["cybersecurity", "fullstack"],
+    "servicesOffered": [
+      "cybersecurity",
+      "fullstack"
+    ],
     "thumbnail": "/media/scrihdr/scrihdr1.png",
     "images": [
       "/media/scrihdr/scrihdr1.png",
@@ -306,10 +477,22 @@
     "featured": true,
     "themeColor": "#6366f1",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(99, 102, 241, 0.28), transparent 70%)",
-    "tags": ["Developer Tools", "REST API", "Framer Motion"],
-    "technologies": ["React", "Tailwind CSS", "Axios", "Framer Motion"],
+    "tags": [
+      "Developer Tools",
+      "REST API",
+      "Framer Motion"
+    ],
+    "technologies": [
+      "React",
+      "Tailwind CSS",
+      "Axios",
+      "Framer Motion"
+    ],
     "category": "personal",
-    "servicesOffered": ["fullstack", "design-systems"],
+    "servicesOffered": [
+      "fullstack",
+      "design-systems"
+    ],
     "thumbnail": "/media/reqapi/reqapi1.png",
     "images": [
       "/media/reqapi/reqapi1.png",
@@ -328,10 +511,20 @@
     "year": "2023",
     "featured": false,
     "themeColor": "#ec4899",
-    "tags": ["npm Package", "Node.js", "CLI"],
-    "technologies": ["Node.js", "CLI", "npm"],
+    "tags": [
+      "npm Package",
+      "Node.js",
+      "CLI"
+    ],
+    "technologies": [
+      "Node.js",
+      "CLI",
+      "npm"
+    ],
     "category": "personal",
-    "servicesOffered": ["fullstack"],
+    "servicesOffered": [
+      "fullstack"
+    ],
     "thumbnail": "/media/Quotzy/quotzy(1).png",
     "images": [
       "/media/Quotzy/quotzy(1).png",
@@ -350,10 +543,23 @@
     "year": "2023",
     "featured": false,
     "themeColor": "#14b8a6",
-    "tags": ["Networking", "GeoIP", "Intelligence"],
-    "technologies": ["React JS", "Vite", "Tailwind CSS", "Framer Motion"],
+    "tags": [
+      "Networking",
+      "GeoIP",
+      "Intelligence"
+    ],
+    "technologies": [
+      "React JS",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
     "category": "personal",
-    "servicesOffered": ["cybersecurity", "fullstack", "design-systems"],
+    "servicesOffered": [
+      "cybersecurity",
+      "fullstack",
+      "design-systems"
+    ],
     "thumbnail": "/media/IPLocator/1.png",
     "images": [
       "/media/IPLocator/1.png",
@@ -371,10 +577,20 @@
     "year": "2023",
     "featured": false,
     "themeColor": "#6366f1",
-    "tags": ["Enterprise", "Database", ".NET"],
-    "technologies": ["VB.NET", "SQL Server 2022", "Windows Forms"],
+    "tags": [
+      "Enterprise",
+      "Database",
+      ".NET"
+    ],
+    "technologies": [
+      "VB.NET",
+      "SQL Server 2022",
+      "Windows Forms"
+    ],
     "category": "college",
-    "servicesOffered": ["fullstack"],
+    "servicesOffered": [
+      "fullstack"
+    ],
     "thumbnail": "/media/AMC/AMC1.png",
     "images": [
       "/media/AMC/AMC1.png",
