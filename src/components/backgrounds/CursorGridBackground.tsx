@@ -56,14 +56,14 @@ export const CursorGridBackground: React.FC<CursorGridBackgroundProps> = ({
       const rect = parent ? parent.getBoundingClientRect() : { width: window.innerWidth, height: window.innerHeight };
 
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = rect.width;
-      height = rect.height;
+      width = Math.round(rect.width);
+      height = Math.round(rect.height);
 
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      ctx.scale(dpr, dpr);
+      if (width === 0 || height === 0) return;
+
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       nodes = [];
       const cols = Math.ceil(width / SPACING) + 1;
@@ -88,6 +88,16 @@ export const CursorGridBackground: React.FC<CursorGridBackgroundProps> = ({
     };
 
     initGrid();
+
+    // Dynamically re-initialize grid when parent dimensions expand or shrink (e.g. filtering projects)
+    const parent = canvas.parentElement;
+    let resizeObserver: ResizeObserver | null = null;
+    if (parent && typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        initGrid();
+      });
+      resizeObserver.observe(parent);
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -175,14 +185,19 @@ export const CursorGridBackground: React.FC<CursorGridBackgroundProps> = ({
       window.removeEventListener("resize", handleResize);
       document.body.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
     };
   }, [spacing, influenceRadius]);
 
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 pointer-events-none z-0 ${className}`}
+      className={`absolute inset-0 w-full h-full pointer-events-none z-0 ${className}`}
       style={{
+        width: "100%",
+        height: "100%",
         opacity,
         willChange: "transform",
         maskImage:
