@@ -111,7 +111,7 @@ export const ProjectsPage: React.FC = () => {
         {/* Hero Title & Ethos */}
         <div className="mb-14">
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase font-display">
-            Selected Works
+            Portfolio
           </h1>
           <p className="text-neutral-400 text-sm sm:text-base max-w-2xl mt-4 leading-relaxed font-sans">
             A comprehensive interactive repository of web architectures, security telemetry tools, open-source packages, and creative applications.
@@ -277,19 +277,17 @@ export const ProjectsPage: React.FC = () => {
                   <button
                     key={cat.value}
                     onClick={() => setSelectedCategory(cat.value)}
-                    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
-                      isActive
+                    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${isActive
                         ? "bg-white text-black font-bold shadow-lg shadow-white/20 scale-105"
                         : "text-neutral-400 hover:text-white"
-                    }`}
+                      }`}
                     data-cursor="button"
                   >
                     {CatIcon && <CatIcon size={13} className={isActive ? "text-black" : "text-neutral-400"} />}
                     <span>{cat.label}</span>
                     <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${
-                        isActive ? "bg-black/15 text-black font-bold" : "bg-white/10 text-neutral-400"
-                      }`}
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${isActive ? "bg-black/15 text-black font-bold" : "bg-white/10 text-neutral-400"
+                        }`}
                     >
                       {count}
                     </span>
@@ -332,23 +330,22 @@ export const ProjectsPage: React.FC = () => {
               const count =
                 s.value === "all"
                   ? allProjects.filter((p) =>
-                      selectedCategory === "all" || p.category?.toLowerCase() === selectedCategory
-                    ).length
+                    selectedCategory === "all" || p.category?.toLowerCase() === selectedCategory
+                  ).length
                   : allProjects.filter(
-                      (p) =>
-                        (selectedCategory === "all" || p.category?.toLowerCase() === selectedCategory) &&
-                        p.servicesOffered?.includes(s.value)
-                    ).length;
+                    (p) =>
+                      (selectedCategory === "all" || p.category?.toLowerCase() === selectedCategory) &&
+                      p.servicesOffered?.includes(s.value)
+                  ).length;
 
               return (
                 <button
                   key={s.value}
                   onClick={() => setSelectedService(s.value)}
-                  className={`px-3 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
-                    isActive
+                  className={`px-3 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${isActive
                       ? "bg-white/20 border border-white/50 text-white font-semibold"
                       : "bg-white/[0.02] text-neutral-400 border border-white/10 hover:text-neutral-200 hover:border-white/20"
-                  }`}
+                    }`}
                   data-cursor="button"
                 >
                   <span>{s.label}</span>
