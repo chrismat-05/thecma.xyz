@@ -81,9 +81,9 @@ export const ProjectsPage: React.FC = () => {
     });
   }, [allProjects, selectedCategory, selectedService, searchQuery]);
 
-  // Spotlight featured project (defaults to forms-thecma or first project)
+  // Spotlight featured project (defaults to ICPF Bengaluru or first project)
   const spotlightProject = useMemo(() => {
-    return allProjects.find((p) => p.featured && p.id === "forms-thecma") || allProjects[0];
+    return allProjects.find((p) => p.id === "icpf-bengaluru") || allProjects[0];
   }, [allProjects]);
 
   const spotlightCatMeta = spotlightProject ? getCategoryMeta(spotlightProject.category) : null;
