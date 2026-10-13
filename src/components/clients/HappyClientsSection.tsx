@@ -9,6 +9,7 @@ interface HappyClient {
   id?: string;
   name: string;
   logo?: string;
+  logoMode?: "dark" | "light";
   work: string;
   link?: string;
 }
@@ -19,7 +20,7 @@ export const HappyClientsSection: React.FC = () => {
     { label: "Client Satisfaction", value: 99.8, suffix: "%", decimals: 1 },
   ];
 
-  const clients: HappyClient[] = clientsData;
+  const clients: HappyClient[] = clientsData as HappyClient[];
 
   // Duplicated array to guarantee seamless infinite loop
   const marqueeItems = [...clients, ...clients, ...clients, ...clients];
@@ -81,6 +82,8 @@ export const HappyClientsSection: React.FC = () => {
       >
         <div className="animate-marquee-scroll flex items-center gap-14 sm:gap-20 md:gap-24 w-max">
           {marqueeItems.map((item, index) => {
+            const isDarkLogo = item.logoMode === "dark";
+
             const clientContent = (
               <>
                 {item.logo ? (
@@ -89,7 +92,11 @@ export const HappyClientsSection: React.FC = () => {
                     alt={item.name}
                     loading="lazy"
                     decoding="async"
-                    className="h-40 md:h-48 w-auto max-w-[240px] object-contain filter grayscale opacity-40 group-hover:filter-none group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                    className={`h-40 md:h-48 w-auto max-w-[240px] object-contain transition-all duration-300 group-hover:scale-105 group-hover:filter-none group-hover:opacity-100 ${
+                      isDarkLogo
+                        ? "filter brightness-0 invert opacity-40"
+                        : "filter grayscale opacity-40"
+                    }`}
                   />
                 ) : (
                   <span className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-neutral-500 group-hover:text-white group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] group-hover:scale-105 transition-all duration-300 font-['Space_Grotesk'] whitespace-nowrap">
