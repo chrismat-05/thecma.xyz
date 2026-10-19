@@ -54,7 +54,13 @@ export const ProjectDetailPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, [id]);
+    if (project) {
+      document.title = `the CMA - ${project.title}`;
+    }
+    return () => {
+      document.title = "the CMA";
+    };
+  }, [id, project]);
 
   if (!project) {
     return (

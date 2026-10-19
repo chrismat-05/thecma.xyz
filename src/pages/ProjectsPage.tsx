@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -30,6 +30,10 @@ export const ProjectsPage: React.FC = () => {
   const allProjects = projectsData as ProjectItem[];
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>("all");
+
+  useEffect(() => {
+    document.title = "the CMA - Projects";
+  }, []);
 
   const disciplineFilters = [
     { label: "All Disciplines", value: "all", icon: Layers },
