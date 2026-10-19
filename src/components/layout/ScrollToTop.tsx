@@ -15,9 +15,11 @@ export const ScrollToTop = () => {
         }
         const element = document.getElementById(targetId);
         if (element) {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
+          const yOffset = -70;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
         }
-      }, 150);
+      }, 180);
       return () => clearTimeout(timer);
     }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Phone, MessageSquareMore, Award, MapPin, Handshake } from 'lucide-react';
 import { Link as ScrollLink } from 'react-scroll';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const socialLinks = [
   { icon: Github, label: 'GitHub', href: 'https://github.com/chrismat-05', brandColor: '#2b3137' },
@@ -15,6 +15,9 @@ const socialLinks = [
 ];
 
 export const Footer: React.FC = () => {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   return (
     <footer className="bg-black border-t border-white/[0.08] pt-12 sm:pt-16 pb-28 sm:pb-16 text-white">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -41,38 +44,79 @@ export const Footer: React.FC = () => {
                 Quick Navigation
               </h4>
               <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-neutral-300">
-                <ScrollLink to="hero" smooth={true} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
-                  Home
-                </ScrollLink>
-                <ScrollLink to="projects" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
-                  Featured
-                </ScrollLink>
-                <Link to="/projects" className="hover:text-brand-red cursor-pointer transition-colors">
-                  All Projects
-                </Link>
-                <ScrollLink to="services" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
-                  Capabilities
-                </ScrollLink>
-                <ScrollLink to="about" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
-                  About
-                </ScrollLink>
-                <ScrollLink to="testimonials" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
-                  Reviews
-                </ScrollLink>
-                <ScrollLink to="contact" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
-                  Contact
-                </ScrollLink>
+                {isHome ? (
+                  <>
+                    <ScrollLink to="hero" smooth={true} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
+                      Home
+                    </ScrollLink>
+                    <ScrollLink to="projects" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
+                      Featured
+                    </ScrollLink>
+                    <Link to="/projects" className="hover:text-brand-red cursor-pointer transition-colors">
+                      All Projects
+                    </Link>
+                    <ScrollLink to="services" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
+                      Capabilities
+                    </ScrollLink>
+                    <Link to="/about" className="hover:text-brand-red cursor-pointer transition-colors">
+                      About
+                    </Link>
+                    <ScrollLink to="testimonials" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
+                      Reviews
+                    </ScrollLink>
+                    <ScrollLink to="contact" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
+                      Contact
+                    </ScrollLink>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/" className="hover:text-brand-red cursor-pointer transition-colors">
+                      Home
+                    </Link>
+                    <Link to="/#projects" className="hover:text-brand-red cursor-pointer transition-colors">
+                      Featured
+                    </Link>
+                    <Link to="/projects" className="hover:text-brand-red cursor-pointer transition-colors">
+                      All Projects
+                    </Link>
+                    <Link to="/#services" className="hover:text-brand-red cursor-pointer transition-colors">
+                      Capabilities
+                    </Link>
+                    <Link to="/about" className="hover:text-brand-red cursor-pointer transition-colors">
+                      About
+                    </Link>
+                    <Link to="/#testimonials" className="hover:text-brand-red cursor-pointer transition-colors">
+                      Reviews
+                    </Link>
+                    <Link to="/#contact" className="hover:text-brand-red cursor-pointer transition-colors">
+                      Contact
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
 
             <div className="pt-2 sm:pt-6 w-full sm:w-auto">
-              <a
-                href="mailto:chrismaje05@gmail.com"
-                className="btn-hero-outline hover:border-brand-red/60 hover:text-white hover:shadow-[0_0_25px_rgba(229,9,20,0.35)] w-full sm:w-auto text-center block"
-                data-cursor="button"
-              >
-                Initiate Project Transmission
-              </a>
+              {isHome ? (
+                <ScrollLink
+                  to="contact"
+                  smooth={true}
+                  offset={-70}
+                  duration={600}
+                  className="btn-hero-outline hover:border-brand-red/60 hover:text-white hover:shadow-[0_0_25px_rgba(229,9,20,0.35)] w-full sm:w-auto text-center block cursor-pointer"
+                  data-cursor="button"
+                >
+                  Initiate Project Transmission
+                </ScrollLink>
+              ) : (
+                <Link
+                  to="/#contact"
+                  className="btn-hero-outline hover:border-brand-red/60 hover:text-white hover:shadow-[0_0_25px_rgba(229,9,20,0.35)] w-full sm:w-auto text-center block cursor-pointer"
+                  data-cursor="button"
+                >
+                  Initiate Project Transmission
+                </Link>
+              )}
             </div>
           </div>
         </div>

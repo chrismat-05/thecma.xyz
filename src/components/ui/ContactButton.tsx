@@ -1,5 +1,6 @@
 import React from "react";
 import { Link as ScrollLink } from "react-scroll";
+import { Link } from "react-router-dom";
 
 interface ContactButtonProps {
   onClick?: () => void;
@@ -38,7 +39,7 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
     </span>
   );
 
-  if (isScroll) {
+  if (isScroll && (!to || !to.startsWith("/"))) {
     return (
       <ScrollLink
         to={to}
@@ -49,6 +50,14 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
       >
         {buttonContent}
       </ScrollLink>
+    );
+  }
+
+  if (to && to.startsWith("/")) {
+    return (
+      <Link to={to} className="inline-block">
+        {buttonContent}
+      </Link>
     );
   }
 

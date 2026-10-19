@@ -178,7 +178,7 @@ export const AboutPage: React.FC = () => {
             </p>
 
             <div className="pt-2 sm:pt-4 flex justify-center lg:justify-start">
-              <ContactButton label="Initiate Contact" href="mailto:chrismaje05@gmail.com" isScroll={false} />
+              <ContactButton label="Initiate Contact" to="/#contact" isScroll={false} />
             </div>
           </div>
 
