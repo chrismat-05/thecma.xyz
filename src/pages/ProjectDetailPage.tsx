@@ -22,8 +22,19 @@ import Footer from "@/components/Footer";
 import { CursorGridBackground } from "@/components/backgrounds/CursorGridBackground";
 import { getCategoryMeta } from "@/lib/projectCategories";
 
-import { GraphicDesignDetailView } from "@/components/projects/GraphicDesignDetailView";
+import { TechVistaDetailView } from "@/components/projects/TechVistaDetailView";
 import { VideoEditingDetailView } from "@/components/projects/VideoEditingDetailView";
+
+interface ProjectDetailViewProps {
+  project: ProjectItem;
+  nextProject: ProjectItem | null;
+}
+
+// Registry allowing each project to have its own unique, custom-crafted detail page component
+const customProjectViews: Record<string, React.FC<ProjectDetailViewProps>> = {
+  techvista: TechVistaDetailView,
+  "airborne-26": VideoEditingDetailView,
+};
 
 interface ProjectItem {
   id: string;
@@ -116,13 +127,25 @@ export const ProjectDetailPage: React.FC = () => {
         style={{ background: themeColor }}
       />
 
-      {project.discipline === "graphic-design" || (project.servicesOffered && project.servicesOffered.includes("graphic-design")) ? (
-        <GraphicDesignDetailView project={project} nextProject={nextProject} />
-      ) : project.discipline === "video-editing" || (project.servicesOffered && project.servicesOffered.includes("video-editing")) ? (
-        <VideoEditingDetailView project={project} nextProject={nextProject} />
-      ) : (
-        <main className="relative z-10 pt-28 sm:pt-36 pb-32">
-          <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+      {(() => {
+        // 1. Check if this exact project ID has its own bespoke detail view component
+        const CustomView = customProjectViews[project.id];
+        if (CustomView) {
+          return <CustomView project={project} nextProject={nextProject} />;
+        }
+
+        // 2. Fallback based on video discipline
+        if (
+          project.discipline === "video-editing" ||
+          (project.servicesOffered && project.servicesOffered.includes("video-editing"))
+        ) {
+          return <VideoEditingDetailView project={project} nextProject={nextProject} />;
+        }
+
+        // 3. Standard Web Dev project detail layout
+        return (
+          <main className="relative z-10 pt-28 sm:pt-36 pb-32">
+            <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
 
           {/* Top Sticky-like Utility Bar */}
           <motion.div
@@ -555,9 +578,10 @@ export const ProjectDetailPage: React.FC = () => {
             </motion.div>
           )}
 
-          </div>
-        </main>
-      )}
+            </div>
+          </main>
+        );
+      })()}
 
       <Footer />
     </div>

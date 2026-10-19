@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
@@ -40,7 +41,7 @@ export interface ProjectItem {
   videos?: Array<{ id: string; title: string; src: string; duration?: string; caption?: string }>;
 }
 
-interface GraphicDesignDetailViewProps {
+interface TechVistaDetailViewProps {
   project: ProjectItem;
   nextProject: ProjectItem | null;
 }
@@ -51,15 +52,29 @@ interface DesignAsset {
   type: string;
   image: string;
   dimensions: string;
-  description: string;
 }
 
-export const GraphicDesignDetailView: React.FC<GraphicDesignDetailViewProps> = ({
+export const TechVistaDetailView: React.FC<TechVistaDetailViewProps> = ({
   project,
   nextProject,
 }) => {
   const [selectedAssetIndex, setSelectedAssetIndex] = useState<number>(0);
   const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
+
+  // Lock body scroll and listen for ESC key when lightbox is open
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [lightboxOpen]);
 
   const themeColor = project.themeColor || "#00e5ff";
   const catMeta = getCategoryMeta(project.category);
@@ -346,45 +361,53 @@ export const GraphicDesignDetailView: React.FC<GraphicDesignDetailViewProps> = (
           </div>
         </section>
 
-        {/* FULLSCREEN LIGHTBOX MODAL */}
-        <AnimatePresence>
-          {lightboxOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-4 sm:p-8"
-              onClick={() => setLightboxOpen(false)}
-            >
-              <button
-                onClick={() => setLightboxOpen(false)}
-                className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer z-50"
-              >
-                <X size={24} />
-              </button>
+        {/* FULLSCREEN LIGHTBOX MODAL VIA PORTAL TO BODY */}
+        {typeof document !== "undefined" &&
+          createPortal(
+            <AnimatePresence>
+              {lightboxOpen && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-4 sm:p-8"
+                  onClick={() => setLightboxOpen(false)}
+                >
+                  {/* Fixed Close Button always locked in the visible top-right viewport corner */}
+                  <button
+                    onClick={() => setLightboxOpen(false)}
+                    className="fixed top-6 right-6 p-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer z-[10000] border border-white/20 shadow-2xl backdrop-blur-md hover:scale-105 active:scale-95"
+                    title="Close (ESC)"
+                    aria-label="Close Fullscreen"
+                  >
+                    <X size={24} />
+                  </button>
 
-              <div
-                className="relative max-w-6xl max-h-[85vh] w-full flex items-center justify-center"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <img
-                  src={currentAsset.image}
-                  alt={currentAsset.title}
-                  className="max-h-[80vh] max-w-full object-contain rounded-xl shadow-2xl"
-                />
-              </div>
+                  <div
+                    className="relative max-w-6xl max-h-[82vh] w-full flex items-center justify-center"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <img
+                      src={currentAsset.image}
+                      alt={currentAsset.title}
+                      className="max-h-[80vh] max-w-full object-contain rounded-xl shadow-2xl select-none"
+                    />
+                  </div>
 
-              <div className="mt-4 text-center">
-                <h4 className="text-lg font-bold font-display uppercase tracking-tight text-white">
-                  {currentAsset.title}
-                </h4>
-                <p className="text-xs font-mono text-cyan-400 mt-1">
-                  {currentAsset.dimensions} • Click anywhere or press ESC to close
-                </p>
-              </div>
-            </motion.div>
+                  <div className="mt-4 text-center select-none" onClick={(e) => e.stopPropagation()}>
+                    <h4 className="text-lg font-bold font-display uppercase tracking-tight text-white">
+                      {currentAsset.title}
+                    </h4>
+                    <p className="text-xs font-mono text-cyan-400 mt-1">
+                      {currentAsset.dimensions} • Click anywhere or press ESC to close
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>,
+            document.body
           )}
-        </AnimatePresence>
 
         {/* Next Project Footer Bar */}
         {nextProject && (
@@ -420,4 +443,5 @@ export const GraphicDesignDetailView: React.FC<GraphicDesignDetailViewProps> = (
   );
 };
 
-export default GraphicDesignDetailView;
+export const GraphicDesignDetailView = TechVistaDetailView;
+export default TechVistaDetailView;
