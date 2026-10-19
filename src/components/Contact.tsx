@@ -16,6 +16,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const socialLinks = [
     {
@@ -56,29 +57,43 @@ const Contact = () => {
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null);
 
-    // Netlify forms submission via fetch
-    const encodedData = new URLSearchParams({
-      'form-name': 'contactv2',
-      ...formData,
-    }).toString();
-
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encodedData,
-    })
-      .then(() => {
-        setIsSubmitted(true);
-        setIsSubmitting(false);
-        setFormData({ name: '', email: '', message: '' });
-      })
-      .catch(() => {
-        setIsSubmitting(false);
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/chrismaje05@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `New Transmission from ${formData.name} via thecma.xyz`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
       });
+
+      const result = await response.json();
+
+      if (response.ok && (result.success === 'true' || result.success === true)) {
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error(result.message || 'Transmission failed');
+      }
+    } catch {
+      setErrorMessage(
+        'Direct server transmission encountered an issue. You can also contact me directly at chrismaje05@gmail.com'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -244,6 +259,20 @@ const Contact = () => {
                       className="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white placeholder-neutral-600 focus:outline-none focus:border-white transition-colors text-sm resize-none"
                     ></textarea>
                   </div>
+
+                  {errorMessage && (
+                    <div className="p-3.5 rounded-xl bg-red-950/50 border border-red-500/40 text-red-200 text-xs font-mono leading-relaxed">
+                      {errorMessage}{" "}
+                      <a
+                        href={`mailto:chrismaje05@gmail.com?subject=Transmission%20from%20${encodeURIComponent(
+                          formData.name || "Portfolio Visitor"
+                        )}&body=${encodeURIComponent(formData.message)}`}
+                        className="underline hover:text-white font-bold ml-1"
+                      >
+                        Click to open email client →
+                      </a>
+                    </div>
+                  )}
 
                   <button
                     type="submit"
