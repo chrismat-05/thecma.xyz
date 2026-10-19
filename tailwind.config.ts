@@ -52,6 +52,13 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				brand: {
+					red: '#E50914',
+					'red-hover': '#FF1F2D',
+					'red-dark': '#991B1B',
+					'red-deep': '#450A0A',
+					'red-glow': 'rgba(229, 9, 20, 0.45)'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -139,6 +146,18 @@ export default {
 						boxShadow: '0 0 40px hsl(var(--glow-primary) / 0.6)'
 					}
 				},
+				'glow-pulse-red': {
+					'0%, 100%': {
+						boxShadow: '0 0 15px rgba(229, 9, 20, 0.35)'
+					},
+					'50%': {
+						boxShadow: '0 0 35px rgba(229, 9, 20, 0.75)'
+					}
+				},
+				'beacon-pulse': {
+					'0%, 100%': { transform: 'scale(1)', opacity: '1' },
+					'50%': { transform: 'scale(1.25)', opacity: '0.65' }
+				},
 				'float': {
 					'0%, 100%': { transform: 'translateY(0px)' },
 					'50%': { transform: 'translateY(-10px)' }
@@ -152,6 +171,8 @@ export default {
 				'slide-in-left': 'slide-in-left 0.6s ease-out',
 				'slide-in-right': 'slide-in-right 0.6s ease-out',
 				'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+				'glow-pulse-red': 'glow-pulse-red 2.5s ease-in-out infinite',
+				'beacon-pulse': 'beacon-pulse 2s ease-in-out infinite',
 				'float': 'float 3s ease-in-out infinite'
 			}
 		}
