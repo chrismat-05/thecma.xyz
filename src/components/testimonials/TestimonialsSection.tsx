@@ -36,7 +36,7 @@ export const TestimonialsSection: React.FC = () => {
   return (
     <section
       id="testimonials"
-      className="py-20 sm:py-32 relative overflow-hidden bg-black text-white"
+      className="pt-8 sm:pt-12 pb-20 sm:pb-32 relative overflow-hidden bg-black text-white"
     >
       {/* 1. ReactBits ChromaGrid with cursor chromatic glow & grid lines (feathered at edges to blend seamlessly) */}
       <div

@@ -111,7 +111,7 @@ export const Projects: React.FC = () => {
     <div
       id="projects"
       ref={containerRef}
-      className="relative w-full py-20 px-4 md:px-6 select-none bg-[#060606] text-white"
+      className="relative w-full pt-16 sm:pt-20 pb-6 sm:pb-8 px-4 md:px-6 select-none bg-[#060606] text-white"
     >
       {/* Ambient Blurred Background Layers (st-scbg from TristanMedia) */}
       <div className="absolute inset-0 left-[calc(50%-50vw)] w-[100vw] overflow-hidden pointer-events-none z-0">
@@ -314,7 +314,7 @@ export const Projects: React.FC = () => {
       </div>
 
       {/* Bottom CTA to View Full Archive */}
-      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-24 pt-10 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         <div>
           <h4 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">
             Looking to explore more creations &amp; projects?

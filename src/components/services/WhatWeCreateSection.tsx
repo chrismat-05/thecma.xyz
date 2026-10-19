@@ -26,7 +26,7 @@ export const WhatWeCreateSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
-    <section id="services" className="py-32 relative overflow-hidden bg-black text-white">
+    <section id="services" className="pt-16 sm:pt-20 pb-8 sm:pb-12 relative overflow-hidden bg-black text-white">
       {/* Subtle interactive dot grid background */}
       <CursorGridBackground opacity={0.35} spacing={40} />
 
