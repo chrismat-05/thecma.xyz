@@ -106,7 +106,7 @@ export const ProjectsPage: React.FC = () => {
       <CursorGridBackground opacity={0.4} />
       <Navigation />
 
-      <main className="container mx-auto px-4 max-w-7xl pt-32 sm:pt-36 pb-28 relative z-10 flex-1">
+      <main className="container mx-auto px-4 sm:px-6 max-w-7xl pt-28 sm:pt-36 pb-32 relative z-10 flex-1">
         {/* Top Breadcrumb & Return to Portfolio */}
         <div className="flex items-center justify-between mb-8">
           <Link
@@ -120,18 +120,18 @@ export const ProjectsPage: React.FC = () => {
         </div>
 
         {/* Hero Title & Ethos */}
-        <div className="mb-14">
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase font-display">
+        <div className="mb-10 sm:mb-14">
+          <h1 className="text-3xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase font-display">
             Portfolio
           </h1>
-          <p className="text-neutral-400 text-sm sm:text-base max-w-2xl mt-4 leading-relaxed font-sans">
+          <p className="text-neutral-400 text-xs sm:text-base max-w-2xl mt-3 sm:mt-4 leading-relaxed font-sans">
             A comprehensive interactive repository spanning web architectures, developer tools & packages, graphic design branding, and cinematic video editing.
           </p>
         </div>
 
         {/* 1. Bento Spotlight Banner (Dynamic Featured Showcase) */}
         {spotlightProject && !searchQuery && (
-          <div className="mb-16 rounded-[32px] sm:rounded-[40px] border border-white/15 bg-gradient-to-b from-white/[0.07] via-neutral-950/80 to-black p-6 sm:p-10 relative overflow-hidden group shadow-2xl backdrop-blur-xl">
+          <div className="mb-12 sm:mb-16 rounded-2xl sm:rounded-[40px] border border-white/15 bg-gradient-to-b from-white/[0.07] via-neutral-950/80 to-black p-5 sm:p-10 relative overflow-hidden group shadow-2xl backdrop-blur-xl">
             <div
               className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-[140px] pointer-events-none opacity-40 transition-all duration-700"
               style={{ background: spotlightProject.themeColor || "#9333ea" }}
@@ -252,7 +252,7 @@ export const ProjectsPage: React.FC = () => {
           {/* Top row: Discipline Tabs & Search Input */}
           <div className="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center">
             {/* Discipline Filter Tabs */}
-            <div className="flex flex-wrap gap-2 items-center p-1.5 rounded-2xl sm:rounded-full bg-white/[0.03] border border-white/10 w-fit">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 items-center p-1.5 rounded-2xl sm:rounded-full bg-white/[0.03] border border-white/10 w-full sm:w-fit">
               {disciplineFilters.map((disc) => {
                 const isActive = selectedDiscipline === disc.value;
                 const count =
@@ -269,7 +269,7 @@ export const ProjectsPage: React.FC = () => {
                   <button
                     key={disc.value}
                     onClick={() => setSelectedDiscipline(disc.value)}
-                    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer ${isActive
+                    className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 sm:gap-2 cursor-pointer ${isActive
                       ? "bg-gradient-to-r from-red-600 via-brand-red to-red-700 text-white font-bold shadow-lg shadow-brand-red/40 scale-105 border border-brand-red/80"
                       : "text-neutral-400 hover:text-white hover:bg-white/[0.05]"
                       }`}

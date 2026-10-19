@@ -16,18 +16,18 @@ const socialLinks = [
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-black border-t border-white/[0.08] py-16 text-white">
+    <footer className="bg-black border-t border-white/[0.08] pt-12 sm:pt-16 pb-28 sm:pb-16 text-white">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid md:grid-cols-2 gap-12 mb-12">
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-12 mb-8 sm:mb-12">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-red/30 bg-brand-red/10 text-xs font-mono text-neutral-300 mb-4 shadow-[0_0_15px_rgba(229,9,20,0.2)]">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-beacon-pulse shadow-[0_0_8px_#ef4444]" />
               CHRIS MATHEW AJE
             </div>
-            <h3 className="text-2xl font-bold tracking-tight text-white mb-2">
-              Full-Stack Engineer & Creative Designer
+            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-2">
+              Full-Stack Engineer &amp; Creative Designer
             </h3>
-            <p className="text-neutral-400 text-sm max-w-md leading-relaxed mb-4">
+            <p className="text-neutral-400 text-xs sm:text-sm max-w-md leading-relaxed mb-4">
               Building next-generation digital products, robust security tools, and interactive WebGL experiences.
             </p>
             <div className="flex items-center gap-2 text-neutral-500 text-xs font-mono">
@@ -35,12 +35,12 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex flex-col md:items-end justify-between">
+          <div className="flex flex-col md:items-end justify-between gap-6">
             <div>
               <h4 className="text-sm font-mono uppercase tracking-widest text-neutral-400 mb-3">
                 Quick Navigation
               </h4>
-              <div className="flex flex-wrap gap-4 text-sm text-neutral-300">
+              <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-neutral-300">
                 <ScrollLink to="hero" smooth={true} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
                   Home
                 </ScrollLink>
@@ -65,10 +65,10 @@ export const Footer: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-6">
+            <div className="pt-2 sm:pt-6 w-full sm:w-auto">
               <a
                 href="mailto:chrismaje05@gmail.com"
-                className="btn-hero-outline hover:border-brand-red/60 hover:text-white hover:shadow-[0_0_25px_rgba(229,9,20,0.35)]"
+                className="btn-hero-outline hover:border-brand-red/60 hover:text-white hover:shadow-[0_0_25px_rgba(229,9,20,0.35)] w-full sm:w-auto text-center block"
                 data-cursor="button"
               >
                 Initiate Project Transmission
@@ -77,12 +77,12 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/[0.08] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="border-t border-white/[0.08] pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
           <p className="text-neutral-500 text-xs font-mono">
             © {new Date().getFullYear()} Chris Mathew Aje. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             {socialLinks.map((social) => {
               const Icon = social.icon;
               return (

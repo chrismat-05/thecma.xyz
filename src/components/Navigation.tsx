@@ -35,7 +35,7 @@ export const Navigation: React.FC = () => {
           animate={{ opacity: 1, y: 0, x: "-50%" }}
           exit={{ opacity: 0, y: 40, x: "-50%" }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-6 left-1/2 z-[999] flex items-center gap-1.5 p-1.5 rounded-full border border-white/15 bg-neutral-950/85 backdrop-blur-2xl shadow-2xl shadow-black/90 hover:border-brand-red/40 transition-colors duration-300"
+          className="fixed bottom-6 left-1/2 z-[999] flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full border border-white/15 bg-neutral-950/85 backdrop-blur-2xl shadow-2xl shadow-black/90 hover:border-brand-red/40 transition-colors duration-300 max-w-[calc(100vw-16px)] sm:max-w-max"
           aria-label="Bottom Navigation Dock"
         >
           {navItems.map((item) => {
@@ -48,7 +48,7 @@ export const Navigation: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.route}
-                  className={`relative p-3 rounded-full transition-all duration-200 group flex items-center justify-center ${
+                  className={`relative p-2.5 sm:p-3 rounded-full transition-all duration-200 group flex items-center justify-center ${
                     isActivePage
                       ? "text-white bg-brand-red/20 border border-brand-red/50 shadow-lg shadow-brand-red/30"
                       : "text-neutral-400 hover:text-white hover:bg-brand-red/10 active:scale-95"
@@ -57,11 +57,11 @@ export const Navigation: React.FC = () => {
                   data-cursor="button"
                   data-cursor-text={item.name}
                 >
-                  <Icon size={18} className="transition-transform duration-200 group-hover:scale-110" />
+                  <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] transition-transform duration-200 group-hover:scale-110" />
                   <span className="sr-only">{item.name}</span>
 
                   {/* Discreet hover tooltip pill */}
-                  <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/15 text-[10px] font-mono font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl whitespace-nowrap">
+                  <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/15 text-[10px] font-mono font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl whitespace-nowrap hidden sm:block">
                     {item.name} Page
                   </span>
                 </Link>
@@ -82,16 +82,16 @@ export const Navigation: React.FC = () => {
                         behavior: 'smooth',
                       });
                     }}
-                    className="relative p-3 rounded-full text-neutral-400 hover:text-white hover:bg-white/[0.08] active:scale-95 transition-all duration-200 cursor-pointer group flex items-center justify-center"
+                    className="relative p-2.5 sm:p-3 rounded-full text-neutral-400 hover:text-white hover:bg-white/[0.08] active:scale-95 transition-all duration-200 cursor-pointer group flex items-center justify-center"
                     title={item.name}
                     data-cursor="button"
                     data-cursor-text="Hero"
                   >
-                    <Icon size={18} className="transition-transform duration-200 group-hover:scale-110" />
+                    <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] transition-transform duration-200 group-hover:scale-110" />
                     <span className="sr-only">{item.name}</span>
 
                     {/* Discreet hover tooltip pill */}
-                    <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/15 text-[10px] font-mono font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl whitespace-nowrap">
+                    <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/15 text-[10px] font-mono font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl whitespace-nowrap hidden sm:block">
                       Hero Section
                     </span>
                   </button>
@@ -106,17 +106,17 @@ export const Navigation: React.FC = () => {
                   smooth={true}
                   offset={-70}
                   duration={500}
-                  className="relative p-3 rounded-full text-neutral-400 hover:text-white hover:bg-brand-red/10 active:scale-95 transition-all duration-200 cursor-pointer group flex items-center justify-center"
+                  className="relative p-2.5 sm:p-3 rounded-full text-neutral-400 hover:text-white hover:bg-brand-red/10 active:scale-95 transition-all duration-200 cursor-pointer group flex items-center justify-center"
                   activeClass="!text-white !bg-brand-red/20 !border !border-brand-red/50 shadow-lg shadow-brand-red/30"
                   title={item.name}
                   data-cursor="button"
                   data-cursor-text={item.name}
                 >
-                  <Icon size={18} className="transition-transform duration-200 group-hover:scale-110" />
+                  <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] transition-transform duration-200 group-hover:scale-110" />
                   <span className="sr-only">{item.name}</span>
 
                   {/* Discreet hover tooltip pill */}
-                  <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/15 text-[10px] font-mono font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl whitespace-nowrap">
+                  <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/15 text-[10px] font-mono font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl whitespace-nowrap hidden sm:block">
                     {item.name}
                   </span>
                 </ScrollLink>
@@ -126,16 +126,16 @@ export const Navigation: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.route}
-                  className="relative p-3 rounded-full text-neutral-400 hover:text-white hover:bg-white/[0.08] active:scale-95 transition-all duration-200 group flex items-center justify-center"
+                  className="relative p-2.5 sm:p-3 rounded-full text-neutral-400 hover:text-white hover:bg-white/[0.08] active:scale-95 transition-all duration-200 group flex items-center justify-center"
                   title={item.name}
                   data-cursor="button"
                   data-cursor-text={item.name}
                 >
-                  <Icon size={18} className="transition-transform duration-200 group-hover:scale-110" />
+                  <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] transition-transform duration-200 group-hover:scale-110" />
                   <span className="sr-only">{item.name}</span>
 
                   {/* Discreet hover tooltip pill */}
-                  <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/15 text-[10px] font-mono font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl whitespace-nowrap">
+                  <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/15 text-[10px] font-mono font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl whitespace-nowrap hidden sm:block">
                     {item.name}
                   </span>
                 </Link>

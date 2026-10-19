@@ -195,7 +195,7 @@ export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center justify-between gap-4 mb-10 pb-6 border-b border-white/[0.08]"
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-8 sm:mb-10 pb-4 sm:pb-6 border-b border-white/[0.08]"
         >
           <Link
             to="/projects"
@@ -281,13 +281,13 @@ export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Primary Reel Player (9:16 vertical phone aspect ratio) */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[9/16] rounded-3xl overflow-hidden border-2 border-white/20 bg-black shadow-2xl shadow-amber-500/10 group">
+              <div className="relative w-full max-w-[290px] xs:max-w-[320px] sm:max-w-[380px] aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-white/20 bg-black shadow-2xl shadow-amber-500/10 group">
                 {currentClip.link && (
                   <a
                     href={currentClip.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute top-4 right-4 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 hover:bg-black/95 backdrop-blur-md border border-white/25 hover:border-pink-500/70 text-white text-[11px] font-mono transition-all hover:scale-105 shadow-xl group/insta cursor-pointer"
+                    className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/75 hover:bg-black/95 backdrop-blur-md border border-white/25 hover:border-pink-500/70 text-white text-[10px] sm:text-[11px] font-mono transition-all hover:scale-105 shadow-xl group/insta cursor-pointer"
                     title="Watch directly on Instagram Reel"
                   >
                     <Instagram size={13} className="text-pink-500 group-hover/insta:rotate-12 transition-transform" />

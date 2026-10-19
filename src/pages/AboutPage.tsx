@@ -124,9 +124,9 @@ export const AboutPage: React.FC = () => {
     <div className="min-h-screen bg-[#0C0C0C] text-white selection:bg-white selection:text-black">
       <Navigation />
 
-      <main className="container mx-auto px-4 max-w-6xl pt-36 pb-28">
+      <main className="container mx-auto px-4 sm:px-6 max-w-6xl pt-28 sm:pt-36 pb-32">
         {/* Back navigation */}
-        <div className="mb-10">
+        <div className="mb-8 sm:mb-10">
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-wider text-neutral-400 hover:text-white transition-colors"
@@ -143,11 +143,11 @@ export const AboutPage: React.FC = () => {
           align="left"
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start mt-8 sm:mt-12">
           {/* Left Column: Profile Card */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-8">
+          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6 sm:space-y-8">
             <div className="relative group">
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto lg:mx-0 rounded-3xl overflow-hidden border border-white/20 bg-neutral-900/60 p-2 backdrop-blur-xl shadow-2xl shadow-black/80">
+              <div className="relative w-56 h-56 sm:w-72 sm:h-72 mx-auto lg:mx-0 rounded-3xl overflow-hidden border border-white/20 bg-neutral-900/60 p-2 backdrop-blur-xl shadow-2xl shadow-black/80">
                 <div className="w-full h-full rounded-2xl overflow-hidden relative">
                   <img
                     src="/media/cover.png"
@@ -160,53 +160,53 @@ export const AboutPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="absolute -bottom-3 left-6 sm:left-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/90 border border-white/20 backdrop-blur-md">
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/90 border border-white/20 backdrop-blur-md">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-xs font-mono text-neutral-300">Bengaluru, India</span>
               </div>
             </div>
 
-            <div>
-              <h3 className="text-3xl font-black tracking-tight text-white">Chris Mathew Aje</h3>
+            <div className="text-center lg:text-left pt-2 lg:pt-0">
+              <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white">Chris Mathew Aje</h3>
               <p className="text-neutral-400 font-mono text-xs uppercase tracking-widest mt-1">
-                Full-Stack Engineer & Creative Designer
+                Full-Stack Engineer &amp; Creative Designer
               </p>
             </div>
 
-            <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
+            <p className="text-neutral-400 text-xs sm:text-base leading-relaxed text-center lg:text-left">
               Cybersecurity student and creative developer bridging technical resilience with cinematic UI/UX. Passionate about privacy, zero-knowledge mechanics, and modern WebGL digital systems.
             </p>
 
-            <div className="pt-4">
+            <div className="pt-2 sm:pt-4 flex justify-center lg:justify-start">
               <ContactButton label="Initiate Contact" href="mailto:chrismaje05@gmail.com" isScroll={false} />
             </div>
           </div>
 
           {/* Right Column: Narrative + Milestones */}
-          <div className="lg:col-span-7 space-y-12">
+          <div className="lg:col-span-7 space-y-8 sm:space-y-12">
             {/* 1. Philosophy */}
-            <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/[0.08] backdrop-blur-sm space-y-4">
+            <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-neutral-900/40 border border-white/[0.08] backdrop-blur-sm space-y-4">
               <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest block">
                 01 // What I believe
               </span>
-              <h4 className="text-2xl font-bold text-white tracking-tight">
+              <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Creativity and technology go hand-in-hand.
               </h4>
-              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+              <p className="text-neutral-300 text-xs sm:text-base leading-relaxed">
                 I enjoy digging into tech, discovering, and building solutions that work well to suit real needs-whether that's full-stack web platforms, backend architectures, or security utilities, figuring out how to make complex systems simpler and smoother.
               </p>
-              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+              <p className="text-neutral-300 text-xs sm:text-base leading-relaxed">
                 But I'm not all code and logic. I have a deep passion for visual design, typography, color harmony, and cinematic motion. I look into the fine details of how an interface feels, striving to build digital experiences that feel fresh, intentional, and reflective of genuine personality.
               </p>
             </div>
 
             {/* 2. Education */}
-            <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/[0.08] backdrop-blur-sm space-y-6">
+            <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-neutral-900/40 border border-white/[0.08] backdrop-blur-sm space-y-6">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
                   <GraduationCap size={20} />
                 </div>
-                <h4 className="text-xl font-bold text-white tracking-tight">
+                <h4 className="text-lg sm:text-xl font-bold text-white tracking-tight">
                   Academic Background
                 </h4>
               </div>
@@ -214,25 +214,25 @@ export const AboutPage: React.FC = () => {
               <div className="space-y-6 divide-y divide-white/[0.06]">
                 {education.map((item, idx) => (
                   <div key={idx} className={idx > 0 ? "pt-5" : ""}>
-                    <div className="flex justify-between items-baseline">
-                      <h5 className="font-semibold text-white text-base">{item.degree}</h5>
-                      <span className="text-xs font-mono text-neutral-400">{item.year}</span>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1">
+                      <h5 className="font-semibold text-white text-sm sm:text-base">{item.degree}</h5>
+                      <span className="text-xs font-mono text-neutral-400 shrink-0">{item.year}</span>
                     </div>
-                    <p className="text-neutral-400 text-sm mt-0.5">{item.institution}</p>
-                    <p className="text-neutral-500 text-xs mt-1 font-mono">{item.focus}</p>
+                    <p className="text-neutral-400 text-xs sm:text-sm mt-0.5">{item.institution}</p>
+                    <p className="text-neutral-500 text-[11px] sm:text-xs mt-1 font-mono">{item.focus}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* 3. Skills */}
-            <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/[0.08] backdrop-blur-sm space-y-6">
+            <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-neutral-900/40 border border-white/[0.08] backdrop-blur-sm space-y-6">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
                   <Code size={20} />
                 </div>
-                <h4 className="text-xl font-bold text-white tracking-tight">
-                  Skills & Technical Domains
+                <h4 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                  Skills &amp; Technical Domains
                 </h4>
               </div>
 
@@ -242,7 +242,7 @@ export const AboutPage: React.FC = () => {
                   return (
                     <div
                       key={idx}
-                      className="p-5 rounded-2xl bg-black/40 border border-white/[0.06] space-y-3 hover:border-white/20 transition-colors"
+                      className="p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/[0.06] space-y-3 hover:border-white/20 transition-colors"
                     >
                       <div className="flex items-center gap-2">
                         <Icon size={16} className="text-neutral-400" />
@@ -265,7 +265,7 @@ export const AboutPage: React.FC = () => {
             </div>
 
             {/* 4. Certifications */}
-            <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/[0.08] backdrop-blur-sm space-y-6">
+            <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-neutral-900/40 border border-white/[0.08] backdrop-blur-sm space-y-6">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
                   <Award size={20} />

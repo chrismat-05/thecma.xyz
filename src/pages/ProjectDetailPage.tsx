@@ -133,7 +133,7 @@ export const ProjectDetailPage: React.FC = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="flex items-center justify-between gap-4 mb-10 pb-6 border-b border-white/[0.08]"
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-8 sm:mb-10 pb-4 sm:pb-6 border-b border-white/[0.08]"
               >
                 <Link
                   to="/projects"
@@ -144,7 +144,7 @@ export const ProjectDetailPage: React.FC = () => {
                   <span>Selected Works</span>
                 </Link>
 
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                   {project.link && (
                     <a
                       href={project.link}
