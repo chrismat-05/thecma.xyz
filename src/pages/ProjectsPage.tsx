@@ -266,15 +266,15 @@ export const ProjectsPage: React.FC = () => {
                     key={disc.value}
                     onClick={() => setSelectedDiscipline(disc.value)}
                     className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer ${isActive
-                        ? "bg-white text-black font-bold shadow-lg shadow-white/20 scale-105"
-                        : "text-neutral-400 hover:text-white"
+                        ? "bg-gradient-to-r from-red-600 via-brand-red to-red-700 text-white font-bold shadow-lg shadow-brand-red/40 scale-105 border border-brand-red/80"
+                        : "text-neutral-400 hover:text-white hover:bg-white/[0.05]"
                       }`}
                     data-cursor="button"
                   >
-                    <DiscIcon size={13} className={isActive ? "text-black" : "text-neutral-400"} />
+                    <DiscIcon size={13} className={isActive ? "text-white" : "text-neutral-400"} />
                     <span>{disc.label}</span>
                     <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${isActive ? "bg-black/15 text-black font-bold" : "bg-white/10 text-neutral-400"
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${isActive ? "bg-black/30 text-white font-bold" : "bg-white/10 text-neutral-400"
                         }`}
                     >
                       {count}
@@ -347,7 +347,7 @@ export const ProjectsPage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-black/60 hover:border-white/30 transition-all duration-500 flex flex-col justify-between overflow-hidden group shadow-xl backdrop-blur-sm hover:shadow-2xl hover:shadow-white/[0.03]"
+                  className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-black/60 hover:border-brand-red/50 hover:shadow-[0_0_35px_rgba(229,9,20,0.18)] transition-all duration-500 flex flex-col justify-between overflow-hidden group shadow-xl backdrop-blur-sm"
                 >
                   <div>
                     {/* Thumbnail Image */}
@@ -390,7 +390,7 @@ export const ProjectsPage: React.FC = () => {
                       </div>
 
                       {project.featured && (
-                        <div className="absolute bottom-3 left-4 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-[10px] font-mono uppercase tracking-wider text-white">
+                        <div className="absolute bottom-3 left-4 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-brand-red/25 backdrop-blur-md border border-brand-red/50 text-[10px] font-mono uppercase tracking-wider text-white shadow-[0_0_10px_rgba(229,9,20,0.35)]">
                           <Sparkles size={10} className="text-white" />
                           <span>Featured</span>
                         </div>
@@ -401,7 +401,7 @@ export const ProjectsPage: React.FC = () => {
                     <div className="p-6 sm:p-7 space-y-4">
                       <div>
                         <Link to={`/projects/${project.id}`} className="group/title block">
-                          <h3 className="text-xl sm:text-2xl font-bold text-white group-hover/title:text-neutral-200 transition-colors tracking-tight font-display">
+                          <h3 className="text-xl sm:text-2xl font-bold text-white group-hover/title:text-brand-red transition-colors tracking-tight font-display">
                             {project.title}
                           </h3>
                         </Link>
