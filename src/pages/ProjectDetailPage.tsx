@@ -24,6 +24,7 @@ import { getCategoryMeta } from "@/lib/projectCategories";
 
 import { TechVistaDetailView } from "@/components/projects/TechVistaDetailView";
 import { AirborneDetailView } from "@/components/projects/AirborneDetailView";
+import { VideoEditingDetailView } from "@/components/projects/VideoEditingDetailView";
 import type { ProjectItem, ProjectDetailViewProps } from "@/types/project";
 
 // Registry allowing each project to have its own unique, custom-crafted detail page component
