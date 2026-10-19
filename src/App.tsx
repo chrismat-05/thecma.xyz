@@ -55,6 +55,14 @@ const AnimatedRoutes = () => {
           }
         />
         <Route
+          path="/project/:id"
+          element={
+            <PageTransition>
+              <ProjectDetailPage />
+            </PageTransition>
+          }
+        />
+        <Route
           path="*"
           element={
             <PageTransition>

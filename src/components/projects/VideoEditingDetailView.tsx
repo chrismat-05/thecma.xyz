@@ -540,7 +540,7 @@ export const VideoEditingDetailView: React.FC<VideoEditingDetailViewProps> = ({
             </Link>
 
             <Link
-              to={`/project/${nextProject.id}`}
+              to={`/projects/${nextProject.id}`}
               className="group inline-flex items-center gap-3 text-right"
             >
               <div>

@@ -11,7 +11,11 @@ import {
   Layers,
   ChevronRight,
   ExternalLink,
-  Eye
+  Eye,
+  Code2,
+  Wrench,
+  Palette,
+  Film
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import projectsData from "@/content/projects.json";
@@ -33,60 +37,81 @@ interface ProjectItem {
   tags: string[];
   technologies: string[];
   category: string;
+  discipline?: string;
   servicesOffered?: string[];
   thumbnail: string;
   images: string[];
   link: string | null;
   github: string | null;
   package: string | null;
+  videos?: Array<{ id: string; title: string; src: string; duration?: string; caption?: string }>;
 }
 
 export const ProjectsPage: React.FC = () => {
   const allProjects = projectsData as ProjectItem[];
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedService, setSelectedService] = useState<string>("all");
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedDiscipline, setSelectedDiscipline] = useState<string>("all");
 
-  const categoryFilters = [
-    { label: "All Projects", value: "all" },
-    { label: "Client Projects", value: "client" },
-    { label: "Personal Projects", value: "personal" },
-    { label: "College Projects", value: "college" },
-  ];
-
-  const serviceFilters = [
-    { label: "All Services", value: "all" },
-    ...servicesData.map((s) => ({
-      label: s.title,
-      value: s.id,
-    })),
+  const disciplineFilters = [
+    { label: "All Disciplines", value: "all", icon: Layers },
+    { label: "Web Development", value: "web-dev", icon: Code2 },
+    { label: "Tools & Packages", value: "tools-packages", icon: Wrench },
+    { label: "Graphic Designing", value: "graphic-design", icon: Palette },
+    { label: "Video Editing", value: "video-editing", icon: Film },
   ];
 
   const filteredProjects = useMemo(() => {
     return allProjects.filter((project) => {
-      const matchesCategory =
-        selectedCategory === "all" ||
-        (project.category && project.category.toLowerCase() === selectedCategory.toLowerCase());
-      const matchesService =
-        selectedService === "all" ||
-        (project.servicesOffered && project.servicesOffered.includes(selectedService));
+      const matchesDiscipline =
+        selectedDiscipline === "all" ||
+        project.discipline === selectedDiscipline ||
+        (project.servicesOffered && project.servicesOffered.includes(selectedDiscipline));
       const matchesSearch =
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (project.subtitle && project.subtitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
         project.technologies.some((t) =>
           t.toLowerCase().includes(searchQuery.toLowerCase())
+        ) ||
+        project.tags.some((t) =>
+          t.toLowerCase().includes(searchQuery.toLowerCase())
         );
-      return matchesCategory && matchesService && matchesSearch;
+      return matchesDiscipline && matchesSearch;
     });
-  }, [allProjects, selectedCategory, selectedService, searchQuery]);
+  }, [allProjects, selectedDiscipline, searchQuery]);
 
-  // Spotlight featured project (defaults to ICPF Bengaluru or first project)
+  // Dynamic hero spotlight project based on active discipline
   const spotlightProject = useMemo(() => {
+    if (selectedDiscipline === "graphic-design") {
+      return allProjects.find((p) => p.id === "techvista") || allProjects[0];
+    }
+    if (selectedDiscipline === "video-editing") {
+      return allProjects.find((p) => p.id === "airborne-26") || allProjects[0];
+    }
+    if (selectedDiscipline === "tools-packages") {
+      return (
+        allProjects.find((p) => p.id === "isitsecure") ||
+        allProjects.find((p) => p.id === "req-api") ||
+        allProjects[0]
+      );
+    }
+    // "all" or "web-dev"
     return allProjects.find((p) => p.id === "icpf-bengaluru") || allProjects[0];
-  }, [allProjects]);
+  }, [allProjects, selectedDiscipline]);
 
-  const spotlightCatMeta = spotlightProject ? getCategoryMeta(spotlightProject.category) : null;
+  const spotlightTag = useMemo(() => {
+    if (spotlightProject?.discipline === "graphic-design")
+      return "Flagship Hackathon Identity & Collateral";
+    if (spotlightProject?.discipline === "video-editing")
+      return "Flagship Social Media Promo Campaign";
+    if (spotlightProject?.discipline === "tools-packages")
+      return "Flagship Developer Telemetry Suite";
+    return "Flagship Production Platform";
+  }, [spotlightProject]);
+
+  const spotlightCatMeta = spotlightProject
+    ? getCategoryMeta(spotlightProject.category)
+    : null;
   const SpotlightCatIcon = spotlightCatMeta?.icon;
 
   return (
@@ -105,7 +130,6 @@ export const ProjectsPage: React.FC = () => {
             <ArrowLeft size={16} />
             <span>Return to Portfolio</span>
           </Link>
-
         </div>
 
         {/* Hero Title & Ethos */}
@@ -114,15 +138,15 @@ export const ProjectsPage: React.FC = () => {
             Portfolio
           </h1>
           <p className="text-neutral-400 text-sm sm:text-base max-w-2xl mt-4 leading-relaxed font-sans">
-            A comprehensive interactive repository of web architectures, security telemetry tools, open-source packages, and creative applications.
+            A comprehensive interactive repository spanning web architectures, developer tools & packages, graphic design branding, and cinematic video editing.
           </p>
         </div>
 
         {/* 1. Bento Spotlight Banner (Dynamic Featured Showcase) */}
-        {spotlightProject && selectedService === "all" && !searchQuery && (
+        {spotlightProject && !searchQuery && (
           <div className="mb-16 rounded-[32px] sm:rounded-[40px] border border-white/15 bg-gradient-to-b from-white/[0.07] via-neutral-950/80 to-black p-6 sm:p-10 relative overflow-hidden group shadow-2xl backdrop-blur-xl">
             <div
-              className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-[140px] pointer-events-none opacity-40"
+              className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-[140px] pointer-events-none opacity-40 transition-all duration-700"
               style={{ background: spotlightProject.themeColor || "#9333ea" }}
             />
 
@@ -132,7 +156,7 @@ export const ProjectsPage: React.FC = () => {
                 <div className="flex flex-wrap items-center gap-2">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/[0.05] text-[11px] font-mono uppercase tracking-widest text-[#D7E2EA]">
                     <Sparkles size={12} className="text-[#D7E2EA]" />
-                    <span>Flagship Production Platform</span>
+                    <span>{spotlightTag}</span>
                   </div>
                   {spotlightCatMeta && SpotlightCatIcon && (
                     <div
@@ -171,69 +195,47 @@ export const ProjectsPage: React.FC = () => {
                   ))}
                 </div>
 
-                {/* Services Offered Badges */}
-                {spotlightProject.servicesOffered && spotlightProject.servicesOffered.length > 0 && (
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {spotlightProject.servicesOffered.map((srvId) => {
-                      const srv = servicesData.find((s) => s.id === srvId);
-                      if (!srv) return null;
-                      return (
-                        <span
-                          key={srvId}
-                          className="px-3 py-1 text-xs font-mono rounded-lg bg-white/[0.08] border border-white/20 text-[#D7E2EA] flex items-center gap-1.5"
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                          {srv.title}
-                        </span>
-                      );
-                    })}
-                  </div>
-                )}
-
-                {/* Actions */}
-                <div className="flex items-center justify-between gap-3 pt-2">
-                  <div className="flex items-center gap-3">
-                    {spotlightProject.link ? (
-                      <a
-                        href={spotlightProject.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-7 py-3 rounded-full border border-white/25 bg-gradient-to-b from-white/15 via-white/[0.05] to-black hover:border-white/60 text-[#D7E2EA] hover:text-white font-mono text-xs uppercase tracking-[0.15em] font-semibold transition-all flex items-center gap-2 shadow-lg"
-                        data-cursor="button"
-                      >
-                        <Globe size={14} />
-                        <span>Live Platform</span>
-                        <ArrowUpRight size={14} />
-                      </a>
-                    ) : spotlightProject.github ? (
-                      <a
-                        href={spotlightProject.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-7 py-3 rounded-full border border-white/25 bg-gradient-to-b from-white/15 via-white/[0.05] to-black hover:border-white/60 text-[#D7E2EA] hover:text-white font-mono text-xs uppercase tracking-[0.15em] font-semibold transition-all flex items-center gap-2 shadow-lg"
-                        data-cursor="button"
-                      >
-                        <Github size={14} />
-                        <span>Source Code</span>
-                        <ArrowUpRight size={14} />
-                      </a>
-                    ) : null}
-                  </div>
-
-                  {/* Icon-based button aligned to the right to open project */}
+                {/* Action Buttons */}
+                <div className="flex flex-wrap items-center gap-4 pt-2">
                   <Link
                     to={`/projects/${spotlightProject.id}`}
-                    className="w-12 h-12 rounded-full border border-white/20 bg-white/[0.05] hover:bg-white/15 hover:border-white/50 text-[#D7E2EA] hover:text-white flex items-center justify-center transition-all duration-300 shadow-lg group/modalbtn ml-auto"
-                    title="View Project"
-                    aria-label="View Project"
+                    className="px-6 py-3 rounded-full bg-white text-black font-semibold text-xs font-mono uppercase tracking-wider transition-all duration-300 hover:bg-neutral-200 shadow-lg shadow-white/10 inline-flex items-center gap-2"
                     data-cursor="button"
                   >
-                    <Eye size={20} className="group-hover/modalbtn:scale-110 transition-transform" />
+                    <span>Inspect Project</span>
+                    <ArrowUpRight size={15} />
                   </Link>
+
+                  {spotlightProject.link && (
+                    <a
+                      href={spotlightProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-3 rounded-full border border-white/20 bg-white/[0.05] hover:border-white/50 text-neutral-300 hover:text-white text-xs font-mono uppercase tracking-wider transition-all inline-flex items-center gap-2"
+                      data-cursor="button"
+                    >
+                      <Globe size={14} />
+                      <span>Live Site</span>
+                      <ArrowUpRight size={14} />
+                    </a>
+                  )}
+                  {spotlightProject.github && (
+                    <a
+                      href={spotlightProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-3 rounded-full border border-white/15 bg-white/[0.02] hover:border-white/40 text-neutral-400 hover:text-white text-xs font-mono uppercase tracking-wider transition-all inline-flex items-center gap-2"
+                      data-cursor="button"
+                    >
+                      <Github size={14} />
+                      <span>Code</span>
+                      <ArrowUpRight size={14} />
+                    </a>
+                  )}
                 </div>
               </div>
 
-              {/* Right Column Showcase Visual */}
+              {/* Right Column Preview Image */}
               <div className="lg:col-span-6">
                 <Link
                   to={`/projects/${spotlightProject.id}`}
@@ -260,34 +262,39 @@ export const ProjectsPage: React.FC = () => {
 
         {/* Filter Bar & Interactive Search */}
         <div className="flex flex-col gap-5 mb-10 pb-6 border-b border-white/10">
-          {/* Top row: Category Tabs & Search Input */}
-          <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
-            {/* Category Filter Tabs */}
-            <div className="flex flex-wrap gap-2 items-center p-1 rounded-full bg-white/[0.03] border border-white/10 w-fit">
-              {categoryFilters.map((cat) => {
-                const isActive = selectedCategory === cat.value;
+          {/* Top row: Discipline Tabs & Search Input */}
+          <div className="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center">
+            {/* Discipline Filter Tabs */}
+            <div className="flex flex-wrap gap-2 items-center p-1.5 rounded-2xl sm:rounded-full bg-white/[0.03] border border-white/10 w-fit">
+              {disciplineFilters.map((disc) => {
+                const isActive = selectedDiscipline === disc.value;
                 const count =
-                  cat.value === "all"
+                  disc.value === "all"
                     ? allProjects.length
-                    : allProjects.filter((p) => p.category?.toLowerCase() === cat.value).length;
-                const catMeta = cat.value !== "all" ? getCategoryMeta(cat.value) : null;
-                const CatIcon = catMeta?.icon;
+                    : allProjects.filter(
+                        (p) =>
+                          p.discipline === disc.value ||
+                          (p.servicesOffered && p.servicesOffered.includes(disc.value))
+                      ).length;
+                const DiscIcon = disc.icon;
 
                 return (
                   <button
-                    key={cat.value}
-                    onClick={() => setSelectedCategory(cat.value)}
-                    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${isActive
+                    key={disc.value}
+                    onClick={() => setSelectedDiscipline(disc.value)}
+                    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                      isActive
                         ? "bg-white text-black font-bold shadow-lg shadow-white/20 scale-105"
                         : "text-neutral-400 hover:text-white"
-                      }`}
+                    }`}
                     data-cursor="button"
                   >
-                    {CatIcon && <CatIcon size={13} className={isActive ? "text-black" : "text-neutral-400"} />}
-                    <span>{cat.label}</span>
+                    <DiscIcon size={13} className={isActive ? "text-black" : "text-neutral-400"} />
+                    <span>{disc.label}</span>
                     <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${isActive ? "bg-black/15 text-black font-bold" : "bg-white/10 text-neutral-400"
-                        }`}
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${
+                        isActive ? "bg-black/15 text-black font-bold" : "bg-white/10 text-neutral-400"
+                      }`}
                     >
                       {count}
                     </span>
@@ -297,7 +304,7 @@ export const ProjectsPage: React.FC = () => {
             </div>
 
             {/* Search Input */}
-            <div className="relative w-full md:w-80 shrink-0">
+            <div className="relative w-full lg:w-80 shrink-0">
               <Search
                 size={15}
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"
@@ -312,47 +319,12 @@ export const ProjectsPage: React.FC = () => {
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs cursor-pointer"
                 >
                   Clear
                 </button>
               )}
             </div>
-          </div>
-
-          {/* Sub row: Services Offered Filter Chips */}
-          <div className="flex flex-wrap gap-2 items-center pt-1">
-            <span className="text-[11px] font-mono text-neutral-500 uppercase tracking-widest mr-1">
-              Domain:
-            </span>
-            {serviceFilters.map((s) => {
-              const isActive = selectedService === s.value;
-              const count =
-                s.value === "all"
-                  ? allProjects.filter((p) =>
-                    selectedCategory === "all" || p.category?.toLowerCase() === selectedCategory
-                  ).length
-                  : allProjects.filter(
-                    (p) =>
-                      (selectedCategory === "all" || p.category?.toLowerCase() === selectedCategory) &&
-                      p.servicesOffered?.includes(s.value)
-                  ).length;
-
-              return (
-                <button
-                  key={s.value}
-                  onClick={() => setSelectedService(s.value)}
-                  className={`px-3 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${isActive
-                      ? "bg-white/20 border border-white/50 text-white font-semibold"
-                      : "bg-white/[0.02] text-neutral-400 border border-white/10 hover:text-neutral-200 hover:border-white/20"
-                    }`}
-                  data-cursor="button"
-                >
-                  <span>{s.label}</span>
-                  <span className="text-[10px] text-neutral-400">({count})</span>
-                </button>
-              );
-            })}
           </div>
         </div>
 
@@ -360,28 +332,29 @@ export const ProjectsPage: React.FC = () => {
         {filteredProjects.length === 0 ? (
           <div className="text-center py-24 border border-dashed border-white/15 rounded-3xl p-8">
             <p className="text-neutral-400 font-mono text-sm">
-              No repositories or systems found matching "{searchQuery}".
+              No projects found matching "{searchQuery}".
             </p>
             <button
               onClick={() => {
                 setSearchQuery("");
-                setSelectedService("all");
+                setSelectedDiscipline("all");
               }}
-              className="mt-5 px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-mono text-white transition-colors"
-              data-cursor="button"
+              className="mt-5 px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-mono text-white transition-colors cursor-pointer"
             >
               Reset Filters
             </button>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredProjects.map((project, idx) => {
-              const actionLabel = project.link
-                ? "Live Site"
-                : project.package
-                  ? "Package"
-                  : "Source Code";
+            {filteredProjects.map((project, index) => {
               const targetUrl = project.link || project.package || project.github;
+              const actionLabel = project.link
+                ? "Live Preview"
+                : project.package
+                ? "PyPI Package"
+                : project.github
+                ? "GitHub Source"
+                : null;
 
               const catMeta = getCategoryMeta(project.category);
               const CatIcon = catMeta.icon;
@@ -390,42 +363,55 @@ export const ProjectsPage: React.FC = () => {
                 <motion.div
                   key={project.id}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="rounded-[28px] bg-gradient-to-b from-neutral-900/80 via-neutral-950/90 to-black border border-white/10 hover:border-white/30 overflow-hidden flex flex-col justify-between group transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-black origin-top"
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-black/60 hover:border-white/30 transition-all duration-500 flex flex-col justify-between overflow-hidden group shadow-xl backdrop-blur-sm hover:shadow-2xl hover:shadow-white/[0.03]"
                 >
                   <div>
-                    {/* Card Media Viewport */}
+                    {/* Thumbnail Image */}
                     <Link
                       to={`/projects/${project.id}`}
-                      className="aspect-video w-full overflow-hidden bg-neutral-950 relative cursor-pointer group/thumb block"
-                      data-cursor="VIEW"
+                      className="relative block aspect-[16/10] overflow-hidden bg-neutral-950 border-b border-white/[0.08]"
+                      data-cursor="SELECT"
                     >
                       <img
                         src={project.thumbnail}
                         alt={project.title}
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-full object-cover group-hover/thumb:scale-105 transition-transform duration-700 ease-out filter brightness-95 group-hover/thumb:brightness-105"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
-                      {/* Header tags inside image */}
-                      <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none z-10">
+                      {/* Top Badges */}
+                      <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2">
                         <span
-                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-md border text-[10px] font-mono uppercase tracking-wider font-semibold ${catMeta.badgeClass}`}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-md border text-[11px] font-mono uppercase tracking-wider font-semibold ${catMeta.badgeClass}`}
                         >
                           <CatIcon size={11} className="shrink-0" />
-                          <span>{catMeta.label}</span>
+                          <span>{catMeta.shortLabel}</span>
+                          <span className="opacity-40">•</span>
+                          <span>{project.year}</span>
                         </span>
-                        <span className="px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-[10px] font-mono text-[#D7E2EA] font-semibold">
-                          {project.year}
-                        </span>
+
+                        {project.discipline && (
+                          <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[10px] font-mono uppercase tracking-wider text-neutral-300">
+                            {project.discipline === "graphic-design"
+                              ? "Design"
+                              : project.discipline === "video-editing"
+                              ? "Video"
+                              : project.discipline === "tools-packages"
+                              ? "Tool"
+                              : "Web"}
+                          </span>
+                        )}
                       </div>
 
-                      {project.images && project.images.length > 1 && (
-                        <div className="absolute bottom-3 right-3 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono text-neutral-400">
-                          +{project.images.length} images
+                      {project.featured && (
+                        <div className="absolute bottom-3 left-4 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-[10px] font-mono uppercase tracking-wider text-white">
+                          <Sparkles size={10} className="text-white" />
+                          <span>Featured</span>
                         </div>
                       )}
                     </Link>
@@ -491,12 +477,25 @@ export const ProjectsPage: React.FC = () => {
                         className="px-4 py-2 rounded-full border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black hover:border-white/50 text-[#D7E2EA] hover:text-white text-xs font-mono uppercase tracking-wider font-semibold transition-all inline-flex items-center gap-1.5 shadow-md mt-4"
                         data-cursor="button"
                       >
-                        {project.link ? <Globe size={13} /> : project.package ? <Package size={13} /> : <Github size={13} />}
+                        {project.link ? (
+                          <Globe size={13} />
+                        ) : project.package ? (
+                          <Package size={13} />
+                        ) : (
+                          <Github size={13} />
+                        )}
                         <span>{actionLabel}</span>
                         <ArrowUpRight size={13} />
                       </a>
                     ) : (
-                      <div className="mt-4" />
+                      <Link
+                        to={`/projects/${project.id}`}
+                        className="px-4 py-2 rounded-full border border-white/15 bg-white/[0.04] hover:bg-white/10 text-neutral-300 hover:text-white text-xs font-mono uppercase tracking-wider transition-all inline-flex items-center gap-1.5 mt-4"
+                        data-cursor="button"
+                      >
+                        <span>View Details</span>
+                        <ArrowUpRight size={13} />
+                      </Link>
                     )}
 
                     {/* Icon-based button aligned to the right to open project */}
