@@ -18,33 +18,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getCategoryMeta } from "@/lib/projectCategories";
-
-export interface ProjectItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  year: string;
-  featured: boolean;
-  themeColor?: string;
-  ambientGradient?: string;
-  tags: string[];
-  technologies: string[];
-  category: string;
-  discipline?: string;
-  servicesOffered?: string[];
-  thumbnail: string;
-  images: string[];
-  link: string | null;
-  github: string | null;
-  package: string | null;
-  videos?: Array<{ id: string; title: string; src: string; duration?: string; caption?: string }>;
-}
-
-interface TechVistaDetailViewProps {
-  project: ProjectItem;
-  nextProject: ProjectItem | null;
-}
+import type { ProjectItem, ProjectDetailViewProps } from "@/types/project";
 
 interface DesignAsset {
   id: string;
@@ -52,9 +26,10 @@ interface DesignAsset {
   type: string;
   image: string;
   dimensions: string;
+  description?: string;
 }
 
-export const TechVistaDetailView: React.FC<TechVistaDetailViewProps> = ({
+export const TechVistaDetailView: React.FC<ProjectDetailViewProps> = ({
   project,
   nextProject,
 }) => {
@@ -285,9 +260,11 @@ export const TechVistaDetailView: React.FC<TechVistaDetailViewProps> = ({
                 <h3 className="text-xl sm:text-2xl font-bold font-display uppercase tracking-tight text-white">
                   {currentAsset.title}
                 </h3>
-                <p className="text-sm text-neutral-400 mt-1 max-w-3xl">
-                  {currentAsset.description}
-                </p>
+                {currentAsset.description && (
+                  <p className="text-sm text-neutral-400 mt-1 max-w-3xl">
+                    {currentAsset.description}
+                  </p>
+                )}
               </div>
 
               <button
@@ -301,8 +278,8 @@ export const TechVistaDetailView: React.FC<TechVistaDetailViewProps> = ({
           </div>
         </section>
 
-        {/* DESIGN DNA & SPECIFICATIONS GRID */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        {/* DESIGN DNA & SPECIFICATIONS GRID (2 Clean Cards) */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
           {/* Card 1: Color Palette */}
           <div className="rounded-3xl border border-white/10 bg-[#090b10] p-6 sm:p-8 flex flex-col justify-between">
             <div>

@@ -24,28 +24,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import servicesData from "@/content/services.json";
 import { getCategoryMeta } from "@/lib/projectCategories";
-
-interface ProjectItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  year: string;
-  featured: boolean;
-  themeColor?: string;
-  ambientGradient?: string;
-  tags: string[];
-  technologies: string[];
-  category: string;
-  discipline?: string;
-  servicesOffered?: string[];
-  thumbnail: string;
-  images: string[];
-  link: string | null;
-  github: string | null;
-  package: string | null;
-  videos?: Array<{ id: string; title: string; src: string; duration?: string; caption?: string }>;
-}
+import type { ProjectItem } from "@/types/project";
 
 export const ProjectsPage: React.FC = () => {
   const allProjects = projectsData as ProjectItem[];

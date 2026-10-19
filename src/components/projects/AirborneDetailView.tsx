@@ -21,12 +21,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getCategoryMeta } from "@/lib/projectCategories";
-import type { ProjectItem } from "./GraphicDesignDetailView";
-
-interface VideoEditingDetailViewProps {
-  project: ProjectItem;
-  nextProject: ProjectItem | null;
-}
+import type { ProjectItem, ProjectDetailViewProps } from "@/types/project";
 
 interface VideoClip {
   id: string;
@@ -36,7 +31,7 @@ interface VideoClip {
   caption?: string;
 }
 
-export const VideoEditingDetailView: React.FC<VideoEditingDetailViewProps> = ({
+export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
   project,
   nextProject,
 }) => {
@@ -357,9 +352,11 @@ export const VideoEditingDetailView: React.FC<VideoEditingDetailViewProps> = ({
                 <h3 className="text-xl sm:text-2xl font-bold font-display uppercase tracking-tight text-white mb-2">
                   {currentClip.title}
                 </h3>
-                <p className="text-sm text-neutral-300 leading-relaxed">
-                  {currentClip.caption || "High-tempo promotional cut edited for peak social media impact, engagement, and youth camp registration."}
-                </p>
+                {currentClip.caption && (
+                  <p className="text-sm text-neutral-300 leading-relaxed">
+                    {currentClip.caption}
+                  </p>
+                )}
               </div>
 
               {/* Scrollable Reel Cards List */}
@@ -389,9 +386,11 @@ export const VideoEditingDetailView: React.FC<VideoEditingDetailViewProps> = ({
                           <h4 className={`text-sm font-bold font-sans ${isActive ? "text-amber-300" : "text-white"}`}>
                             {clip.title}
                           </h4>
-                          <p className="text-xs text-neutral-400 line-clamp-1 mt-0.5">
-                            {clip.caption}
-                          </p>
+                          {clip.caption && (
+                            <p className="text-xs text-neutral-400 line-clamp-1 mt-0.5">
+                              {clip.caption}
+                            </p>
+                          )}
                         </div>
                       </div>
 
@@ -551,4 +550,5 @@ export const VideoEditingDetailView: React.FC<VideoEditingDetailViewProps> = ({
   );
 };
 
-export default VideoEditingDetailView;
+export const VideoEditingDetailView = AirborneDetailView;
+export default AirborneDetailView;

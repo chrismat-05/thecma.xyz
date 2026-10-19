@@ -23,40 +23,14 @@ import { CursorGridBackground } from "@/components/backgrounds/CursorGridBackgro
 import { getCategoryMeta } from "@/lib/projectCategories";
 
 import { TechVistaDetailView } from "@/components/projects/TechVistaDetailView";
-import { VideoEditingDetailView } from "@/components/projects/VideoEditingDetailView";
-
-interface ProjectDetailViewProps {
-  project: ProjectItem;
-  nextProject: ProjectItem | null;
-}
+import { AirborneDetailView } from "@/components/projects/AirborneDetailView";
+import type { ProjectItem, ProjectDetailViewProps } from "@/types/project";
 
 // Registry allowing each project to have its own unique, custom-crafted detail page component
 const customProjectViews: Record<string, React.FC<ProjectDetailViewProps>> = {
   techvista: TechVistaDetailView,
-  "airborne-26": VideoEditingDetailView,
+  "airborne-26": AirborneDetailView,
 };
-
-interface ProjectItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  year: string;
-  featured: boolean;
-  themeColor?: string;
-  ambientGradient?: string;
-  tags: string[];
-  technologies: string[];
-  category: string;
-  discipline?: string;
-  servicesOffered?: string[];
-  thumbnail: string;
-  images: string[];
-  link: string | null;
-  github: string | null;
-  package: string | null;
-  videos?: Array<{ id: string; title: string; src: string; duration?: string; caption?: string }>;
-}
 
 export const ProjectDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
