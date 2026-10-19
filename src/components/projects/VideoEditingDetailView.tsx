@@ -60,63 +60,54 @@ export const VideoEditingDetailView: React.FC<VideoEditingDetailViewProps> = ({
         title: "10 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/10daystogo_final.mp4",
         duration: "0:30",
-        caption: "Official 10-day countdown teaser crafted for Instagram Reels & WhatsApp status updates."
       },
       {
-        id: "promo-726",
-        title: "Airborne '26 Campaign Clip",
+        id: "promo-7d",
+        title: "7 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/726sde.mp4",
         duration: "0:15",
-        caption: "Fast-paced punchy promotional cut for youth outreach."
       },
       {
         id: "promo-v1",
-        title: "Camp Announcement Reel",
+        title: "Register Now",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260922_045107_239_bsl.mp4",
         duration: "0:45",
-        caption: "Atmospheric announcement highlight introducing the theme and dates."
       },
       {
         id: "promo-v2",
-        title: "Spiritual Atmosphere & Fellowship",
+        title: "Camp Announcement",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260922_065931_731_bsl.mp4",
         duration: "0:35",
-        caption: "Capturing worship, fellowship moments, and uplifting student experiences."
       },
       {
-        id: "promo-v3",
-        title: "Youth Energy & Sessions Feature",
+        id: "promo-6d",
+        title: "6 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_022740_885_bsl.mp4",
         duration: "0:50",
-        caption: "Extended feature spotlighting keynote sessions and vibrant community atmosphere."
       },
       {
-        id: "promo-v4",
-        title: "Speaker & Worship Reveal",
+        id: "promo-7d",
+        title: "7 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_034426_253_bsl.mp4",
         duration: "0:25",
-        caption: "Dynamic reveal teaser announcing guest speakers and worship leaders."
       },
       {
-        id: "promo-v5",
-        title: "Registration Call to Action",
+        id: "promo-9d",
+        title: "Registration Call to Action & 9Days Countdown",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_034435_907_bsl.mp4",
         duration: "0:25",
-        caption: "Urgent registration CTA clip with motion typography directing to registration portal."
       },
       {
         id: "promo-v6",
-        title: "Final Week Countdown Reel",
+        title: "Registration Call to Action",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260925_201438_593_bsl.mp4",
         duration: "0:30",
-        caption: "High-octane final countdown reel building peak anticipation."
       },
       {
         id: "promo-v7",
-        title: "Camp Experience Teaser",
+        title: "Registration Call to Action",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260928_084005_377_bsl.mp4",
         duration: "0:35",
-        caption: "Final retrospective teaser summing up the camp vision."
       }
     ];
 
@@ -275,9 +266,6 @@ export const VideoEditingDetailView: React.FC<VideoEditingDetailViewProps> = ({
         <section className="mb-20">
           <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
             <div>
-              <span className="text-xs font-mono uppercase tracking-[0.2em] text-amber-400 font-semibold block mb-1">
-                // CINEMATIC REEL STATION
-              </span>
               <h2 className="text-2xl sm:text-3xl font-bold font-display uppercase tracking-tight text-white">
                 Airborne '26 Promo Collection
               </h2>
