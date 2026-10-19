@@ -1,166 +1,226 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
-import { Github, Linkedin, Mail, Phone, MessageSquareMore, Handshake } from 'lucide-react';
-import { Link } from 'react-scroll';
-import Player from 'lottie-react';
-import devLottie from './ui/dev-lottie.json';
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowDown } from "lucide-react";
+import { Link as ScrollLink } from "react-scroll";
+import { Link } from "react-router-dom";
+import { LanyardHeroScene } from "@/components/hero/LanyardHeroScene";
+import { LightRays } from "@/components/backgrounds/LightRays";
+import { Waves } from "@/components/backgrounds/Waves";
+import { ThreadsBackground } from "@/components/backgrounds/ThreadsBackground";
+import { WarpText } from "@/components/ui/WarpText";
+import { Magnet } from "@/components/ui/Magnet";
+import { ContactButton } from "@/components/ui/ContactButton";
 
-const Hero = () => {
-  const socialLinks = [
-    { icon: Github, href: 'https://github.com/chrismat-05', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/chrismaje/', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:chrismaje63@gmail.com', label: 'Email' },
-    { icon: MessageSquareMore, href: 'https://wa.me/+918848914245', label: 'WhatsApp' },
-    { icon: Phone, href: 'tel:+918848914245', label: 'Call' },
-    { icon: Handshake, href: 'https://www.fiverr.com/s/zWgryod', label: 'Fiverr' },
-  ];
+export const Hero: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  // Scroll tracking across the 240vh Hero & Lanyard sequence
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // 1. Initial State (Progress 0.0 -> 0.45):
+  // Introductory prompt invites the user to scroll to zoom in.
+  const lanyardIntroOpacity = useTransform(scrollYProgress, [0, 0.25, 0.45], [1, 0.8, 0]);
+
+  // 2. Zoom in progression (Progress 0.0 -> 0.7):
+  const [zoomProgress, setZoomProgress] = React.useState(0);
+  React.useEffect(() => {
+    return scrollYProgress.onChange((latest) => {
+      const val = Math.min(Math.max(latest / 0.65, 0), 1);
+      setZoomProgress(val);
+    });
+  }, [scrollYProgress]);
+
+  // 3. Lanyard fades away as it completes zoom into the hero reveal (Progress 0.55 -> 0.8)
+  const lanyardSceneOpacity = useTransform(scrollYProgress, [0, 0.55, 0.8], [1, 1, 0]);
+  const lanyardScale = useTransform(scrollYProgress, [0, 0.7], [1, 1.8]);
+
+  // 4. Hero Content Section emerges as the lanyard zooms past into the screen (Progress 0.45 -> 0.85)
+  const heroContentOpacity = useTransform(scrollYProgress, [0.45, 0.7, 1], [0, 0.85, 1]);
+  const heroContentY = useTransform(scrollYProgress, [0.45, 0.75], [80, 0]);
+  const heroContentScale = useTransform(scrollYProgress, [0.45, 0.75], [0.92, 1]);
 
   return (
-    <section id="hero" className="min-h-screen flex items-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/20" />
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-left space-y-8">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-xl md:text-2xl text-muted-foreground mb-4 font-mono"
-            >
-              &lt;hello world&gt;
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              <span
-                className="block text-3xl md:text-3xl lg:text-4xl font-semibold text-foreground mb-2"
-                style={{ fontFamily: 'Pacifico, "Dancing Script", "Great Vibes", cursive' }}
-              >
-                I'm
-              </span>
-              <span
-                className="block text-4xl md:text-7xl lg:text-7xl font-bold gradient-text whitespace-nowrap font-display overflow-visible w-full"
-                style={{ fontFamily: 'Tangerine, cursive', lineHeight: 1.5 }}
-              >
-                Chris Mathew Aje
-              </span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-2xl md:text-4xl lg:text-4xl mb-12 h-12"
-              style={{ fontFamily: 'Fredoka, Baloo, Comic Neue, cursive', background: 'linear-gradient(90deg, #FFCC00, #FF9900, #FF6600)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
-            >
-              <TypeAnimation
-                sequence={[ 
-                  'Aspiring Cybersecurity Professional',
-                  2000,
-                  'Aspiring Software Developer',
-                  2000,
-                  'Cybersecurity Student',
-                  2000,
-                  'Ethical Hacking Explorer',
-                  2000,
-                  'Videographer',
-                  2000,
-                  'Tech Enthusiast',
-                  2000,
-                  'Filmmaker',
-                  2000,
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 mb-12"
-            >
-              <Link
-                to="projects"
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="btn-hero-primary cursor-pointer"
-              >
-                View My Work
-              </Link>
-              <Link
-                to="contact"
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="btn-hero-outline cursor-pointer"
-              >
-                Get In Touch
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-              className="flex gap-6"
-            >
-              {socialLinks.map((social, index) => {
-                const Icon = social.icon;
-                let hoverColor = "hover:text-primary";
-                if (social.label === "GitHub") hoverColor = "hover:text-gray-500";
-                if (social.label === "LinkedIn") hoverColor = "hover:text-blue-600";
-                if (social.label === "Email") hoverColor = "hover:text-red-500";
-                if (social.label === "WhatsApp") hoverColor = "hover:text-green-500";
-                if (social.label === "Call") hoverColor = "hover:text-purple-500";
-                if (social.label === "Fiverr") hoverColor = "hover:text-green-600";
-                return (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`text-muted-foreground ${hoverColor} transition-colors duration-300`}
-                    whileHover={{ scale: 1.2, y: -5 }}
-                    whileTap={{ scale: 0.9 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.4 + index * 0.1 }}
-                  >
-                    <Icon size={24} />
-                  </motion.a>
-                );
-              })}
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="hidden lg:flex items-center justify-center"
-          >
-            <div className="w-144 h-144 flex items-center justify-center">
-              <Player
-                autoplay
-                loop
-                animationData={devLottie}
-                style={{ width: '100%', height: '100%' }}
-              />
-            </div>
-          </motion.div>
+    <div
+      ref={containerRef}
+      id="hero-track"
+      className="relative h-[240vh] w-full bg-black text-white"
+    >
+      {/* Sticky Fullscreen Stage */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+        {/* Layer 1: Ambient Perlin Noise Waves with interactive cursor displacement */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-35">
+          <Waves
+            lineColor="rgba(215, 226, 234, 0.14)"
+            backgroundColor="transparent"
+            waveSpeedX={0.012}
+            waveSpeedY={0.005}
+            waveAmpX={36}
+            waveAmpY={18}
+            xGap={14}
+            yGap={34}
+            friction={0.925}
+            tension={0.005}
+            maxCursorMove={90}
+            showCursorDot={false}
+          />
         </div>
 
+        {/* Layer 2: Subtle Silk Mathematical Threads for depth */}
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden opacity-25">
+          <ThreadsBackground
+            threadsCount={14}
+            accentColor="rgba(187, 204, 215, 0.22)"
+          />
+        </div>
+
+        {/* Layer 3: Dynamic Radial Center Vignette & Ambient Glow */}
+        <div
+          className="absolute inset-0 z-[2] pointer-events-none overflow-hidden"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 65% at 50% 50%, rgba(187, 204, 215, 0.07), transparent 70%), radial-gradient(ellipse 60% 40% at 50% 90%, rgba(229, 9, 20, 0.05), transparent 60%)",
+          }}
+        />
+
+        {/* Layer 4: ReactBits Light Rays shining from TOP CENTER down onto the lanyard */}
+        <motion.div
+          style={{ opacity: lanyardSceneOpacity }}
+          className="absolute inset-0 z-[3] pointer-events-none"
+        >
+          <LightRays className="opacity-90" />
+        </motion.div>
+
+        {/* 3D Lanyard Scene with Interactive Physics & Zoom */}
+        <motion.div
+          style={{ opacity: lanyardSceneOpacity, scale: lanyardScale }}
+          className="absolute inset-0 z-10 pointer-events-auto"
+        >
+          <LanyardHeroScene scrollProgress={zoomProgress} />
+        </motion.div>
+
+        {/* Phase 1 Overlay: Intro Prompt when opening website positioned in the bottom-left corner */}
+        <motion.div
+          style={{ opacity: lanyardIntroOpacity }}
+          className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12 z-20 flex items-center gap-3.5 pointer-events-none"
+        >
+          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/15 bg-black/70 backdrop-blur-md text-xs font-mono tracking-widest uppercase text-neutral-300 shadow-2xl">
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            <span>Scroll to zoom in &amp; enter</span>
+          </div>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            className="text-white/70 p-2 rounded-full border border-white/10 bg-black/40 backdrop-blur-md"
+          >
+            <ArrowDown size={16} />
+          </motion.div>
+        </motion.div>
+
+        {/* Phase 2: Revealed Hero Content Section (Jack 3D Creator Style) */}
+        <motion.div
+          style={{
+            opacity: heroContentOpacity,
+            y: heroContentY,
+            scale: heroContentScale,
+          }}
+          className="absolute inset-0 z-20 w-full h-full flex flex-col justify-between px-6 md:px-10 py-6 md:py-8 pointer-events-auto"
+        >
+          {/* Top Navbar Row */}
+          <nav
+            aria-label="Hero Navigation"
+            className="w-full flex items-center justify-between text-[#D7E2EA] font-medium uppercase tracking-wider text-xs sm:text-sm md:text-base lg:text-[1.15rem] pt-2 relative z-30"
+          >
+            <ScrollLink
+              to="about"
+              smooth={true}
+              offset={-70}
+              duration={600}
+              className="cursor-pointer hover:text-white transition-colors duration-200 py-2 px-1"
+              data-cursor="button"
+            >
+              About
+            </ScrollLink>
+            <Link
+              to="/projects"
+              className="cursor-pointer hover:text-white transition-colors duration-200 py-2 px-1"
+              data-cursor="button"
+            >
+              Projects
+            </Link>
+            <ScrollLink
+              to="services"
+              smooth={true}
+              offset={-70}
+              duration={600}
+              className="cursor-pointer hover:text-white transition-colors duration-200 py-2 px-1"
+              data-cursor="button"
+            >
+              Services
+            </ScrollLink>
+            <ScrollLink
+              to="contact"
+              smooth={true}
+              offset={-70}
+              duration={600}
+              className="cursor-pointer hover:text-white transition-colors duration-200 py-2 px-1"
+              data-cursor="button"
+            >
+              Contact
+            </ScrollLink>
+          </nav>
+
+          {/* Center Area: Massive Hero Heading + Elegantly Integrated Magnetic Portrait */}
+          <div className="relative w-full flex-1 flex flex-col items-center justify-center overflow-hidden">
+            {/* Massive Hero Heading with crisp high-contrast silver gradient */}
+            <div className="w-full text-center overflow-hidden relative z-20 pointer-events-auto">
+              <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[12.5vw] sm:text-[13.5vw] md:text-[14vw] lg:text-[14.5vw] select-none drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)]">
+                <WarpText
+                  text="HI, I'M CHRIS"
+                  as="span"
+                  intensity={1.1}
+                  radius={220}
+                  className="hero-heading"
+                />
+              </h1>
+            </div>
+
+            {/* Centered Magnetic Portrait: Scaled and framed with a luxury arch silhouette behind the bottom of the letters */}
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-10 pointer-events-auto">
+              <Magnet padding={120} strength={3}>
+                <div className="relative w-[160px] sm:w-[210px] md:w-[260px] lg:w-[290px] h-[220px] sm:h-[280px] md:h-[330px] lg:h-[370px] rounded-t-[100px] sm:rounded-t-[140px] md:rounded-t-[160px] overflow-hidden border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black shadow-[0_20px_50px_rgba(0,0,0,0.95)] group/portrait">
+                  <img
+                    src="/media/chris.png"
+                    alt="Chris Mathew Aje"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-top select-none filter contrast-105 group-hover/portrait:scale-105 transition-transform duration-700 ease-out"
+                  />
+                  {/* Subtle inner shadow and rim light */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+                </div>
+              </Magnet>
+            </div>
+          </div>
+
+          {/* Bottom Bar: Left Fluid Descriptor + Right Jack Signature ContactButton */}
+          <div className="w-full flex items-end justify-between pb-4 sm:pb-6 md:pb-8 relative z-20">
+            {/* Left: Jack-style fluid uppercase descriptor */}
+            <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[170px] sm:max-w-[230px] md:max-w-[280px] text-xs sm:text-sm md:text-base lg:text-[1.1rem]">
+              bridging creative visual design with performant, modern web development
+            </p>
+
+            {/* Right: Jack signature multi-layered gradient ContactButton */}
+            <div>
+              <ContactButton label="Contact Me" to="contact" />
+            </div>
+          </div>
+        </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
 

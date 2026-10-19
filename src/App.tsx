@@ -2,66 +2,91 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
+import ProjectsPage from "./pages/ProjectsPage";
+import ProjectDetailPage from "./pages/ProjectDetailPage";
+import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
-import React, { useEffect } from "react";
+import React from "react";
+import { MagneticCustomCursor } from "./components/cursor/MagneticCustomCursor";
+import { ScrollToTop } from "./components/layout/ScrollToTop";
+import { PageTransition } from "./components/layout/PageTransition";
 
 const queryClient = new QueryClient();
 
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route
+          path="/"
+          element={
+            <PageTransition>
+              <Index />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <PageTransition>
+              <AboutPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <PageTransition>
+              <ProjectsPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/projects/:id"
+          element={
+            <PageTransition>
+              <ProjectDetailPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/project/:id"
+          element={
+            <PageTransition>
+              <ProjectDetailPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PageTransition>
+              <NotFound />
+            </PageTransition>
+          }
+        />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 const App = () => {
-
-  useEffect(() => {
-    const cursor = document.createElement('div');
-    cursor.id = 'custom-cursor';
-    document.body.appendChild(cursor);
-
-    const moveCursor = (e: MouseEvent) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
-
-      const el = document.elementFromPoint(e.clientX, e.clientY);
-      if (!el) {
-        cursor.className = '';
-        return;
-      }
-      if (
-        el.tagName === 'A' ||
-        el.tagName === 'BUTTON' ||
-        el.classList.contains('cursor-pointer') ||
-        (el as HTMLElement).onclick ||
-        el.getAttribute('role') === 'button'
-      ) {
-        cursor.className = 'pointer';
-      } else if (
-        el.tagName === 'INPUT' ||
-        el.tagName === 'TEXTAREA' ||
-        (el as HTMLElement).isContentEditable
-      ) {
-        cursor.className = 'text';
-      } else {
-        cursor.className = '';
-      }
-    };
-    window.addEventListener('mousemove', moveCursor);
-
-    return () => {
-      window.removeEventListener('mousemove', moveCursor);
-      cursor.remove();
-    };
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <MagneticCustomCursor>
+          <BrowserRouter>
+            <ScrollToTop />
+            <AnimatedRoutes />
+          </BrowserRouter>
+        </MagneticCustomCursor>
       </TooltipProvider>
     </QueryClientProvider>
   );

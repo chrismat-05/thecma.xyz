@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | CMA</title>
     <link rel="icon" href="../media/favicon.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&family=Montserrat:wght@400;500;600&family=Tangerine:wght@700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&family=Montserrat:wght@400;500;600&family=Tangerine:wght@700&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --gradient: linear-gradient(90deg, #ffcc00, #ff9900, #ff6600);
@@ -52,7 +55,7 @@
         .header-container {
             display: flex;
             justify-content: space-between;
-			width: 100%;
+            width: 100%;
             align-items: center;
         }
 
@@ -71,14 +74,15 @@
             list-style: none;
             display: flex;
             gap: 20px;
-			padding-right: 0;
-    		margin-right: 0; 
+            padding-right: 0;
+            margin-right: 0;
         }
-		nav {
-    		display: flex;
-    		justify-content: flex-end;
-    		flex-grow: 1;
-		}
+
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            flex-grow: 1;
+        }
 
         nav a {
             color: var(--white);
@@ -153,19 +157,20 @@
         }
 
         .pagetitle {
-    		font-size: 34px;
-    		font-weight: 700;
-    		margin-bottom: 30px;
-    		background: var(--gradient);
-    		background-clip: text;
-    		-webkit-background-clip: text;
-    		-webkit-text-fill-color: transparent;
-    		-moz-background-clip: text;
-    		-moz-text-fill-color: transparent;
-    		font-family: 'Playfair Display', serif;
-    		display: inline-block;
-}
-		.project-description {
+            font-size: 34px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-background-clip: text;
+            -moz-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            display: inline-block;
+        }
+
+        .project-description {
             color: var(--light-white);
             line-height: 1.6;
             margin-bottom: 20px;
@@ -271,24 +276,24 @@
             margin: 2px 0 40px 0;
         }
 
-footer {
+        footer {
             padding: 50px 0 30px;
             background-color: var(--dark-bg);
         }
-        
+
         .footer-divider {
             height: 1px;
             background-color: var(--divider);
             width: 100%;
             margin-bottom: 40px;
         }
-        
+
         .footer-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .footer-logo {
             font-size: 24px;
             font-weight: bold;
@@ -299,30 +304,30 @@ footer {
             margin-bottom: 8px;
             font-family: 'Playfair Display', serif;
         }
-        
+
         .footer-text {
             color: var(--white);
             font-size: 16px;
             font-weight: 500;
         }
-        
+
         .social-icons {
             display: flex;
             gap: 25px;
         }
-        
+
         .social-icon {
             width: 36px;
             height: 36px;
             transition: all 0.3s ease;
             filter: brightness(0.8);
         }
-        
+
         .social-icon:hover {
             filter: brightness(1.5);
             transform: translateY(-5px);
         }
-        
+
         .footer-bottom-divider {
             height: 1px;
             background-color: var(--divider);
@@ -330,7 +335,7 @@ footer {
             max-width: 1200px;
             margin: 30px auto;
         }
-        
+
         .copyright {
             text-align: center;
             color: var(--light-white);
@@ -343,215 +348,226 @@ footer {
                 flex-direction: column;
             }
 
-            .project-info, .project-preview {
+            .project-info,
+            .project-preview {
                 width: 100%;
             }
 
             .container {
                 padding: 0 20px;
-            }}
-@media (max-width: 768px) {
-    .header-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 20px;
-    }
-    
-    .menu-toggle {
-        order: 2;
-        margin-left: auto;
-    }
-    
-    .logo {
-        order: 1;
-    }
-    
-    nav {
-        order: 3;
-    }
-    .menu-toggle {
-        display: block;
-        background: none;
-        border: none;
-        color: var(--white);
-        font-size: 24px;
-        cursor: pointer;
-        z-index: 1001;
-    }
+            }
+        }
 
-    nav ul {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        height: 100vh;
-        background-color: var(--dark-bg);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        transition: right 0.3s ease;
-        z-index: 1000;
-        padding-top: 80px;
-    }
+        @media (max-width: 768px) {
+            .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 20px;
+            }
 
-    nav ul.active {
-        right: 0;
-    }
+            .menu-toggle {
+                order: 2;
+                margin-left: auto;
+            }
 
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
+            .logo {
+                order: 1;
+            }
 
-    .overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
+            nav {
+                order: 3;
+            }
 
-    nav ul {
-        display: none;
-    }
-    
-    nav ul.active {
-        display: flex;
-    }
-    
-    header {
-        padding: 15px 0;
-    }
-	}
+            .menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--white);
+                font-size: 24px;
+                cursor: pointer;
+                z-index: 1001;
+            }
 
-	@media (min-width: 769px) {
-    .menu-toggle {
-        display: none !important;
-    }
-    
-    .overlay {
-        display: none !important;
-    }
-	}
-@media (max-width: 768px) {
-    nav ul.active a.active::after {
-        transform: scaleX(1);
-        transform-origin: bottom left;
-    }
-}
-@media (max-width: 768px) {
-    .menu-toggle {
-        position: absolute;
-        right: 20px;
-    }
-    
-    .logo {
-        position: relative;
-        z-index: 1;
-    }
-}
-.project-tags {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-}
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--dark-bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: right 0.3s ease;
+                z-index: 1000;
+                padding-top: 80px;
+            }
 
-.tag {
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+            nav ul.active {
+                right: 0;
+            }
 
-.tag-major {
-    background-color: rgba(255, 102, 0, 0.2);
-    color: #ff6600;
-    border: 1px solid rgba(255, 102, 0, 0.3);
-}
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
 
-.tag-minor {
-    background-color: rgba(0, 153, 255, 0.2);
-    color: #0099ff;
-    border: 1px solid rgba(0, 153, 255, 0.3);
-}
+            .overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
 
-.tag-development {
-    background-color: rgba(255, 204, 0, 0.2);
-    color: #ffcc00;
-    border: 1px solid rgba(255, 204, 0, 0.3);
-}
+            nav ul {
+                display: none;
+            }
 
-.tag-upcoming {
-    background-color: rgba(153, 51, 255, 0.2);
-    color: #9933ff;
-    border: 1px solid rgba(153, 51, 255, 0.3);
-}
+            nav ul.active {
+                display: flex;
+            }
 
-.tag-live {
-    background-color: rgba(0, 204, 102, 0.2);
-    color: #00cc66;
-    border: 1px solid rgba(0, 204, 102, 0.3);
-}
+            header {
+                padding: 15px 0;
+            }
+        }
 
-.tag-opensource {
-    background-color: rgba(102, 204, 255, 0.2);
-    color: #66ccff;
-    border: 1px solid rgba(102, 204, 255, 0.3);
-}
-.tag-testing {
-    background-color: rgba(102, 204, 255, 0.2);
-    color: #008080;
-    border: 1px solid rgba(102, 204, 255, 0.3);
-}
-.tag-college {
-    background-color: rgba(219, 102, 255, 0.2);
-    color: #f700ff;
-    border: 1px solid rgba(219, 102, 255, 0.3);
-}
-.tag-package {
-    background-color: rgba(160, 120, 70, 0.2);
-    color: #A07846;
-    border: 1px solid rgba(160, 120, 70, 0.3);
-}
+        @media (min-width: 769px) {
+            .menu-toggle {
+                display: none !important;
+            }
+
+            .overlay {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul.active a.active::after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                position: absolute;
+                right: 20px;
+            }
+
+            .logo {
+                position: relative;
+                z-index: 1;
+            }
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-major {
+            background-color: rgba(255, 102, 0, 0.2);
+            color: #ff6600;
+            border: 1px solid rgba(255, 102, 0, 0.3);
+        }
+
+        .tag-minor {
+            background-color: rgba(0, 153, 255, 0.2);
+            color: #0099ff;
+            border: 1px solid rgba(0, 153, 255, 0.3);
+        }
+
+        .tag-development {
+            background-color: rgba(255, 204, 0, 0.2);
+            color: #ffcc00;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+        }
+
+        .tag-upcoming {
+            background-color: rgba(153, 51, 255, 0.2);
+            color: #9933ff;
+            border: 1px solid rgba(153, 51, 255, 0.3);
+        }
+
+        .tag-live {
+            background-color: rgba(0, 204, 102, 0.2);
+            color: #00cc66;
+            border: 1px solid rgba(0, 204, 102, 0.3);
+        }
+
+        .tag-opensource {
+            background-color: rgba(102, 204, 255, 0.2);
+            color: #66ccff;
+            border: 1px solid rgba(102, 204, 255, 0.3);
+        }
+
+        .tag-testing {
+            background-color: rgba(102, 204, 255, 0.2);
+            color: #008080;
+            border: 1px solid rgba(102, 204, 255, 0.3);
+        }
+
+        .tag-college {
+            background-color: rgba(219, 102, 255, 0.2);
+            color: #f700ff;
+            border: 1px solid rgba(219, 102, 255, 0.3);
+        }
+
+        .tag-package {
+            background-color: rgba(160, 120, 70, 0.2);
+            color: #A07846;
+            border: 1px solid rgba(160, 120, 70, 0.3);
+        }
     </style>
 </head>
+
 <body>
 
-<header>
-    <div class="container header-container">
-        <div class="logo">CMA</div>
-        <button class="menu-toggle">☰</button>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="projects.html" class="active">Projects</a></li>
-                <li><a href="creative.html">Creative</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="overlay"></div>
-    </div>
-    <div class="header-divider"></div>
-</header>
+    <header>
+        <div class="container header-container">
+            <div class="logo">CMA</div>
+            <button class="menu-toggle">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html" class="active">Projects</a></li>
+                    <li><a href="creative.html">Creative</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="overlay"></div>
+        </div>
+        <div class="header-divider"></div>
+    </header>
 
     <main>
         <div class="container">
-		<div class="pagetitle">Projects</div>
+            <div class="pagetitle">Projects</div>
             <div class="projects-container">
-				
-				<!-- Project forms.thecma.xyz -->
-		        <div class="project">
+
+                <!-- Project forms.thecma.xyz -->
+                <div class="project">
                     <div class="project-info">
                         <h2 class="project-title">forms.thecma.xyz</h2>
                         <div class="project-tags">
@@ -559,7 +575,13 @@ footer {
                             <span class="tag tag-testing">🧪Testing</span>
                         </div>
                         <p class="project-description">
-                           Built with HTML, CSS, JavaScript, and formBuilder.js, the platform enables users to create, preview, and share customizable forms with themes, analytics, and export options. Data is securely handled using Firebase Auth and Firestore, while responses are managed through a custom-built interface supporting sheet view, graph view, and individual response view. Export options include CSV, Excel, and PDF formats using SheetJS and jsPDF. Hosted on Netlify with code managed on GitHub, the tool empowers users with complete control over form creation and response management; without relying on third-party integrations.</p>
+                            Built with HTML, CSS, JavaScript, and formBuilder.js, the platform enables users to create,
+                            preview, and share customizable forms with themes, analytics, and export options. Data is
+                            securely handled using Firebase Auth and Firestore, while responses are managed through a
+                            custom-built interface supporting sheet view, graph view, and individual response view.
+                            Export options include CSV, Excel, and PDF formats using SheetJS and jsPDF. Hosted on
+                            Netlify with code managed on GitHub, the tool empowers users with complete control over form
+                            creation and response management; without relying on third-party integrations.</p>
                         <a href="https://forms.thecma.xyz/" target="_blank" class="visit-btn">Visit</a>
                     </div>
                     <div class="project-preview">
@@ -574,7 +596,8 @@ footer {
                                 <img src="../media/forms.thecma.xyz/forms.thecma (2).png" alt="Form Textbox question">
                             </div>
                             <div class="slide">
-                                <img src="../media/forms.thecma.xyz/forms.thecma (1).png" alt="Form Radio button question">
+                                <img src="../media/forms.thecma.xyz/forms.thecma (1).png"
+                                    alt="Form Radio button question">
                             </div>
                             <div class="slide-nav">
                                 <div class="slide-dot active" data-index="0"></div>
@@ -586,10 +609,10 @@ footer {
                     </div>
                 </div>
 
-		    	<!-- Project Divider -->
+                <!-- Project Divider -->
                 <div class="project-divider"></div>
-		    
-		        <!-- Project quotzy -->
+
+                <!-- Project quotzy -->
                 <div class="project">
                     <div class="project-info">
                         <h2 class="project-title">Quotzy</h2>
@@ -599,7 +622,11 @@ footer {
                             <span class="tag tag-opensource">🌐Open Source</span>
                         </div>
                         <p class="project-description">
-                            Quotzy is a fully open-source quote generator built as both a CLI tool and a JS module. It features handpicked quotes across six diverse categories: Movies, Bible Verses, Fun, Christian, Deep, and Inspirational. Quotzy supports both terminal-based use and programmatic integration. Published to npm and GitHub Packages, with automated CI/CD using GitHub Actions.<br>Check out the Repo for install and setup instructions.
+                            Quotzy is a fully open-source quote generator built as both a CLI tool and a JS module. It
+                            features handpicked quotes across six diverse categories: Movies, Bible Verses, Fun,
+                            Christian, Deep, and Inspirational. Quotzy supports both terminal-based use and programmatic
+                            integration. Published to npm and GitHub Packages, with automated CI/CD
+                            using GitHub Actions.<br>Check out the Repo for install and setup instructions.
                         </p>
                         <a href="https://github.com/chrismat-05/quotzy" target="_blank" class="visit-btn">Visit Repo</a>
                     </div>
@@ -625,8 +652,8 @@ footer {
 
                 <!-- Project Divider -->
                 <div class="project-divider"></div>
-		    
-		        <!-- Project SecuriHeader -->
+
+                <!-- Project SecuriHeader -->
                 <div class="project">
                     <div class="project-info">
                         <h2 class="project-title">SecuriHeader</h2>
@@ -636,7 +663,9 @@ footer {
                             <span class="tag tag-opensource">🌐Open Source</span>
                         </div>
                         <p class="project-description">
-                            A tool that analyzes the HTTP response headers of any website and checks for missing or misconfigured security-related headers like X-Frame-Options, Content-Security-Policy, and more. Ideal for developers and security-conscious users looking to audit basic web hygiene.
+                            A tool that analyzes the HTTP response headers of any website and checks for missing or
+                            misconfigured security-related headers like X-Frame-Options, Content-Security-Policy, and
+                            more. Ideal for developers and security-conscious users looking to audit basic web hygiene.
                             <br>Clean interface, instant results.
                         </p>
                         <a href="https://scrihdr.thecma.xyz" target="_blank" class="visit-btn">Visit</a>
@@ -660,10 +689,10 @@ footer {
                         </div>
                     </div>
                 </div>
-		    	<!-- Project Divider -->
+                <!-- Project Divider -->
                 <div class="project-divider"></div>
-		    
-		        <!-- Project Req API -->
+
+                <!-- Project Req API -->
                 <div class="project">
                     <div class="project-info">
                         <h2 class="project-title">Req API</h2>
@@ -673,7 +702,12 @@ footer {
                             <span class="tag tag-opensource">🌐Open Source</span>
                         </div>
                         <p class="project-description">
-                            A lightweight, developer-friendly API request debugger built using React, Tailwind CSS, Axios, and Framer Motion. It allows users to test HTTP methods like GET, POST, PUT, and DELETE by entering a URL, headers, and body, and instantly viewing a formatted response with status, headers, and even the time taken. Designed with an animated UI and no login or tracking, it's fully open source and perfect for developers who need a fast, focused tool to inspect APIs on the go.
+                            A lightweight, developer-friendly API request debugger built using React, Tailwind CSS,
+                            Axios, and Framer Motion. It allows users to test HTTP methods like GET, POST, PUT, and
+                            DELETE by entering a URL, headers, and body, and instantly viewing a formatted response with
+                            status, headers, and even the time taken. Designed with an animated UI and no login or
+                            tracking, it's fully open source and perfect for developers who need a fast, focused tool to
+                            inspect APIs on the go.
                         </p>
                         <a href="https://reqapi.thecma.xyz" target="_blank" class="visit-btn">Visit</a>
                     </div>
@@ -696,7 +730,7 @@ footer {
                 <!-- Project Divider -->
                 <div class="project-divider"></div>
 
-		        <!-- Project theCMA.xyz -->
+                <!-- Project theCMA.xyz -->
                 <div class="project">
                     <div class="project-info">
                         <h2 class="project-title">theCMA.xyz</h2>
@@ -705,9 +739,11 @@ footer {
                             <span class="tag tag-live">🟢Live</span>
                         </div>
                         <p class="project-description">
-                            theCMA.xyz – My personal portfolio website, built primarily with HTML5, CSS3, and a touch of JavaScript for interactivity. 
-                            It's a fully static site hosted on GitHub Pages with a custom domain. 
-                            theCMA.xyz showcases my tech projects, creative work, and personal milestones, all in one evolving space.
+                            theCMA.xyz – My personal portfolio website, built primarily with HTML5, CSS3, and a touch of
+                            JavaScript for interactivity.
+                            It's a fully static site hosted on GitHub Pages with a custom domain.
+                            theCMA.xyz showcases my tech projects, creative work, and personal milestones, all in one
+                            evolving space.
                         </p>
                         <a href="https://thecma.xyz/v1" target="_blank" class="visit-btn">Visit</a>
                     </div>
@@ -719,13 +755,13 @@ footer {
                             <div class="slide">
                                 <img src="../media/theCMA.xyz/thecma.xyz-projects.png" alt="theCMA.xyz Projects Page">
                             </div>
-			    <div class="slide">
+                            <div class="slide">
                                 <img src="../media/theCMA.xyz/thecma.xyz-contact.png" alt="theCMA.xyz Contact Page">
                             </div>
-			    <div class="slide">
+                            <div class="slide">
                                 <img src="../media/theCMA.xyz/thecma.xyz-about.png" alt="theCMA.xyz About Page">
                             </div>
-			    <div class="slide">
+                            <div class="slide">
                                 <img src="../media/theCMA.xyz/thecma.xyz-creative.png" alt="theCMA.xyz Creative Page">
                             </div>
                             <div class="slide-nav">
@@ -740,12 +776,12 @@ footer {
                 </div>
 
                 <!-- Project Divider -->
-<!--
+                <!--
                 <div class="project-divider"></div>
 -->
 
-		    	<!-- Project AMC ERP -->
-		        <div class="project">
+                <!-- Project AMC ERP -->
+                <div class="project">
                     <div class="project-info">
                         <h2 class="project-title">AMC</h2>
                         <div class="project-tags">
@@ -754,7 +790,10 @@ footer {
                             <span class="tag tag-college">🎓 College project</span>
                         </div>
                         <p class="project-description">
-                            A user-friendly Annual Maintenance Contract (AMC) Management System built using VB.NET and SQL Server 2022. It streamlines contract, client, asset, and service request management with secure login roles, intuitive dashboards, and admin reporting; enhancing efficiency for individuals or teams managing multiple maintenance contracts.
+                            A user-friendly Annual Maintenance Contract (AMC) Management System built using VB.NET and
+                            SQL Server 2022. It streamlines contract, client, asset, and service request management with
+                            secure login roles, intuitive dashboards, and admin reporting; enhancing efficiency for
+                            individuals or teams managing multiple maintenance contracts.
                         </p>
                         <a href="https://github.com/chrismat-05/AMC" target="_blank" class="visit-btn">Visit</a>
                     </div>
@@ -775,13 +814,13 @@ footer {
                             <div class="slide">
                                 <img src="../media/AMC/AMC5.png" alt="AMC">
                             </div>
-			    <div class="slide">
+                            <div class="slide">
                                 <img src="../media/AMC/AMC6.png" alt="AMC">
                             </div>
-			    <div class="slide">
+                            <div class="slide">
                                 <img src="../media/AMC/AMC7.png" alt="AMC">
-			    </div>
-			    <div class="slide">
+                            </div>
+                            <div class="slide">
                                 <img src="../media/AMC/AMC8.png" alt="AMC">
                             </div>
                             <div class="slide-nav">
@@ -798,13 +837,13 @@ footer {
                     </div>
                 </div>
 
-				<!-- Project Divider -->
-<!--
+                <!-- Project Divider -->
+                <!--
                 <div class="project-divider"></div>
 -->
-				
-				<!-- Project photos.thecma.xyz -->
-<!--
+
+                <!-- Project photos.thecma.xyz -->
+                <!--
 		        <div class="project">
                     <div class="project-info">
                         <h2 class="project-title">photos.thecma.xyz</h2>
@@ -842,7 +881,7 @@ footer {
                     </div>
                 </div>
 -->
-	</div>
+            </div>
     </main>
 
     <footer>
@@ -853,75 +892,79 @@ footer {
                 <div class="footer-text">Bridging tech & creativity - one step at a time</div>
             </div>
             <div class="social-icons">
-                <a href="https://github.com/chrismat-05" target="_blank"><img class="social-icon" src="../media/github.png" alt="GitHub"></a>
-                <a href="https://www.linkedin.com/in/chrismaje/" target="_blank"><img class="social-icon" src="../media/linkedin.png" alt="LinkedIn"></a>
-                <a href="https://wa.me/+918848914245" target="_blank"><img class="social-icon" src="../media/whatsapp.png" alt="WhatsApp"></a>
-                <a href="mailto:chrismaje63@gmail.com"><img class="social-icon" src="../media/mail.png" alt="Email"></a>
+                <a href="https://github.com/chrismat-05" target="_blank"><img class="social-icon"
+                        src="../media/github.png" alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/chrismaje/" target="_blank"><img class="social-icon"
+                        src="../media/linkedin.png" alt="LinkedIn"></a>
+                <a href="https://wa.me/+918848914245" target="_blank"><img class="social-icon"
+                        src="../media/whatsapp.png" alt="WhatsApp"></a>
+                <a href="mailto:chrismaje05@gmail.com"><img class="social-icon" src="../media/mail.png" alt="Email"></a>
             </div>
         </div>
         <div class="footer-bottom-divider"></div>
         <div class="copyright">© 2025 Chris Mathew Aje, All rights reserved.</div><br><br>
     </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const slideshowContainers = document.querySelectorAll('.slideshow-container');
-        
-        slideshowContainers.forEach(container => {
-            const slides = container.querySelectorAll('.slide');
-            const dots = container.querySelectorAll('.slide-dot');
-            let currentSlide = 0;
-            let slideInterval;
-            
-            function startSlideshow() {
-                slideInterval = setInterval(() => {
-                    nextSlide();
-                }, 3000);
-            }
-            
-            function nextSlide() {
-                goToSlide((currentSlide + 1) % slides.length);
-            }
-            
-            function goToSlide(n) {
-                slides[currentSlide].classList.remove('active');
-                dots[currentSlide].classList.remove('active');
-                currentSlide = n;
-                slides[currentSlide].classList.add('active');
-                dots[currentSlide].classList.add('active');
-            }
-            
-            dots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    clearInterval(slideInterval);
-                    goToSlide(parseInt(this.getAttribute('data-index')));
-                    startSlideshow();
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slideshowContainers = document.querySelectorAll('.slideshow-container');
+
+            slideshowContainers.forEach(container => {
+                const slides = container.querySelectorAll('.slide');
+                const dots = container.querySelectorAll('.slide-dot');
+                let currentSlide = 0;
+                let slideInterval;
+
+                function startSlideshow() {
+                    slideInterval = setInterval(() => {
+                        nextSlide();
+                    }, 3000);
+                }
+
+                function nextSlide() {
+                    goToSlide((currentSlide + 1) % slides.length);
+                }
+
+                function goToSlide(n) {
+                    slides[currentSlide].classList.remove('active');
+                    dots[currentSlide].classList.remove('active');
+                    currentSlide = n;
+                    slides[currentSlide].classList.add('active');
+                    dots[currentSlide].classList.add('active');
+                }
+
+                dots.forEach(dot => {
+                    dot.addEventListener('click', function () {
+                        clearInterval(slideInterval);
+                        goToSlide(parseInt(this.getAttribute('data-index')));
+                        startSlideshow();
+                    });
                 });
+
+                startSlideshow();
             });
-            
-            startSlideshow();
         });
-    });
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('nav ul');
-    const overlay = document.querySelector('.overlay');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('nav ul');
+        const overlay = document.querySelector('.overlay');
 
-    menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
-    });
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
 
-    overlay.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        overlay.classList.remove('active');
-    });
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', () => {
+        overlay.addEventListener('click', () => {
             navMenu.classList.remove('active');
             overlay.classList.remove('active');
         });
-    });
-</script>
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+    </script>
 
 </body>
+
 </html>

@@ -1,129 +1,106 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
-import { Link } from 'react-scroll';
 import { Github, Linkedin, Mail, Phone, MessageSquareMore, Award, MapPin, Handshake } from 'lucide-react';
+import { Link as ScrollLink } from 'react-scroll';
+import { Link } from 'react-router-dom';
 
 const socialLinks = [
-  {
-    icon: Github,
-    label: 'GitHub',
-    href: 'https://github.com/chrismat-05',
-    color: 'hover:text-foreground',
-  },
-  {
-    icon: Linkedin,
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/chrismaje/',
-    color: 'hover:text-blue-400',
-  },
-  {
-    icon: MessageSquareMore,
-    label: 'WhatsApp',
-    href: 'https://wa.me/+918848914245',
-    color: 'hover:text-green-400',
-  },
-  {
-    icon: Phone,
-    label: 'Call',
-    href: 'tel:+918848914245',
-    color: 'hover:text-purple-400',
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    href: 'mailto:chrismaje63@gmail.com',
-    color: 'hover:text-red-400',
-  },
-  {
-    icon: Handshake,
-    label: 'Fiverr',
-    href: 'https://www.fiverr.com/s/zWgryod',
-    color: 'hover:text-green-600',
-  },
-  {
-    icon: Award,
-    label: 'Credly',
-    href: 'https://www.credly.com/users/chrismaje',
-    color: 'hover:text-orange-400',
-  },
+  { icon: Github, label: 'GitHub', href: 'https://github.com/chrismat-05', brandColor: '#2b3137' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/chrismaje/', brandColor: '#0077b5' },
+  { icon: MessageSquareMore, label: 'WhatsApp', href: 'https://wa.me/+918848914245', brandColor: '#25D366' },
+  { icon: Phone, label: 'Call', href: 'tel:+918848914245', brandColor: '#0284c7' },
+  { icon: Mail, label: 'Email', href: 'mailto:chrismaje05@gmail.com', brandColor: '#ea4335' },
+  { icon: Handshake, label: 'Fiverr', href: 'https://www.fiverr.com/s/zWgryod', brandColor: '#1dbf73' },
+  { icon: Award, label: 'Credly', href: 'https://www.credly.com/users/chrismaje', brandColor: '#ff6f00' },
 ];
 
-const Footer = () => {
+export const Footer: React.FC = () => {
   return (
-    <footer className="bg-card/20 backdrop-blur-sm border-t border-border py-12">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-xl font-bold gradient-text mb-2">Chris Mathew Aje</h3>
-              <p className="text-grey-100 mb-4">
-                Bridging tech & creativity - one step at a time
-              </p>
-              <p className="text-muted-foreground">
-                <span className="inline-flex items-center gap-2">
-                  <MapPin /> Bengaluru, Karnataka, India
-                </span>
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="text-lg font-semibold text-foreground mb-4">Let's Connect</h4>
-              <p className="text-muted-foreground mb-4">
-                Ready to collaborate on your next project?
-              </p>
-              <a
-                href="mailto:chrismaje63@gmail.com"
-                className="btn-hero-outline inline-block"
-              >
-                Get In Touch
-              </a>
-            </motion.div>
+    <footer className="bg-black border-t border-white/[0.08] py-16 text-white">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="grid md:grid-cols-2 gap-12 mb-12">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs font-mono text-neutral-400 mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
+              CHRIS MATHEW AJE
+            </div>
+            <h3 className="text-2xl font-bold tracking-tight text-white mb-2">
+              Full-Stack Engineer & Creative Designer
+            </h3>
+            <p className="text-neutral-400 text-sm max-w-md leading-relaxed mb-4">
+              Building next-generation digital products, robust security tools, and interactive WebGL experiences.
+            </p>
+            <div className="flex items-center gap-2 text-neutral-500 text-xs font-mono">
+              <MapPin size={14} /> Bengaluru, Karnataka, India
+            </div>
           </div>
 
-          <div className="border-t border-border pt-8">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="flex flex-col md:flex-row justify-between items-center gap-4"
-            >
-              <div className="order-2 md:order-1 w-full md:w-auto flex justify-center md:justify-start">
-                <p className="text-muted-foreground text-sm">
-                  © {new Date().getFullYear()} Chris Mathew Aje. All rights reserved.
-                </p>
+          <div className="flex flex-col md:items-end justify-between">
+            <div>
+              <h4 className="text-sm font-mono uppercase tracking-widest text-neutral-400 mb-3">
+                Quick Navigation
+              </h4>
+              <div className="flex flex-wrap gap-4 text-sm text-neutral-300">
+                <ScrollLink to="hero" smooth={true} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                  Home
+                </ScrollLink>
+                <ScrollLink to="projects" smooth={true} offset={-70} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                  Featured
+                </ScrollLink>
+                <Link to="/projects" className="hover:text-white cursor-pointer transition-colors">
+                  All Projects
+                </Link>
+                <ScrollLink to="services" smooth={true} offset={-70} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                  Capabilities
+                </ScrollLink>
+                <ScrollLink to="about" smooth={true} offset={-70} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                  About
+                </ScrollLink>
+                <ScrollLink to="testimonials" smooth={true} offset={-70} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                  Reviews
+                </ScrollLink>
+                <ScrollLink to="contact" smooth={true} offset={-70} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                  Contact
+                </ScrollLink>
               </div>
-              <div className="order-1 md:order-2 w-full md:w-auto flex justify-center md:justify-end">
-                <div className="flex gap-4">
-                  {socialLinks.map((social) => {
-                    const Icon = social.icon;
-                    return (
-                      <a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`text-muted-foreground ${social.color} transition-colors duration-300`}
-                        title={social.label}
-                      >
-                        <Icon size={22} />
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            </motion.div>
+            </div>
+
+            <div className="pt-6">
+              <a
+                href="mailto:chrismaje05@gmail.com"
+                className="btn-hero-outline"
+                data-cursor="button"
+              >
+                Initiate Project Transmission
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-white/[0.08] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-neutral-500 text-xs font-mono">
+            © {new Date().getFullYear()} Chris Mathew Aje. All rights reserved.
+          </p>
+
+          <div className="flex items-center gap-3">
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:border-white/30 transition-colors"
+                  title={social.label}
+                  data-cursor="button"
+                  data-cursor-color={social.brandColor}
+                  data-cursor-text={social.label}
+                >
+                  <Icon size={15} />
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>

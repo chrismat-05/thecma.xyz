@@ -1,0 +1,70 @@
+[
+  {
+    "id": "web-dev",
+    "number": "01",
+    "verticalTitle": "WEB DESIGN & DEVELOPMENT",
+    "category": "FULL-STACK ENGINEERING",
+    "title": "Web Design & Development (Full Stack)",
+    "tagline": "Scalable reactive applications, interactive architectures, and high-performance digital platforms.",
+    "description": "End-to-end web platforms engineered with React, Next.js, TypeScript, Vite, Tailwind CSS, and cloud backends. Delivering pixel-perfect UX, resilient APIs, and seamless micro-interactions.",
+    "specs": [
+      "REACT & NEXT.JS",
+      "TYPESCRIPT & VITE",
+      "TAILWIND CSS",
+      "REST & CLOUD APIS"
+    ],
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80",
+    "accentGlow": "rgba(59, 130, 246, 0.45)"
+  },
+  {
+    "id": "tools-packages",
+    "number": "02",
+    "verticalTitle": "TOOLS & PACKAGES",
+    "category": "SYSTEMS & TELEMETRY",
+    "title": "Tools and Packages",
+    "tagline": "Developer utilities, security telemetry suites, open-source packages, and API tooling.",
+    "description": "Purpose-built CLI tools, security inspection headers, policy analysis engines, and network telemetry utilities built to empower developers and strengthen digital environments.",
+    "specs": [
+      "SECURITY TELEMETRY",
+      "API TESTING CLIENTS",
+      "OPEN SOURCE PACKAGES",
+      "HTTP HEADER AUDITING"
+    ],
+    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=80",
+    "accentGlow": "rgba(168, 85, 247, 0.45)"
+  },
+  {
+    "id": "graphic-design",
+    "number": "03",
+    "verticalTitle": "GRAPHIC DESIGNING",
+    "category": "BRAND & VISUAL IDENTITY",
+    "title": "Graphic Designing",
+    "tagline": "High-impact visual branding, event collateral, typography choreography, and marketing assets.",
+    "description": "Comprehensive visual identity systems, hackathon branding, stage backdrops, print collateral, and digital signage crafted with Canva and precise design hierarchy.",
+    "specs": [
+      "CANVA & VISUAL SYSTEMS",
+      "STAGE BACKDROPS & POSTERS",
+      "BROCHURE & SIGNAGE DESIGN",
+      "EVENT IDENTITY ARCHITECTURE"
+    ],
+    "image": "/media/Projects/Graphic Design/TechVista/TechVista Backdrop v3.png",
+    "accentGlow": "rgba(6, 182, 212, 0.45)"
+  },
+  {
+    "id": "video-editing",
+    "number": "04",
+    "verticalTitle": "VIDEO EDITING",
+    "category": "MOTION & CINEMATIC EDITS",
+    "title": "Video Editing",
+    "tagline": "Dynamic social media promos, cinematic cuts, narrative pacing, and audio-visual synchronization.",
+    "description": "High-energy social media promotional campaigns, event countdown teasers, and cinematic reels edited in DaVinci Resolve and Meta Edits with sound design and color grading.",
+    "specs": [
+      "DAVINCI RESOLVE",
+      "META EDITS",
+      "SOUND DESIGN & PACING",
+      "COLOR GRADING"
+    ],
+    "image": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&auto=format&fit=crop&q=80",
+    "accentGlow": "rgba(245, 158, 11, 0.45)"
+  }
+]
