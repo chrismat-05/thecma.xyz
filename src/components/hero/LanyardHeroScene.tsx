@@ -349,6 +349,9 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       const intersects = raycaster.intersectObject(badgeCard);
       if (intersects.length > 0) {
         isDragging = true;
+        if (typeof navigator !== "undefined" && navigator.vibrate) {
+          navigator.vibrate(12);
+        }
       }
     };
 
@@ -365,6 +368,9 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     };
 
     const handleTouchEnd = () => {
+      if (isDragging && typeof navigator !== "undefined" && navigator.vibrate) {
+        navigator.vibrate(8);
+      }
       isDragging = false;
     };
 

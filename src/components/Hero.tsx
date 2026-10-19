@@ -101,19 +101,21 @@ export const Hero: React.FC = () => {
           <LanyardHeroScene scrollProgress={zoomProgress} />
         </motion.div>
 
-        {/* Phase 1 Overlay: Intro Prompt when opening website positioned in the bottom-left corner */}
+        {/* Phase 1 Overlay: Intro Prompt when opening website */}
         <motion.div
           style={{ opacity: lanyardIntroOpacity }}
-          className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12 z-20 flex items-center gap-3.5 pointer-events-none"
+          className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-12 z-20 flex items-center gap-3 pointer-events-none whitespace-nowrap"
         >
-          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-red-500/30 bg-black/80 backdrop-blur-md text-xs font-mono tracking-widest uppercase text-neutral-200 shadow-[0_0_20px_rgba(229,9,20,0.25)]">            <span>Scroll to enter</span>
+          <div className="flex items-center gap-2.5 px-3.5 sm:px-4 py-2 rounded-full border border-red-500/30 bg-black/80 backdrop-blur-md text-[10px] sm:text-xs font-mono tracking-widest uppercase text-neutral-200 shadow-[0_0_20px_rgba(229,9,20,0.25)]">
+            <span className="sm:hidden">Swipe down to explore</span>
+            <span className="hidden sm:inline">Scroll to enter</span>
           </div>
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-            className="text-brand-red p-2 rounded-full border border-brand-red/35 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(229,9,20,0.25)]"
+            className="text-brand-red p-1.5 sm:p-2 rounded-full border border-brand-red/35 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(229,9,20,0.25)]"
           >
-            <ArrowDown size={16} />
+            <ArrowDown size={14} className="sm:w-4 sm:h-4" />
           </motion.div>
         </motion.div>
 
