@@ -106,9 +106,7 @@ export const Hero: React.FC = () => {
           style={{ opacity: lanyardIntroOpacity }}
           className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12 z-20 flex items-center gap-3.5 pointer-events-none"
         >
-          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-red-500/30 bg-black/80 backdrop-blur-md text-xs font-mono tracking-widest uppercase text-neutral-200 shadow-[0_0_20px_rgba(229,9,20,0.25)]">
-            <span className="w-2.5 h-2.5 rounded-full bg-brand-red animate-beacon-pulse shadow-[0_0_10px_#ef4444]" />
-            <span>Scroll to zoom in &amp; enter</span>
+          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-red-500/30 bg-black/80 backdrop-blur-md text-xs font-mono tracking-widest uppercase text-neutral-200 shadow-[0_0_20px_rgba(229,9,20,0.25)]">            <span>Scroll to enter</span>
           </div>
           <motion.div
             animate={{ y: [0, 6, 0] }}
