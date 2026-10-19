@@ -221,7 +221,7 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     // Asynchronously load Chris's actual photo and update 3D canvas texture
     const portraitImage = new Image();
     portraitImage.crossOrigin = "anonymous";
-    portraitImage.src = "/media/chris.png";
+    portraitImage.src = "/media/chrismat.jpg";
     portraitImage.onload = () => {
       renderBadge(portraitImage);
       badgeTexture.needsUpdate = true;
