@@ -296,7 +296,9 @@ export const ProjectDetailPage: React.FC = () => {
                       Role / Discipline
                     </span>
                     <span className="text-sm sm:text-base font-mono font-bold text-white mt-1 block">
-                      Full Stack Web Dev
+                      {project.discipline === "tools-packages"
+                        ? "Tools & Telemetry Engineering"
+                        : "Full-Stack Web Engineering"}
                     </span>
                   </div>
                   <div>

@@ -169,7 +169,7 @@ export const AboutPage: React.FC = () => {
             <div>
               <h3 className="text-3xl font-black tracking-tight text-white">Chris Mathew Aje</h3>
               <p className="text-neutral-400 font-mono text-xs uppercase tracking-widest mt-1">
-                Full Stack Web Dev
+                Full-Stack Engineer & Creative Designer
               </p>
             </div>
 
