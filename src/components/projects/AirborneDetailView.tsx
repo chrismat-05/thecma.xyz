@@ -219,11 +219,6 @@ export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
               <span>{project.year}</span>
             </span>
 
-            <span className="px-3.5 py-1 rounded-full border border-white/15 bg-white/[0.06] text-xs font-mono uppercase tracking-wider text-neutral-300 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: themeColor }} />
-              DaVinci Resolve & Meta Edits
-            </span>
-
             <span className="px-3.5 py-1 rounded-full border border-white/15 bg-white/[0.06] text-xs font-mono uppercase tracking-wider text-neutral-400">
               ICPF Bengaluru Annual Camp
             </span>

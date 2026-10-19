@@ -58,13 +58,6 @@ export const TechVistaDetailView: React.FC<ProjectDetailViewProps> = ({
   // Assets catalogued for TechVista or general graphic design
   const designAssets: DesignAsset[] = [
     {
-      id: "backdrop",
-      title: "Main Stage Backdrop",
-      type: "Stage & Venue Collateral",
-      image: "/media/Projects/Graphic Design/TechVista/TechVista Backdrop v3.png",
-      dimensions: "16:9 Large Format Print",
-    },
-    {
       id: "poster",
       title: "Official Hackathon Poster",
       type: "Promotional Print & Digital",
@@ -73,7 +66,7 @@ export const TechVistaDetailView: React.FC<ProjectDetailViewProps> = ({
     },
     {
       id: "signage",
-      title: "Venue & Navigation Signage",
+      title: "Digital Signage",
       type: "Wayfinding & Standee",
       image: "/media/Projects/Graphic Design/TechVista/TechVista Signage v2.png",
       dimensions: "Vertical Standee",
@@ -92,6 +85,13 @@ export const TechVistaDetailView: React.FC<ProjectDetailViewProps> = ({
       image: "/media/Projects/Graphic Design/TechVista/Brochure2.png",
       dimensions: "Print Guide (A4 Folded)",
     },
+    {
+      id: "backdrop",
+      title: "Main Stage Backdrop",
+      type: "Stage & Venue Collateral",
+      image: "/media/Projects/Graphic Design/TechVista/TechVista Backdrop v3.png",
+      dimensions: "16:9 Large Format Print",
+    }
   ];
 
   const currentAsset = designAssets[selectedAssetIndex] || designAssets[0];
@@ -149,10 +149,6 @@ export const TechVistaDetailView: React.FC<ProjectDetailViewProps> = ({
               <span>{project.year}</span>
             </span>
 
-            <span className="px-3.5 py-1 rounded-full border border-white/15 bg-white/[0.06] text-xs font-mono uppercase tracking-wider text-neutral-300 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: themeColor }} />
-              Canva & Visual Identity
-            </span>
 
             <span className="px-3.5 py-1 rounded-full border border-white/15 bg-white/[0.06] text-xs font-mono uppercase tracking-wider text-neutral-400">
               Kristu Jayanti Institute of Technology

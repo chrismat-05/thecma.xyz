@@ -32,7 +32,7 @@ export const ProjectsPage: React.FC = () => {
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>("all");
 
   useEffect(() => {
-    document.title = "the CMA - Projects";
+    document.title = "CMA - Projects";
   }, []);
 
   const disciplineFilters = [
@@ -255,29 +255,27 @@ export const ProjectsPage: React.FC = () => {
                   disc.value === "all"
                     ? allProjects.length
                     : allProjects.filter(
-                        (p) =>
-                          p.discipline === disc.value ||
-                          (p.servicesOffered && p.servicesOffered.includes(disc.value))
-                      ).length;
+                      (p) =>
+                        p.discipline === disc.value ||
+                        (p.servicesOffered && p.servicesOffered.includes(disc.value))
+                    ).length;
                 const DiscIcon = disc.icon;
 
                 return (
                   <button
                     key={disc.value}
                     onClick={() => setSelectedDiscipline(disc.value)}
-                    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer ${
-                      isActive
+                    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer ${isActive
                         ? "bg-white text-black font-bold shadow-lg shadow-white/20 scale-105"
                         : "text-neutral-400 hover:text-white"
-                    }`}
+                      }`}
                     data-cursor="button"
                   >
                     <DiscIcon size={13} className={isActive ? "text-black" : "text-neutral-400"} />
                     <span>{disc.label}</span>
                     <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${
-                        isActive ? "bg-black/15 text-black font-bold" : "bg-white/10 text-neutral-400"
-                      }`}
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${isActive ? "bg-black/15 text-black font-bold" : "bg-white/10 text-neutral-400"
+                        }`}
                     >
                       {count}
                     </span>
@@ -334,10 +332,10 @@ export const ProjectsPage: React.FC = () => {
               const actionLabel = project.link
                 ? "Live Preview"
                 : project.package
-                ? "PyPI Package"
-                : project.github
-                ? "GitHub Source"
-                : null;
+                  ? "PyPI Package"
+                  : project.github
+                    ? "GitHub Source"
+                    : null;
 
               const catMeta = getCategoryMeta(project.category);
               const CatIcon = catMeta.icon;
@@ -383,10 +381,10 @@ export const ProjectsPage: React.FC = () => {
                             {project.discipline === "graphic-design"
                               ? "Design"
                               : project.discipline === "video-editing"
-                              ? "Video"
-                              : project.discipline === "tools-packages"
-                              ? "Tool"
-                              : "Web"}
+                                ? "Video"
+                                : project.discipline === "tools-packages"
+                                  ? "Tool"
+                                  : "Web"}
                           </span>
                         )}
                       </div>
