@@ -53,7 +53,7 @@ export const Navigation: React.FC = () => {
           animate={{ opacity: 1, y: 0, x: "-50%" }}
           exit={{ opacity: 0, y: 40, x: "-50%" }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-6 left-1/2 z-50 flex items-center gap-1.5 p-1.5 rounded-full border border-white/15 bg-neutral-950/80 backdrop-blur-2xl shadow-2xl shadow-black/90"
+          className="fixed bottom-6 left-1/2 z-50 flex items-center gap-1.5 p-1.5 rounded-full border border-white/15 bg-neutral-950/85 backdrop-blur-2xl shadow-2xl shadow-black/90 hover:border-brand-red/40 transition-colors duration-300"
           aria-label="Bottom Navigation Dock"
         >
           {navItems.map((item) => {
@@ -68,8 +68,8 @@ export const Navigation: React.FC = () => {
                   to={item.route}
                   className={`relative p-3 rounded-full transition-all duration-200 group flex items-center justify-center ${
                     isActivePage
-                      ? "text-white bg-white/15 shadow-lg shadow-white/10"
-                      : "text-neutral-400 hover:text-white hover:bg-white/[0.08] active:scale-95"
+                      ? "text-white bg-brand-red/20 border border-brand-red/50 shadow-lg shadow-brand-red/30"
+                      : "text-neutral-400 hover:text-white hover:bg-brand-red/10 active:scale-95"
                   }`}
                   title={item.name}
                   data-cursor="button"
@@ -124,8 +124,8 @@ export const Navigation: React.FC = () => {
                   smooth={true}
                   offset={-70}
                   duration={500}
-                  className="relative p-3 rounded-full text-neutral-400 hover:text-white hover:bg-white/[0.08] active:scale-95 transition-all duration-200 cursor-pointer group flex items-center justify-center"
-                  activeClass="!text-white !bg-white/15 shadow-lg shadow-white/10"
+                  className="relative p-3 rounded-full text-neutral-400 hover:text-white hover:bg-brand-red/10 active:scale-95 transition-all duration-200 cursor-pointer group flex items-center justify-center"
+                  activeClass="!text-white !bg-brand-red/20 !border !border-brand-red/50 shadow-lg shadow-brand-red/30"
                   title={item.name}
                   data-cursor="button"
                   data-cursor-text={item.name}

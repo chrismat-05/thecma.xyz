@@ -20,8 +20,8 @@ export const Footer: React.FC = () => {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid md:grid-cols-2 gap-12 mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs font-mono text-neutral-400 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-white" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-red/30 bg-brand-red/10 text-xs font-mono text-neutral-300 mb-4 shadow-[0_0_15px_rgba(229,9,20,0.2)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-beacon-pulse shadow-[0_0_8px_#ef4444]" />
               CHRIS MATHEW AJE
             </div>
             <h3 className="text-2xl font-bold tracking-tight text-white mb-2">
@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
               Building next-generation digital products, robust security tools, and interactive WebGL experiences.
             </p>
             <div className="flex items-center gap-2 text-neutral-500 text-xs font-mono">
-              <MapPin size={14} /> Bengaluru, Karnataka, India
+              <MapPin size={14} className="text-brand-red" /> Bengaluru, Karnataka, India
             </div>
           </div>
 
@@ -41,25 +41,25 @@ export const Footer: React.FC = () => {
                 Quick Navigation
               </h4>
               <div className="flex flex-wrap gap-4 text-sm text-neutral-300">
-                <ScrollLink to="hero" smooth={true} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                <ScrollLink to="hero" smooth={true} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
                   Home
                 </ScrollLink>
-                <ScrollLink to="projects" smooth={true} offset={-70} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                <ScrollLink to="projects" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
                   Featured
                 </ScrollLink>
-                <Link to="/projects" className="hover:text-white cursor-pointer transition-colors">
+                <Link to="/projects" className="hover:text-brand-red cursor-pointer transition-colors">
                   All Projects
                 </Link>
-                <ScrollLink to="services" smooth={true} offset={-70} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                <ScrollLink to="services" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
                   Capabilities
                 </ScrollLink>
-                <ScrollLink to="about" smooth={true} offset={-70} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                <ScrollLink to="about" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
                   About
                 </ScrollLink>
-                <ScrollLink to="testimonials" smooth={true} offset={-70} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                <ScrollLink to="testimonials" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
                   Reviews
                 </ScrollLink>
-                <ScrollLink to="contact" smooth={true} offset={-70} duration={500} className="hover:text-white cursor-pointer transition-colors">
+                <ScrollLink to="contact" smooth={true} offset={-70} duration={500} className="hover:text-brand-red cursor-pointer transition-colors">
                   Contact
                 </ScrollLink>
               </div>
@@ -68,7 +68,7 @@ export const Footer: React.FC = () => {
             <div className="pt-6">
               <a
                 href="mailto:chrismaje05@gmail.com"
-                className="btn-hero-outline"
+                className="btn-hero-outline hover:border-brand-red/60 hover:text-white hover:shadow-[0_0_25px_rgba(229,9,20,0.35)]"
                 data-cursor="button"
               >
                 Initiate Project Transmission
@@ -91,7 +91,7 @@ export const Footer: React.FC = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:border-white/30 transition-colors"
+                  className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:border-brand-red/60 hover:shadow-[0_0_15px_rgba(229,9,20,0.35)] transition-all"
                   title={social.label}
                   data-cursor="button"
                   data-cursor-color={social.brandColor}
