@@ -76,12 +76,12 @@ export const Hero: React.FC = () => {
           />
         </div>
 
-        {/* Layer 3: Dynamic Radial Center Vignette & Ambient Glow */}
+        {/* Layer 3: Dynamic Radial Center Vignette & Ambient Crimson Stage Glow */}
         <div
           className="absolute inset-0 z-[2] pointer-events-none overflow-hidden"
           style={{
             background:
-              "radial-gradient(ellipse 80% 65% at 50% 50%, rgba(187, 204, 215, 0.07), transparent 70%), radial-gradient(ellipse 60% 40% at 50% 90%, rgba(229, 9, 20, 0.05), transparent 60%)",
+              "radial-gradient(circle 540px at 50% 46%, rgba(229, 9, 20, 0.22), rgba(185, 28, 28, 0.08) 48%, transparent 75%), radial-gradient(ellipse 70% 55% at 50% 18%, rgba(229, 9, 20, 0.16), transparent 65%), radial-gradient(ellipse 85% 70% at 50% 50%, rgba(187, 204, 215, 0.05), transparent 70%)",
           }}
         />
 
@@ -106,14 +106,14 @@ export const Hero: React.FC = () => {
           style={{ opacity: lanyardIntroOpacity }}
           className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12 z-20 flex items-center gap-3.5 pointer-events-none"
         >
-          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/15 bg-black/70 backdrop-blur-md text-xs font-mono tracking-widest uppercase text-neutral-300 shadow-2xl">
-            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-red-500/30 bg-black/80 backdrop-blur-md text-xs font-mono tracking-widest uppercase text-neutral-200 shadow-[0_0_20px_rgba(229,9,20,0.25)]">
+            <span className="w-2.5 h-2.5 rounded-full bg-brand-red animate-beacon-pulse shadow-[0_0_10px_#ef4444]" />
             <span>Scroll to zoom in &amp; enter</span>
           </div>
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-            className="text-white/70 p-2 rounded-full border border-white/10 bg-black/40 backdrop-blur-md"
+            className="text-brand-red p-2 rounded-full border border-brand-red/35 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(229,9,20,0.25)]"
           >
             <ArrowDown size={16} />
           </motion.div>
