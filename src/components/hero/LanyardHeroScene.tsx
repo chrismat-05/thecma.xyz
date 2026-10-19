@@ -17,11 +17,12 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     const width = container.clientWidth;
     const height = container.clientHeight;
 
+    const getBaseCameraZ = (w: number) => (w < 640 ? 9.5 : w < 1024 ? 8.2 : 7.5);
+    const initialZ = getBaseCameraZ(width);
     // Scene & Camera
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    // Initial camera position at z = 7.5
-    camera.position.set(0, 0, 7.5);
+    camera.position.set(0, 0, initialZ);
 
     let renderer: THREE.WebGLRenderer;
     try {
@@ -315,8 +316,9 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
 
     const handleMouseMove = (e: MouseEvent) => {
       const ndc = getNDCMouse(e);
-      mouse.x = ndc.x * 3.5;
-      mouse.y = ndc.y * 2.8;
+      const isMobile = window.innerWidth < 640;
+      mouse.x = ndc.x * (isMobile ? 2.2 : 3.5);
+      mouse.y = ndc.y * (isMobile ? 2.0 : 2.8);
 
       if (isDragging) {
         cardPos.x = mouse.x;
@@ -329,9 +331,50 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       isDragging = false;
     };
 
+    // Mobile touch interaction
+    const getNDCTouch = (e: TouchEvent) => {
+      const rect = container.getBoundingClientRect();
+      const touch = e.touches[0] || e.changedTouches[0];
+      return {
+        x: ((touch.clientX - rect.left) / rect.width) * 2 - 1,
+        y: -(((touch.clientY - rect.top) / rect.height) * 2 - 1),
+      };
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 0) return;
+      const ndc = getNDCTouch(e);
+      const raycaster = new THREE.Raycaster();
+      raycaster.setFromCamera(new THREE.Vector2(ndc.x, ndc.y), camera);
+      const intersects = raycaster.intersectObject(badgeCard);
+      if (intersects.length > 0) {
+        isDragging = true;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging) return;
+      const ndc = getNDCTouch(e);
+      const isMobile = window.innerWidth < 640;
+      mouse.x = ndc.x * (isMobile ? 2.2 : 3.5);
+      mouse.y = ndc.y * (isMobile ? 2.0 : 2.8);
+
+      cardPos.x = mouse.x;
+      cardPos.y = mouse.y;
+      cardAngleVel = (mouse.x - cardPos.x) * 0.2;
+    };
+
+    const handleTouchEnd = () => {
+      isDragging = false;
+    };
+
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("touchcancel", handleTouchEnd);
 
     // ==========================================
     // Animation Loop
@@ -339,18 +382,19 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     const clock = new THREE.Clock();
     let animationId: number;
 
-    let currentCameraZ = 7.5;
+    let currentCameraZ = initialZ;
     let currentCardScale = 1.0;
 
     const animate = () => {
       const elapsed = clock.getElapsedTime();
 
       // Zoom in calculation:
-      // When scrollProgress is 0 -> Camera at z: 7.5, Lanyard at normal size
-      // When scrollProgress goes from 0 -> 1 -> Camera zooms in towards card (z: 7.5 -> 2.6)
+      // When scrollProgress is 0 -> Camera at baseZ, Lanyard at normal size
+      // When scrollProgress goes from 0 -> 1 -> Camera zooms in towards card (baseZ -> 2.6)
       // and scales card in so it seamlessly reveals through into the hero section!
       const targetProgress = scrollRef.current;
-      const targetZ = 7.5 - targetProgress * 4.9; // zooms into 2.6
+      const currentBaseZ = getBaseCameraZ(window.innerWidth);
+      const targetZ = currentBaseZ - targetProgress * (currentBaseZ - 2.6);
       currentCameraZ += (targetZ - currentCameraZ) * 0.1;
       camera.position.z = currentCameraZ;
 
@@ -451,6 +495,10 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("touchcancel", handleTouchEnd);
       window.removeEventListener("resize", handleResize);
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);

@@ -124,12 +124,12 @@ export const Hero: React.FC = () => {
             y: heroContentY,
             scale: heroContentScale,
           }}
-          className="absolute inset-0 z-20 w-full h-full flex flex-col justify-between px-6 md:px-10 py-6 md:py-8 pointer-events-auto"
+          className="absolute inset-0 z-20 w-full h-full flex flex-col justify-between px-4 sm:px-6 md:px-10 py-4 sm:py-6 md:py-8 pointer-events-auto"
         >
           {/* Top Navbar Row */}
           <nav
             aria-label="Hero Navigation"
-            className="w-full flex items-center justify-between text-[#D7E2EA] font-medium uppercase tracking-wider text-xs sm:text-sm md:text-base lg:text-[1.15rem] pt-2 relative z-30"
+            className="w-full flex items-center justify-between text-[#D7E2EA] font-medium uppercase tracking-wider text-[11px] sm:text-xs md:text-base lg:text-[1.15rem] pt-2 relative z-30"
           >
             <ScrollLink
               to="about"
@@ -210,7 +210,7 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Bottom Bar: Left Fluid Descriptor + Right Jack Signature ContactButton */}
-          <div className="w-full flex items-end justify-between pb-4 sm:pb-6 md:pb-8 relative z-20">
+          <div className="w-full flex items-end justify-between pb-24 sm:pb-20 md:pb-8 relative z-20">
             {/* Left: Jack-style fluid uppercase descriptor */}
             <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[170px] sm:max-w-[230px] md:max-w-[280px] text-xs sm:text-sm md:text-base lg:text-[1.1rem]">
               bridging creative visual design with performant, modern web development
