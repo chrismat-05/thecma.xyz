@@ -72,24 +72,21 @@ export const GraphicDesignDetailView: React.FC<GraphicDesignDetailViewProps> = (
       title: "Main Stage Backdrop",
       type: "Stage & Venue Collateral",
       image: "/media/Projects/Graphic Design/TechVista/TechVista Backdrop v3.png",
-      dimensions: "16:9 Large Format Print (24ft × 12ft)",
-      description: "Centerpiece panoramic stage backdrop engineered for the auditorium main stage, creating an electrifying atmosphere behind keynote speakers, judging panels, and winners' ceremonies.",
+      dimensions: "16:9 Large Format Print",
     },
     {
       id: "poster",
       title: "Official Hackathon Poster",
       type: "Promotional Print & Digital",
       image: "/media/Projects/Graphic Design/TechVista/TechVista Poster v2.png",
-      dimensions: "A3 High-Res (300 DPI) & 4:5 Social",
-      description: "Primary promotional poster distributed across university campuses and digital channels, establishing the visual tone with futuristic neon accents and clean information hierarchy.",
+      dimensions: "A3 High-Res",
     },
     {
       id: "signage",
       title: "Venue & Navigation Signage",
       type: "Wayfinding & Standee",
       image: "/media/Projects/Graphic Design/TechVista/TechVista Signage v2.png",
-      dimensions: "Vertical Standee (3ft × 6ft)",
-      description: "Wayfinding and welcoming standee positioned at Kristu Jayanti campus entrances and registration desks to direct 24-hour hackathon teams.",
+      dimensions: "Vertical Standee",
     },
     {
       id: "brochure1",
@@ -97,7 +94,6 @@ export const GraphicDesignDetailView: React.FC<GraphicDesignDetailViewProps> = (
       type: "Event Guide & Rules",
       image: "/media/Projects/Graphic Design/TechVista/Brochure1.png",
       dimensions: "Print Guide (A4 Folded)",
-      description: "Front event brochure detailing theme tracks, eligibility criteria, schedule roadmap, and submission regulations for competing teams.",
     },
     {
       id: "brochure2",
@@ -105,7 +101,6 @@ export const GraphicDesignDetailView: React.FC<GraphicDesignDetailViewProps> = (
       type: "Tracks & Guidelines",
       image: "/media/Projects/Graphic Design/TechVista/Brochure2.png",
       dimensions: "Print Guide (A4 Folded)",
-      description: "Comprehensive inner spread laying out prize pools, mentoring sessions, judging rubrics, and sponsor attributions.",
     },
   ];
 
@@ -296,16 +291,9 @@ export const GraphicDesignDetailView: React.FC<GraphicDesignDetailViewProps> = (
           {/* Card 1: Color Palette */}
           <div className="rounded-3xl border border-white/10 bg-[#090b10] p-6 sm:p-8 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2.5 mb-4 text-cyan-400 font-mono text-xs uppercase tracking-wider">
-                <Palette size={16} />
-                <span>Chromatic System</span>
-              </div>
               <h3 className="text-xl font-bold font-display uppercase tracking-tight text-white mb-3">
                 Color Palette
               </h3>
-              <p className="text-xs text-neutral-400 mb-6 leading-relaxed">
-                Cyber-futuristic neon gradients grounded by deep obsidian space to maximize contrast in large auditorium lighting.
-              </p>
             </div>
 
             <div className="space-y-3">
@@ -326,23 +314,11 @@ export const GraphicDesignDetailView: React.FC<GraphicDesignDetailViewProps> = (
 
           {/* Card 2: Typography & Branding */}
           <div className="rounded-3xl border border-white/10 bg-[#090b10] p-6 sm:p-8 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-2.5 mb-4 text-cyan-400 font-mono text-xs uppercase tracking-wider">
-                <Type size={16} />
-                <span>Typography & Hierarchy</span>
-              </div>
-              <h3 className="text-xl font-bold font-display uppercase tracking-tight text-white mb-3">
-                Display Architecture
-              </h3>
-              <p className="text-xs text-neutral-400 mb-6 leading-relaxed">
-                Engineered with high-voltage angular display letterforms to communicate speed, technical rigor, and 24-hour hackathon endurance.
-              </p>
-            </div>
 
             <div className="space-y-4 pt-2 border-t border-white/10">
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 block mb-1">
-                  Headline Title Typography
+                  Event
                 </span>
                 <p className="text-lg font-black uppercase tracking-wider text-white font-display">
                   TECHVISTA 2026
@@ -363,43 +339,8 @@ export const GraphicDesignDetailView: React.FC<GraphicDesignDetailViewProps> = (
                   Hosting Entity
                 </span>
                 <p className="text-xs text-neutral-400">
-                  Kristu Jayanti Institute of Technology (Autonomous)
+                  Kristu Jayanti Institute of Technology
                 </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: Design Workflow & Tools */}
-          <div className="rounded-3xl border border-white/10 bg-[#090b10] p-6 sm:p-8 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-2.5 mb-4 text-cyan-400 font-mono text-xs uppercase tracking-wider">
-                <Printer size={16} />
-                <span>Production & Output</span>
-              </div>
-              <h3 className="text-xl font-bold font-display uppercase tracking-tight text-white mb-3">
-                Canva & Print Pipeline
-              </h3>
-              <p className="text-xs text-neutral-400 mb-6 leading-relaxed">
-                Streamlined creative production executed in Canva with CMYK vector accuracy for large-scale stage backdrops and sharp A4 brochures.
-              </p>
-            </div>
-
-            <div className="space-y-2.5 text-xs font-mono text-neutral-300">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={14} className="text-cyan-400 shrink-0" />
-                <span>Auditorium Stage Backdrop (24ft)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={14} className="text-cyan-400 shrink-0" />
-                <span>Campus Promotional Posters (A3)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={14} className="text-cyan-400 shrink-0" />
-                <span>Two-Fold Official Brochure</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={14} className="text-cyan-400 shrink-0" />
-                <span>Directional Standees & Entrance Signage</span>
               </div>
             </div>
           </div>
