@@ -89,7 +89,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-32 relative overflow-hidden bg-black text-white">
+    <section id="contact" className="py-20 sm:py-32 relative overflow-hidden bg-black text-white">
       {/* Subtle interactive dot grid background scoped exclusively to this section */}
       <CursorGridBackground opacity={0.4} spacing={40} />
 
@@ -106,43 +106,43 @@ const Contact = () => {
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
             {/* Left Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="space-y-8"
+              className="space-y-6 sm:space-y-8"
             >
               <div>
-                <h3 className="text-2xl font-bold text-white mb-3">Let's build something exceptional.</h3>
-                <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">Let's build something exceptional.</h3>
+                <p className="text-neutral-400 text-xs sm:text-base leading-relaxed">
                   Whether you require full-stack web applications, cybersecurity tools, or high-touch digital experiences, I'm currently open to client projects and team collaborations.
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <a
                   href="mailto:chrismaje05@gmail.com"
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-neutral-900/40 border border-white/10 hover:border-white/30 transition-colors"
+                  className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-neutral-900/40 border border-white/10 hover:border-white/30 transition-colors"
                   data-cursor="button"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
+                  <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white shrink-0">
                     <Mail size={18} />
                   </div>
-                  <div>
-                    <div className="text-xs font-mono text-neutral-500 uppercase tracking-wider">Email Transmission</div>
-                    <div className="text-sm font-medium text-white">chrismaje05@gmail.com</div>
+                  <div className="min-w-0">
+                    <div className="text-[11px] sm:text-xs font-mono text-neutral-500 uppercase tracking-wider">Email Transmission</div>
+                    <div className="text-xs sm:text-sm font-medium text-white truncate max-w-[210px] sm:max-w-none">chrismaje05@gmail.com</div>
                   </div>
                 </a>
 
-                <div className="flex items-center gap-4 p-4 rounded-2xl bg-neutral-900/40 border border-white/10">
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
+                <div className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-neutral-900/40 border border-white/10">
+                  <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white shrink-0">
                     <MapPin size={18} />
                   </div>
-                  <div>
-                    <div className="text-xs font-mono text-neutral-500 uppercase tracking-wider">Base Location</div>
-                    <div className="text-sm font-medium text-white">Bengaluru, Karnataka, India</div>
+                  <div className="min-w-0">
+                    <div className="text-[11px] sm:text-xs font-mono text-neutral-500 uppercase tracking-wider">Base Location</div>
+                    <div className="text-xs sm:text-sm font-medium text-white truncate max-w-[210px] sm:max-w-none">Bengaluru, Karnataka, India</div>
                   </div>
                 </div>
               </div>
@@ -179,7 +179,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="p-8 sm:p-10 rounded-3xl bg-neutral-900/30 border border-white/[0.1] backdrop-blur-xl"
+              className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl bg-neutral-900/30 border border-white/[0.1] backdrop-blur-xl"
             >
               {isSubmitted ? (
                 <div className="text-center py-12 space-y-4">

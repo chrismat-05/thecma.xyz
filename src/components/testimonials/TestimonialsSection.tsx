@@ -36,7 +36,7 @@ export const TestimonialsSection: React.FC = () => {
   return (
     <section
       id="testimonials"
-      className="py-32 relative overflow-hidden bg-black text-white"
+      className="py-20 sm:py-32 relative overflow-hidden bg-black text-white"
     >
       {/* 1. ReactBits ChromaGrid with cursor chromatic glow & grid lines (feathered at edges to blend seamlessly) */}
       <div
@@ -118,7 +118,7 @@ const TestimonialCard: React.FC<{ item: Testimonial }> = ({ item }) => {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-[340px] sm:w-[380px] h-[270px] rounded-3xl p-6 sm:p-7 flex flex-col justify-between border border-white/[0.08] bg-[#0c0d12] backdrop-blur-xl transition-all duration-500 overflow-hidden cursor-pointer select-none group"
+      className="relative w-[280px] sm:w-[380px] h-[260px] sm:h-[270px] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col justify-between border border-white/[0.08] bg-[#0c0d12] backdrop-blur-xl transition-all duration-500 overflow-hidden cursor-pointer select-none group"
       style={{
         boxShadow: isHovered
           ? `0 20px 40px -15px ${item.chromaColor}`
