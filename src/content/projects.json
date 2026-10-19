@@ -24,9 +24,7 @@
     ],
     "category": "client",
     "servicesOffered": [
-      "creative-media",
-      "fullstack",
-      "design-systems"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/creatorsgarage/creatorsgarage-1.png",
     "images": [
@@ -38,7 +36,8 @@
     ],
     "link": "https://creatorsgarage.vercel.app/",
     "github": null,
-    "package": null
+    "package": null,
+    "discipline": "web-dev"
   },
   {
     "id": "brand-me-up",
@@ -64,9 +63,7 @@
     ],
     "category": "client",
     "servicesOffered": [
-      "design-systems",
-      "fullstack",
-      "creative-media"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/brandmeup/brandmeup-1.png",
     "images": [
@@ -78,7 +75,8 @@
     ],
     "link": "https://brandmeup.vercel.app/",
     "github": null,
-    "package": null
+    "package": null,
+    "discipline": "web-dev"
   },
   {
     "id": "icpf-bengaluru",
@@ -104,8 +102,7 @@
     ],
     "category": "client",
     "servicesOffered": [
-      "fullstack",
-      "design-systems"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/icpf/icpf-1.png",
     "images": [
@@ -117,7 +114,8 @@
     ],
     "link": "https://icpf.in/",
     "github": null,
-    "package": null
+    "package": null,
+    "discipline": "web-dev"
   },
   {
     "id": "ipc-shalom",
@@ -143,8 +141,7 @@
     ],
     "category": "client",
     "servicesOffered": [
-      "fullstack",
-      "design-systems"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/ipcshalom/ipcshalom-1.png",
     "images": [
@@ -156,7 +153,8 @@
     ],
     "link": "https://www.ipcshalom.org/",
     "github": null,
-    "package": null
+    "package": null,
+    "discipline": "web-dev"
   },
   {
     "id": "dcc",
@@ -182,8 +180,7 @@
     ],
     "category": "client",
     "servicesOffered": [
-      "fullstack",
-      "design-systems"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/dcc/dcc-1.png",
     "images": [
@@ -195,7 +192,8 @@
     ],
     "link": "https://dccbangalore.vercel.app/",
     "github": null,
-    "package": null
+    "package": null,
+    "discipline": "web-dev"
   },
   {
     "id": "shilpkala-25",
@@ -222,9 +220,7 @@
     ],
     "category": "client",
     "servicesOffered": [
-      "fullstack",
-      "design-systems",
-      "creative-media"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/shilpkala/shilpkala-1.png",
     "images": [
@@ -236,7 +232,8 @@
     ],
     "link": "https://shilpkala2k25.vercel.app/home",
     "github": "https://github.com/chrismat-05/Shilpkala-2025",
-    "package": null
+    "package": null,
+    "discipline": "web-dev"
   },
   {
     "id": "auteur-26",
@@ -262,9 +259,7 @@
     ],
     "category": "client",
     "servicesOffered": [
-      "fullstack",
-      "design-systems",
-      "creative-media"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/auteur/auteur-1.png",
     "images": [
@@ -276,7 +271,8 @@
     ],
     "link": "https://kju-auteur.vercel.app/",
     "github": "https://github.com/chrismat-05/Media-Dept-Submission-Portal",
-    "package": null
+    "package": null,
+    "discipline": "web-dev"
   },
   {
     "id": "rooted",
@@ -302,8 +298,7 @@
     ],
     "category": "client",
     "servicesOffered": [
-      "fullstack",
-      "design-systems"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/rooted/rooted-1.png",
     "images": [
@@ -315,7 +310,8 @@
     ],
     "link": "https://cma-rooted.vercel.app/",
     "github": null,
-    "package": null
+    "package": null,
+    "discipline": "web-dev"
   },
   {
     "id": "forms-thecma",
@@ -344,8 +340,7 @@
     ],
     "category": "personal",
     "servicesOffered": [
-      "fullstack",
-      "design-systems"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/forms.thecma.xyz/forms.thecma (1).png",
     "images": [
@@ -359,7 +354,8 @@
     ],
     "link": "https://forms.thecma.xyz/",
     "github": null,
-    "package": null
+    "package": null,
+    "discipline": "web-dev"
   },
   {
     "id": "isitsecure",
@@ -383,8 +379,7 @@
     ],
     "category": "personal",
     "servicesOffered": [
-      "cybersecurity",
-      "fullstack"
+      "tools-packages"
     ],
     "thumbnail": "/media/Projects/Web Dev/IsItSecure/IsItSecure1.png",
     "images": [
@@ -396,7 +391,8 @@
     ],
     "link": null,
     "github": "https://github.com/chrismat-05/IsItSecure",
-    "package": "https://pypi.org/project/isitsecure/"
+    "package": "https://pypi.org/project/isitsecure/",
+    "discipline": "tools-packages"
   },
   {
     "id": "scanthepolicy",
@@ -420,9 +416,7 @@
     ],
     "category": "personal",
     "servicesOffered": [
-      "cybersecurity",
-      "fullstack",
-      "design-systems"
+      "tools-packages"
     ],
     "thumbnail": "/media/Projects/Web Dev/ScanThePolicy/home.png",
     "images": [
@@ -432,7 +426,8 @@
     ],
     "link": null,
     "github": "https://github.com/chrismat-05/ScanThePolicy",
-    "package": null
+    "package": null,
+    "discipline": "tools-packages"
   },
   {
     "id": "securiheader",
@@ -455,8 +450,7 @@
     ],
     "category": "personal",
     "servicesOffered": [
-      "cybersecurity",
-      "fullstack"
+      "tools-packages"
     ],
     "thumbnail": "/media/Projects/Web Dev/scrihdr/scrihdr1.png",
     "images": [
@@ -466,7 +460,8 @@
     ],
     "link": "https://scrihdr.thecma.xyz/",
     "github": "https://github.com/chrismat-05/SecuriHeader",
-    "package": null
+    "package": null,
+    "discipline": "tools-packages"
   },
   {
     "id": "req-api",
@@ -490,8 +485,7 @@
     ],
     "category": "personal",
     "servicesOffered": [
-      "fullstack",
-      "design-systems"
+      "tools-packages"
     ],
     "thumbnail": "/media/Projects/Web Dev/reqapi/reqapi1.png",
     "images": [
@@ -501,7 +495,8 @@
     ],
     "link": "https://reqapi.thecma.xyz/",
     "github": "https://github.com/chrismat-05/Req-API",
-    "package": null
+    "package": null,
+    "discipline": "tools-packages"
   },
   {
     "id": "quotzy",
@@ -523,7 +518,7 @@
     ],
     "category": "personal",
     "servicesOffered": [
-      "fullstack"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/Quotzy/quotzy(1).png",
     "images": [
@@ -533,7 +528,8 @@
     ],
     "link": null,
     "github": "https://github.com/chrismat-05/quotzy",
-    "package": "https://www.npmjs.com/package/quotzy"
+    "package": "https://www.npmjs.com/package/quotzy",
+    "discipline": "web-dev"
   },
   {
     "id": "iplocator",
@@ -556,9 +552,7 @@
     ],
     "category": "personal",
     "servicesOffered": [
-      "cybersecurity",
-      "fullstack",
-      "design-systems"
+      "tools-packages"
     ],
     "thumbnail": "/media/Projects/Web Dev/IPLocator/1.png",
     "images": [
@@ -567,7 +561,8 @@
     ],
     "link": "https://iplocator.thecma.xyz/",
     "github": "https://github.com/chrismat-05/IPLocator",
-    "package": null
+    "package": null,
+    "discipline": "tools-packages"
   },
   {
     "id": "amc",
@@ -589,7 +584,7 @@
     ],
     "category": "college",
     "servicesOffered": [
-      "fullstack"
+      "web-dev"
     ],
     "thumbnail": "/media/Projects/Web Dev/AMC/AMC1.png",
     "images": [
@@ -604,6 +599,150 @@
     ],
     "link": null,
     "github": "https://github.com/chrismat-05/AMC",
+    "package": null,
+    "discipline": "web-dev"
+  },
+  {
+    "id": "techvista",
+    "title": "TechVista",
+    "subtitle": "National Level Hackathon Visual Identity & Event Collateral",
+    "description": "Comprehensive branding, stage backdrop, event posters, signage, and brochures designed for TechVista—a prestigious National Level 24-Hour Hackathon hosted by Kristu Jayanti Institute of Technology under the theme \"Think Bold, Build Beyond\". Designed with bold futuristic typography and electric cyan cyber visuals in Canva.",
+    "year": "2026",
+    "featured": true,
+    "themeColor": "#00e5ff",
+    "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(6, 182, 212, 0.28), transparent 70%)",
+    "tags": [
+      "Hackathon Branding",
+      "Kristu Jayanti",
+      "Canva",
+      "Print & Signage",
+      "Event Identity"
+    ],
+    "technologies": [
+      "Canva",
+      "Event Branding",
+      "Print Design",
+      "Typography",
+      "Visual Identity"
+    ],
+    "category": "college",
+    "discipline": "graphic-design",
+    "servicesOffered": [
+      "graphic-design"
+    ],
+    "thumbnail": "/media/Projects/Graphic Design/TechVista/TechVista Poster v2.png",
+    "images": [
+      "/media/Projects/Graphic Design/TechVista/TechVista Backdrop v3.png",
+      "/media/Projects/Graphic Design/TechVista/TechVista Poster v2.png",
+      "/media/Projects/Graphic Design/TechVista/TechVista Signage v2.png",
+      "/media/Projects/Graphic Design/TechVista/Brochure1.png",
+      "/media/Projects/Graphic Design/TechVista/Brochure2.png",
+      "/media/Projects/Graphic Design/TechVista/think bold build beyond.png"
+    ],
+    "link": null,
+    "github": null,
+    "package": null
+  },
+  {
+    "id": "airborne-26",
+    "title": "Airborne '26",
+    "subtitle": "ICPF Bengaluru Annual Evangelical Camp Promo Campaign",
+    "description": "High-impact social media promotional campaign and video edits created for Airborne '26, the Annual Evangelical Camp organized by Inter Collegiate Prayer Fellowship (ICPF) Bengaluru. Featured high-energy pacing, custom countdown promos, motion kinetic typography, sound design, and color grading.",
+    "year": "2026",
+    "featured": true,
+    "themeColor": "#f59e0b",
+    "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(245, 158, 11, 0.28), transparent 70%)",
+    "tags": [
+      "Social Media Promos",
+      "ICPF Bengaluru",
+      "Davinci Resolve",
+      "Meta Edits",
+      "Sound Design",
+      "Color Grading"
+    ],
+    "technologies": [
+      "Davinci Resolve",
+      "Meta Edits",
+      "Sound Design",
+      "Color Grading",
+      "Social Media Pacing"
+    ],
+    "category": "client",
+    "discipline": "video-editing",
+    "servicesOffered": [
+      "video-editing"
+    ],
+    "thumbnail": "/media/Projects/Web Dev/icpf/icpf-1.png",
+    "images": [
+      "/media/Projects/Web Dev/icpf/icpf-1.png"
+    ],
+    "videos": [
+      {
+        "id": "promo-10d",
+        "title": "10 Days to Go - Countdown Teaser",
+        "src": "/media/Projects/VideoEditing/Airborne '26 Promo/10daystogo_final.mp4",
+        "duration": "0:30",
+        "caption": "Official 10-day countdown teaser crafted for Instagram Reels & WhatsApp status updates."
+      },
+      {
+        "id": "promo-726",
+        "title": "Airborne '26 Campaign Clip",
+        "src": "/media/Projects/VideoEditing/Airborne '26 Promo/726sde.mp4",
+        "duration": "0:15",
+        "caption": "Fast-paced punchy promotional cut for youth outreach."
+      },
+      {
+        "id": "promo-v1",
+        "title": "Camp Announcement Reel",
+        "src": "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260922_045107_239_bsl.mp4",
+        "duration": "0:45",
+        "caption": "Atmospheric announcement highlight introducing the theme and dates."
+      },
+      {
+        "id": "promo-v2",
+        "title": "Spiritual Atmosphere & Fellowship",
+        "src": "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260922_065931_731_bsl.mp4",
+        "duration": "0:35",
+        "caption": "Capturing worship, fellowship moments, and uplifting student experiences."
+      },
+      {
+        "id": "promo-v3",
+        "title": "Youth Energy & Sessions Feature",
+        "src": "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_022740_885_bsl.mp4",
+        "duration": "0:50",
+        "caption": "Extended feature spotlighting keynote sessions and vibrant community atmosphere."
+      },
+      {
+        "id": "promo-v4",
+        "title": "Speaker & Worship Reveal",
+        "src": "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_034426_253_bsl.mp4",
+        "duration": "0:25",
+        "caption": "Dynamic reveal teaser announcing guest speakers and worship leaders."
+      },
+      {
+        "id": "promo-v5",
+        "title": "Registration Call to Action",
+        "src": "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_034435_907_bsl.mp4",
+        "duration": "0:25",
+        "caption": "Urgent registration CTA clip with motion typography directing to registration portal."
+      },
+      {
+        "id": "promo-v6",
+        "title": "Final Week Countdown Reel",
+        "src": "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260925_201438_593_bsl.mp4",
+        "duration": "0:30",
+        "caption": "High-octane final countdown reel building peak anticipation."
+      },
+      {
+        "id": "promo-v7",
+        "title": "Camp Experience Teaser",
+        "src": "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260928_084005_377_bsl.mp4",
+        "duration": "0:35",
+        "caption": "Final retrospective teaser summing up the camp vision."
+      }
+    ],
+    "link": null,
+    "github": null,
     "package": null
   }
 ]

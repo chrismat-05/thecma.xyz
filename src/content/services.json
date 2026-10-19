@@ -1,87 +1,70 @@
 [
   {
-    "id": "webgl",
+    "id": "web-dev",
     "number": "01",
-    "verticalTitle": "3D & WEBGL PLATFORMS",
-    "category": "CORE PRODUCTION DISCIPLINE",
-    "title": "3D & WebGL Platforms",
-    "tagline": "Ultra-fluid WebGL shaders, Three.js physics kinetics, and immersive digital realms.",
-    "description": "High-performance interactive 3D web applications, particle simulations, dynamic camera choreography, and custom GLSL shader pipelines engineered at locked 60–120fps.",
-    "specs": [
-      "THREE.JS & SHADERS",
-      "GPU OPTIMIZATION",
-      "PHYSICS ENGINES",
-      "CINEMATIC CAMERA PATHS"
-    ],
-    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80",
-    "accentGlow": "rgba(255, 255, 255, 0.4)"
-  },
-  {
-    "id": "fullstack",
-    "number": "02",
-    "verticalTitle": "FULL-STACK WEB APPS",
-    "category": "ENTERPRISE & PRODUCT SUITE",
-    "title": "Full-Stack Web Apps",
-    "tagline": "Scalable reactive applications with lightning-fast cloud backend synchronization.",
-    "description": "End-to-end web platforms built with React, Next.js, TypeScript, FastAPI, and Firebase/Supabase. Featuring robust authorization, realtime data streaming, and elegant micro-interactions.",
+    "verticalTitle": "WEB DESIGN & DEVELOPMENT",
+    "category": "FULL-STACK ENGINEERING",
+    "title": "Web Design & Development (Full Stack)",
+    "tagline": "Scalable reactive applications, interactive architectures, and high-performance digital platforms.",
+    "description": "End-to-end web platforms engineered with React, Next.js, TypeScript, Vite, Tailwind CSS, and cloud backends. Delivering pixel-perfect UX, resilient APIs, and seamless micro-interactions.",
     "specs": [
       "REACT & NEXT.JS",
-      "TYPESCRIPT ARCHITECTURE",
-      "REST & GRAPHQL",
-      "SERVERLESS CLOUD"
+      "TYPESCRIPT & VITE",
+      "TAILWIND CSS",
+      "REST & CLOUD APIS"
     ],
     "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80",
-    "accentGlow": "rgba(255, 255, 255, 0.35)"
+    "accentGlow": "rgba(59, 130, 246, 0.45)"
   },
   {
-    "id": "cybersecurity",
-    "number": "03",
-    "verticalTitle": "CYBERSECURITY & AUDITING",
-    "category": "THREAT TELEMETRY & HARDENING",
-    "title": "Cybersecurity & Auditing",
-    "tagline": "Zero-knowledge encryption, attack-surface minimization, and protocol defense.",
-    "description": "Comprehensive web and network penetration testing, automated HTTP security header audits, credential entropy verification, and defensive policy architecture.",
+    "id": "tools-packages",
+    "number": "02",
+    "verticalTitle": "TOOLS & PACKAGES",
+    "category": "SYSTEMS & TELEMETRY",
+    "title": "Tools and Packages",
+    "tagline": "Developer utilities, security telemetry suites, open-source packages, and API tooling.",
+    "description": "Purpose-built CLI tools, security inspection headers, policy analysis engines, and network telemetry utilities built to empower developers and strengthen digital environments.",
     "specs": [
-      "PENETRATION TESTING",
-      "HTTP SECURITY HEADERS",
-      "ZERO-KNOWLEDGE AUTH",
-      "VULNERABILITY ASSESSMENT"
+      "SECURITY TELEMETRY",
+      "API TESTING CLIENTS",
+      "OPEN SOURCE PACKAGES",
+      "HTTP HEADER AUDITING"
     ],
     "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=80",
-    "accentGlow": "rgba(255, 255, 255, 0.45)"
+    "accentGlow": "rgba(168, 85, 247, 0.45)"
   },
   {
-    "id": "design-systems",
-    "number": "04",
-    "verticalTitle": "UI/UX & DESIGN SYSTEMS",
-    "category": "CREATIVE ENGINEERING",
-    "title": "UI/UX & Design Systems",
-    "tagline": "Precision dark-mode design systems, typography hierarchy, and fluid UX patterns.",
-    "description": "Bespoke visual identities, Figma component tokens, accessible WCAG color scales, and motion choreography that turn complex digital products into intuitive works of art.",
+    "id": "graphic-design",
+    "number": "03",
+    "verticalTitle": "GRAPHIC DESIGNING",
+    "category": "BRAND & VISUAL IDENTITY",
+    "title": "Graphic Designing",
+    "tagline": "High-impact visual branding, event collateral, typography choreography, and marketing assets.",
+    "description": "Comprehensive visual identity systems, hackathon branding, stage backdrops, print collateral, and digital signage crafted with Canva and precise design hierarchy.",
     "specs": [
-      "ACCESSIBLE WCAG AAA",
-      "COMPONENT ARCHITECTURE",
-      "FIGMA TOKENS",
-      "MICRO-INTERACTIONS"
+      "CANVA & VISUAL SYSTEMS",
+      "STAGE BACKDROPS & POSTERS",
+      "BROCHURE & SIGNAGE DESIGN",
+      "EVENT IDENTITY ARCHITECTURE"
     ],
-    "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1200&auto=format&fit=crop&q=80",
-    "accentGlow": "rgba(255, 255, 255, 0.35)"
+    "image": "/media/Projects/Graphic Design/TechVista/TechVista Backdrop v3.png",
+    "accentGlow": "rgba(6, 182, 212, 0.45)"
   },
   {
-    "id": "creative-media",
-    "number": "05",
-    "verticalTitle": "CREATIVE DIRECTION & MEDIA",
-    "category": "VISUAL STORYTELLING",
-    "title": "Creative Direction & Media",
-    "tagline": "Cinematic videography, sound design, and editorial brand aesthetics.",
-    "description": "Fusing technical software mastery with cinematic visual direction, video post-production, high-impact sound design, and narrative brand storytelling.",
+    "id": "video-editing",
+    "number": "04",
+    "verticalTitle": "VIDEO EDITING",
+    "category": "MOTION & CINEMATIC EDITS",
+    "title": "Video Editing",
+    "tagline": "Dynamic social media promos, cinematic cuts, narrative pacing, and audio-visual synchronization.",
+    "description": "High-energy social media promotional campaigns, event countdown teasers, and cinematic reels edited in DaVinci Resolve and Meta Edits with sound design and color grading.",
     "specs": [
-      "CINEMATIC VIDEOGRAPHY",
-      "SOUND DESIGN",
-      "NARRATIVE PACING",
+      "DAVINCI RESOLVE",
+      "META EDITS",
+      "SOUND DESIGN & PACING",
       "COLOR GRADING"
     ],
-    "image": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&auto=format&fit=crop&q=80",
-    "accentGlow": "rgba(255, 255, 255, 0.4)"
+    "image": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&auto=format&fit=crop&q=80",
+    "accentGlow": "rgba(245, 158, 11, 0.45)"
   }
 ]
