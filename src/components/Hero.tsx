@@ -187,20 +187,25 @@ export const Hero: React.FC = () => {
               </h1>
             </div>
 
-            {/* Centered Magnetic Portrait: Scaled and framed with a luxury arch silhouette behind the bottom of the letters */}
+            {/* Centered Magnetic Portrait: Scaled and framed with a luxury arch silhouette behind the bottom of the letters with ruby back-glow */}
             <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-10 pointer-events-auto">
               <Magnet padding={120} strength={3}>
-                <div className="relative w-[160px] sm:w-[210px] md:w-[260px] lg:w-[290px] h-[220px] sm:h-[280px] md:h-[330px] lg:h-[370px] rounded-t-[100px] sm:rounded-t-[140px] md:rounded-t-[160px] overflow-hidden border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black shadow-[0_20px_50px_rgba(0,0,0,0.95)] group/portrait">
-                  <img
-                    src="/media/chris.png"
-                    alt="Chris Mathew Aje"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover object-top select-none filter contrast-105 group-hover/portrait:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  {/* Subtle inner shadow and rim light */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
-                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+                <div className="relative group/portrait">
+                  {/* Subtle ruby ambient back-glow */}
+                  <div className="absolute -inset-2 rounded-t-[100px] sm:rounded-t-[140px] md:rounded-t-[160px] bg-brand-red/20 blur-xl pointer-events-none group-hover/portrait:bg-brand-red/35 transition-all duration-700" />
+
+                  <div className="relative w-[160px] sm:w-[210px] md:w-[260px] lg:w-[290px] h-[220px] sm:h-[280px] md:h-[330px] lg:h-[370px] rounded-t-[100px] sm:rounded-t-[140px] md:rounded-t-[160px] overflow-hidden border border-white/20 group-hover/portrait:border-brand-red/60 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_30px_rgba(229,9,20,0.25)] transition-all duration-500">
+                    <img
+                      src="/media/chris.png"
+                      alt="Chris Mathew Aje"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover object-top select-none filter contrast-105 group-hover/portrait:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    {/* Subtle inner shadow and rim light */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+                    <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+                  </div>
                 </div>
               </Magnet>
             </div>

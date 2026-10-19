@@ -20,7 +20,7 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
 }) => {
   const buttonContent = (
     <span
-      className={`group relative inline-flex items-center justify-center rounded-full font-medium uppercase tracking-widest text-white cursor-pointer select-none transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${className}`}
+      className={`group relative inline-flex items-center justify-center rounded-full font-medium uppercase tracking-widest text-white cursor-pointer select-none transition-all duration-300 ease-out hover:scale-105 active:scale-95 hover:shadow-[0_0_25px_rgba(229,9,20,0.45)] ${className}`}
       style={{
         background:
           "linear-gradient(135deg, #1f232b 0%, #111317 50%, #050608 100%)",
