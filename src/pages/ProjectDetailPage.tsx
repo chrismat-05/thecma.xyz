@@ -22,6 +22,9 @@ import Footer from "@/components/Footer";
 import { CursorGridBackground } from "@/components/backgrounds/CursorGridBackground";
 import { getCategoryMeta } from "@/lib/projectCategories";
 
+import { GraphicDesignDetailView } from "@/components/projects/GraphicDesignDetailView";
+import { VideoEditingDetailView } from "@/components/projects/VideoEditingDetailView";
+
 interface ProjectItem {
   id: string;
   title: string;
@@ -34,12 +37,14 @@ interface ProjectItem {
   tags: string[];
   technologies: string[];
   category: string;
+  discipline?: string;
   servicesOffered?: string[];
   thumbnail: string;
   images: string[];
   link: string | null;
   github: string | null;
   package: string | null;
+  videos?: Array<{ id: string; title: string; src: string; duration?: string; caption?: string }>;
 }
 
 export const ProjectDetailPage: React.FC = () => {
@@ -111,8 +116,13 @@ export const ProjectDetailPage: React.FC = () => {
         style={{ background: themeColor }}
       />
 
-      <main className="relative z-10 pt-28 sm:pt-36 pb-32">
-        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+      {project.discipline === "graphic-design" || (project.servicesOffered && project.servicesOffered.includes("graphic-design")) ? (
+        <GraphicDesignDetailView project={project} nextProject={nextProject} />
+      ) : project.discipline === "video-editing" || (project.servicesOffered && project.servicesOffered.includes("video-editing")) ? (
+        <VideoEditingDetailView project={project} nextProject={nextProject} />
+      ) : (
+        <main className="relative z-10 pt-28 sm:pt-36 pb-32">
+          <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
 
           {/* Top Sticky-like Utility Bar */}
           <motion.div
@@ -545,8 +555,9 @@ export const ProjectDetailPage: React.FC = () => {
             </motion.div>
           )}
 
-        </div>
-      </main>
+          </div>
+        </main>
+      )}
 
       <Footer />
     </div>
