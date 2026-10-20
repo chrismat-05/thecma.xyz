@@ -8,26 +8,8 @@ export const Navigation: React.FC = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
-  // On homepage: hide dock during initial lanyard intro scene (reveal when user zooms in, ~scrollY > window.innerHeight * 0.7)
-  // On other pages (/projects): dock is always visible
-  const [showDock, setShowDock] = useState(!isHome);
-
-  useEffect(() => {
-    if (!isHome) {
-      setShowDock(true);
-      return;
-    }
-
-    const handleScroll = () => {
-      // Show dock once the user scrolls past the initial lanyard-only view (~60% of viewport height)
-      const threshold = window.innerHeight * 0.65;
-      setShowDock(window.scrollY > threshold);
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isHome]);
+  // Dock is always accessible across all sections and pages so the user can freely jump anytime
+  const showDock = true;
 
   // Iconography & Destination definitions:
   // 1. Home -> Scrolls to top on homepage, or links to '/'
@@ -53,7 +35,7 @@ export const Navigation: React.FC = () => {
           animate={{ opacity: 1, y: 0, x: "-50%" }}
           exit={{ opacity: 0, y: 40, x: "-50%" }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-6 left-1/2 z-50 flex items-center gap-1.5 p-1.5 rounded-full border border-white/15 bg-neutral-950/85 backdrop-blur-2xl shadow-2xl shadow-black/90 hover:border-brand-red/40 transition-colors duration-300"
+          className="fixed bottom-6 left-1/2 z-[999] flex items-center gap-1.5 p-1.5 rounded-full border border-white/15 bg-neutral-950/85 backdrop-blur-2xl shadow-2xl shadow-black/90 hover:border-brand-red/40 transition-colors duration-300"
           aria-label="Bottom Navigation Dock"
         >
           {navItems.map((item) => {
