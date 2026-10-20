@@ -10,7 +10,7 @@ export const About: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const narrativeText =
-    "I'm a Cybersecurity student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field. From Cybersecurity to videography, I love exploring new things and trying them out while trying to bridge the gap between technical expertise and creative expression, always seeking new technologies and opportunities to grow.";
+    "I bridge rigorous cybersecurity engineering and full-stack development with cinematic UI/UX and 3D WebGL. I don't just write clean, resilient code—I engineer high-performance digital platforms and brand experiences that captivate users, solve complex problems, and drive real measurable impact.";
 
   return (
     <section
