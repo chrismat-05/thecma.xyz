@@ -229,8 +229,8 @@ export const Projects: React.FC = () => {
                 </div>
               </div>
 
-              {/* Full Widescreen Media Stage */}
-              <div className="relative w-full h-[280px] sm:h-[380px] md:h-[460px] lg:h-[520px] overflow-hidden bg-black">
+              {/* Full Widescreen Media Stage with Right-Middle Project Details */}
+              <div className="relative w-full h-[360px] sm:h-[420px] md:h-[480px] lg:h-[540px] overflow-hidden bg-black">
                 {/* Full-Cover Background Image */}
                 <img
                   src={imageSrc}
@@ -241,63 +241,121 @@ export const Projects: React.FC = () => {
                   className="w-full h-full object-cover filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-700 ease-out"
                 />
 
-                {/* Subtle bottom gradient blending into editorial footer */}
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/30 to-transparent pointer-events-none" />
+                {/* Subtle base vignette */}
+                <div className="absolute inset-0 bg-neutral-950/20 pointer-events-none" />
+
+                {/* Desktop: Smooth organic black shade on the right side behind the text */}
+                <div className="hidden md:block absolute inset-y-0 right-0 w-3/5 lg:w-1/2 bg-gradient-to-l from-black/95 via-black/65 to-transparent pointer-events-none z-10" />
+
+                {/* Mobile: Smooth organic black shade at bottom */}
+                <div className="md:hidden absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/95 via-black/75 to-transparent pointer-events-none z-10" />
 
                 {/* Floating Category Pill on Mobile */}
-                <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full border backdrop-blur-md text-[10px] font-mono uppercase tracking-wider font-semibold sm:hidden inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
+                <div className={`absolute top-4 left-4 z-20 px-3 py-1 rounded-full border backdrop-blur-md text-[10px] font-mono uppercase tracking-wider font-semibold sm:hidden inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
                   <CatIcon size={10} className="shrink-0" />
                   <span>{catMeta.label}</span>
                 </div>
-              </div>
 
-              {/* Card Editorial Footer - Clean, integrated, no separate box */}
-              <div className="p-5 sm:p-6 md:p-8 flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 bg-neutral-950/90 border-t border-white/5">
-                <div className="max-w-3xl space-y-2 sm:space-y-3">
-                  <p className="text-xs sm:text-sm md:text-base text-neutral-300 leading-relaxed font-sans line-clamp-2">
+                {/* Desktop/Tablet Right-Middle Project Details (No card, pure typography with soft dark scrim) */}
+                <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 right-6 md:right-10 lg:right-16 w-full max-w-md lg:max-w-lg xl:max-w-xl flex-col gap-3.5 z-20 pointer-events-auto">
+                  {project.subtitle && (
+                    <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#D7E2EA] font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                      {project.subtitle}
+                    </span>
+                  )}
+
+                  <p className="text-sm lg:text-base text-neutral-200 leading-relaxed font-sans line-clamp-3 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
                     {description}
                   </p>
 
                   {/* Tags */}
                   {tags.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5 sm:pt-1">
+                    <div className="flex flex-wrap items-center gap-1.5 pt-1">
                       {tags.slice(0, 4).map((item, tagIdx) => (
                         <span
                           key={tagIdx}
-                          className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-neutral-900 border border-neutral-800 text-neutral-300"
+                          className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-black/60 backdrop-blur-md border border-white/10 text-neutral-300 drop-shadow-sm"
                         >
                           {item}
                         </span>
                       ))}
                     </div>
                   )}
-                </div>
 
-                <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 self-start md:self-auto w-full md:w-auto">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(`/projects/${project.id}`);
-                    }}
-                    className="flex-1 md:flex-initial px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black hover:border-white/50 hover:bg-white/[0.08] text-[#D7E2EA] hover:text-white font-mono text-[11px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.2em] font-semibold transition-all flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-white/[0.05]"
-                  >
-                    <span>View Project</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                  </button>
-
-                  {targetUrl && (
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-3 pt-2">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        window.open(targetUrl, "_blank", "noopener,noreferrer");
+                        navigate(`/projects/${project.id}`);
                       }}
-                      className="p-2.5 sm:p-3 rounded-full border border-white/15 hover:border-white/40 bg-neutral-900/80 hover:bg-neutral-800 text-neutral-400 hover:text-white transition-all shadow-md shrink-0"
-                      title={actionLabel}
-                      aria-label={actionLabel}
+                      className="px-6 py-2.5 lg:py-3 rounded-full border border-white/25 bg-black/70 hover:bg-white hover:text-black backdrop-blur-md text-[#D7E2EA] font-mono text-xs uppercase tracking-[0.18em] font-semibold transition-all flex items-center justify-center gap-2 group/btn shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:shadow-white/20 hover:scale-[1.02]"
                     >
-                      <ArrowUpRight className="w-4 h-4" />
+                      <span>View Project</span>
+                      <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                     </button>
+
+                    {targetUrl && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(targetUrl, "_blank", "noopener,noreferrer");
+                        }}
+                        className="p-2.5 lg:p-3 rounded-full border border-white/20 bg-black/70 hover:bg-white/20 backdrop-blur-md text-neutral-300 hover:text-white transition-all shadow-[0_4px_20px_rgba(0,0,0,0.6)] shrink-0"
+                        title={actionLabel}
+                        aria-label={actionLabel}
+                      >
+                        <ArrowUpRight className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Mobile Bottom Project Details */}
+                <div className="md:hidden absolute inset-x-0 bottom-0 p-4 sm:p-5 flex flex-col gap-2.5 z-20 pointer-events-auto">
+                  <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed font-sans line-clamp-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                    {description}
+                  </p>
+
+                  {tags.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {tags.slice(0, 3).map((item, tagIdx) => (
+                        <span
+                          key={tagIdx}
+                          className="px-2 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-black/60 backdrop-blur-md border border-white/10 text-neutral-300"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   )}
+
+                  <div className="flex items-center gap-2 pt-1">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/projects/${project.id}`);
+                      }}
+                      className="flex-1 px-4 py-2 rounded-full border border-white/25 bg-black/80 backdrop-blur-md text-white font-mono text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 shadow-md"
+                    >
+                      <span>View Project</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </button>
+
+                    {targetUrl && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(targetUrl, "_blank", "noopener,noreferrer");
+                        }}
+                        className="p-2 rounded-full border border-white/20 bg-black/80 backdrop-blur-md text-neutral-300 hover:text-white shrink-0 shadow-md"
+                        title={actionLabel}
+                        aria-label={actionLabel}
+                      >
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
