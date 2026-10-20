@@ -258,13 +258,23 @@ export const Projects: React.FC = () => {
 
                 {/* Desktop/Tablet Right-Middle Project Details (No card, pure typography with soft dark scrim) */}
                 <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 right-6 md:right-10 lg:right-16 w-full max-w-md lg:max-w-lg xl:max-w-xl flex-col gap-3.5 z-20 pointer-events-auto">
+                  {/* Organic feathered dark shade directly behind the text for high contrast */}
+                  <div
+                    className="absolute -inset-8 lg:-inset-12 bg-black/90 rounded-full blur-3xl pointer-events-none -z-10"
+                    aria-hidden="true"
+                  />
+                  <div
+                    className="absolute -inset-4 lg:-inset-6 bg-black/65 rounded-3xl blur-xl pointer-events-none -z-10"
+                    aria-hidden="true"
+                  />
+
                   {project.subtitle && (
-                    <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#D7E2EA] font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                    <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#D7E2EA] font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
                       {project.subtitle}
                     </span>
                   )}
 
-                  <p className="text-sm lg:text-base text-neutral-200 leading-relaxed font-sans line-clamp-3 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+                  <p className="text-sm lg:text-base text-white/95 leading-relaxed font-sans line-clamp-3 drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
                     {description}
                   </p>
 
@@ -274,7 +284,7 @@ export const Projects: React.FC = () => {
                       {tags.slice(0, 4).map((item, tagIdx) => (
                         <span
                           key={tagIdx}
-                          className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-black/60 backdrop-blur-md border border-white/10 text-neutral-300 drop-shadow-sm"
+                          className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-black/80 backdrop-blur-md border border-white/20 text-neutral-200 drop-shadow-sm"
                         >
                           {item}
                         </span>
@@ -289,7 +299,7 @@ export const Projects: React.FC = () => {
                         e.stopPropagation();
                         navigate(`/projects/${project.id}`);
                       }}
-                      className="px-6 py-2.5 lg:py-3 rounded-full border border-white/25 bg-black/70 hover:bg-white hover:text-black backdrop-blur-md text-[#D7E2EA] font-mono text-xs uppercase tracking-[0.18em] font-semibold transition-all flex items-center justify-center gap-2 group/btn shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:shadow-white/20 hover:scale-[1.02]"
+                      className="px-6 py-2.5 lg:py-3 rounded-full border border-white/30 bg-black/80 hover:bg-white hover:text-black backdrop-blur-md text-white font-mono text-xs uppercase tracking-[0.18em] font-semibold transition-all flex items-center justify-center gap-2 group/btn shadow-[0_4px_25px_rgba(0,0,0,0.8)] hover:shadow-white/20 hover:scale-[1.02]"
                     >
                       <span>View Project</span>
                       <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
@@ -301,7 +311,7 @@ export const Projects: React.FC = () => {
                           e.stopPropagation();
                           window.open(targetUrl, "_blank", "noopener,noreferrer");
                         }}
-                        className="p-2.5 lg:p-3 rounded-full border border-white/20 bg-black/70 hover:bg-white/20 backdrop-blur-md text-neutral-300 hover:text-white transition-all shadow-[0_4px_20px_rgba(0,0,0,0.6)] shrink-0"
+                        className="p-2.5 lg:p-3 rounded-full border border-white/25 bg-black/80 hover:bg-white/20 backdrop-blur-md text-neutral-200 hover:text-white transition-all shadow-[0_4px_25px_rgba(0,0,0,0.8)] shrink-0"
                         title={actionLabel}
                         aria-label={actionLabel}
                       >
@@ -313,7 +323,13 @@ export const Projects: React.FC = () => {
 
                 {/* Mobile Bottom Project Details */}
                 <div className="md:hidden absolute inset-x-0 bottom-0 p-4 sm:p-5 flex flex-col gap-2.5 z-20 pointer-events-auto">
-                  <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed font-sans line-clamp-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                  {/* Feathered dark shade directly behind mobile text */}
+                  <div
+                    className="absolute -inset-4 bg-black/85 rounded-2xl blur-xl pointer-events-none -z-10"
+                    aria-hidden="true"
+                  />
+
+                  <p className="text-xs sm:text-sm text-white/95 leading-relaxed font-sans line-clamp-2 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
                     {description}
                   </p>
 
@@ -322,7 +338,7 @@ export const Projects: React.FC = () => {
                       {tags.slice(0, 3).map((item, tagIdx) => (
                         <span
                           key={tagIdx}
-                          className="px-2 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-black/60 backdrop-blur-md border border-white/10 text-neutral-300"
+                          className="px-2 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-black/80 backdrop-blur-md border border-white/20 text-neutral-200"
                         >
                           {item}
                         </span>
@@ -336,7 +352,7 @@ export const Projects: React.FC = () => {
                         e.stopPropagation();
                         navigate(`/projects/${project.id}`);
                       }}
-                      className="flex-1 px-4 py-2 rounded-full border border-white/25 bg-black/80 backdrop-blur-md text-white font-mono text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 shadow-md"
+                      className="flex-1 px-4 py-2 rounded-full border border-white/30 bg-black/85 backdrop-blur-md text-white font-mono text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 shadow-md"
                     >
                       <span>View Project</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
@@ -348,7 +364,7 @@ export const Projects: React.FC = () => {
                           e.stopPropagation();
                           window.open(targetUrl, "_blank", "noopener,noreferrer");
                         }}
-                        className="p-2 rounded-full border border-white/20 bg-black/80 backdrop-blur-md text-neutral-300 hover:text-white shrink-0 shadow-md"
+                        className="p-2 rounded-full border border-white/25 bg-black/85 backdrop-blur-md text-neutral-200 hover:text-white shrink-0 shadow-md"
                         title={actionLabel}
                         aria-label={actionLabel}
                       >
