@@ -1,5 +1,6 @@
 import React from "react";
 import { Link as ScrollLink } from "react-scroll";
+import { Link } from "react-router-dom";
 
 interface ContactButtonProps {
   onClick?: () => void;
@@ -20,7 +21,7 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
 }) => {
   const buttonContent = (
     <span
-      className={`group relative inline-flex items-center justify-center rounded-full font-medium uppercase tracking-widest text-white cursor-pointer select-none transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${className}`}
+      className={`group relative inline-flex items-center justify-center rounded-full font-medium uppercase tracking-widest text-white cursor-pointer select-none transition-all duration-300 ease-out hover:scale-105 active:scale-95 hover:shadow-[0_0_25px_rgba(229,9,20,0.45)] ${className}`}
       style={{
         background:
           "linear-gradient(135deg, #1f232b 0%, #111317 50%, #050608 100%)",
@@ -38,7 +39,7 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
     </span>
   );
 
-  if (isScroll) {
+  if (isScroll && (!to || !to.startsWith("/"))) {
     return (
       <ScrollLink
         to={to}
@@ -49,6 +50,14 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
       >
         {buttonContent}
       </ScrollLink>
+    );
+  }
+
+  if (to && to.startsWith("/")) {
+    return (
+      <Link to={to} className="inline-block">
+        {buttonContent}
+      </Link>
     );
   }
 

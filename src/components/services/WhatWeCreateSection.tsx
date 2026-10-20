@@ -26,7 +26,7 @@ export const WhatWeCreateSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
-    <section id="services" className="py-32 relative overflow-hidden bg-black text-white">
+    <section id="services" className="pt-16 sm:pt-20 pb-8 sm:pb-12 relative overflow-hidden bg-black text-white">
       {/* Subtle interactive dot grid background */}
       <CursorGridBackground opacity={0.35} spacing={40} />
 
@@ -214,10 +214,30 @@ export const WhatWeCreateSection: React.FC = () => {
                     transition={{ duration: 0.3 }}
                     className="pt-4 space-y-4"
                   >
-                    <p className="text-neutral-300 text-xs leading-relaxed">
+                    {/* Rich Visual Image Preview for Mobile */}
+                    <div className="relative w-full h-44 rounded-xl overflow-hidden border border-white/15 shadow-lg">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
+                      <div className="absolute bottom-3 left-3 flex items-center gap-2">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+                          {service.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed">
                       {service.tagline}
                     </p>
-                    <div className="flex flex-wrap gap-1.5 pt-2">
+                    <p className="text-neutral-400 text-xs leading-relaxed">
+                      {service.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 pt-1">
                       {service.specs.map((spec, sIdx) => (
                         <span
                           key={sIdx}
@@ -230,7 +250,7 @@ export const WhatWeCreateSection: React.FC = () => {
                     <div className="pt-2">
                       <Link
                         to="/projects"
-                        className="btn-hero-primary !py-2 !px-4 text-xs font-semibold inline-flex items-center gap-1.5"
+                        className="btn-hero-primary !py-2.5 !px-5 text-xs font-semibold inline-flex items-center gap-1.5 w-full sm:w-auto justify-center"
                       >
                         Explore Projects <ArrowUpRight size={13} />
                       </Link>

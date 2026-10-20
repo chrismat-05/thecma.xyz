@@ -31,10 +31,28 @@ export const Projects: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-
-  const featuredProjects: ProjectItem[] = (projectsData as ProjectItem[]).filter(
-    (p) => p.featured
+  const [isMobile, setIsMobile] = useState<boolean>(
+    typeof window !== "undefined" ? window.innerWidth < 640 : false
   );
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Selected Works curated list in exact requested sequence:
+  // 1. ICPF Bengaluru, 2. Creators Garage, 3. Airborne '26, 4. IPLocator
+  const selectedProjectIds = [
+    "icpf-bengaluru",
+    "creators-garage",
+    "airborne-26",
+    "iplocator",
+  ];
+
+  const featuredProjects: ProjectItem[] = selectedProjectIds
+    .map((id) => (projectsData as ProjectItem[]).find((p) => p.id === id))
+    .filter((p): p is ProjectItem => Boolean(p));
 
   // TristanMedia Active Card Detection via getBoundingClientRect & requestAnimationFrame
   useEffect(() => {
@@ -49,9 +67,7 @@ export const Projects: React.FC = () => {
       let currentActive = 0;
       cards.forEach((card, i) => {
         const rect = card.getBoundingClientRect();
-        // Exact formula from TristanMedia StackedProjects.jsx:
-        // top: 72 + i * 52
-        const expectedStickyTop = 72 + i * 52;
+        const expectedStickyTop = isMobile ? 52 + i * 32 : 64 + i * 44;
         if (rect.top <= expectedStickyTop + 25) {
           currentActive = i;
         }
@@ -75,7 +91,7 @@ export const Projects: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
-  }, [featuredProjects]);
+  }, [featuredProjects, isMobile]);
 
   const handleCardClick = (project: ProjectItem, index: number) => {
     // If clicking an inactive predecessor tab, scroll it into focus
@@ -93,7 +109,7 @@ export const Projects: React.FC = () => {
     <div
       id="projects"
       ref={containerRef}
-      className="relative w-full py-20 px-4 md:px-6 select-none bg-[#060606] text-white"
+      className="relative w-full pt-16 sm:pt-20 pb-6 sm:pb-8 px-4 md:px-6 select-none bg-[#060606] text-white"
     >
       {/* Ambient Blurred Background Layers (st-scbg from TristanMedia) */}
       <div className="absolute inset-0 left-[calc(50%-50vw)] w-[100vw] overflow-hidden pointer-events-none z-0">
@@ -118,8 +134,8 @@ export const Projects: React.FC = () => {
         })}
       </div>
 
-      {/* Section Header (TristanMedia layout) */}
-      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mb-16 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col md:flex-row md:items-end justify-between">
+      {/* Section Header */}
+      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mb-12 sm:mb-16 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col md:flex-row md:items-end justify-between">
         <div>
           <SplitFlapText
             text="SELECTED WORKS"
@@ -131,8 +147,8 @@ export const Projects: React.FC = () => {
       {/* Sticky Stacking Cards Container */}
       <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col pb-6 sm:pb-8">
         {featuredProjects.map((project, i) => {
-          // Tabbed cascading offsets: 52px tab clearance per stacked card
-          const desktopTop = 72 + i * 52;
+          // Tabbed cascading offsets: 32px on mobile, 44px on desktop per stacked card
+          const stickyTop = isMobile ? 52 + i * 32 : 64 + i * 44;
           const imageSrc =
             (project.images && project.images[0]) ||
             project.thumbnail ||
@@ -154,6 +170,9 @@ export const Projects: React.FC = () => {
               ? "View Package"
               : "Source Code";
 
+          const catMeta = getCategoryMeta(project.category);
+          const CatIcon = catMeta.icon;
+
           return (
             <div
               key={project.id || i}
@@ -163,10 +182,10 @@ export const Projects: React.FC = () => {
               data-st-card={i}
               onClick={() => handleCardClick(project, i)}
               data-cursor={isCovered ? "SELECT" : "VIEW"}
-              className="group cursor-pointer rounded-2xl overflow-hidden border border-white/10 bg-neutral-950/95 transition-all duration-500 shadow-[0_-16px_50px_rgba(0,0,0,0.85)] hover:border-white/30 backdrop-blur-xl origin-top min-h-[440px] sm:min-h-[500px]"
+              className="group cursor-pointer rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 transition-all duration-500 shadow-[0_-16px_50px_rgba(0,0,0,0.85)] hover:border-white/30 origin-top min-h-0"
               style={{
                 position: "sticky",
-                top: `${desktopTop}px`,
+                top: `${stickyTop}px`,
                 zIndex: i + 1,
                 marginTop: i === 0 ? "0px" : "40px",
                 transform: `scale(${depthScale})`,
@@ -175,7 +194,7 @@ export const Projects: React.FC = () => {
               }}
             >
               {/* Top Hero Header Bar (Always visible when stacked like folder index tabs) */}
-              <div className="px-5 sm:px-7 py-3.5 bg-neutral-900/95 border-b border-white/10 flex items-center justify-between gap-4 transition-colors group-hover:bg-neutral-900">
+              <div className="px-5 sm:px-7 py-3 sm:py-3.5 bg-neutral-900/95 border-b border-white/10 flex items-center justify-between gap-4 transition-colors group-hover:bg-neutral-900">
                 {/* Left: Indicator, Index & Project Title */}
                 <div className="flex items-center gap-3 sm:gap-4 min-w-0">
                   <span
@@ -199,16 +218,10 @@ export const Projects: React.FC = () => {
 
                 {/* Right: Category, Year */}
                 <div className="flex items-center gap-2 sm:gap-4 font-mono text-xs text-neutral-400 shrink-0">
-                  {(() => {
-                    const catMeta = getCategoryMeta(project.category);
-                    const CatIcon = catMeta.icon;
-                    return (
-                      <span className={`px-2.5 py-1 rounded-full border text-[11px] font-mono uppercase tracking-wider font-semibold hidden sm:inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
-                        <CatIcon size={11} className="shrink-0" />
-                        <span>{catMeta.label}</span>
-                      </span>
-                    );
-                  })()}
+                  <span className={`px-2.5 py-1 rounded-full border text-[11px] font-mono uppercase tracking-wider font-semibold hidden sm:inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
+                    <CatIcon size={11} className="shrink-0" />
+                    <span>{catMeta.label}</span>
+                  </span>
                   <span className="hidden md:inline text-neutral-600">•</span>
                   <span className="text-[#D7E2EA] font-bold font-mono text-xs sm:text-sm">
                     {project.year}
@@ -216,8 +229,9 @@ export const Projects: React.FC = () => {
                 </div>
               </div>
 
-              {/* Widescreen Media Viewport */}
-              <div className="relative w-full h-[280px] sm:h-[380px] md:h-[460px] lg:h-[520px] overflow-hidden bg-black">
+              {/* Full Widescreen Media Stage with Right-Middle Project Details */}
+              <div className="relative w-full h-[420px] sm:h-[500px] md:h-[580px] lg:h-[660px] xl:h-[720px] overflow-hidden bg-black">
+                {/* Full-Cover Background Image */}
                 <img
                   src={imageSrc}
                   alt={project.title}
@@ -226,68 +240,138 @@ export const Projects: React.FC = () => {
                   fetchPriority={i === 0 ? "high" : "low"}
                   className="w-full h-full object-cover filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent pointer-events-none" />
 
-                {/* Floating Category Pill */}
-                {(() => {
-                  const catMeta = getCategoryMeta(project.category);
-                  const CatIcon = catMeta.icon;
-                  return (
-                    <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full border backdrop-blur-md text-[10px] font-mono uppercase tracking-wider font-semibold sm:hidden inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
-                      <CatIcon size={10} className="shrink-0" />
-                      <span>{catMeta.label}</span>
-                    </div>
-                  );
-                })()}
-              </div>
+                {/* Subtle base vignette */}
+                <div className="absolute inset-0 bg-neutral-950/20 pointer-events-none" />
 
-              {/* Card Editorial Footer */}
-              <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-end justify-between gap-6 bg-neutral-950/80">
-                <div className="max-w-3xl space-y-3">
-                  <p className="text-sm md:text-base text-neutral-300 leading-relaxed font-sans line-clamp-2">
+                {/* Desktop: Smooth organic black shade on the right side behind the text */}
+                <div className="hidden md:block absolute inset-y-0 right-0 w-3/5 lg:w-1/2 bg-gradient-to-l from-black/95 via-black/65 to-transparent pointer-events-none z-10" />
+
+                {/* Mobile: Smooth organic black shade at bottom */}
+                <div className="md:hidden absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/95 via-black/75 to-transparent pointer-events-none z-10" />
+
+                {/* Floating Category Pill on Mobile */}
+                <div className={`absolute top-4 left-4 z-20 px-3 py-1 rounded-full border backdrop-blur-md text-[10px] font-mono uppercase tracking-wider font-semibold sm:hidden inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
+                  <CatIcon size={10} className="shrink-0" />
+                  <span>{catMeta.label}</span>
+                </div>
+
+                {/* Desktop/Tablet Right-Middle Project Details (No card, pure typography with soft dark scrim) */}
+                <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 right-6 md:right-10 lg:right-16 w-full max-w-md lg:max-w-lg xl:max-w-xl flex-col gap-3.5 z-20 pointer-events-auto">
+                  {/* Organic feathered dark shade directly behind the text for high contrast */}
+                  <div
+                    className="absolute -inset-8 lg:-inset-12 bg-black/90 rounded-full blur-3xl pointer-events-none -z-10"
+                    aria-hidden="true"
+                  />
+                  <div
+                    className="absolute -inset-4 lg:-inset-6 bg-black/65 rounded-3xl blur-xl pointer-events-none -z-10"
+                    aria-hidden="true"
+                  />
+
+                  {project.subtitle && (
+                    <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#D7E2EA] font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+                      {project.subtitle}
+                    </span>
+                  )}
+
+                  <p className="text-sm lg:text-base text-white/95 leading-relaxed font-sans line-clamp-3 drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
                     {description}
                   </p>
 
                   {/* Tags */}
                   {tags.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-2 pt-1">
+                    <div className="flex flex-wrap items-center gap-1.5 pt-1">
                       {tags.slice(0, 4).map((item, tagIdx) => (
                         <span
                           key={tagIdx}
-                          className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-neutral-900 border border-neutral-800 text-neutral-300"
+                          className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-black/80 backdrop-blur-md border border-white/20 text-neutral-200 drop-shadow-sm"
                         >
                           {item}
                         </span>
                       ))}
                     </div>
                   )}
-                </div>
 
-                <div className="flex items-center gap-3 shrink-0 self-start md:self-auto">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(`/projects/${project.id}`);
-                    }}
-                    className="shrink-0 px-6 py-3 rounded-full border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black hover:border-white/50 hover:bg-white/[0.08] text-[#D7E2EA] hover:text-white font-mono text-xs uppercase tracking-[0.2em] font-semibold transition-all flex items-center gap-2 group/btn shadow-lg hover:shadow-white/[0.05]"
-                  >
-                    <span>View Project</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                  </button>
-
-                  {targetUrl && (
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-3 pt-2">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        window.open(targetUrl, "_blank", "noopener,noreferrer");
+                        navigate(`/projects/${project.id}`);
                       }}
-                      className="p-3 rounded-full border border-white/15 hover:border-white/40 bg-neutral-900/80 hover:bg-neutral-800 text-neutral-400 hover:text-white transition-all shadow-md"
-                      title={actionLabel}
-                      aria-label={actionLabel}
+                      className="px-6 py-2.5 lg:py-3 rounded-full border border-white/30 bg-black/80 hover:bg-white hover:text-black backdrop-blur-md text-white font-mono text-xs uppercase tracking-[0.18em] font-semibold transition-all flex items-center justify-center gap-2 group/btn shadow-[0_4px_25px_rgba(0,0,0,0.8)] hover:shadow-white/20 hover:scale-[1.02]"
                     >
-                      <ArrowUpRight className="w-4 h-4" />
+                      <span>View Project</span>
+                      <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                     </button>
+
+                    {targetUrl && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(targetUrl, "_blank", "noopener,noreferrer");
+                        }}
+                        className="p-2.5 lg:p-3 rounded-full border border-white/25 bg-black/80 hover:bg-white/20 backdrop-blur-md text-neutral-200 hover:text-white transition-all shadow-[0_4px_25px_rgba(0,0,0,0.8)] shrink-0"
+                        title={actionLabel}
+                        aria-label={actionLabel}
+                      >
+                        <ArrowUpRight className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Mobile Bottom Project Details */}
+                <div className="md:hidden absolute inset-x-0 bottom-0 p-4 sm:p-5 flex flex-col gap-2.5 z-20 pointer-events-auto">
+                  {/* Feathered dark shade directly behind mobile text */}
+                  <div
+                    className="absolute -inset-4 bg-black/85 rounded-2xl blur-xl pointer-events-none -z-10"
+                    aria-hidden="true"
+                  />
+
+                  <p className="text-xs sm:text-sm text-white/95 leading-relaxed font-sans line-clamp-2 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+                    {description}
+                  </p>
+
+                  {tags.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {tags.slice(0, 3).map((item, tagIdx) => (
+                        <span
+                          key={tagIdx}
+                          className="px-2 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-black/80 backdrop-blur-md border border-white/20 text-neutral-200"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   )}
+
+                  <div className="flex items-center gap-2 pt-1">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/projects/${project.id}`);
+                      }}
+                      className="flex-1 px-4 py-2 rounded-full border border-white/30 bg-black/85 backdrop-blur-md text-white font-mono text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 shadow-md"
+                    >
+                      <span>View Project</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </button>
+
+                    {targetUrl && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(targetUrl, "_blank", "noopener,noreferrer");
+                        }}
+                        className="p-2 rounded-full border border-white/25 bg-black/85 backdrop-blur-md text-neutral-200 hover:text-white shrink-0 shadow-md"
+                        title={actionLabel}
+                        aria-label={actionLabel}
+                      >
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -296,13 +380,13 @@ export const Projects: React.FC = () => {
       </div>
 
       {/* Bottom CTA to View Full Archive */}
-      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-24 pt-10 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         <div>
           <h4 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">
-            Looking for more experiments &amp; open-source tools?
+            Looking to explore more creations &amp; projects?
           </h4>
           <p className="text-xs md:text-sm text-neutral-400 font-sans mt-1">
-            Browse all works across web architectures, security utilities, and CLI tools.
+            Browse all works across full-stack engineering, developer tools, graphic design, and cinematic video editing.
           </p>
         </div>
 

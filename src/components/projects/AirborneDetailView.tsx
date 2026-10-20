@@ -17,7 +17,9 @@ import {
   Layers,
   Flame,
   CheckCircle2,
-  Share2
+  Share2,
+  Instagram,
+  ExternalLink,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getCategoryMeta } from "@/lib/projectCategories";
@@ -29,6 +31,7 @@ interface VideoClip {
   src: string;
   duration?: string;
   caption?: string;
+  link?: string;
 }
 
 export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
@@ -55,54 +58,63 @@ export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
         title: "10 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/10daystogo_final.mp4",
         duration: "0:30",
+        link: "https://www.instagram.com/icpfbangalore/reel/DdgtEWBTIcw/",
       },
       {
-        id: "promo-7d",
-        title: "7 Days to Go - Countdown Teaser",
+        id: "promo-3d",
+        title: "3 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/726sde.mp4",
         duration: "0:15",
+        link: "https://www.instagram.com/icpfbangalore/reel/DdyzxbuzDD-/",
       },
       {
         id: "promo-v1",
         title: "Register Now",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260922_045107_239_bsl.mp4",
         duration: "0:45",
+        link: "https://www.instagram.com/icpfbangalore/reel/Ddv7nU8hWMT/",
       },
       {
         id: "promo-v2",
         title: "Camp Announcement",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260922_065931_731_bsl.mp4",
         duration: "0:35",
+        link: "https://www.instagram.com/icpfbangalore/reel/Ddl8jJVhxYo/"
       },
       {
         id: "promo-6d",
         title: "6 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_022740_885_bsl.mp4",
         duration: "0:50",
+        link: "https://www.instagram.com/icpfbangalore/reel/Ddq7RbZB9Of/",
       },
       {
         id: "promo-7d",
         title: "7 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_034426_253_bsl.mp4",
         duration: "0:25",
+        link: "https://www.instagram.com/icpfbangalore/reel/Ddotae2TgGb/"
       },
       {
         id: "promo-9d",
         title: "Registration Call to Action & 9Days Countdown",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_034435_907_bsl.mp4",
         duration: "0:25",
+        link: "https://www.instagram.com/icpfbangalore/reel/Ddjdcu3zKXK/"
       },
       {
         id: "promo-v6",
         title: "Registration Call to Action",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260925_201438_593_bsl.mp4",
         duration: "0:30",
+        link: "https://www.instagram.com/icpfbangalore/reel/DdteO07BxNd/"
       },
       {
         id: "promo-v7",
         title: "Registration Call to Action",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260928_084005_377_bsl.mp4",
         duration: "0:35",
+        link: "https://www.instagram.com/icpfbangalore/reel/Dd1jQLlTlq2/"
       }
     ];
 
@@ -183,7 +195,7 @@ export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center justify-between gap-4 mb-10 pb-6 border-b border-white/[0.08]"
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-8 sm:mb-10 pb-4 sm:pb-6 border-b border-white/[0.08]"
         >
           <Link
             to="/projects"
@@ -269,7 +281,21 @@ export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Primary Reel Player (9:16 vertical phone aspect ratio) */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[9/16] rounded-3xl overflow-hidden border-2 border-white/20 bg-black shadow-2xl shadow-amber-500/10 group">
+              <div className="relative w-full max-w-[290px] xs:max-w-[320px] sm:max-w-[380px] aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-white/20 bg-black shadow-2xl shadow-amber-500/10 group">
+                {currentClip.link && (
+                  <a
+                    href={currentClip.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/75 hover:bg-black/95 backdrop-blur-md border border-white/25 hover:border-pink-500/70 text-white text-[10px] sm:text-[11px] font-mono transition-all hover:scale-105 shadow-xl group/insta cursor-pointer"
+                    title="Watch directly on Instagram Reel"
+                  >
+                    <Instagram size={13} className="text-pink-500 group-hover/insta:rotate-12 transition-transform" />
+                    <span>Watch on Instagram</span>
+                    <ExternalLink size={10} className="text-neutral-400" />
+                  </a>
+                )}
+
                 <video
                   ref={videoRef}
                   src={currentClip.src}
@@ -341,9 +367,23 @@ export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
             {/* Reel Selection Drawer & Breakdown */}
             <div className="lg:col-span-7 flex flex-col gap-4">
               <div className="p-6 rounded-3xl border border-white/10 bg-[#090b10] mb-2">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-amber-400 block mb-1">
-                  Active Highlight // {currentClip.duration || "0:30"}
-                </span>
+                <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-amber-400 block">
+                    Active Highlight // {currentClip.duration || "0:30"}
+                  </span>
+                  {currentClip.link && (
+                    <a
+                      href={currentClip.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white text-[11px] font-mono font-semibold tracking-wider hover:opacity-95 hover:scale-105 transition-all shadow-md shadow-pink-500/20"
+                    >
+                      <Instagram size={12} />
+                      <span>Open on Instagram</span>
+                      <ExternalLink size={10} />
+                    </a>
+                  )}
+                </div>
                 <h3 className="text-xl sm:text-2xl font-bold font-display uppercase tracking-tight text-white mb-2">
                   {currentClip.title}
                 </h3>

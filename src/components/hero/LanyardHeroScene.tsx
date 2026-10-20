@@ -17,11 +17,12 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     const width = container.clientWidth;
     const height = container.clientHeight;
 
+    const getBaseCameraZ = (w: number) => (w < 640 ? 9.5 : w < 1024 ? 8.2 : 7.5);
+    const initialZ = getBaseCameraZ(width);
     // Scene & Camera
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    // Initial camera position at z = 7.5
-    camera.position.set(0, 0, 7.5);
+    camera.position.set(0, 0, initialZ);
 
     let renderer: THREE.WebGLRenderer;
     try {
@@ -48,14 +49,14 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     // Anchor at top [0, 2.7, 0]
     const anchorY = 2.7;
 
-    // Segmented chain rope: tuned length so card rests centered in the middle of the screen
+    // Segmented chain rope: dark obsidian metallic with subtle crimson undertone
     const numLinks = 8;
     const linkLength = 0.16;
     const linkGeometry = new THREE.CylinderGeometry(0.018, 0.018, linkLength, 8);
     const ropeMaterial = new THREE.MeshStandardMaterial({
-      color: 0x4a4a4a,
-      metalness: 0.85,
-      roughness: 0.25,
+      color: 0x2e191c,
+      metalness: 0.9,
+      roughness: 0.2,
     });
 
     const links: THREE.Mesh[] = [];
@@ -65,11 +66,11 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       links.push(link);
     }
 
-    // Clip ring
+    // Clip ring with platinum-chrome finish
     const ringGeo = new THREE.TorusGeometry(0.11, 0.025, 8, 24);
     const clipRing = new THREE.Mesh(
       ringGeo,
-      new THREE.MeshStandardMaterial({ color: 0xeeeeee, metalness: 0.95, roughness: 0.1 })
+      new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.95, roughness: 0.1 })
     );
     lanyardGroup.add(clipRing);
 
@@ -90,13 +91,13 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       bctx.fillStyle = "#090a0f";
       bctx.fillRect(0, 0, 512, 760);
 
-      // Top lanyard clip punch hole simulation
+      // Top lanyard clip punch hole simulation with subtle red rim accent
       bctx.fillStyle = "#040507";
       bctx.beginPath();
       bctx.roundRect ? bctx.roundRect(226, 18, 60, 10, 5) : bctx.rect(226, 18, 60, 10);
       bctx.fill();
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
-      bctx.lineWidth = 1;
+      bctx.strokeStyle = "rgba(229, 9, 20, 0.65)";
+      bctx.lineWidth = 1.5;
       bctx.stroke();
 
       // --- 1. PHOTO IN THE MIDDLE ON TOP ---
@@ -116,12 +117,12 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
         bctx.beginPath();
         bctx.roundRect ? bctx.roundRect(px, py, pw, ph, pr) : bctx.rect(px, py, pw, ph);
         bctx.clip();
-        // Crop chris.png centered on face & shoulders
+        // Crop centered on face & shoulders
         bctx.drawImage(photo, 140, 30, 1280, 1500, px, py, pw, ph);
         bctx.restore();
       } else {
         // Silhouette placeholder while loading
-        bctx.fillStyle = "rgba(255, 255, 255, 0.12)";
+        bctx.fillStyle = "rgba(229, 9, 20, 0.15)";
         bctx.beginPath();
         bctx.arc(px + pw / 2, py + 95, 42, 0, Math.PI * 2);
         bctx.fill();
@@ -130,12 +131,18 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
         bctx.fill();
       }
 
-      // Clean rim stroke around photo
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.28)";
-      bctx.lineWidth = 1.5;
+      // Clean rim stroke around photo with brand red accent
+      bctx.strokeStyle = "rgba(229, 9, 20, 0.65)";
+      bctx.lineWidth = 1.8;
       bctx.beginPath();
       bctx.roundRect ? bctx.roundRect(px, py, pw, ph, pr) : bctx.rect(px, py, pw, ph);
       bctx.stroke();
+
+      // Corner VIP tag
+      bctx.fillStyle = "#E50914";
+      bctx.font = "bold 11px monospace";
+      bctx.textAlign = "right";
+      bctx.fillText("CMA // PASS", px + pw, py - 9);
 
       // --- 2. MIDDLE: LEFT ALIGNED & RIGHT ALIGNED CONTENT ---
 
@@ -152,18 +159,21 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       bctx.font = "bold 13.5px monospace";
       bctx.fillText("FULL-STACK ENGINEER & DESIGNER", 50, 485);
 
-      // Status: ONLINE SINCE 2022 with active green dot
-      bctx.fillStyle = "#34d399";
+      // Status: ONLINE SINCE 2022 with active ruby red beacon dot
+      bctx.fillStyle = "#EF4444";
+      bctx.shadowColor = "#E50914";
+      bctx.shadowBlur = 10;
       bctx.beginPath();
-      bctx.arc(56, 526, 4.5, 0, Math.PI * 2);
+      bctx.arc(56, 526, 5, 0, Math.PI * 2);
       bctx.fill();
+      bctx.shadowBlur = 0;
 
       bctx.fillStyle = "#ffffff";
       bctx.font = "bold 13px monospace";
       bctx.fillText("ONLINE SINCE 2022", 68, 530);
 
       // [RIGHT ALIGNED]
-      // Smart Microchip
+      // Smart Microchip with red circuitry
       const chipX = 380;
       const chipY = 372;
       const chipW = 82;
@@ -172,11 +182,11 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       bctx.strokeStyle = "rgba(255, 255, 255, 0.55)";
       bctx.lineWidth = 1.5;
       bctx.strokeRect(chipX, chipY, chipW, chipH);
-      bctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+      bctx.fillStyle = "rgba(229, 9, 20, 0.08)";
       bctx.fillRect(chipX, chipY, chipW, chipH);
 
-      // Chip internal circuit cross
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.28)";
+      // Chip internal circuit cross in ruby red
+      bctx.strokeStyle = "rgba(229, 9, 20, 0.85)";
       bctx.beginPath();
       bctx.moveTo(chipX + chipW / 2, chipY);
       bctx.lineTo(chipX + chipW / 2, chipY + chipH);
@@ -184,10 +194,10 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       bctx.lineTo(chipX + chipW, chipY + chipH / 2);
       bctx.stroke();
 
-      // Contactless NFC Wave Icon
+      // Contactless NFC Wave Icon in ruby red
       const nfcX = 412;
       const nfcY = 495;
-      bctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
+      bctx.strokeStyle = "rgba(229, 9, 20, 0.85)";
       bctx.lineWidth = 2;
       bctx.beginPath();
       bctx.arc(nfcX, nfcY, 7, -Math.PI / 3, Math.PI / 3);
@@ -201,17 +211,23 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
 
       // --- 3. BOTTOM ALIGNED CONTENT ---
 
+      // Red accent separator
+      bctx.fillStyle = "#E50914";
+      bctx.fillRect(50, 594, 412, 2.5);
+
       // Clean Barcode
       bctx.fillStyle = "#ffffff";
       for (let x = 50; x < 462; x += 10) {
-        bctx.fillRect(x, 608, (x % 20 === 0) ? 5 : 2.5, 62);
+        bctx.fillRect(x, 612, (x % 20 === 0) ? 5 : 2.5, 58);
       }
 
       // ID Serial
       bctx.font = "14px monospace";
-      bctx.fillStyle = "#71717a";
+      bctx.fillStyle = "#EF4444";
       bctx.textAlign = "left";
-      bctx.fillText("ID: 88489-14245-CMA-STUDIO", 50, 705);
+      bctx.fillText("CMA-STUDIO", 50, 705);
+      bctx.fillStyle = "#71717a";
+      bctx.fillText(" // ID: 88489-14245-PRO", 160, 705);
     };
 
     renderBadge();
@@ -228,37 +244,43 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     };
 
     const cardMaterials = [
-      new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.5, roughness: 0.2 }),
-      new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.5, roughness: 0.2 }),
-      new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.7, roughness: 0.2 }),
-      new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.7, roughness: 0.2 }),
+      new THREE.MeshStandardMaterial({ color: 0x1a0a0c, metalness: 0.6, roughness: 0.2 }),
+      new THREE.MeshStandardMaterial({ color: 0x1a0a0c, metalness: 0.6, roughness: 0.2 }),
+      new THREE.MeshStandardMaterial({ color: 0x221113, metalness: 0.7, roughness: 0.2 }),
+      new THREE.MeshStandardMaterial({ color: 0x221113, metalness: 0.7, roughness: 0.2 }),
       new THREE.MeshStandardMaterial({
         map: badgeTexture,
         roughness: 0.2,
         metalness: 0.1,
       }), // Front face
-      new THREE.MeshStandardMaterial({ color: 0x07070a, roughness: 0.4 }), // Back face
+      new THREE.MeshStandardMaterial({ color: 0x080304, roughness: 0.4 }), // Back face
     ];
 
     const badgeCard = new THREE.Mesh(cardGeo, cardMaterials);
     lanyardGroup.add(badgeCard);
 
     // Ambient & Directional Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.1);
     scene.add(ambientLight);
 
-    // Directional light from top center illuminating the lanyard from above (matching rays)
-    const topLight = new THREE.DirectionalLight(0xffffff, 3.5);
+    // Directional light from top center illuminating the lanyard from above (soft spotlight)
+    const topLight = new THREE.DirectionalLight(0xffffff, 1.7);
     topLight.position.set(0, 8, 4);
     scene.add(topLight);
 
-    const frontLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    const frontLight = new THREE.DirectionalLight(0xffffff, 1.2);
     frontLight.position.set(0, 0, 5);
     scene.add(frontLight);
 
-    const backRimLight = new THREE.PointLight(0xffffff, 2.5, 12);
-    backRimLight.position.set(0, 3, -1.5);
-    scene.add(backRimLight);
+    // Studio Crimson Back Rim Light (creating the red edge glow matching Chris's logo)
+    const redRimLight = new THREE.PointLight(0xe50914, 6.5, 12);
+    redRimLight.position.set(0, 0.4, -1.2);
+    scene.add(redRimLight);
+
+    // Subtle warm red fill light from below
+    const redFillLight = new THREE.DirectionalLight(0xb91c1c, 1.6);
+    redFillLight.position.set(0, -4, 2);
+    scene.add(redFillLight);
 
     // ==========================================
     // Physics Simulation Variables:
@@ -294,8 +316,9 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
 
     const handleMouseMove = (e: MouseEvent) => {
       const ndc = getNDCMouse(e);
-      mouse.x = ndc.x * 3.5;
-      mouse.y = ndc.y * 2.8;
+      const isMobile = window.innerWidth < 640;
+      mouse.x = ndc.x * (isMobile ? 2.2 : 3.5);
+      mouse.y = ndc.y * (isMobile ? 2.0 : 2.8);
 
       if (isDragging) {
         cardPos.x = mouse.x;
@@ -308,9 +331,56 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       isDragging = false;
     };
 
+    // Mobile touch interaction
+    const getNDCTouch = (e: TouchEvent) => {
+      const rect = container.getBoundingClientRect();
+      const touch = e.touches[0] || e.changedTouches[0];
+      return {
+        x: ((touch.clientX - rect.left) / rect.width) * 2 - 1,
+        y: -(((touch.clientY - rect.top) / rect.height) * 2 - 1),
+      };
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 0) return;
+      const ndc = getNDCTouch(e);
+      const raycaster = new THREE.Raycaster();
+      raycaster.setFromCamera(new THREE.Vector2(ndc.x, ndc.y), camera);
+      const intersects = raycaster.intersectObject(badgeCard);
+      if (intersects.length > 0) {
+        isDragging = true;
+        if (typeof navigator !== "undefined" && navigator.vibrate) {
+          navigator.vibrate(12);
+        }
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging) return;
+      const ndc = getNDCTouch(e);
+      const isMobile = window.innerWidth < 640;
+      mouse.x = ndc.x * (isMobile ? 2.2 : 3.5);
+      mouse.y = ndc.y * (isMobile ? 2.0 : 2.8);
+
+      cardPos.x = mouse.x;
+      cardPos.y = mouse.y;
+      cardAngleVel = (mouse.x - cardPos.x) * 0.2;
+    };
+
+    const handleTouchEnd = () => {
+      if (isDragging && typeof navigator !== "undefined" && navigator.vibrate) {
+        navigator.vibrate(8);
+      }
+      isDragging = false;
+    };
+
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("touchcancel", handleTouchEnd);
 
     // ==========================================
     // Animation Loop
@@ -318,18 +388,19 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     const clock = new THREE.Clock();
     let animationId: number;
 
-    let currentCameraZ = 7.5;
+    let currentCameraZ = initialZ;
     let currentCardScale = 1.0;
 
     const animate = () => {
       const elapsed = clock.getElapsedTime();
 
       // Zoom in calculation:
-      // When scrollProgress is 0 -> Camera at z: 7.5, Lanyard at normal size
-      // When scrollProgress goes from 0 -> 1 -> Camera zooms in towards card (z: 7.5 -> 2.6)
+      // When scrollProgress is 0 -> Camera at baseZ, Lanyard at normal size
+      // When scrollProgress goes from 0 -> 1 -> Camera zooms in towards card (baseZ -> 2.6)
       // and scales card in so it seamlessly reveals through into the hero section!
       const targetProgress = scrollRef.current;
-      const targetZ = 7.5 - targetProgress * 4.9; // zooms into 2.6
+      const currentBaseZ = getBaseCameraZ(window.innerWidth);
+      const targetZ = currentBaseZ - targetProgress * (currentBaseZ - 2.6);
       currentCameraZ += (targetZ - currentCameraZ) * 0.1;
       camera.position.z = currentCameraZ;
 
@@ -430,6 +501,10 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("touchcancel", handleTouchEnd);
       window.removeEventListener("resize", handleResize);
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);

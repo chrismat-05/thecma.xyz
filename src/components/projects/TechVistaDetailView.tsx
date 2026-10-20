@@ -73,14 +73,14 @@ export const TechVistaDetailView: React.FC<ProjectDetailViewProps> = ({
     },
     {
       id: "brochure1",
-      title: "Official Brochure — Page 1",
+      title: "Official Brochure - Page 1",
       type: "Event Guide & Rules",
       image: "/media/Projects/Graphic Design/TechVista/Brochure1.png",
       dimensions: "Print Guide (A4 Folded)",
     },
     {
       id: "brochure2",
-      title: "Official Brochure — Page 2",
+      title: "Official Brochure - Page 2",
       type: "Tracks & Guidelines",
       image: "/media/Projects/Graphic Design/TechVista/Brochure2.png",
       dimensions: "Print Guide (A4 Folded)",
@@ -113,7 +113,7 @@ export const TechVistaDetailView: React.FC<ProjectDetailViewProps> = ({
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center justify-between gap-4 mb-10 pb-6 border-b border-white/[0.08]"
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-8 sm:mb-10 pb-4 sm:pb-6 border-b border-white/[0.08]"
         >
           <Link
             to="/projects"
@@ -170,7 +170,7 @@ export const TechVistaDetailView: React.FC<ProjectDetailViewProps> = ({
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg sm:text-2xl text-cyan-300/90 font-mono max-w-3xl leading-relaxed"
           >
-            "Think Bold, Build Beyond" — National Level 24-Hour Hackathon
+            "Think Bold, Build Beyond" - National Level 24-Hour Hackathon
           </motion.p>
 
           <motion.p

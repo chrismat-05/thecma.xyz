@@ -104,10 +104,10 @@ export const LightRays: React.FC<LightRaysProps> = ({ className = "" }) => {
         float totalLight = (rays * coneMask * verticalFalloff * 0.75 + haze) * originGlow;
         totalLight *= (1.0 + uScroll * 0.5); // intensify slightly as it zooms
 
-        // High-end neutral silver / cold white ray color (matching ReactBits screenshot)
-        vec3 rayColor = vec3(0.92, 0.94, 0.98);
-        vec3 coreColor = vec3(1.0, 1.0, 1.0);
-        vec3 finalColor = mix(rayColor, coreColor, totalLight * 0.4);
+        // Volumetric ray colors: crisp platinum beam core with warm ruby crimson edge scattering
+        vec3 rayColor = vec3(0.96, 0.22, 0.26);
+        vec3 coreColor = vec3(1.0, 0.98, 0.98);
+        vec3 finalColor = mix(rayColor, coreColor, totalLight * 0.55);
 
         gl_FragColor = vec4(finalColor, totalLight * 0.85);
       }

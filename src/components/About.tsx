@@ -10,13 +10,13 @@ export const About: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const narrativeText =
-    "I'm a Cybersecurity student passionate about technology, problem-solving and innovation. Eager to learn and apply skills in a professional setting while continuously expanding knowledge in the field. From Cybersecurity to videography, I love exploring new things and trying them out while trying to bridge the gap between technical expertise and creative expression, always seeking new technologies and opportunities to grow.";
+    "I bridge rigorous cybersecurity engineering and full-stack development with cinematic UI/UX and 3D WebGL. I don't just write clean, resilient code—I engineer high-performance digital platforms and brand experiences that captivate users, solve complex problems, and drive real measurable impact.";
 
   return (
     <section
       id="about"
       ref={containerRef}
-      className="relative min-h-[90vh] bg-[#0C0C0C] text-white flex flex-col items-center justify-center overflow-hidden px-5 sm:px-8 md:px-10 py-24 sm:py-32"
+      className="relative min-h-[90vh] bg-[#0C0C0C] text-white flex flex-col items-center justify-center overflow-hidden px-4 sm:px-8 md:px-10 py-20 sm:py-32"
     >
       {/* Stealth Ambient Radial Glow in background (unifying with other sections) */}
       <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
@@ -31,19 +31,19 @@ export const About: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-          className="mb-10 sm:mb-12 md:mb-14"
+          className="mb-8 sm:mb-12 md:mb-14"
         >
-          <h2 className="font-display font-black uppercase leading-none tracking-tight text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] select-none text-white">
+          <h2 className="font-display font-black uppercase leading-none tracking-tight text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem] select-none text-white">
             <SplitFlapText text="ABOUT ME" onHoverTrigger={true} className="text-white hover:text-neutral-200 transition-colors" />
           </h2>
         </motion.div>
 
         {/* Kinetic Character-by-Character Scroll Reveal Narrative */}
-        <div className="max-w-[720px] mx-auto mb-12 sm:mb-14 md:mb-16">
+        <div className="max-w-[720px] mx-auto mb-10 sm:mb-14 md:mb-16">
           <AnimatedText
             text={narrativeText}
             initialOpacity={0.12}
-            className="text-[#D7E2EA] font-normal text-center leading-relaxed text-base sm:text-xl md:text-2xl"
+            className="text-[#D7E2EA] font-normal text-center leading-relaxed text-sm sm:text-xl md:text-2xl"
           />
         </div>
 
@@ -53,13 +53,13 @@ export const About: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col sm:flex-row items-center gap-5 justify-center"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 justify-center w-full sm:w-auto px-4 sm:px-0"
         >
           <ContactButton label="Contact Me" to="contact" />
 
           <Link
             to="/about"
-            className="group inline-flex items-center gap-2 rounded-full border border-white/20 hover:border-white/60 text-[#D7E2EA] hover:text-white px-7 py-3 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-medium uppercase tracking-widest transition-all duration-300 hover:bg-white/[0.05]"
+            className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/20 hover:border-white/60 text-[#D7E2EA] hover:text-white px-6 py-3 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-medium uppercase tracking-widest transition-all duration-300 hover:bg-white/[0.05]"
             data-cursor="button"
           >
             <span>Read more About Me</span>
