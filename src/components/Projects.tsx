@@ -134,8 +134,8 @@ export const Projects: React.FC = () => {
         })}
       </div>
 
-      {/* Section Header (TristanMedia layout) */}
-      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mb-16 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col md:flex-row md:items-end justify-between">
+      {/* Section Header */}
+      <div className="relative z-10 max-w-6xl 2xl:max-w-7xl mx-auto mb-12 sm:mb-16 px-4 sm:px-6 flex flex-col md:flex-row md:items-end justify-between">
         <div>
           <SplitFlapText
             text="SELECTED WORKS"
@@ -145,7 +145,7 @@ export const Projects: React.FC = () => {
       </div>
 
       {/* Sticky Stacking Cards Container */}
-      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto px-3 sm:px-8 md:px-12 lg:px-16 flex flex-col pb-6 sm:pb-8">
+      <div className="relative z-10 max-w-6xl 2xl:max-w-7xl mx-auto px-3 sm:px-6 flex flex-col pb-6 sm:pb-8">
         {featuredProjects.map((project, i) => {
           // Tabbed cascading offsets: 32px on mobile, 40px on desktop per stacked card
           const stickyTop = isMobile ? 52 + i * 32 : 64 + i * 40;
@@ -170,6 +170,9 @@ export const Projects: React.FC = () => {
               ? "View Package"
               : "Source Code";
 
+          const catMeta = getCategoryMeta(project.category);
+          const CatIcon = catMeta.icon;
+
           return (
             <div
               key={project.id || i}
@@ -179,7 +182,7 @@ export const Projects: React.FC = () => {
               data-st-card={i}
               onClick={() => handleCardClick(project, i)}
               data-cursor={isCovered ? "SELECT" : "VIEW"}
-              className="group cursor-pointer rounded-2xl overflow-hidden border border-white/10 bg-neutral-950/95 transition-all duration-500 shadow-[0_-16px_50px_rgba(0,0,0,0.85)] hover:border-white/30 backdrop-blur-xl origin-top min-h-0"
+              className="group cursor-pointer rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 transition-all duration-500 shadow-[0_-16px_50px_rgba(0,0,0,0.85)] hover:border-white/30 origin-top min-h-0"
               style={{
                 position: "sticky",
                 top: `${stickyTop}px`,
@@ -215,16 +218,10 @@ export const Projects: React.FC = () => {
 
                 {/* Right: Category, Year */}
                 <div className="flex items-center gap-2 sm:gap-4 font-mono text-xs text-neutral-400 shrink-0">
-                  {(() => {
-                    const catMeta = getCategoryMeta(project.category);
-                    const CatIcon = catMeta.icon;
-                    return (
-                      <span className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border text-[10px] sm:text-[11px] font-mono uppercase tracking-wider font-semibold hidden sm:inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
-                        <CatIcon size={11} className="shrink-0" />
-                        <span>{catMeta.label}</span>
-                      </span>
-                    );
-                  })()}
+                  <span className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border text-[10px] sm:text-[11px] font-mono uppercase tracking-wider font-semibold hidden sm:inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
+                    <CatIcon size={11} className="shrink-0" />
+                    <span>{catMeta.label}</span>
+                  </span>
                   <span className="hidden md:inline text-neutral-600">•</span>
                   <span className="text-[#D7E2EA] font-bold font-mono text-xs sm:text-sm">
                     {project.year}
@@ -232,8 +229,9 @@ export const Projects: React.FC = () => {
                 </div>
               </div>
 
-              {/* Widescreen Viewport-Adaptive Media Viewport */}
-              <div className="relative w-full h-[180px] sm:h-[240px] md:h-[32vh] lg:h-[36vh] xl:h-[38vh] max-h-[440px] min-h-[170px] overflow-hidden bg-black">
+              {/* Main Card Stage with Rich Height */}
+              <div className="relative w-full h-[260px] sm:h-[340px] md:h-[440px] lg:h-[470px] overflow-hidden bg-black">
+                {/* Full-Cover Background Image */}
                 <img
                   src={imageSrc}
                   alt={project.title}
@@ -242,53 +240,102 @@ export const Projects: React.FC = () => {
                   fetchPriority={i === 0 ? "high" : "low"}
                   className="w-full h-full object-cover filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent pointer-events-none" />
 
-                {/* Floating Category Pill */}
-                {(() => {
-                  const catMeta = getCategoryMeta(project.category);
-                  const CatIcon = catMeta.icon;
-                  return (
-                    <div className={`absolute top-3 left-3 sm:top-4 sm:left-4 z-10 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full border backdrop-blur-md text-[9px] sm:text-[10px] font-mono uppercase tracking-wider font-semibold sm:hidden inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
-                      <CatIcon size={10} className="shrink-0" />
-                      <span>{catMeta.label}</span>
-                    </div>
-                  );
-                })()}
-              </div>
+                {/* Ambient vignette and smooth right-side darkening gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-neutral-950/60 via-neutral-950/20 to-neutral-950/85 pointer-events-none" />
 
-              {/* Card Editorial Footer */}
-              <div className="p-3.5 sm:px-6 sm:py-3.5 md:px-7 md:py-4 flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-6 bg-neutral-950/90">
-                <div className="max-w-3xl space-y-1.5 sm:space-y-2.5">
-                  <p className="text-xs sm:text-sm md:text-base text-neutral-300 leading-relaxed font-sans line-clamp-2">
-                    {description}
-                  </p>
+                {/* Floating Category Pill on Mobile */}
+                <div className={`absolute top-3 left-3 sm:top-4 sm:left-4 z-10 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full border backdrop-blur-md text-[9px] sm:text-[10px] font-mono uppercase tracking-wider font-semibold sm:hidden inline-flex items-center gap-1.5 ${catMeta.badgeClass}`}>
+                  <CatIcon size={10} className="shrink-0" />
+                  <span>{catMeta.label}</span>
+                </div>
+
+                {/* Desktop/Tablet Right-Middle Dark Glassmorphic Info Panel */}
+                <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 right-6 lg:right-10 w-[360px] lg:w-[420px] flex-col gap-3.5 p-5 lg:p-6 rounded-2xl bg-neutral-950/90 backdrop-blur-2xl border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.95)] hover:border-white/30 transition-all z-20">
+                  <div className="space-y-1.5">
+                    {project.subtitle && (
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-brand-red font-semibold block">
+                        {project.subtitle}
+                      </span>
+                    )}
+                    <p className="text-xs lg:text-sm text-neutral-200 leading-relaxed font-sans line-clamp-3">
+                      {description}
+                    </p>
+                  </div>
 
                   {/* Tags */}
                   {tags.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5">
+                    <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
                       {tags.slice(0, 4).map((item, tagIdx) => (
                         <span
                           key={tagIdx}
-                          className="px-2 sm:px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono uppercase tracking-wider bg-neutral-900 border border-neutral-800 text-neutral-300"
+                          className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-white/[0.06] border border-white/10 text-neutral-300"
                         >
                           {item}
                         </span>
                       ))}
                     </div>
                   )}
-                </div>
 
-                <div className="flex items-center gap-2 sm:gap-3 shrink-0 w-full sm:w-auto">
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-2.5 pt-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/projects/${project.id}`);
+                      }}
+                      className="flex-1 px-5 py-2.5 rounded-full border border-white/20 bg-gradient-to-b from-white/15 via-neutral-900/80 to-black hover:border-white/50 hover:bg-white/[0.1] text-[#D7E2EA] hover:text-white font-mono text-[11px] lg:text-xs uppercase tracking-[0.16em] font-semibold transition-all flex items-center justify-center gap-2 group/btn shadow-lg"
+                    >
+                      <span>View Project</span>
+                      <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                    </button>
+
+                    {targetUrl && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(targetUrl, "_blank", "noopener,noreferrer");
+                        }}
+                        className="p-2.5 rounded-full border border-white/15 hover:border-white/40 bg-neutral-900/80 hover:bg-neutral-800 text-neutral-400 hover:text-white transition-all shadow-md shrink-0"
+                        title={actionLabel}
+                        aria-label={actionLabel}
+                      >
+                        <ArrowUpRight className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile Info Bar (< md) */}
+              <div className="md:hidden p-4 bg-neutral-950/95 border-t border-white/10 flex flex-col gap-3">
+                <p className="text-xs text-neutral-300 leading-relaxed font-sans line-clamp-2">
+                  {description}
+                </p>
+
+                {tags.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {tags.slice(0, 3).map((item, tagIdx) => (
+                      <span
+                        key={tagIdx}
+                        className="px-2 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-white/[0.06] border border-white/10 text-neutral-300"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <div className="flex items-center gap-2 pt-1">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       navigate(`/projects/${project.id}`);
                     }}
-                    className="flex-1 sm:flex-initial px-5 sm:px-6 py-2 sm:py-2.5 rounded-full border border-white/20 bg-gradient-to-b from-white/10 via-neutral-900/60 to-black hover:border-white/50 hover:bg-white/[0.08] text-[#D7E2EA] hover:text-white font-mono text-[11px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] font-semibold transition-all flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-white/[0.05]"
+                    className="flex-1 px-4 py-2 rounded-full border border-white/20 bg-white/10 text-white font-mono text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5"
                   >
                     <span>View Project</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
 
                   {targetUrl && (
@@ -297,11 +344,11 @@ export const Projects: React.FC = () => {
                         e.stopPropagation();
                         window.open(targetUrl, "_blank", "noopener,noreferrer");
                       }}
-                      className="p-2 sm:p-2.5 rounded-full border border-white/15 hover:border-white/40 bg-neutral-900/80 hover:bg-neutral-800 text-neutral-400 hover:text-white transition-all shadow-md shrink-0"
+                      className="p-2 rounded-full border border-white/15 bg-neutral-900 text-neutral-400 hover:text-white"
                       title={actionLabel}
                       aria-label={actionLabel}
                     >
-                      <ArrowUpRight className="w-4 h-4" />
+                      <ArrowUpRight className="w-3.5 h-3.5" />
                     </button>
                   )}
                 </div>
@@ -312,7 +359,7 @@ export const Projects: React.FC = () => {
       </div>
 
       {/* Bottom CTA to View Full Archive */}
-      <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      <div className="relative z-10 max-w-6xl 2xl:max-w-7xl mx-auto mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         <div>
           <h4 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">
             Looking to explore more creations &amp; projects?
