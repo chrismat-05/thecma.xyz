@@ -60,6 +60,10 @@ export const ProjectsPage: React.FC = () => {
           t.toLowerCase().includes(searchQuery.toLowerCase())
         );
       return matchesDiscipline && matchesSearch;
+    }).sort((a, b) => {
+      const yearA = parseInt(a.year || "0", 10);
+      const yearB = parseInt(b.year || "0", 10);
+      return yearB - yearA;
     });
   }, [allProjects, selectedDiscipline, searchQuery]);
 

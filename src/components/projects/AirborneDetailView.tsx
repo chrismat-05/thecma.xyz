@@ -17,7 +17,9 @@ import {
   Layers,
   Flame,
   CheckCircle2,
-  Share2
+  Share2,
+  Instagram,
+  ExternalLink,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getCategoryMeta } from "@/lib/projectCategories";
@@ -280,6 +282,20 @@ export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
             {/* Primary Reel Player (9:16 vertical phone aspect ratio) */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[9/16] rounded-3xl overflow-hidden border-2 border-white/20 bg-black shadow-2xl shadow-amber-500/10 group">
+                {currentClip.link && (
+                  <a
+                    href={currentClip.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-4 right-4 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 hover:bg-black/95 backdrop-blur-md border border-white/25 hover:border-pink-500/70 text-white text-[11px] font-mono transition-all hover:scale-105 shadow-xl group/insta cursor-pointer"
+                    title="Watch directly on Instagram Reel"
+                  >
+                    <Instagram size={13} className="text-pink-500 group-hover/insta:rotate-12 transition-transform" />
+                    <span>Watch on Instagram</span>
+                    <ExternalLink size={10} className="text-neutral-400" />
+                  </a>
+                )}
+
                 <video
                   ref={videoRef}
                   src={currentClip.src}
@@ -351,9 +367,23 @@ export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
             {/* Reel Selection Drawer & Breakdown */}
             <div className="lg:col-span-7 flex flex-col gap-4">
               <div className="p-6 rounded-3xl border border-white/10 bg-[#090b10] mb-2">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-amber-400 block mb-1">
-                  Active Highlight // {currentClip.duration || "0:30"}
-                </span>
+                <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-amber-400 block">
+                    Active Highlight // {currentClip.duration || "0:30"}
+                  </span>
+                  {currentClip.link && (
+                    <a
+                      href={currentClip.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white text-[11px] font-mono font-semibold tracking-wider hover:opacity-95 hover:scale-105 transition-all shadow-md shadow-pink-500/20"
+                    >
+                      <Instagram size={12} />
+                      <span>Open on Instagram</span>
+                      <ExternalLink size={10} />
+                    </a>
+                  )}
+                </div>
                 <h3 className="text-xl sm:text-2xl font-bold font-display uppercase tracking-tight text-white mb-2">
                   {currentClip.title}
                 </h3>
