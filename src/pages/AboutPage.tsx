@@ -162,7 +162,7 @@ export const AboutPage: React.FC = () => {
 
               <div className="absolute -bottom-3 left-6 sm:left-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/90 border border-white/20 backdrop-blur-md">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-xs font-mono text-neutral-300">Bengaluru, India • Available</span>
+                <span className="text-xs font-mono text-neutral-300">Bengaluru, India</span>
               </div>
             </div>
 

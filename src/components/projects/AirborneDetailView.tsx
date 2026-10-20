@@ -29,6 +29,7 @@ interface VideoClip {
   src: string;
   duration?: string;
   caption?: string;
+  link?: string;
 }
 
 export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
@@ -55,54 +56,63 @@ export const AirborneDetailView: React.FC<ProjectDetailViewProps> = ({
         title: "10 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/10daystogo_final.mp4",
         duration: "0:30",
+        link: "https://www.instagram.com/icpfbangalore/reel/DdgtEWBTIcw/",
       },
       {
-        id: "promo-7d",
-        title: "7 Days to Go - Countdown Teaser",
+        id: "promo-3d",
+        title: "3 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/726sde.mp4",
         duration: "0:15",
+        link: "https://www.instagram.com/icpfbangalore/reel/DdyzxbuzDD-/",
       },
       {
         id: "promo-v1",
         title: "Register Now",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260922_045107_239_bsl.mp4",
         duration: "0:45",
+        link: "https://www.instagram.com/icpfbangalore/reel/Ddv7nU8hWMT/",
       },
       {
         id: "promo-v2",
         title: "Camp Announcement",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260922_065931_731_bsl.mp4",
         duration: "0:35",
+        link: "https://www.instagram.com/icpfbangalore/reel/Ddl8jJVhxYo/"
       },
       {
         id: "promo-6d",
         title: "6 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_022740_885_bsl.mp4",
         duration: "0:50",
+        link: "https://www.instagram.com/icpfbangalore/reel/Ddq7RbZB9Of/",
       },
       {
         id: "promo-7d",
         title: "7 Days to Go - Countdown Teaser",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_034426_253_bsl.mp4",
         duration: "0:25",
+        link: "https://www.instagram.com/icpfbangalore/reel/Ddotae2TgGb/"
       },
       {
         id: "promo-9d",
         title: "Registration Call to Action & 9Days Countdown",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260924_034435_907_bsl.mp4",
         duration: "0:25",
+        link: "https://www.instagram.com/icpfbangalore/reel/Ddjdcu3zKXK/"
       },
       {
         id: "promo-v6",
         title: "Registration Call to Action",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260925_201438_593_bsl.mp4",
         duration: "0:30",
+        link: "https://www.instagram.com/icpfbangalore/reel/DdteO07BxNd/"
       },
       {
         id: "promo-v7",
         title: "Registration Call to Action",
         src: "/media/Projects/VideoEditing/Airborne '26 Promo/VID_20260928_084005_377_bsl.mp4",
         duration: "0:35",
+        link: "https://www.instagram.com/icpfbangalore/reel/Dd1jQLlTlq2/"
       }
     ];
 

@@ -36,8 +36,8 @@ export const ProjectsPage: React.FC = () => {
   }, []);
 
   const disciplineFilters = [
-    { label: "All Disciplines", value: "all", icon: Layers },
-    { label: "Web Development", value: "web-dev", icon: Code2 },
+    { label: "All", value: "all", icon: Layers },
+    { label: "Web Dev", value: "web-dev", icon: Code2 },
     { label: "Tools & Packages", value: "tools-packages", icon: Wrench },
     { label: "Graphic Designing", value: "graphic-design", icon: Palette },
     { label: "Video Editing", value: "video-editing", icon: Film },
@@ -266,8 +266,8 @@ export const ProjectsPage: React.FC = () => {
                     key={disc.value}
                     onClick={() => setSelectedDiscipline(disc.value)}
                     className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer ${isActive
-                        ? "bg-gradient-to-r from-red-600 via-brand-red to-red-700 text-white font-bold shadow-lg shadow-brand-red/40 scale-105 border border-brand-red/80"
-                        : "text-neutral-400 hover:text-white hover:bg-white/[0.05]"
+                      ? "bg-gradient-to-r from-red-600 via-brand-red to-red-700 text-white font-bold shadow-lg shadow-brand-red/40 scale-105 border border-brand-red/80"
+                      : "text-neutral-400 hover:text-white hover:bg-white/[0.05]"
                       }`}
                     data-cursor="button"
                   >
