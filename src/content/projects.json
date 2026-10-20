@@ -5,7 +5,7 @@
     "subtitle": "Cinematic Production Studio & Editorial Portfolio",
     "description": "High-end creative production studio website showcasing cinematic commercial films, editorial automotive cinematography, visual storytelling, photography, and brand media production. Built with Next.js and Tailwind CSS featuring fluid motion pacing and rich typography.",
     "year": "2026",
-    "featured": false,
+    "featured": true,
     "themeColor": "#59232f",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(139, 92, 246, 0.28), transparent 70%)",
     "tags": [
@@ -84,7 +84,7 @@
     "subtitle": "Full-Stack Youth Ministry & Event Management Portal",
     "description": "Official web platform for Inter Collegiate Prayer Fellowship (ICPF) Bengaluru. Engineered to impact new generations and redefine optimism through youth ministry events, leadership camps, regional chapter networks, and spiritual development resources across colleges in Bengaluru.",
     "year": "2026",
-    "featured": false,
+    "featured": true,
     "themeColor": "#151c46",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(37, 99, 235, 0.28), transparent 70%)",
     "tags": [
@@ -319,7 +319,7 @@
     "subtitle": "Interactive Form Builder & Analytics Engine",
     "description": "Built with HTML, CSS, JavaScript, and formBuilder.js, the platform enables users to create, preview, and share customizable forms with themes, analytics, and export options. Data is securely handled using Firebase Auth and Firestore.",
     "year": "2024",
-    "featured": true,
+    "featured": false,
     "themeColor": "#9333ea",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(147, 51, 234, 0.28), transparent 70%)",
     "tags": [
@@ -363,7 +363,7 @@
     "subtitle": "Zero-Knowledge Password & Threat Scanner",
     "description": "A comprehensive password security scanner that analyzes password strength and checks breach exposure using privacy-preserving techniques.",
     "year": "2024",
-    "featured": true,
+    "featured": false,
     "themeColor": "#0284c7",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(2, 132, 199, 0.28), transparent 70%)",
     "tags": [
@@ -400,7 +400,7 @@
     "subtitle": "AI Legal & Privacy Policy Risk Analyzer",
     "description": "ScanThePolicy helps users quickly understand complex privacy policies and terms of service. Paste text or a URL, and get highlights, breakdowns, and a privacy risk score. The app features a modern Vite/React frontend and a FastAPI backend powered by NLP.",
     "year": "2024",
-    "featured": true,
+    "featured": false,
     "themeColor": "#3b82f6",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(59, 130, 246, 0.28), transparent 70%)",
     "tags": [
@@ -435,7 +435,7 @@
     "subtitle": "HTTP Security & Header Inspector",
     "description": "A tool that analyzes the HTTP response headers of any website and checks for missing or misconfigured security-related headers. Ideal for developers and security-conscious users.",
     "year": "2024",
-    "featured": true,
+    "featured": false,
     "themeColor": "#059669",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(5, 150, 105, 0.28), transparent 70%)",
     "tags": [
@@ -469,7 +469,7 @@
     "subtitle": "High-Velocity API Debugger & Tester",
     "description": "A lightweight, developer-friendly API request debugger built using React, Tailwind CSS, Axios, and Framer Motion. Allows users to test HTTP methods with instant formatted responses.",
     "year": "2024",
-    "featured": true,
+    "featured": false,
     "themeColor": "#6366f1",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(99, 102, 241, 0.28), transparent 70%)",
     "tags": [
@@ -537,7 +537,7 @@
     "subtitle": "Geo-Intelligence & ASN Inspector",
     "description": "A professional IP address lookup and analysis tool. Instantly discover detailed information about any IP address, including location, ISP details, security insights, and network information",
     "year": "2023",
-    "featured": false,
+    "featured": true,
     "themeColor": "#14b8a6",
     "tags": [
       "Networking",
@@ -608,7 +608,7 @@
     "subtitle": "National Level Hackathon Visual Identity & Event Collateral",
     "description": "Comprehensive branding, stage backdrop, event posters, signage, and brochures designed for TechVista—a prestigious National Level 24-Hour Hackathon hosted by Kristu Jayanti Institute of Technology under the theme \"Think Bold, Build Beyond\". Designed with bold futuristic typography and electric cyan cyber visuals in Canva.",
     "year": "2026",
-    "featured": true,
+    "featured": false,
     "themeColor": "#00e5ff",
     "ambientGradient": "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(6, 182, 212, 0.28), transparent 70%)",
     "tags": [

@@ -259,15 +259,15 @@ export const LanyardHeroScene: React.FC<LanyardProps> = ({ scrollProgress = 0 })
     lanyardGroup.add(badgeCard);
 
     // Ambient & Directional Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.1);
     scene.add(ambientLight);
 
-    // Directional light from top center illuminating the lanyard from above (matching rays)
-    const topLight = new THREE.DirectionalLight(0xffffff, 3.2);
+    // Directional light from top center illuminating the lanyard from above (soft spotlight)
+    const topLight = new THREE.DirectionalLight(0xffffff, 1.7);
     topLight.position.set(0, 8, 4);
     scene.add(topLight);
 
-    const frontLight = new THREE.DirectionalLight(0xffffff, 1.6);
+    const frontLight = new THREE.DirectionalLight(0xffffff, 1.2);
     frontLight.position.set(0, 0, 5);
     scene.add(frontLight);
 

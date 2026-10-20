@@ -32,9 +32,18 @@ export const Projects: React.FC = () => {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  const featuredProjects: ProjectItem[] = (projectsData as ProjectItem[]).filter(
-    (p) => p.featured
-  );
+  // Selected Works curated list in exact requested sequence:
+  // 1. ICPF Bengaluru, 2. Creators Garage, 3. Airborne '26, 4. IPLocator
+  const selectedProjectIds = [
+    "icpf-bengaluru",
+    "creators-garage",
+    "airborne-26",
+    "iplocator",
+  ];
+
+  const featuredProjects: ProjectItem[] = selectedProjectIds
+    .map((id) => (projectsData as ProjectItem[]).find((p) => p.id === id))
+    .filter((p): p is ProjectItem => Boolean(p));
 
   // TristanMedia Active Card Detection via getBoundingClientRect & requestAnimationFrame
   useEffect(() => {
@@ -299,10 +308,10 @@ export const Projects: React.FC = () => {
       <div className="relative z-10 max-w-[1720px] 2xl:max-w-[1920px] mx-auto mt-24 pt-10 border-t border-white/10 px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         <div>
           <h4 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">
-            Looking for more experiments &amp; open-source tools?
+            Looking to explore more creations &amp; projects?
           </h4>
           <p className="text-xs md:text-sm text-neutral-400 font-sans mt-1">
-            Browse all works across web architectures, security utilities, and CLI tools.
+            Browse all works across full-stack engineering, developer tools, graphic design, and cinematic video editing.
           </p>
         </div>
 

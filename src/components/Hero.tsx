@@ -90,7 +90,7 @@ export const Hero: React.FC = () => {
           style={{ opacity: lanyardSceneOpacity }}
           className="absolute inset-0 z-[3] pointer-events-none"
         >
-          <LightRays className="opacity-90" />
+          <LightRays className="opacity-40" />
         </motion.div>
 
         {/* 3D Lanyard Scene with Interactive Physics & Zoom */}
