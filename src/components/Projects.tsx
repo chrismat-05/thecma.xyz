@@ -230,7 +230,7 @@ export const Projects: React.FC = () => {
               </div>
 
               {/* Full Widescreen Media Stage with Right-Middle Project Details */}
-              <div className="relative w-full h-[360px] sm:h-[420px] md:h-[480px] lg:h-[540px] overflow-hidden bg-black">
+              <div className="relative w-full h-[420px] sm:h-[500px] md:h-[580px] lg:h-[660px] xl:h-[720px] overflow-hidden bg-black">
                 {/* Full-Cover Background Image */}
                 <img
                   src={imageSrc}
