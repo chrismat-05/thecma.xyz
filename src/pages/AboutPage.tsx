@@ -190,10 +190,13 @@ export const AboutPage: React.FC = () => {
                 01 // What I believe
               </span>
               <h4 className="text-2xl font-bold text-white tracking-tight">
-                Where security integrity meets interactive elegance.
+                Creativity and technology go hand-in-hand.
               </h4>
               <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-                From creating cybersecurity tools to directing cinematic videography, I love operating at the intersection of left-brain technical depth and right-brain aesthetic instinct. Every interface should be as robust beneath the surface as it is captivating to navigate.
+                I enjoy digging into tech, discovering, and building solutions that work well to suit real needs—whether that's full-stack web platforms, backend architectures, or security utilities, figuring out how to make complex systems simpler and smoother.
+              </p>
+              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+                But I'm not all code and logic. I have a deep passion for visual design, typography, color harmony, and cinematic motion. I look into the fine details of how an interface feels, striving to build digital experiences that feel fresh, intentional, and reflective of genuine personality.
               </p>
             </div>
 
